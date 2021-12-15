@@ -29,6 +29,24 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
+.button-light {
+    color: $white-bg;
+    background-color: $orange-primary;
+
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25px;
+
+    min-width: 150px;
+
+    font-size: 1em;
+}
+
+.button-light:hover {
+    background-color: $orange-dark-hover;
+}
+
 .button-dark {
     color: $white-bg;
     background-color: $black-bg;
@@ -44,5 +62,5 @@ h1, h2, h3 {
 }
 
 .button-dark:hover {
-    background-color: #222222;
+    background-color: $black-bg-hover;
 }
