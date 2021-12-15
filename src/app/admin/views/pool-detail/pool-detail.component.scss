@@ -1,3 +1,9 @@
+.poolWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
 .poolHeader {
     margin-block: 50px;
 }
@@ -5,5 +11,10 @@
 .poolBody {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     gap: 150px;
+}
+
+.buttonGroup {
+    justify-self: end;
 }
