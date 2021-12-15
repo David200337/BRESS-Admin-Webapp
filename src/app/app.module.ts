@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { PoolPlayersItemComponent } from './shared/pool-players-item/pool-players-item.component';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    PoolPlayersItemComponent
+    PoolPlayersItemComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
