@@ -9,13 +9,14 @@
 
 form {
     padding: 20px;
-    background-color: #FF7D00;
+    color: white;
+    background-color: #ff7d00;
     display: flex;
     flex-direction: column;
     .form-group {
         display: flex;
         flex-direction: column;
-        margin-top: 10px;
+        margin-bottom: 10px;
         label {
             margin: 0 0 5px 0;
         }
@@ -29,5 +30,11 @@ form {
             border: none;
             padding: 6px 8px;
         }
+    }
+    .buttons {
+        margin-bottom: 0;
+    }
+    .cancel {
+        margin-left: 6px;
     }
 }

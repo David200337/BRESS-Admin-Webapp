@@ -15,7 +15,7 @@ import { PoolGamesItemComponent } from './shared/pool-games-item/pool-games-item
     AppComponent,
     NavbarComponent,
     PoolPlayersItemComponent,
-    LoginComponent
+    LoginComponent,
     PoolGamesItemComponent
   ],
   imports: [
