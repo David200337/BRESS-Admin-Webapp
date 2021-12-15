@@ -64,3 +64,18 @@ h1, h2, h3 {
 .button-dark:hover {
     background-color: $black-bg-hover;
 }
+
+input {
+    border: none;
+    border-radius: 7px;
+
+    padding-block: 15px;
+    padding-inline: 25px;
+
+}
+
+textarea:focus ,input:focus {
+    outline: none;
+}
+
+    
