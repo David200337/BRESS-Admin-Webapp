@@ -32,10 +32,10 @@ We use typescript in combination with html and scss to build the web application
 - chore - no production code changes, but more like configuration and setup
 - Example - ```feat/admin/dashboard```
 
-# C# coding conventions
+# Ts coding conventions
 - https://angular.io/guide/styleguide
 - https://jsdoc.app/
-- 
+
 # Definition of done
 - Code written
 - Documentation of the code
