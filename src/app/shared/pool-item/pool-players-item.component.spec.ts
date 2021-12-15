@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PoolItemComponent } from './pool-item.component';
+import { PoolPlayersItemComponent } from './pool-players-item.component';
 
 describe('PoolItemComponent', () => {
-  let component: PoolItemComponent;
-  let fixture: ComponentFixture<PoolItemComponent>;
+  let component: PoolPlayersItemComponent;
+  let fixture: ComponentFixture<PoolPlayersItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PoolItemComponent ]
+      declarations: [ PoolPlayersItemComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PoolItemComponent);
+    fixture = TestBed.createComponent(PoolPlayersItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
