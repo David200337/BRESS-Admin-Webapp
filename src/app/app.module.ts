@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { PoolPlayersItemComponent } from './shared/pool-players-item/pool-players-item.component';
+
+import { LoginComponent } from './views/login/login.component';
 import { PoolGamesItemComponent } from './shared/pool-games-item/pool-games-item.component';
 
 @NgModule({
@@ -13,6 +15,7 @@ import { PoolGamesItemComponent } from './shared/pool-games-item/pool-games-item
     AppComponent,
     NavbarComponent,
     PoolPlayersItemComponent,
+    LoginComponent
     PoolGamesItemComponent
   ],
   imports: [
