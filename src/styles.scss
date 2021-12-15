@@ -8,3 +8,12 @@ $grey-light: #c7c5c5;
 
 $white-bg: #ffffff;
 $white-bg-dark: #eeeeee;
+
+@font-face {
+    font-family: "Open Sans";
+    src: url('./assets/OpenSans-VariableFont_wdth\,wght.ttf');
+}
+
+html {
+    font-family: "Open Sans";
+}
