@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/bress-admin-webapp",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
