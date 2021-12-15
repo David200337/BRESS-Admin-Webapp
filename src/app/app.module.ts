@@ -5,11 +5,13 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { PoolItemComponent } from './shared/pool-item/pool-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    PoolItemComponent
   ],
   imports: [
     BrowserModule,
