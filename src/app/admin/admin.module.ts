@@ -5,6 +5,8 @@ import { TournamentItemComponent } from './shared/tournament-item/tournament-ite
 import { CreateTournamentComponent } from './views/create-tournament/create-tournament.component';
 import { PoolDetailComponent } from './views/pool-detail/pool-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { EditTournamentComponent } from './views/edit-tournament/edit-tournament.component';
+
 
 
 
@@ -14,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     TournamentItemComponent,
     CreateTournamentComponent,
     PoolDetailComponent
+    EditTournamentComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent,
     CreateTournamentComponent,
     PoolDetailComponent,
+    EditTournamentComponent
   ]
 })
 export class AdminModule { }
