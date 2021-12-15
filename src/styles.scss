@@ -9,6 +9,9 @@ $grey-light: #c7c5c5;
 $white-bg: #ffffff;
 $white-bg-dark: #eeeeee;
 
+$black-bg: #000000;
+$black-bg-hover: #222222;
+
 @font-face {
     font-family: "Open Sans";
     src: url('./assets/OpenSans-VariableFont_wdth\,wght.ttf');
@@ -24,4 +27,40 @@ body {
 
 h1, h2, h3 {
     font-weight: normal;
+}
+
+.button-light {
+    color: $white-bg;
+    background-color: $orange-primary;
+
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25px;
+
+    min-width: 150px;
+
+    font-size: 1em;
+}
+
+.button-light:hover {
+    background-color: $orange-dark-hover;
+}
+
+.button-dark {
+    color: $white-bg;
+    background-color: $black-bg;
+
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25px;
+
+    min-width: 150px;
+
+    font-size: 1em;
+}
+
+.button-dark:hover {
+    background-color: $black-bg-hover;
 }
