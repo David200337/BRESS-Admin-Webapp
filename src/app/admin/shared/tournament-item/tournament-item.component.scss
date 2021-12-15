@@ -1,0 +1,35 @@
+@import '../../../../styles.scss';
+
+.itemWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+
+    border: 1px solid $grey-primary;
+}
+
+.itemHeader {
+    font-weight: 700;
+    font-size: 1.2 em;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25px;
+
+    background-color: $orange-primary;
+    color: $white-bg;
+}
+
+.itemBody {
+    padding: 25px;
+}
+
+.labelGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.buttonGroup {
+    margin-top: 25px;
+}
