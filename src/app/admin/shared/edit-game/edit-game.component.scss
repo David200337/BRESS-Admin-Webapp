@@ -1,0 +1,65 @@
+@import '../../../../styles.scss';
+
+.editWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    background-color: $white-bg-dark;
+
+    padding-block: 25px;
+    padding-inline: 50px;
+}
+
+table, tr, td {
+    background-color: $white-bg;
+    border: 1px solid $grey-primary;
+    border-collapse: collapse;
+
+    td {
+        padding: 10px;
+        text-align: center;
+        white-space: nowrap;
+
+        &.long {
+            padding-inline: 20px;
+        }
+    }
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;  
+    background-color: #fff;
+
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    place-content: center;
+
+    font: inherit;
+    color: currentColor;
+
+    transform: translateY(-0.075em);
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 2em;
+    height: 2em;
+    transform: scale(0);
+    box-shadow: inset 2em 2em $grey-primary;
+}
+  
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.editButtonGroup {
+    display: flex;
+    justify-content: end;
+
+    width: 100%;
+}
