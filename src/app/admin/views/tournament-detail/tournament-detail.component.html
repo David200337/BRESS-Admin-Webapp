@@ -1,0 +1,21 @@
+<div class="detail-container">
+    <div class="title-bar">
+        <h1>Speeltoernooi beginners</h1>
+        <div>
+            <button class="button-light">Toernooi bewerken</button>
+        </div>
+    </div>
+    <div class="pools">
+        <div *ngFor="let i of [1,2,3]">
+            <h3>Poule A</h3>
+            <app-pool-players-item></app-pool-players-item>
+        </div>
+    </div>
+    <div class="bottom-buttons">
+        <div>
+            <button class="button-light">Toernooi starten</button>
+            <button class="button-dark">Toernooi beëindigen</button>
+        </div>
+        <button class="button-light">Live tussenstand</button>
+    </div>
+</div>

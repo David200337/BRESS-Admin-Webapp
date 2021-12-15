@@ -1,0 +1,26 @@
+.detail-container {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 70px;
+    div {
+        margin-left: auto;
+    }
+}
+
+.pools {
+    display: flex;
+    gap: 20px;
+}
+
+.bottom-buttons {
+    margin-top: auto;
+    margin-bottom: 20px;
+}
