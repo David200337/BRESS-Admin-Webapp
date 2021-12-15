@@ -5,7 +5,7 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
-import { PoolPlayersItemComponent } from './shared/pool-item/pool-players-item.component';
+import { PoolPlayersItemComponent } from './shared/pool-players-item/pool-players-item.component';
 
 @NgModule({
   declarations: [
