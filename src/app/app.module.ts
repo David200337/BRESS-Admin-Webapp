@@ -14,14 +14,14 @@ import { PoolGamesItemComponent } from './shared/pool-games-item/pool-games-item
   declarations: [
     AppComponent,
     NavbarComponent,
-    PoolPlayersItemComponent,
     LoginComponent,
-    PoolGamesItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AdminModule
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]
