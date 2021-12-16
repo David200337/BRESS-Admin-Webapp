@@ -5,7 +5,7 @@
     background-color: #746e6e;
     height: 70px;
     .navbar-img {
-        margin-left: 300px;
+        margin-left: clamp(25px, 10%, 300px);
         img {
             max-width: 150px;
             height: auto;
