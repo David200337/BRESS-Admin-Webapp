@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-edit-game',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-game.component.scss']
 })
 export class EditGameComponent implements OnInit {
+  @Output() sumbitEvent = new EventEmitter<void>();
   playerScores!: number[][]
 
   constructor() {
@@ -24,5 +25,9 @@ export class EditGameComponent implements OnInit {
         this.playerScores[Math.abs(player - 1)][round] = 0
       }
     }
+  }
+
+  onSubmit() {
+    this.sumbitEvent.emit();
   }
 }
