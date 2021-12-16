@@ -1,3 +1,3 @@
 main {
-    margin-inline: 100px;
+    margin-inline: clamp(0px, 10%, 100px);
 }
