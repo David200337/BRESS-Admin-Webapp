@@ -8,7 +8,7 @@ $grey-light: #c7c5c5;
 $white-bg: #ffffff;
 $white-bg-dark: #eeeeee;
 $black-bg: #000000;
-$black-bg-hover: #222222;
+$black-bg-hover: #444444;
 @font-face {
     font-family: "Open Sans";
     src: url('./assets/OpenSans-VariableFont_wdth\,wght.ttf');
@@ -71,7 +71,8 @@ h3 {
     background-color: $black-bg-hover;
 }
 
-input {
+input,
+select {
     border: none;
     border-radius: 7px;
     padding-block: 15px;

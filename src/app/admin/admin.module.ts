@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EditGameComponent } from './shared/edit-game/edit-game.component';
 import { EditTournamentComponent } from './views/edit-tournament/edit-tournament.component';
 import { TournamentDetailComponent } from './views/tournament-detail/tournament-detail.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -25,6 +26,7 @@ import { TournamentDetailComponent } from './views/tournament-detail/tournament-
   imports: [
     CommonModule,
     SharedModule,
+    AppRoutingModule,
   ],
   exports: [
     DashboardComponent,
