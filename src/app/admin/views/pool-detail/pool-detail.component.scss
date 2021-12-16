@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
+
+    height: 100%;
 }
 
 .poolHeader {
@@ -11,10 +13,13 @@
 .poolBody {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    flex: 1;
     gap: 150px;
+    row-gap: 50px;
 }
 
 .buttonGroup {
     justify-self: end;
+    padding-bottom: 25px;
 }
