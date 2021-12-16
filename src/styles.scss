@@ -16,16 +16,29 @@ $black-bg-hover: #222222;
 
 html {
     font-family: "Open Sans";
+    height: 100%;
 }
 
 body {
     margin: 0;
+    height: 100%;
+}
+
+main {
+    height: 100%;
+}
+
+.website-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 h1,
 h2,
 h3 {
     font-weight: normal;
+    margin: 0;
 }
 
 .button-light {
