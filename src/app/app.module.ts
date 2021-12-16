@@ -5,6 +5,7 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { SharedModule } from './shared/shared.module';
 
 import { LoginComponent } from './views/login/login.component';
 
@@ -17,7 +18,8 @@ import { LoginComponent } from './views/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    SharedModule
   ],
   exports: [
   ],

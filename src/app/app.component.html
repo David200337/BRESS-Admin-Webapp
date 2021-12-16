@@ -1,6 +1,13 @@
 <div class="website-wrapper">
     <app-navbar></app-navbar>
     <main role="main">
-        <app-dashboard></app-dashboard>
+        <!-- <app-dashboard></app-dashboard> -->
+        <app-single-elimination-tree>
+            [tournament]="myTournamentData" [matchTemplate]="myMatchTemplate" [number]="number"
+        </app-single-elimination-tree>
+
+        <ng-template #myMatchTemplate let-match>
+            <app-match [match]="match"></app-match>
+        </ng-template>
     </main>
 </div>
