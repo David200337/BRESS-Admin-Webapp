@@ -1,0 +1,8 @@
+<div class="dashboardWrapper">
+    <div class="buttonGroup">
+        <button [routerLink]="['/create-tournament']" class="button-light">Maak een toernooi aan</button>
+    </div>
+    <div class="tournamentList">
+        <app-tournament-item class="tournamentItem" *ngFor="let i of [1,2,3,4,5]"></app-tournament-item>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="poolWrapper">
+    <h1 class="poolHeader">{{tournament}} - {{poolName}}</h1>
+    <div class="poolBody">
+        <app-pool-players-item></app-pool-players-item>
+        <app-pool-games-item (gameEvent)="showGameEdit()"></app-pool-games-item>
+        <app-edit-game [style.display]="gameEditDisplay" (sumbitEvent)="hideGameEdit()"></app-edit-game>
+    </div>
+    <div class="buttonGroup">
+        <button [routerLink]="['../../']" class="button-dark">Terug</button>
+    </div>
+</div>

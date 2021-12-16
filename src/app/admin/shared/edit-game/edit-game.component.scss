@@ -1,0 +1,49 @@
+@import '../../../../styles.scss';
+
+.editWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    background-color: $white-bg-dark;
+
+    padding-block: 25px;
+    padding-inline: 50px;
+}
+
+table, tr, td {
+    background-color: $white-bg;
+    border: 1px solid $grey-primary;
+    border-collapse: collapse;
+
+    td {
+        padding: 5px;
+        text-align: center;
+        white-space: nowrap;
+
+        &.long {
+            padding: 10px;
+            padding-inline: 20px;
+        }
+    }
+}
+
+img {
+    opacity: 0%;
+}
+
+img.true {
+    opacity: 100%;
+}
+
+.buttonCheckbox {
+    background: none;
+    border: none;
+}
+
+.editButtonGroup {
+    display: flex;
+    justify-content: flex-end;
+
+    width: 100%;
+}

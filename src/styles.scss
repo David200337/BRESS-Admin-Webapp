@@ -1,1 +1,109 @@
 /* You can add global styles to this file, and also import other style files */
+
+$orange-primary: #ff7d00;
+$orange-light-hover: #ffb166;
+$orange-dark-hover: #cc6400;
+$grey-primary: #746e6e;
+$grey-light: #c7c5c5;
+$white-bg: #ffffff;
+$white-bg-dark: #eeeeee;
+$black-bg: #000000;
+$black-bg-hover: #444444;
+@font-face {
+    font-family: "Open Sans";
+    src: url('./assets/OpenSans-VariableFont_wdth\,wght.ttf');
+}
+
+html {
+    font-family: "Open Sans";
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+main {
+    height: 100%;
+}
+
+.website-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: normal;
+    margin: 0;
+}
+
+.button-light {
+    color: $white-bg;
+    background-color: $orange-primary;
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25px;
+    min-width: 150px;
+    font-size: 1em;
+}
+
+.button-light:hover {
+    background-color: $orange-dark-hover;
+}
+
+.button-dark {
+    color: $white-bg;
+    background-color: $black-bg;
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline: 25px;
+    min-width: 150px;
+    font-size: 1em;
+}
+
+.button-dark:hover {
+    background-color: $black-bg-hover;
+}
+
+input,
+select {
+    border: none;
+    border-radius: 7px;
+    padding-block: 15px;
+    padding-inline: 25px;
+}
+
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #707070;
+    thead {
+        text-align: left;
+        color: white;
+        background-color: #ff7d00;
+        th {
+            padding: 10px 20px;
+        }
+    }
+    tbody {
+        tr:nth-child(even) {
+            background-color: #EEEEEE;
+        }
+        tr {
+            border-top: 1px solid #707070;
+            td {
+                padding: 10px 20px;
+            }
+        }
+    }
+}

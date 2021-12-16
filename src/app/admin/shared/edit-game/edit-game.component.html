@@ -1,0 +1,51 @@
+<div class="editWrapper">
+    <div class="editInput">
+        <table>
+            <tr>
+                <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td class="long">Speler 1</td>
+                <td>
+                    <button class="buttonCheckbox" (click)="toggle(0, 0)">
+                        <img [class.true]="playerScores[0][0]" src="../../../../assets/images/cross.svg" alt=""/>
+                    </button>
+                </td>
+                <td>
+                    <button class="buttonCheckbox" (click)="toggle(0, 1)">
+                        <img [class.true]="playerScores[0][1]" src="../../../../assets/images/cross.svg" alt=""/>
+                    </button>
+                </td>
+                <td>
+                    <button class="buttonCheckbox" (click)="toggle(0, 2)">
+                        <img [class.true]="playerScores[0][2]" src="../../../../assets/images/cross.svg" alt=""/>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="long">Speler 2</td>
+                <td>
+                    <button class="buttonCheckbox" (click)="toggle(1, 0)">
+                        <img [class.true]="playerScores[1][0]" src="../../../../assets/images/cross.svg" alt=""/>
+                    </button>
+                </td>
+                <td>
+                    <button class="buttonCheckbox" (click)="toggle(1, 1)">
+                        <img [class.true]="playerScores[1][1]" src="../../../../assets/images/cross.svg" alt=""/>
+                    </button>
+                </td>
+                <td>
+                    <button class="buttonCheckbox" (click)="toggle(1, 2)">
+                        <img [class.true]="playerScores[1][2]" src="../../../../assets/images/cross.svg" alt=""/>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="editButtonGroup">
+        <button class="button-dark" (click)="onSubmit()">Bevestig score</button>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="itemWrapper">
+    <div class="itemHeader">
+        {{title}}
+    </div>
+    <div class="itemBody">
+        <div class="labelGroup">
+            <div class="itemLabel">Datum: {{date.toLocaleDateString()}}</div>
+            <div class="itemLabel">Niveau: {{skillLevel}}</div>
+            <div class="itemLabel">Aantal Spelers: {{playerCount}} (max. {{playerMax}})</div>
+        </div>
+        <div class="buttonGroup">
+            <button [routerLink]="['/tournament/1']" class="button-dark">Ga naar toernooi</button>
+        </div>
+    </div>
+</div>
