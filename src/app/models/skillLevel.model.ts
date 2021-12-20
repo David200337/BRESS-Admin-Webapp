@@ -1,9 +1,10 @@
-export class SkillLevel {
-	public id: number;
+import { GenericModel } from "./generic.model";
+
+export class SkillLevel extends GenericModel {
 	public name: string;
 
 	constructor(id: number, name: string) {
-		this.id = id;
+		super(id);
 		this.name = name;
 	}
 }

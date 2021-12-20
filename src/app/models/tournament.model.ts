@@ -1,7 +1,7 @@
 import { Category } from "./category.model";
+import { GenericModel } from "./generic.model";
 
-export class Tournament {
-	public id: number;
+export class Tournament extends GenericModel {
 	public title: string;
 	public beginDateTime: Date;
 	public entreeFee: number; // TODO: Fix possible floating point error
@@ -20,7 +20,7 @@ export class Tournament {
 		idealPoolSize: number,
 		categories: Category[]
 	) {
-		this.id = id;
+		super(id);
 		this.title = title;
 		this.beginDateTime = beginDateTime;
 		this.entreeFee = entreeFee;

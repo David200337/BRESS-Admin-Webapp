@@ -1,8 +1,8 @@
 import { Field } from "./field.model";
+import { GenericModel } from "./generic.model";
 import { Player } from "./player.model";
 
-export class Game {
-	public id: number;
+export class Game extends GenericModel {
 	public score: string;
 	public winner: number;
 	public inQueue: boolean;
@@ -19,7 +19,7 @@ export class Game {
 		player1: Player,
 		player2: Player
 	) {
-		this.id = id;
+		super(id);
 		this.score = score;
 		this.winner = winner;
 		this.inQueue = inQueue;

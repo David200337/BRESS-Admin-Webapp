@@ -1,7 +1,7 @@
+import { GenericModel } from "./generic.model";
 import { SkillLevel } from "./skillLevel.model";
 
-export class Player {
-	public id: number;
+export class Player extends GenericModel {
 	public name: string;
 	public email: string;
 	public skillLevel: SkillLevel;
@@ -12,7 +12,7 @@ export class Player {
 		email: string,
 		skillLevel: SkillLevel
 	) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.email = email;
         this.skillLevel = skillLevel;
