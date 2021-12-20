@@ -9,8 +9,6 @@ import { ResourceService } from "./resource.service";
 	providedIn: "root"
 })
 export class TournamentService extends ResourceService<Tournament> {
-    // private readonly APIUrl = environment.apiUrl + this.getResourceUrl();
-
     constructor(protected override httpClient: HttpClient) {
         super(httpClient);
     }
