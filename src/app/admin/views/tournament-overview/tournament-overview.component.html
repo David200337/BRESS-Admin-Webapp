@@ -2,31 +2,31 @@
     <div class="overviewHeader">
         <h1 class="overviewHeaderTitle">Speeltoernooi</h1>
         <div class="overViewHeaderButtonGroup">
-            <button class="button-dark">Terug</button>
+            <button [routerLink]="['../../dashboard']" class="button-dark">Terug</button>
         </div>
     </div>
     <div class="overviewBody">
         <div class="overviewBodyCollumn">
             <div class="overviewBodyElement">
-                <button class="button-light button-long">
+                <button [routerLink]="['edit-tournament']" class="button-light button-long">
                     Toernooi bewerken
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
-            <div class="overviewBodyElement">
+            <div [routerLink]="['score-overview']" class="overviewBodyElement">
                 <button class="button-light button-long">
                     Scoreoverzicht
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div class="overviewBodyElement">
-                <button class="button-light button-long">
+                <button [routerLink]="['']" class="button-light button-long">
                     Wedstrijdoverzicht
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div class="overviewBodyElement">
-                <button class="button-light button-long">
+                <button [routerLink]="['']" class="button-light button-long">
                     Live tussenstand 
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
