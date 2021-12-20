@@ -1,8 +1,6 @@
 <div class="registerWrapper">
     <div class="formWrapper">
-        <div class="formHeader">
-            Registratie
-        </div>
+        <div class="formHeader">Registratie</div>
         <div class="formBody">
             <div class="formElement">
                 Voornaam
@@ -24,8 +22,11 @@
                 Herhaal wachtwoord
                 <input type="password" placeholder="Herhaal wachtwoord" />
             </div>
+            <p>Al een account? Log in <a routerLink="/login">hier</a>.</p>
             <div class="formButtonGroup">
-                <button [routerLink]="['/dashboard']" class="button-dark">Log in</button>
+                <button [routerLink]="['/dashboard']" class="button-dark">
+                    Registreer
+                </button>
             </div>
         </div>
     </div>
