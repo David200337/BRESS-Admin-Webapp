@@ -6,10 +6,12 @@ import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tour
 import { PoolDetailComponent } from './admin/views/pool-detail/pool-detail.component';
 import { TournamentDetailComponent } from './admin/views/tournament-detail/tournament-detail.component';
 import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
   { path: "login", pathMatch: "full", component: LoginComponent },
+  { path: "register", pathMatch: "full", component: RegisterComponent },
   { path: "dashboard", pathMatch: "full", component: DashboardComponent },
   { path: "create-tournament", pathMatch: "full", component: CreateTournamentComponent },
   { path: "tournament/:id", pathMatch: "full", component: TournamentDetailComponent },
