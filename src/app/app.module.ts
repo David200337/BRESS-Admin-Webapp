@@ -18,7 +18,8 @@ import { LoginComponent } from './views/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    HttpClientModule
   ],
   exports: [
   ],
