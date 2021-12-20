@@ -7,7 +7,7 @@ import { environment } from "src/environments/environment";
 	providedIn: "root"
 })
 export abstract class ResourceService<T> {
-	private readonly APIUrl = environment.apiUrl + this.getResourceUrl();
+	protected readonly APIUrl = environment.apiUrl + this.getResourceUrl();
 
 	constructor(protected httpClient: HttpClient) {}
 
