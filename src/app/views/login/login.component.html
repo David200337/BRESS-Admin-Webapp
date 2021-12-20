@@ -6,11 +6,12 @@
         <div class="formBody">
             <div class="formElement">
                 Gebruikersnaam
-                <input placeholder="Gebruikersnaam"/>
+                <input placeholder="Gebruikersnaam" />
             </div>
             <div class="formElement">
                 Wachtwoord
-                <input type="password" placeholder="Wachtwoord"/>
+                <input type="password" placeholder="Wachtwoord" />
+                <p>Nog geen account? Registreer <a routerLink="/register">hier</a>.</p>
             </div>
             <div class="formButtonGroup">
                 <button [routerLink]="['/dashboard']" class="button-dark">Log in</button>
