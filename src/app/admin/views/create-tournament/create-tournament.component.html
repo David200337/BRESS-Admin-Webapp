@@ -1,7 +1,7 @@
 <div class="form-container">
     <div class="form-sub-container">
         <h1>Toernooi aanmaken</h1>
-        <form>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
             <div class="form-group">
                 <label for="name">Titel</label>
                 <input id="name" formControlName="title" type="text" placeholder="Titel" />
@@ -24,7 +24,7 @@
 
             <div class="form-group buttons">
                 <div>
-                    <button [routerLink]="['/dashboard']" type="submit" class="button-dark">
+                    <button type="submit" class="button-dark">
                         Sla op
                     </button>
                     <button [routerLink]="['/dashboard']" class="button-dark cancel">
