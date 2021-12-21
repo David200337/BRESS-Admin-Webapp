@@ -126,6 +126,23 @@ export class TournamentService extends ResourceService<Tournament> {
 			);
 	}
 
+	public deletePlayerFromPool(
+		tournamentId: number,
+		categoryId: number,
+		poolId: number,
+		playerId: number
+	): Observable<Pool[]> {
+		return this.httpClient
+			.delete<any>(
+				`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}/player/${playerId}`
+			)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
+	}
+
 	public getAllFinales(
 		tournamentId: number,
 		categoryId: number
