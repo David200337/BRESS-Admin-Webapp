@@ -6,6 +6,7 @@ import { FinalGame } from "../models/finalGame.model";
 import { Game } from "../models/game.model";
 import { Player } from "../models/player.model";
 import { Pool } from "../models/pool.model";
+import { PoolGame } from "../models/poolGame.model";
 import { Tournament } from "../models/tournament.model";
 import { ResourceService } from "./resource.service";
 
@@ -159,11 +160,11 @@ export class TournamentService extends ResourceService<Tournament> {
 			);
 	}
 
-	public updateGame(
+	public updatePoolGame(
 		tournamentId: number,
 		gameId: number,
-		game: Game
-	): Observable<Game> {
+		game: PoolGame
+	): Observable<PoolGame> {
 		return this.httpClient
 			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, game)
 			.pipe(
@@ -173,7 +174,7 @@ export class TournamentService extends ResourceService<Tournament> {
 			);
 	}
 
-	public getAllFinales(
+	public getAllFinalGames(
 		tournamentId: number,
 		categoryId: number
 	): Observable<FinalGame> {
@@ -182,7 +183,7 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public getFinale(
+	public getFinalGame(
 		tournamentId: number,
 		categoryId: number,
 		finaleId: number
@@ -192,7 +193,7 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public updateFinale(
+	public updateFinalGame(
 		tournamentId: number,
 		categoryId: number,
 		finaleId: number,
