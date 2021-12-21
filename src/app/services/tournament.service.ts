@@ -35,9 +35,9 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public getCategory(tournamentId: number): Observable<Category> {
+	public getCategory(tournamentId: number, categoryId: number): Observable<Category> {
 		return this.httpClient.get<Category>(
-			`${this.APIUrl}/${tournamentId}/category`
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}`
 		);
 	}
 
