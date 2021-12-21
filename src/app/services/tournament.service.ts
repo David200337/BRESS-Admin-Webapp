@@ -82,6 +82,18 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
+    public updateFinale(
+        tournamentId: number,
+		categoryId: number,
+		finaleId: number,
+        finalGame: FinalGame
+    ): Observable<FinalGame> {
+        return this.httpClient.post<FinalGame>(
+			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale/${finaleId}`,
+            finalGame
+		);
+    }
+
 	public getPoolQueue(tournamentId: number): Observable<Game> {
 		return this.httpClient.get<Game>(
 			`${this.APIUrl}/${tournamentId}/generatepoolqueue`
