@@ -18,8 +18,8 @@ export class TournamentService extends ResourceService<Tournament> {
 		return "/tournament";
 	}
 
-	public getAllCategories(tournamentId: number): Observable<Category> {
-		return this.httpClient.get<Category>(
+	public getAllCategories(tournamentId: number): Observable<Category[]> {
+		return this.httpClient.get<Category[]>(
 			`${this.APIUrl}/${tournamentId}/category`
 		);
 	}
@@ -33,9 +33,19 @@ export class TournamentService extends ResourceService<Tournament> {
 	public getAllPools(
 		tournamentId: number,
 		categoryId: number
+	): Observable<Pool[]> {
+		return this.httpClient.get<Pool[]>(
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool`
+		);
+	}
+
+	public getPool(
+		tournamentId: number,
+		categoryId: number,
+		poolId: number
 	): Observable<Pool> {
 		return this.httpClient.get<Pool>(
-			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool`
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`
 		);
 	}
 }
