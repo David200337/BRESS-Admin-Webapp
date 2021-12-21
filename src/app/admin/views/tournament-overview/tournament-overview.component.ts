@@ -30,7 +30,6 @@ export class TournamentOverviewComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.tournament = response.result;
-          console.log(this.tournament)
         },
         error: (err) => {
           console.log(err);

@@ -12,6 +12,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { TournamentOverviewComponent } from './views/tournament-overview/tournament-overview.component';
 import { CategorySelectorComponent } from './shared/category-selector/category-selector.component';
 import { TournamentService } from '../services/tournament.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -32,6 +33,7 @@ import { TournamentService } from '../services/tournament.service';
     CommonModule,
     SharedModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     DashboardComponent,
