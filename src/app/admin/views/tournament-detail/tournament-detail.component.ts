@@ -24,5 +24,4 @@ export class TournamentDetailComponent implements OnInit, OnDestroy {
     this.categorySubscription = this.tournamentService.getAllCategories(1)
       .subscribe(c => this.categoryList = c);
   }
-
 }
