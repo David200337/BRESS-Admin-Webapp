@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pool-detail.component.scss']
 })
 export class PoolDetailComponent implements OnInit {
+  gameEditDisplay = "none";
+  gameScores: any;
+
   /**
    * @todo Implement domain model
    */
@@ -15,6 +18,14 @@ export class PoolDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showGameEdit() {
+    this.gameEditDisplay = "block"
+  }
+
+  hideGameEdit() {
+    this.gameEditDisplay = "none"
   }
 
 }

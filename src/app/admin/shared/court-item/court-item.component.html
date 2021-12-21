@@ -1,0 +1,21 @@
+<div class="courtWrapper">
+    <div class="courtHeader">{{field.name}}</div>
+    <div class="courtBody">
+        <table>
+            <thead>
+                <tr>
+                    <th>Speler 1</th>
+                    <th>Speler 2</th>
+                    <th>Uitslag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="onClick()">
+                    <td>{{game.player1}}</td>
+                    <td>{{game.player2}}</td>
+                    <td>{{game.score}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

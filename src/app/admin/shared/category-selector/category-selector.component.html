@@ -1,0 +1,5 @@
+<div class="categoryWrapper">
+    <div class="categoryElement" *ngFor="let c of categoryList" (click)="selectCategory(c)" [class.selected]="selectedCategoryList[categoryList.indexOf(c)]">
+        {{c.name}}
+    </div>
+</div>

@@ -3,18 +3,20 @@
         <div class="formHeader">
             Inloggen
         </div>
-        <div class="formBody">
+        <form (ngSubmit)="onSubmit()" class="formBody" [formGroup]="form">
             <div class="formElement">
-                Gebruikersnaam
-                <input placeholder="Gebruikersnaam"/>
+                Email
+                <input formControlName="email" placeholder="Email" />
             </div>
             <div class="formElement">
                 Wachtwoord
-                <input type="password" placeholder="Wachtwoord"/>
+                <input formControlName="password" type="password" placeholder="Wachtwoord" />
             </div>
+            <p>Nog geen account? Registreer <a routerLink="/register">hier</a>.</p>
+
             <div class="formButtonGroup">
-                <button class="button-dark">Log in</button>
+                <button type="submit" class="button-dark">Log in</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

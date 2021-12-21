@@ -8,6 +8,13 @@ import { SharedModule } from '../shared/shared.module';
 import { EditGameComponent } from './shared/edit-game/edit-game.component';
 import { EditTournamentComponent } from './views/edit-tournament/edit-tournament.component';
 import { TournamentDetailComponent } from './views/tournament-detail/tournament-detail.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { TournamentOverviewComponent } from './views/tournament-overview/tournament-overview.component';
+import { CategorySelectorComponent } from './shared/category-selector/category-selector.component';
+import { TournamentService } from '../services/tournament.service';
+import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
+import { CourtItemComponent } from './shared/court-item/court-item.component';
+import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 
 
 
@@ -21,17 +28,27 @@ import { TournamentDetailComponent } from './views/tournament-detail/tournament-
     EditTournamentComponent,
     EditGameComponent,
     TournamentDetailComponent,
+    TournamentOverviewComponent,
+    CategorySelectorComponent,
+    GamesOverviewComponent,
+    CourtItemComponent,
+    GameCourtItemComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    AppRoutingModule,
   ],
   exports: [
     DashboardComponent,
     CreateTournamentComponent,
     PoolDetailComponent,
     EditTournamentComponent,
-    TournamentDetailComponent
+    TournamentDetailComponent,
+    TournamentOverviewComponent
+  ],
+  providers: [
+    TournamentService
   ]
 })
 export class AdminModule { }

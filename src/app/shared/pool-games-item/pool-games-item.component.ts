@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pool-games-item',
@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pool-games-item.component.scss']
 })
 export class PoolGamesItemComponent implements OnInit {
+  @Output() gameEvent = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClick() {
+    this.gameEvent.emit()
   }
 
 }

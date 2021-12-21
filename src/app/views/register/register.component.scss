@@ -1,0 +1,47 @@
+@import '../../../styles.scss';
+.registerWrapper {
+    background-image: url('../../../assets/images/Squash.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    min-height: calc(100% - 70px);
+}
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    width: clamp(500px, 35vw, 700px);
+    margin: 50px 0;
+}
+
+.formHeader {
+    background-color: $grey-primary;
+    color: $white-bg;
+    padding: 15px 50px;
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+.formBody {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: $orange-primary;
+    color: $white-bg;
+    padding: 25px 50px;
+}
+
+.formElement {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+p {
+    margin: 0;
+}

@@ -1,0 +1,16 @@
+@import '../../../../styles.scss';
+
+.courtHeader {
+    font-weight: 700;
+}
+
+.courtBody {
+    margin-top: 5px;
+}
+
+tbody {
+    tr:hover {
+        cursor: pointer;
+        background-color: #EEEEEE;
+    }
+}
