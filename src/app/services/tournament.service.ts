@@ -54,8 +54,8 @@ export class TournamentService extends ResourceService<Tournament> {
 		categoryId: number,
 		poolId: number,
 		pool: Pool
-	) {
-		return this.httpClient.post(
+	): Observable<Pool> {
+		return this.httpClient.post<Pool>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`,
 			pool
 		);
