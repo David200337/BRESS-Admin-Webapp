@@ -33,7 +33,7 @@ export class GamesOverviewComponent implements OnInit {
   /**
    * @function sortGames
    * @param games the array of games to sort
-   * @description sort the provided games array into started games, the next ame and all future games
+   * sort the provided games array into started games, the next game and all future games
    */
   sortGames(games: Game[]) {
     games.forEach(g => {
