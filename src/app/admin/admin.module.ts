@@ -14,6 +14,7 @@ import { CategorySelectorComponent } from './shared/category-selector/category-s
 import { TournamentService } from '../services/tournament.service';
 import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
 import { CourtItemComponent } from './shared/court-item/court-item.component';
+import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 
 
 
@@ -31,6 +32,7 @@ import { CourtItemComponent } from './shared/court-item/court-item.component';
     CategorySelectorComponent,
     GamesOverviewComponent,
     CourtItemComponent,
+    GameCourtItemComponent,
   ],
   imports: [
     CommonModule,
