@@ -10,13 +10,18 @@ export class GamesOverviewComponent implements OnInit {
   games!: Game[];
   activeGames!: Game[];
   futureGames!: Game[];
-
+  nextGame!: Game;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  /**
+   * @function sortGames
+   * @param games the array of games to sort
+   * @description sort the provided games array into started games, the next ame and all future games
+   */
   sortGames(games: Game[]) {
     games.forEach(g => {
       if (true /* g.gameStarted */ ) {
@@ -24,6 +29,8 @@ export class GamesOverviewComponent implements OnInit {
       } else {
         this.futureGames.push(g)
       }
-    })
+    });
+    
+    this.nextGame = this.futureGames.shift()!;
   }
 }
