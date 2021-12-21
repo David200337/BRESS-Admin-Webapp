@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Category } from "../models/category.model";
+import { FinalGame } from "../models/finalGame.model";
 import { Game } from "../models/game.model";
 import { Pool } from "../models/pool.model";
 import { Tournament } from "../models/tournament.model";
@@ -59,6 +60,15 @@ export class TournamentService extends ResourceService<Tournament> {
 		return this.httpClient.post<Pool>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`,
 			pool
+		);
+	}
+
+	public getAllFinales(
+		tournamentId: number,
+		categoryId: number
+	): Observable<FinalGame> {
+		return this.httpClient.get<FinalGame>(
+			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale`
 		);
 	}
 
