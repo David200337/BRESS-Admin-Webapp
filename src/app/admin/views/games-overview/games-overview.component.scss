@@ -1,0 +1,14 @@
+.gamesHeader {
+    margin: 50px 0;
+}
+
+.gamesBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.bodyColumn {
+    flex: 1
+}
