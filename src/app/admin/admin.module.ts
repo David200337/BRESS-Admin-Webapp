@@ -10,6 +10,7 @@ import { EditTournamentComponent } from './views/edit-tournament/edit-tournament
 import { TournamentDetailComponent } from './views/tournament-detail/tournament-detail.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { TournamentOverviewComponent } from './views/tournament-overview/tournament-overview.component';
+import { CategorySelectorComponent } from './shared/category-selector/category-selector.component';
 
 
 
@@ -24,6 +25,7 @@ import { TournamentOverviewComponent } from './views/tournament-overview/tournam
     EditGameComponent,
     TournamentDetailComponent,
     TournamentOverviewComponent,
+    CategorySelectorComponent,
   ],
   imports: [
     CommonModule,
