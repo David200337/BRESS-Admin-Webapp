@@ -21,17 +21,28 @@ export class TournamentService extends ResourceService<Tournament> {
 		return "/tournament";
 	}
 
-    public getAllPlayers(tournamentId: number): Observable<Player[]> {
-        return this.httpClient.get<Player[]>(`${this.APIUrl}/${tournamentId}/player`);
-    }
-    
-    public addPlayer(tournamentId: number, playerId: number): Observable<Player[]> {
-        return this.httpClient.post<Player[]>(`${this.APIUrl}/${tournamentId}/player/${playerId}`, {});
-    }
+	public getAllPlayers(tournamentId: number): Observable<Player[]> {
+		return this.httpClient.get<Player[]>(
+			`${this.APIUrl}/${tournamentId}/player`
+		);
+	}
 
-    public deletePlayer(tournamentId: number, playerId: number) {
-        return this.httpClient.delete<Player>(`${this.APIUrl}/${tournamentId}/player/${playerId}`, {});
-    }
+	public addPlayer(
+		tournamentId: number,
+		playerId: number
+	): Observable<Player[]> {
+		return this.httpClient.post<Player[]>(
+			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
+			{}
+		);
+	}
+
+	public deletePlayer(tournamentId: number, playerId: number) {
+		return this.httpClient.delete<Player>(
+			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
+			{}
+		);
+	}
 
 	public getAllCategories(tournamentId: number): Observable<Category[]> {
 		return this.httpClient.get<Category[]>(
@@ -39,17 +50,44 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-    public addCategory(tournamentId: number, category: Category): Observable<Category> {
-        return this.httpClient.post<Category>(`${this.APIUrl}/tournament/${tournamentId}`, category)
-    }
+	public getCategory(
+		tournamentId: number,
+		categoryId: number
+	): Observable<Category> {
+		return this.httpClient.get<Category>(
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}`
+		);
+	}
 
-    public updateCategory(tournamentId: number, categoryId: number, category: Category): Observable<Category> {
-        return this.httpClient.put<Category>(`${this.APIUrl}/${tournamentId}/category/${categoryId}`, category);
-    }
+	public addCategory(
+		tournamentId: number,
+		category: Category
+	): Observable<Category> {
+		return this.httpClient.post<Category>(
+			`${this.APIUrl}/tournament/${tournamentId}`,
+			category
+		);
+	}
 
-    public deleteCategory(tournamentId: number, categoryId: number): Observable<Category> {
-        return this.httpClient.delete<Category>(`${this.APIUrl}/${tournamentId}/category/${categoryId}`);
-    }
+	public updateCategory(
+		tournamentId: number,
+		categoryId: number,
+		category: Category
+	): Observable<Category> {
+		return this.httpClient.put<Category>(
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}`,
+			category
+		);
+	}
+
+	public deleteCategory(
+		tournamentId: number,
+		categoryId: number
+	): Observable<Category> {
+		return this.httpClient.delete<Category>(
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}`
+		);
+	}
 
 	public getAllPools(
 		tournamentId: number,
@@ -89,17 +127,17 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-    public updateFinale(
-        tournamentId: number,
+	public updateFinale(
+		tournamentId: number,
 		categoryId: number,
 		finaleId: number,
-        finalGame: FinalGame
-    ): Observable<FinalGame> {
-        return this.httpClient.post<FinalGame>(
+		finalGame: FinalGame
+	): Observable<FinalGame> {
+		return this.httpClient.post<FinalGame>(
 			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale/${finaleId}`,
-            finalGame
+			finalGame
 		);
-    }
+	}
 
 	public getPoolQueue(tournamentId: number): Observable<Game> {
 		return this.httpClient.get<Game>(
