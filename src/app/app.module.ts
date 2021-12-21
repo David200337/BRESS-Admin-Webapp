@@ -9,6 +9,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { TournamentService } from './services/tournament.service';
 
 @NgModule({
   declarations: [
