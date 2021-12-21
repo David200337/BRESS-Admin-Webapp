@@ -143,12 +143,12 @@ export class TournamentService extends ResourceService<Tournament> {
 			);
 	}
 
-    public getGame(
-        tournamentId: number,
-        categoryId: number,
-        gameId: number
-    ): Observable<Game> {
-        return this.httpClient
+	public getGame(
+		tournamentId: number,
+		categoryId: number,
+		gameId: number
+	): Observable<Game> {
+		return this.httpClient
 			.delete<any>(
 				`${this.APIUrl}/${tournamentId}/category/${categoryId}/poolgame/${gameId}`
 			)
@@ -157,7 +157,21 @@ export class TournamentService extends ResourceService<Tournament> {
 					return item.result;
 				})
 			);
-    }
+	}
+
+	public updateGame(
+		tournamentId: number,
+		gameId: number,
+		game: Game
+	): Observable<Game> {
+		return this.httpClient
+			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, game)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
+	}
 
 	public getAllFinales(
 		tournamentId: number,
