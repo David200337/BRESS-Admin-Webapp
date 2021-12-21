@@ -21,12 +21,16 @@ export class TournamentService extends ResourceService<Tournament> {
 		return "/tournament";
 	}
 
-    public getAllPlayers(tournamentId: number): Observable<Player> {
-        return this.httpClient.get<Player>(`${this.APIUrl}/${tournamentId}/player`);
+    public getAllPlayers(tournamentId: number): Observable<Player[]> {
+        return this.httpClient.get<Player[]>(`${this.APIUrl}/${tournamentId}/player`);
     }
     
-    public addPlayer(tournamentId: number, playerId: number): Observable<Player> {
-        return this.httpClient.post<Player>(`${this.APIUrl}/${tournamentId}/player/${playerId}`, {});
+    public addPlayer(tournamentId: number, playerId: number): Observable<Player[]> {
+        return this.httpClient.post<Player[]>(`${this.APIUrl}/${tournamentId}/player/${playerId}`, {});
+    }
+
+    public deletePlayer(tournamentId: number, playerId: number) {
+        return this.httpClient.delete<Player>(`${this.APIUrl}/${tournamentId}/player/${playerId}`, {});
     }
 
 	public getAllCategories(tournamentId: number): Observable<Category[]> {
