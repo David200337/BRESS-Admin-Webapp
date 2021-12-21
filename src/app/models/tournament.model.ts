@@ -4,7 +4,7 @@ import { GenericModel } from "./generic.model";
 export class Tournament extends GenericModel {
 	public title: string;
 	public beginDateTime: Date;
-	public entreeFee: number; // TODO: Fix possible floating point error
+	public entryFee: number; // TODO: Fix possible floating point error
 	public maxPlayers: number;
 	public minPlayers: number;
 	public idealPoolSize: number;
@@ -14,7 +14,7 @@ export class Tournament extends GenericModel {
 		id: number,
 		title: string,
 		beginDateTime: Date,
-		entreeFee: number,
+		entryFee: number,
 		maxPlayers: number,
 		minPlayers: number,
 		idealPoolSize: number,
@@ -23,7 +23,7 @@ export class Tournament extends GenericModel {
 		super(id);
 		this.title = title;
 		this.beginDateTime = beginDateTime;
-		this.entreeFee = entreeFee;
+		this.entryFee = entryFee;
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
 		this.idealPoolSize = idealPoolSize;
