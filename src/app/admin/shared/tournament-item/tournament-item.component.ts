@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Tournament } from 'src/app/models/tournament.model';
 
 @Component({
   selector: 'app-tournament-item',
@@ -9,6 +10,8 @@ export class TournamentItemComponent implements OnInit {
   /**
    * @todo Implent domain model class
    */
+  @Input() tournament: Tournament | undefined = undefined
+
   title!: String;
   date!: Date;
   skillLevel!: String;
