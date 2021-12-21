@@ -1,5 +1,5 @@
 <div class="courtWrapper">
-    <div class="courtHeader">{{field.name}}</div>
+    <div class="courtHeader">{{field!.name}}</div>
     <div class="courtBody">
         <table>
             <thead>
@@ -11,8 +11,8 @@
             </thead>
             <tbody>
                 <tr (click)="onClick()">
-                    <td>{{game.player1}}</td>
-                    <td>{{game.player2}}</td>
+                    <td>{{game.player1.name}}</td>
+                    <td>{{game.player2.name}}</td>
                     <td>{{game.score}}</td>
                 </tr>
             </tbody>

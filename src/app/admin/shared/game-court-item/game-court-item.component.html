@@ -9,9 +9,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let game of games">
-                <td>{{game.player1}}</td>
-                <td>{{game.player2}}</td>
-                <td>{{game.field}}</td>
+                <td>{{game.player1.name}}</td>
+                <td>{{game.player2.name}}</td>
+                <td>{{game.field?.name ?? "onbekend"}}</td>
             </tr>
         </tbody>
     </table>
