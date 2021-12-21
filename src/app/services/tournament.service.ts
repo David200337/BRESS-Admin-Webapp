@@ -60,18 +60,6 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public updatePool(
-		tournamentId: number,
-		categoryId: number,
-		poolId: number,
-		pool: Pool
-	): Observable<Pool> {
-		return this.httpClient.post<Pool>(
-			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`,
-			pool
-		);
-	}
-
 	public getAllFinales(
 		tournamentId: number,
 		categoryId: number
