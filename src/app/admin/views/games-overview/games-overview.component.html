@@ -1,1 +1,15 @@
-<p>court-overview works!</p>
+<div class="gamesWrapper">
+    <div class="gamesHeader">
+        <h1>Speeltoernooi</h1>
+    </div>
+    <div class="gamesBody">
+        <div class="bodyColumn">
+            <div class="columnElement" *ngFor="let game of activeGames">
+                <app-court-item [game]="game" [field]="game.field"></app-court-item>
+            </div>
+        </div>
+        <div class="bodyColumn">
+            
+        </div>
+    </div>
+</div>
