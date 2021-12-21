@@ -39,11 +39,9 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public getCategory(tournamentId: number, categoryId: number): Observable<Category> {
-		return this.httpClient.get<Category>(
-			`${this.APIUrl}/${tournamentId}/category/${categoryId}`
-		);
-	}
+    public addCategory(tournamentId: number, category: Category): Observable<Category> {
+        return this.httpClient.post<Category>(`${this.APIUrl}/tournament/${tournamentId}`, category)
+    }
 
 	public getAllPools(
 		tournamentId: number,
