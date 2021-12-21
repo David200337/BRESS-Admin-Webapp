@@ -6,17 +6,16 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthenticationService } from "./authentication.service";
-const { Injectable } = require("@angular/core");
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService) {
-    }
+	constructor(private authenticationService: AuthenticationService) {}
 
-    intercept(
+	intercept(
 		req: HttpRequest<any>,
 		next: HttpHandler
-	): Observable<HttpEvent<any>> {        
+	): Observable<HttpEvent<any>> {
 		const token = this.authenticationService.getToken();
 
 		if (token) {
