@@ -18,7 +18,7 @@ export class AuthenticationService {
 			})
 			.subscribe({
 				next: (result) => {
-					localStorage.setItem("user", JSON.stringify(result));
+					localStorage.setItem("user", JSON.stringify(result.result));
 					this.router.navigate(["/dashboard"])
 				},
 				error: (err) => {
@@ -47,4 +47,8 @@ export class AuthenticationService {
 
 		return {};
 	}
+
+    public isLoggedIn(): boolean {
+        return this.getCurrentUser().expireDate && (new Date(this.getCurrentUser().expireDate) < new Date());
+    }
 }
