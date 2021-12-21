@@ -15,6 +15,7 @@ import { TournamentService } from '../services/tournament.service';
 import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -38,6 +39,7 @@ import { GameCourtItemComponent } from './shared/game-court-item/game-court-item
     CommonModule,
     SharedModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     DashboardComponent,
