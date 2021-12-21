@@ -47,6 +47,10 @@ export class TournamentService extends ResourceService<Tournament> {
         return this.httpClient.put<Category>(`${this.APIUrl}/${tournamentId}/category/${categoryId}`, category);
     }
 
+    public deleteCategory(tournamentId: number, categoryId: number): Observable<Category> {
+        return this.httpClient.delete<Category>(`${this.APIUrl}/${tournamentId}/category/${categoryId}`);
+    }
+
 	public getAllPools(
 		tournamentId: number,
 		categoryId: number
