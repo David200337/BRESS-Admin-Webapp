@@ -11,6 +11,7 @@ import { TournamentDetailComponent } from './views/tournament-detail/tournament-
 import { AppRoutingModule } from '../app-routing.module';
 import { TournamentOverviewComponent } from './views/tournament-overview/tournament-overview.component';
 import { CategorySelectorComponent } from './shared/category-selector/category-selector.component';
+import { TournamentService } from '../services/tournament.service';
 
 
 
@@ -39,6 +40,9 @@ import { CategorySelectorComponent } from './shared/category-selector/category-s
     EditTournamentComponent,
     TournamentDetailComponent,
     TournamentOverviewComponent
+  ],
+  providers: [
+    TournamentService
   ]
 })
 export class AdminModule { }
