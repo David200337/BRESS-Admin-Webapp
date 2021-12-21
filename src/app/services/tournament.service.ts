@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Category } from "../models/category.model";
 import { FinalGame } from "../models/finalGame.model";
 import { Game } from "../models/game.model";
@@ -140,8 +140,12 @@ export class TournamentService extends ResourceService<Tournament> {
 	}
 
 	public getPoolQueue(tournamentId: number): Observable<Game> {
-		return this.httpClient.get<Game>(
-			`${this.APIUrl}/${tournamentId}/generatepoolqueue`
-		);
+		return this.httpClient
+			.get<any>(`${this.APIUrl}/${tournamentId}/generatepoolqueue`)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
 	}
 }
