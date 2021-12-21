@@ -139,7 +139,7 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public getPoolQueue(tournamentId: number): Observable<Game> {
+	public getPoolQueue(tournamentId: number): Observable<Game[]> {
 		return this.httpClient
 			.get<any>(`${this.APIUrl}/${tournamentId}/generatepoolqueue`)
 			.pipe(
