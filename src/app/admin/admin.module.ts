@@ -12,6 +12,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { TournamentOverviewComponent } from './views/tournament-overview/tournament-overview.component';
 import { CategorySelectorComponent } from './shared/category-selector/category-selector.component';
 import { TournamentService } from '../services/tournament.service';
+import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
+import { CourtItemComponent } from './shared/court-item/court-item.component';
 
 
 
@@ -27,6 +29,8 @@ import { TournamentService } from '../services/tournament.service';
     TournamentDetailComponent,
     TournamentOverviewComponent,
     CategorySelectorComponent,
+    GamesOverviewComponent,
+    CourtItemComponent,
   ],
   imports: [
     CommonModule,
