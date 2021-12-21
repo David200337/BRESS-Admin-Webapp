@@ -1,6 +1,6 @@
 <div class="overviewWrapper">
     <div class="overviewHeader">
-        <h1 class="overviewHeaderTitle">Speeltoernooi</h1>
+        <h1 class="overviewHeaderTitle">{{tournament?.title}}</h1>
         <div class="overViewHeaderButtonGroup">
             <button [routerLink]="['../../dashboard']" class="button-dark">Terug</button>
         </div>
@@ -49,7 +49,7 @@
                         Datum
                     </div>
                     <div class="dataContent">
-                        Dinsdag 14 december
+                        {{tournament?.beginDateTime | date: "EEEE d MMMM"}}
                     </div>
                 </div>
                 <div class="overviewBodyElement">
@@ -57,7 +57,7 @@
                         Aantal spelers
                     </div>
                     <div class="dataContent">
-                        18
+                        {{tournament?.minPlayers}}
                     </div>
                 </div>
                 <div class="overviewBodyElement">
@@ -65,7 +65,7 @@
                         Maximaal aantal spelers
                     </div>
                     <div class="dataContent">
-                        32
+                        {{tournament?.maxPlayers}}
                     </div>
                 </div>
                 <div class="overviewBodyElement">
@@ -73,7 +73,7 @@
                         Entreeprijs
                     </div>
                     <div class="dataContent">
-                        €7,50
+                        €{{tournament?.entryFee | number: '1.2-2'}}
                     </div>
                 </div>
                 <div class="overviewBodyElement">

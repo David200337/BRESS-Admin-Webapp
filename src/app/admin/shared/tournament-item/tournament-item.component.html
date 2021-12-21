@@ -4,11 +4,11 @@
     </div>
     <div class="itemBody">
         <div class="labelGroup">
-            <div class="itemLabel">Datum: {{tournament?.beginDateTime! | date: 'fullDate'}}</div>
+            <div class="itemLabel">Datum: {{tournament?.beginDateTime! | date: 'EEEE d MMMM'}}</div>
             <div class="itemLabel">Aantal Spelers: {{tournament?.minPlayers}} (max. {{tournament?.maxPlayers}})</div>
         </div>
         <div class="buttonGroup">
-            <button [routerLink]="['/tournament/1']" class="button-dark">Ga naar toernooi</button>
+            <button [routerLink]="['/tournament', tournament?.id]" class="button-dark">Ga naar toernooi</button>
         </div>
     </div>
 </div>
