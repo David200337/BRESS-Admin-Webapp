@@ -1,0 +1,24 @@
+@import '../../../../styles.scss';
+
+.categoryWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    border: 1px solid $orange-primary;
+}
+
+.categoryElement {
+    color: $orange-primary;
+    background-color: $white-bg;
+    padding: 15px 25px;
+
+    &.categoryElement:not(.selected):hover {
+        background-color: $white-bg-dark;
+    }
+
+    &.selected {
+        background: $orange-primary;
+        color: $white-bg;
+    }
+}
