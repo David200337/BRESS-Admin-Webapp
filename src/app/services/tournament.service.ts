@@ -25,8 +25,8 @@ export class TournamentService extends ResourceService<Tournament> {
         return this.httpClient.get<Player>(`${this.APIUrl}/${tournamentId}/player`);
     }
     
-    public getPlayer(tournamentId: number, playerId: number): Observable<Player> {
-        return this.httpClient.get<Player>(`${this.APIUrl}/${tournamentId}/player/${playerId}`);
+    public addPlayer(tournamentId: number, playerId: number): Observable<Player> {
+        return this.httpClient.post<Player>(`${this.APIUrl}/${tournamentId}/player/${playerId}`, {});
     }
 
 	public getAllCategories(tournamentId: number): Observable<Category[]> {
