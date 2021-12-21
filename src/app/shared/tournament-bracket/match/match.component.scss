@@ -1,4 +1,5 @@
-@import "../styles/styles.scss";
+@import '../styles/styles.scss';
+@import '../../../../styles.scss';
 :host {
     display: flex;
     flex: 1;
@@ -28,4 +29,11 @@
 
 .ngtt__team-score {
     margin-left: 45px;
+}
+
+.winner{
+    background-color: $orange-primary;
+    font-weight: bold;
+    color: white;
+    border: 1px solid black;
 }

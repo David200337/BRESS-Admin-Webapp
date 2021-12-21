@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MatchComponent implements OnInit {
   @Input() match: any
-  
+
   constructor() { }
 
   ngOnInit(): void {

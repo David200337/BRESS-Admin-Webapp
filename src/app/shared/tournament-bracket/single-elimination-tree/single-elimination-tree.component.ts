@@ -1,5 +1,6 @@
 import {
   Component,
+  DoCheck,
   Input,
   OnChanges,
   OnInit,
@@ -45,4 +46,6 @@ export class SingleEliminationTreeComponent implements OnInit, OnChanges {
       .shift();
     console.log(this.final);
   }
+
+
 }
