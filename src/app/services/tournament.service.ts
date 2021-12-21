@@ -108,6 +108,24 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
+	public addPlayerToPool(
+		tournamentId: number,
+		categoryId: number,
+		poolId: number,
+		playerId: number
+	): Observable<Pool[]> {
+		return this.httpClient
+			.post<any>(
+				`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}/player/${playerId}`,
+				{}
+			)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
+	}
+
 	public getAllFinales(
 		tournamentId: number,
 		categoryId: number
