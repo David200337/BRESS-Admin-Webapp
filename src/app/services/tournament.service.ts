@@ -214,4 +214,19 @@ export class TournamentService extends ResourceService<Tournament> {
 				})
 			);
 	}
+
+	public getRanking(
+		tournamentId: number,
+		categoryId: number
+	): Observable<Player[]> {
+		return this.httpClient
+			.get<any>(
+				`${this.APIUrl}/${tournamentId}/category/${categoryId}/ranking`
+			)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
+	}
 }
