@@ -41,6 +41,10 @@ h3 {
     margin: 0;
 }
 
+a:visited {
+    color: inherit;
+}
+
 .button-light {
     color: $white-bg;
     background-color: $orange-primary;
