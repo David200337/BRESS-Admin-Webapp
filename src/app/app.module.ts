@@ -9,6 +9,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RegisterComponent } from './views/register/register.component';
     BrowserModule,
     AppRoutingModule,
     AdminModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   exports: [
   ],
