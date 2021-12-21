@@ -48,4 +48,16 @@ export class TournamentService extends ResourceService<Tournament> {
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`
 		);
 	}
+
+	public updatePool(
+		tournamentId: number,
+		categoryId: number,
+		poolId: number,
+		pool: Pool
+	) {
+		return this.httpClient.post(
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`,
+			pool
+		);
+	}
 }
