@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { Tournament } from 'src/app/models/tournament.model';
 import { TournamentService } from 'src/app/services/tournament.service';
@@ -20,6 +20,7 @@ export class EditTournamentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private tournamentService: TournamentService,
     private formBuilder: FormBuilder,
     private datePipe: DatePipe
@@ -58,6 +59,27 @@ export class EditTournamentComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe()
+    }
+  }
+
+  onSubmit(): void {
+    if (this.tournament && this.form.valid) {
+      this.tournament.title = this.form.value.title
+      this.tournament.beginDateTime = this.form.value.beginDateTime
+      this.tournament.entryFee = this.form.value.entryFee
+      this.tournament.maxPlayers = this.form.value.maxPlayers
+
+      this.tournamentService.update(this.tournamentId! ,this.tournament).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      return
     }
   }
 }

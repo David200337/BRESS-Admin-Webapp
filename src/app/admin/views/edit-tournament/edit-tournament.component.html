@@ -3,7 +3,7 @@
     <div class="edit-container">
         <div class="form-container">
             <div class="form-sub-container">
-                <form [formGroup]="form">
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
                     <div class="form-group">
                         <label for="name">Titel</label>
                         <input id="name" formControlName="title" type="text" placeholder="Titel" />
@@ -26,7 +26,7 @@
 
                     <div class="form-group buttons">
                         <div>
-                            <button [routerLink]="['../']" type="submit" class="button-dark">Sla op</button>
+                            <button type="submit" class="button-dark">Sla op</button>
                             <button [routerLink]="['../']" class="button-dark cancel">Annuleer</button>
                         </div>
                     </div>
