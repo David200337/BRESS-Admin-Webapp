@@ -156,7 +156,7 @@ describe("TournamentService", () => {
 		httpSpy.get.and.nextWith(fakeTournaments[0].players);
 
 		service.getAllPlayers(0).subscribe({
-			next: (players) => {                
+			next: (players) => {
 				expect(players).toHaveSize(fakeTournaments[0].players.length);
 				done();
 			},
@@ -166,5 +166,27 @@ describe("TournamentService", () => {
 		});
 
 		expect(httpSpy.get.calls.count()).toBe(1);
+	});
+
+	it("should add a new player to an existing tournament", (done: DoneFn) => {
+		// TODO: Implement method
+		done();
+	});
+
+	it("should delete an existing player from a tournament", (done: DoneFn) => {
+		let deletedPlayer = fakeTournaments[0].players[1];
+		httpSpy.delete.and.nextWith(fakeTournaments[0].players[1]);
+
+		service.deletePlayer(0, 1).subscribe({
+			next: (player) => {
+				expect(player).toEqual(deletedPlayer);
+				done();
+			},
+			error: () => {
+				done.fail;
+			}
+		});
+
+		expect(httpSpy.delete.calls.count()).toBe(1);
 	});
 });
