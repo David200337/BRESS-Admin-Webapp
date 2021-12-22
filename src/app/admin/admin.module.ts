@@ -15,6 +15,7 @@ import { TournamentService } from '../services/tournament.service';
 import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
 
 
@@ -40,6 +41,7 @@ import { CategoryBracketComponent } from './views/category-bracket/category-brac
     CommonModule,
     SharedModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     DashboardComponent,

@@ -7,7 +7,7 @@ export class Game extends GenericModel {
 	public winner: number;
 	public inQueue: boolean;
     public gameStarted: boolean;
-	public field: Field;
+	public field: Field | undefined;
 	public player1: Player;
 	public player2: Player;
 
@@ -17,7 +17,7 @@ export class Game extends GenericModel {
 		winner: number,
 		inQueue: boolean,
         gameStarted: boolean,
-		field: Field,
+		field: Field | undefined,
 		player1: Player,
 		player2: Player
 	) {

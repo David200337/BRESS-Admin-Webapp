@@ -1,5 +1,6 @@
 import { Category } from "./category.model";
 import { GenericModel } from "./generic.model";
+import { Player } from "./player.model";
 
 export class Tournament extends GenericModel {
 	public title: string;
@@ -9,6 +10,7 @@ export class Tournament extends GenericModel {
 	public minPlayers: number;
 	public idealPoolSize: number;
 	public categories: Category[];
+	public players: Player[];
 
 	constructor(
 		id: number,
@@ -18,7 +20,8 @@ export class Tournament extends GenericModel {
 		maxPlayers: number,
 		minPlayers: number,
 		idealPoolSize: number,
-		categories: Category[]
+		categories: Category[],
+		players: Player[]
 	) {
 		super(id);
 		this.title = title;
@@ -28,5 +31,6 @@ export class Tournament extends GenericModel {
 		this.minPlayers = minPlayers;
 		this.idealPoolSize = idealPoolSize;
 		this.categories = categories;
+		this.players = players;
 	}
 }
