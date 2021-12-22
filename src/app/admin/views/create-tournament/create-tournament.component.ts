@@ -34,12 +34,13 @@ export class CreateTournamentComponent implements OnInit {
         this.form.value.title,
         this.form.value.beginDateTime,
         this.form.value.entryFee,
-        this.form.value.maxPlayer,
+        this.form.value.maxPlayers,
         0,
         0,
         [],
         []
       );
+      
       this.tournamentService.add(tournament).subscribe({
         next: (res) => {
           console.log(res);
