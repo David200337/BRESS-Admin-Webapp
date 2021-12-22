@@ -15,6 +15,7 @@ import { TournamentService } from '../services/tournament.service';
 import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
+import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
 
 
 
@@ -33,6 +34,7 @@ import { GameCourtItemComponent } from './shared/game-court-item/game-court-item
     GamesOverviewComponent,
     CourtItemComponent,
     GameCourtItemComponent,
+    CategoryBracketComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { GameCourtItemComponent } from './shared/game-court-item/game-court-item
     PoolDetailComponent,
     EditTournamentComponent,
     TournamentDetailComponent,
-    TournamentOverviewComponent
+    TournamentOverviewComponent,
+    CategoryBracketComponent
   ],
   providers: [
     TournamentService

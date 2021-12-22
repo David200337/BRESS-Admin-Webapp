@@ -2,12 +2,6 @@
     <app-navbar></app-navbar>
     <main role="main">
         <!-- <app-dashboard></app-dashboard> -->
-        <!-- <app-login></app-login> -->
-        <app-single-elimination-tree [tournament]="myTournamentData" [matchTemplate]="myMatchTemplate">
-        </app-single-elimination-tree>
-
-        <ng-template #myMatchTemplate let-match>
-            <app-match [match]="match"></app-match>
-        </ng-template>
+        <app-login></app-login>
     </main>
 </div>
