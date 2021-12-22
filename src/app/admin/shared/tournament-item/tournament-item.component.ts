@@ -12,18 +12,7 @@ export class TournamentItemComponent implements OnInit {
    */
   @Input() tournament: Tournament | undefined = undefined
 
-  title!: String;
-  date!: Date;
-  skillLevel!: String;
-  playerCount!: number;
-  playerMax!: number
-
   constructor() {
-    this.title = "Speeltoernoei beginners"
-    this.date = new Date();
-    this.skillLevel = "Beginners"
-    this.playerCount = 18;
-    this.playerMax = 32;
    }
 
   ngOnInit(): void {
