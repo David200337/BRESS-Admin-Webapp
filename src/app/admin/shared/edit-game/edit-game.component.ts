@@ -7,7 +7,7 @@ import { EditGameService } from 'src/app/services/edit-game.service';
   styleUrls: ['./edit-game.component.scss']
 })
 export class EditGameComponent implements OnInit {
-  @Output() sumbitEvent = new EventEmitter<void>();
+  @Output() sumbitEvent = new EventEmitter<any>();
   playerScores!: number[][]
 
   constructor(
@@ -30,13 +30,14 @@ export class EditGameComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.playerScores)
     let score: boolean[] = [];
     for (let i = 0; i < this.playerScores[0].length; i++) {
       score[i] = this.playerScores[0][i] === 1 ? true : false;
     }
-    this.editGame.enterScore(score);
-    this.sumbitEvent.emit();
+    this.editGame.enterScore(score).subscribe((res) => {
+      console.log(res)
+      this.sumbitEvent.emit({ id: this.editGame.gameId, score: score });
+    });
   }
 
   close() {

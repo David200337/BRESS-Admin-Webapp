@@ -136,6 +136,7 @@ export class CategoryBracketComponent implements OnInit {
 
   public tournament: any = {};
   public categoryList: Category[] = [];
+  public selectedCategoryIndex: number = 0;
 
   constructor(
     private tournamentService: TournamentService,
@@ -144,6 +145,7 @@ export class CategoryBracketComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.hideGameEdit()
     this.route.paramMap.pipe(
       switchMap((params) => {
         const tournamentId = +params.get("tournamentId")!;
@@ -153,7 +155,7 @@ export class CategoryBracketComponent implements OnInit {
     ).subscribe((result: any) => {
       this.tournament = result.result;
       this.categoryList = this.tournament.categories;
-      this.createBracket(this.tournament.categories[0].id);
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
       this.editGame.tournamentId = this.tournament.id
     });
   }
@@ -201,9 +203,36 @@ export class CategoryBracketComponent implements OnInit {
     this.myTournamentData = { rounds: newlist };
   }
 
+  updateGameScore(game: any) {
+    console.log(game)
+    this.myTournamentData.rounds.forEach((round) => {
+      round.matches.forEach((match) => {
+        if (match.id == game.id) {
+          let player1 = 0;
+          let player2 = 0;
+          game.score.forEach((set: boolean) => {
+            if (set) {
+              player1++;
+            } else {
+              player2++;
+            }
+          })
+          match.teams[0].score = player1;
+          match.teams[1].score = player2;
+        }
+      })
+    })
+    this.myTournamentData = { rounds: this.myTournamentData.rounds };
+  }
+
 
   switchCategory(category: Category) {
     if (category != null) this.createBracket(category.id);
+    for (let i = 0; i < this.categoryList.length; i++) {
+      if (this.categoryList[i].id == category.id) {
+        this.selectedCategoryIndex = i;
+      }
+    }
   }
 
   hideGameEdit() {
