@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Game } from 'src/app/models/game.model';
 
 @Component({
@@ -8,10 +8,14 @@ import { Game } from 'src/app/models/game.model';
 })
 export class GameCourtItemComponent implements OnInit {
   @Input() games!: Game[];
+  @Output() gameEvent = new EventEmitter<Game>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClick(game: Game) {
+    this.gameEvent.emit(game);
+  }
 }

@@ -19,6 +19,6 @@ export class CourtItemComponent implements OnInit {
   }
 
   onClick() {
-    this.gameEvent.emit(this.game)
+    this.gameEvent.emit(this.game);
   }
 }

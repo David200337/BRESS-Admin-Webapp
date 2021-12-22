@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .gamesHeader {
     margin: 50px 0;
 }
@@ -21,4 +23,17 @@
 .elementHeader {
     font-weight: 700;
     margin-bottom: 5px;
+}
+
+.scorePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.visible {
+    display: block;
 }
