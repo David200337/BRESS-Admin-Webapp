@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -8,23 +9,40 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  submitted: boolean = false;
   form!: FormGroup;
 
+  error: string | undefined = undefined
+
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
+    this.submitted = true;
     if (this.form.valid) {
-      this.authService.login(this.form.value.email, this.form.value.password)
+      this.authService
+        .login(this.form.value.email, this.form.value.password)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            if (err.status === 400) {
+              this.error = "Email of wachtwoord is verkeerd."
+            }
+          },
+        });
+      this.submitted = false;
     } else {
       return;
     }
