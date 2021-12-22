@@ -100,7 +100,7 @@ describe("TournamentService", () => {
 
 		httpSpy.put.and.nextWith(tournament);
 
-		service.update(tournament).subscribe({
+		service.update(tournament.id, tournament).subscribe({
 			next: (tournament) => {
 				expect(tournament.title).toEqual("Updated Tournament");
 				done();
