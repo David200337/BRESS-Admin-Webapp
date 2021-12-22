@@ -8,7 +8,7 @@ import { Game } from 'src/app/models/game.model';
   styleUrls: ['./court-item.component.scss']
 })
 export class CourtItemComponent implements OnInit {
-  @Input() field!: Field;
+  @Input() field!: Field | undefined;
   @Input() game!: Game;
   @Output() gameEvent = new EventEmitter<Game>();
 

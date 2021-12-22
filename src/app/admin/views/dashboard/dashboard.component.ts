@@ -14,8 +14,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.tournamentService.getList().subscribe({
-      next: (tournaments: any) => {
-        this.tournaments = tournaments.result;
+      next: (response: any) => {
+        this.tournaments = response.result;
       },
       error: (err) => console.log(err),
     })
