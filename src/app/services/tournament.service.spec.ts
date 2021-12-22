@@ -26,7 +26,7 @@ describe("TournamentService", () => {
 					email: "player0@email.com",
 					skillLevel: new SkillLevel(0, "Beginners")
 				},
-                {
+				{
 					id: 1,
 					name: "Player 1",
 					email: "player1@email.com",
@@ -44,13 +44,13 @@ describe("TournamentService", () => {
 			idealPoolSize: 5,
 			categories: [],
 			players: [
-                {
+				{
 					id: 1,
 					name: "Player 1",
 					email: "player1@email.com",
 					skillLevel: new SkillLevel(1, "Half-Gevorderden")
 				}
-            ]
+			]
 		}
 	];
 
@@ -153,10 +153,10 @@ describe("TournamentService", () => {
 	});
 
 	it("should return an expected list of players", (done: DoneFn) => {
-        httpSpy.get.and.nextWith(fakeTournaments);
+		httpSpy.get.and.nextWith(fakeTournaments[0].players);
 
-        service.getAllPlayers(0).subscribe({
-			next: (players) => {
+		service.getAllPlayers(0).subscribe({
+			next: (players) => {                
 				expect(players).toHaveSize(fakeTournaments[0].players.length);
 				done();
 			},
@@ -166,5 +166,5 @@ describe("TournamentService", () => {
 		});
 
 		expect(httpSpy.get.calls.count()).toBe(1);
-    });
+	});
 });
