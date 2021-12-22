@@ -1,0 +1,90 @@
+<div class="overviewWrapper">
+    <div class="overviewHeader">
+        <h1 class="overviewHeaderTitle">{{tournament?.title}}</h1>
+        <div class="overViewHeaderButtonGroup">
+            <button [routerLink]="['../../dashboard']" class="button-dark">Terug</button>
+        </div>
+    </div>
+    <div class="overviewBody">
+        <div class="overviewBodyCollumn">
+            <div class="overviewBodyElement">
+                <button [routerLink]="['edit-tournament']" class="button-light button-long">
+                    Toernooi bewerken
+                    <img src="../../../../assets/images/chevron-right.svg">
+                </button>
+            </div>
+            <div [routerLink]="['score-overview']" class="overviewBodyElement">
+                <button class="button-light button-long">
+                    Scoreoverzicht
+                    <img src="../../../../assets/images/chevron-right.svg">
+                </button>
+            </div>
+            <div class="overviewBodyElement">
+                <button [routerLink]="['games']" class="button-light button-long">
+                    Wedstrijdoverzicht
+                    <img src="../../../../assets/images/chevron-right.svg">
+                </button>
+            </div>
+            <div class="overviewBodyElement">
+                <button [routerLink]="['']" class="button-light button-long">
+                    Live tussenstand 
+                    <img src="../../../../assets/images/chevron-right.svg">
+                </button>
+            </div>
+            <div class="overviewBodyElement">
+                <div class="overViewBodyButtonGroup">
+                    <button class="button-light">
+                        Toernooi starten
+                    </button>
+                    <button class="button-dark">
+                        Toernooi beëindigen
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="overviewBodyCollumn">
+            <div class="overviewBodyData">
+                <div class="overviewBodyElement">
+                    <div class="dataLabel">
+                        Datum
+                    </div>
+                    <div class="dataContent">
+                        {{tournament?.beginDateTime | date: "EEEE d MMMM"}}
+                    </div>
+                </div>
+                <div class="overviewBodyElement">
+                    <div class="dataLabel">
+                        Aantal spelers
+                    </div>
+                    <div class="dataContent">
+                        {{tournament?.players?.length}}
+                    </div>
+                </div>
+                <div class="overviewBodyElement">
+                    <div class="dataLabel">
+                        Maximaal aantal spelers
+                    </div>
+                    <div class="dataContent">
+                        {{tournament?.maxPlayers}}
+                    </div>
+                </div>
+                <div class="overviewBodyElement">
+                    <div class="dataLabel">
+                        Entreeprijs
+                    </div>
+                    <div class="dataContent">
+                        €{{tournament?.entryFee | number: '1.2-2'}}
+                    </div>
+                </div>
+                <div class="overviewBodyElement">
+                    <div class="dataLabel">
+                        Aantal speelruimtes
+                    </div>
+                    <div class="dataContent">
+                        6
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

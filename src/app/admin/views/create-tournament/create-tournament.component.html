@@ -1,0 +1,37 @@
+<div class="form-container">
+    <div class="form-sub-container">
+        <h1>Toernooi aanmaken</h1>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="form-group">
+                <label for="name">Titel</label>
+                <input id="name" formControlName="title" type="text" placeholder="Titel" />
+            </div>
+
+            <div class="form-group">
+                <label for="date">Datum</label>
+                <input id="date" formControlName="beginDateTime" type="date" placeholder="Datum" />
+            </div>
+
+            <div class="form-group">
+                <label for="maxPlayers">Maximum spelers</label>
+                <input id="maxPlayers" formControlName="maxPlayers" type="number" placeholder="Maximum spelers" />
+            </div>
+
+            <div class="form-group">
+                <label for="entryFee">Entreeprijs</label>
+                <input id="entryFee" formControlName="entryFee" type="number" placeholder="Entreeprijs" />
+            </div>
+
+            <div class="form-group buttons">
+                <div>
+                    <button type="submit" class="button-dark">
+                        Sla op
+                    </button>
+                    <button [routerLink]="['/dashboard']" class="button-dark cancel">
+                        Annuleer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

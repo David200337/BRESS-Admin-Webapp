@@ -1,0 +1,26 @@
+.poolWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    height: 100%;
+}
+
+.poolHeader {
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.poolBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    gap: 150px;
+    row-gap: 50px;
+}
+
+.buttonGroup {
+    justify-self: end;
+    padding-bottom: 25px;
+}

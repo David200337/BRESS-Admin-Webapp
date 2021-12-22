@@ -1,0 +1,63 @@
+@import '../../../../styles.scss';
+
+.overviewWrapper {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 25px;
+}
+
+.overviewHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+
+    margin-block: 50px;
+}
+
+.overviewBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    gap: 100px;
+}
+
+.overviewBodyCollumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    gap: 50px;
+}
+.overviewBodyElement {
+    width: 100%;
+}
+
+.button-long {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.overViewBodyButtonGroup {
+    display: flex; 
+    flex-direction: row;
+    gap: 25px
+}
+
+.overviewBodyData {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    background-color: $white-bg-dark;
+    padding: 25px;
+}
+
+.dataLabel {
+    font-weight: 700;
+}

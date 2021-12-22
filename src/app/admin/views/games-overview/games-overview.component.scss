@@ -1,0 +1,24 @@
+.gamesHeader {
+    margin: 50px 0;
+}
+
+.gamesBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 50px;
+}
+
+.bodyColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 25px;
+    padding-bottom: 25px;
+}
+
+.elementHeader {
+    font-weight: 700;
+    margin-bottom: 5px;
+}

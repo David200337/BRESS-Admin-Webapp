@@ -1,0 +1,22 @@
+<div class="loginWrapper">
+    <div class="formWrapper">
+        <div class="formHeader">
+            Inloggen
+        </div>
+        <form (ngSubmit)="onSubmit()" class="formBody" [formGroup]="form">
+            <div class="formElement">
+                Email
+                <input formControlName="email" placeholder="Email" />
+            </div>
+            <div class="formElement">
+                Wachtwoord
+                <input formControlName="password" type="password" placeholder="Wachtwoord" />
+            </div>
+            <p>Nog geen account? Registreer <a routerLink="/register">hier</a>.</p>
+
+            <div class="formButtonGroup">
+                <button type="submit" class="button-dark">Log in</button>
+            </div>
+        </form>
+    </div>
+</div>

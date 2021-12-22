@@ -1,0 +1,14 @@
+<div class="itemWrapper">
+    <div class="itemHeader">
+        {{tournament?.title}}
+    </div>
+    <div class="itemBody">
+        <div class="labelGroup">
+            <div class="itemLabel">Datum: {{tournament?.beginDateTime! | date: 'EEEE d MMMM'}}</div>
+            <div class="itemLabel">Aantal Spelers: {{tournament?.players?.length}} (max. {{tournament?.maxPlayers}})</div>
+        </div>
+        <div class="buttonGroup">
+            <button [routerLink]="['/tournament', tournament?.id]" class="button-dark">Ga naar toernooi</button>
+        </div>
+    </div>
+</div>
