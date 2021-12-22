@@ -32,10 +32,16 @@ export class TournamentService extends ResourceService<Tournament> {
 		tournamentId: number,
 		playerId: number
 	): Observable<Player[]> {
-		return this.httpClient.post<Player[]>(
-			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
-			{}
-		);
+		return this.httpClient
+			.post<any>(
+				`${this.APIUrl}/${tournamentId}/player/${playerId}`,
+				{}
+			)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
 	}
 
 	public deletePlayer(tournamentId: number, playerId: number) {
@@ -46,13 +52,13 @@ export class TournamentService extends ResourceService<Tournament> {
 	}
 
 	public getAllCategories(tournamentId: number): Observable<Category[]> {
-		return this.httpClient.get<any>(
-			`${this.APIUrl}/${tournamentId}/category`
-		).pipe(
-			map((item) => {
-				return item.result;
-			})
-		);
+		return this.httpClient
+			.get<any>(`${this.APIUrl}/${tournamentId}/category`)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
 	}
 
 	public getCategory(
