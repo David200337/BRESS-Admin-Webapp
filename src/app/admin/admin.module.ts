@@ -16,6 +16,7 @@ import { GamesOverviewComponent } from './views/games-overview/games-overview.co
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
 
 
 
@@ -34,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GamesOverviewComponent,
     CourtItemComponent,
     GameCourtItemComponent,
+    CategoryBracketComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PoolDetailComponent,
     EditTournamentComponent,
     TournamentDetailComponent,
-    TournamentOverviewComponent
+    TournamentOverviewComponent,
+    CategoryBracketComponent
   ],
   providers: [
     TournamentService
