@@ -6,7 +6,7 @@
         <div class="bodyColumn">
             <div *ngIf="activeGames.length > 0; else no_active">
                 <div class="columnElement" *ngFor="let game of activeGames">
-                    <app-court-item [game]="game" [field]="game.field"></app-court-item>
+                    <app-court-item [game]="game" [field]="game.field" (gameEvent)="selectGame($event)"></app-court-item>
                 </div>
             </div>
             <ng-template #no_active>Er worden geen poulewedstrijden gespeeld</ng-template>
@@ -29,3 +29,6 @@
         </div>
     </div>
 </div>
+<app-edit-game class="scorePopup" [class.visible]="showPopup"></app-edit-game>
+
+
