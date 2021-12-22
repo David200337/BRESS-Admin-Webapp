@@ -18,7 +18,18 @@ describe("TournamentService", () => {
 			maxPlayers: 32,
 			minPlayers: 4,
 			idealPoolSize: 5,
-			categories: [],
+			categories: [
+				{
+					id: 0,
+					name: "Beginners",
+					rounds: []
+				},
+				{
+					id: 1,
+					name: "Half-Gevorderden",
+					rounds: []
+				}
+			],
 			players: [
 				{
 					id: 0,
@@ -188,5 +199,26 @@ describe("TournamentService", () => {
 		});
 
 		expect(httpSpy.delete.calls.count()).toBe(1);
+	});
+
+	it("should return an expected list of categories", (done: DoneFn) => {
+		httpSpy.get.and.nextWith({
+			result: fakeTournaments[0].categories
+		});
+
+		service.getAllCategories(0).subscribe({
+			next: (categories) => {
+
+				expect(categories).toHaveSize(
+					fakeTournaments[0].categories.length
+				);
+				done();
+			},
+			error: () => {
+				done.fail;
+			}
+		});
+
+		expect(httpSpy.get.calls.count()).toBe(1);
 	});
 });
