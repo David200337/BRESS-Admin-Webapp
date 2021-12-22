@@ -69,7 +69,7 @@ export class EditTournamentComponent implements OnInit {
       this.tournament.entryFee = this.form.value.entryFee
       this.tournament.maxPlayers = this.form.value.maxPlayers
 
-      this.tournamentService.update(this.tournament).subscribe({
+      this.tournamentService.update(this.tournamentId! ,this.tournament).subscribe({
         next: (res) => {
           console.log(res);
           this.router.navigate(['/dashboard']);
