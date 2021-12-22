@@ -38,6 +38,8 @@ export class EditGameComponent implements OnInit {
       console.log(res)
       this.sumbitEvent.emit({ id: this.editGame.gameId, score: score });
     });
+
+    this.playerScores = [[0, 0, 0], [0, 0, 0]];
   }
 
   close() {

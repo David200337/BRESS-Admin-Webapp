@@ -21,6 +21,7 @@ export class EditGameService {
 
   hideEdit() {
     this.showPopUp = false;
+    this.gameId = 0;
   }
 
   enterScore(score: boolean[]): Observable<any> {

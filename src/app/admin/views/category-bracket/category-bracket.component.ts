@@ -179,8 +179,8 @@ export class CategoryBracketComponent implements OnInit {
               const game = item.games[i];
               const scorePlayer1: number = game.score == null ? 0 : game.score.split(" - ")[0];
               const scorePlayer2: number = game.score == null ? 0 : game.score.split(" - ")[1];
-
-              gameList.push({ teams: [{ name: game.player1.name, score: scorePlayer1 }, { name: game.player2.name, score: scorePlayer2 }], id: game.id });
+              const gamePlayed: boolean = scorePlayer1 != 0 || scorePlayer2 != 0;
+              gameList.push({ teams: [{ name: game.player1.name, score: scorePlayer1, gamePlayed }, { name: game.player2.name, score: scorePlayer2, gamePlayed }], id: game.id });
             }
 
             round.matches = gameList;
