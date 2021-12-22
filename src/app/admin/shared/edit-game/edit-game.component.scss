@@ -11,6 +11,13 @@
     padding-inline: 50px;
 }
 
+.editInput{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
 table, tr, td {
     background-color: $white-bg;
     border: 1px solid $grey-primary;
@@ -43,7 +50,10 @@ img.true {
 
 .editButtonGroup {
     display: flex;
-    justify-content: flex-end;
-
+    justify-content: center;
     width: 100%;
+
+    button{
+        margin: 10px;
+    }
 }

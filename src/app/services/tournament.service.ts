@@ -193,19 +193,18 @@ export class TournamentService extends ResourceService<Tournament> {
 		finaleId: number
 	): Observable<FinalGame> {
 		return this.httpClient.get<FinalGame>(
-			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale/${finaleId}`
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}/finale/${finaleId}`
 		);
 	}
 
 	public updateFinalGame(
 		tournamentId: number,
-		categoryId: number,
 		finaleId: number,
-		finalGame: FinalGame
+		score: boolean[]
 	): Observable<FinalGame> {
-		return this.httpClient.post<FinalGame>(
-			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale/${finaleId}`,
-			finalGame
+		return this.httpClient.put<FinalGame>(
+			`${this.APIUrl}/${tournamentId}/finale/${finaleId}`,
+			{ sets: score }
 		);
 	}
 

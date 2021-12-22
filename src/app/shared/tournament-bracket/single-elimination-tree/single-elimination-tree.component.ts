@@ -1,12 +1,15 @@
 import {
   Component,
   DoCheck,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
+import { Game } from 'src/app/models/game.model';
 import { Round, Tournament } from '../declarations/interfaces';
 
 @Component({

@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Game } from 'src/app/models/game.model';
+import { EditGameService } from 'src/app/services/edit-game.service';
 
 @Component({
   selector: 'app-match',
@@ -8,9 +10,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MatchComponent implements OnInit {
   @Input() match: any
 
-  constructor() { }
+  constructor(private editGameService: EditGameService) { }
 
   ngOnInit(): void {
+  }
+
+  onClick(id: number) {
+    this.editGameService.showEdit(id);
   }
 
 }
