@@ -37,9 +37,9 @@ export abstract class ResourceService<T> {
 			.pipe(catchError(this.handleError));
 	}
 
-	public update(resource: T): Observable<any> {
+	public update(id: number, resource: T): Observable<any> {
 		return this.httpClient
-			.put(`${this.APIUrl}`, resource)
+			.put(`${this.APIUrl}/${id}`, resource)
 			.pipe(catchError(this.handleError));
 	}
 
