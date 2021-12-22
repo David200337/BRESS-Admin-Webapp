@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
 import { createSpyFromClass, Spy } from "jasmine-auto-spies";
+import { SkillLevel } from "../models/skillLevel.model";
 import { Tournament } from "../models/tournament.model";
 
 import { TournamentService } from "./tournament.service";
@@ -18,7 +19,20 @@ describe("TournamentService", () => {
 			minPlayers: 4,
 			idealPoolSize: 5,
 			categories: [],
-			players: []
+			players: [
+				{
+					id: 0,
+					name: "Player 0",
+					email: "player0@email.com",
+					skillLevel: new SkillLevel(0, "Beginners")
+				},
+                {
+					id: 1,
+					name: "Player 1",
+					email: "player1@email.com",
+					skillLevel: new SkillLevel(1, "Half-Gevorderden")
+				}
+			]
 		},
 		{
 			id: 1,
@@ -29,7 +43,14 @@ describe("TournamentService", () => {
 			minPlayers: 4,
 			idealPoolSize: 5,
 			categories: [],
-			players: []
+			players: [
+                {
+					id: 1,
+					name: "Player 1",
+					email: "player1@email.com",
+					skillLevel: new SkillLevel(1, "Half-Gevorderden")
+				}
+            ]
 		}
 	];
 
@@ -118,16 +139,32 @@ describe("TournamentService", () => {
 			})
 		);
 
-        service.delete(1).subscribe({
-            next: (response) => {
-                expect(response.status).toEqual(200);
-                done();
-            },
-            error: () => {
-                done.fail;
-            }
-        })
+		service.delete(1).subscribe({
+			next: (response) => {
+				expect(response.status).toEqual(200);
+				done();
+			},
+			error: () => {
+				done.fail;
+			}
+		});
 
-        expect(httpSpy.delete.calls.count()).toBe(1);
+		expect(httpSpy.delete.calls.count()).toBe(1);
 	});
+
+	it("should return an expected list of players", (done: DoneFn) => {
+        httpSpy.get.and.nextWith(fakeTournaments);
+
+        service.getAllPlayers(0).subscribe({
+			next: (players) => {
+				expect(players).toHaveSize(fakeTournaments[0].players.length);
+				done();
+			},
+			error: () => {
+				done.fail;
+			}
+		});
+
+		expect(httpSpy.get.calls.count()).toBe(1);
+    });
 });
