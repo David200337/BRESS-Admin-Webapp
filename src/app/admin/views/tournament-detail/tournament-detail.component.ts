@@ -22,6 +22,7 @@ export class TournamentDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categorySubscription = this.tournamentService.getAllCategories(1)
-      .subscribe(c => this.categoryList = c);
+        .pipe(tap(c => console.info(c)))
+        .subscribe(c => this.categoryList = c);
   }
 }
