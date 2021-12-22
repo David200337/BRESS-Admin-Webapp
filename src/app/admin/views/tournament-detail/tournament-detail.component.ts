@@ -8,7 +8,7 @@ import { TournamentService } from 'src/app/services/tournament.service';
   templateUrl: './tournament-detail.component.html',
   styleUrls: ['./tournament-detail.component.scss']
 })
-export class TournamentDetailComponent implements OnInit, OnDestroy {
+export class TournamentDetailComponent implements OnInit, OnDestroy{
   categoryList!: Category[];
   categorySubscription!: Subscription;
 
@@ -24,5 +24,14 @@ export class TournamentDetailComponent implements OnInit, OnDestroy {
     this.categorySubscription = this.tournamentService.getAllCategories(1)
         .pipe(tap(c => console.info(c)))
         .subscribe(c => this.categoryList = c);
+  }
+
+  /**
+   * @method switchCategory
+   * @param category The category selected by the user
+   * Display the tournament info for the selected category
+   */
+  switchCategory(category: Category) {
+    console.warn(`Method not implemented. \n@param category: ${JSON.stringify(category)}`);
   }
 }

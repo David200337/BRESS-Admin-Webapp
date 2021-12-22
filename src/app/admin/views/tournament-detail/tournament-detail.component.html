@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="categoryBar">
-        <app-category-selector [categoryList]=categoryList></app-category-selector>
+        <app-category-selector [categoryList]=categoryList (selectedCategoryEvent)="switchCategory($event)"></app-category-selector>
     </div>
     <div class="pools">
         <div *ngFor="let i of [1,2,3]">
