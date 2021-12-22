@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   form!: FormGroup;
 
-  error: string | undefined = undefined
+  errorMessage: string | undefined = undefined
 
   constructor(
     private router: Router,
@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
           },
           error: (err) => {
             if (err.status === 400) {
-              this.error = "Email of wachtwoord is verkeerd."
+              this.errorMessage = "Email of wachtwoord is verkeerd."
             }
           },
-        });
+        })
       this.submitted = false;
     } else {
       return;

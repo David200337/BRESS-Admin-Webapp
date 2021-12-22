@@ -4,9 +4,9 @@
             Inloggen
         </div>
         <form (ngSubmit)="onSubmit()" class="formBody" [formGroup]="form">
-            <div class="errorElement" *ngIf="error">
+            <div class="errorElement" *ngIf="errorMessage">
                 <small>
-                    {{error}}
+                    {{errorMessage}}
                 </small>
             </div>
 
