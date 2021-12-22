@@ -11,7 +11,7 @@
 
 .ngtt__team-wrapper {
     display: flex;
-    border: 1px solid;
+    border: 1px solid $ngtt-line-color-main;
     padding: 10px 25px 10px 25px;
 }
 
@@ -35,5 +35,4 @@
     background-color: $orange-primary;
     font-weight: bold;
     color: white;
-    border: 1px solid black;
 }

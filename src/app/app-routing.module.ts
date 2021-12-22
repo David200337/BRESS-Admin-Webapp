@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: "tournament/:id/score-overview", pathMatch: "full", component: TournamentDetailComponent },
   { path: "tournament/:id/edit-tournament", pathMatch: "full", component: EditTournamentComponent },
   { path: "tournament/:id/pool/:id", pathMatch: "full", component: PoolDetailComponent },
-  { path: "tournament/:tournamentId/category/:categoryId/bracket", pathMatch: "full", component: CategoryBracketComponent },
+  { path: "tournament/:tournamentId/bracket", pathMatch: "full", component: CategoryBracketComponent },
 ];
 
 @NgModule({

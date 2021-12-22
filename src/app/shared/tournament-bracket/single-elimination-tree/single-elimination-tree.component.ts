@@ -37,14 +37,12 @@ export class SingleEliminationTreeComponent implements OnInit, OnChanges {
         return round.type === 'Winnerbracket';
       });
     }
-    console.log(this.winnersBracket);
     //@ts-ignore
     this.final = this.tournament.rounds
       .filter((round) => {
         return round.type === 'Final';
       })
       .shift();
-    console.log(this.final);
   }
 
 
