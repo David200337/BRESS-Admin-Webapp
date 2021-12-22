@@ -6,6 +6,7 @@ import { Game } from 'src/app/models/game.model';
 import { Player } from 'src/app/models/player.model';
 import { SkillLevel } from 'src/app/models/skillLevel.model';
 import { Tournament } from 'src/app/models/tournament.model';
+import { EditGameService } from 'src/app/services/edit-game.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class GamesOverviewComponent implements OnInit {
 
   constructor(
     private tournamentService: TournamentService,
+    public editGameService: EditGameService,
     private route: ActivatedRoute
   ) { 
     this.showPopup = false;
@@ -69,18 +71,6 @@ export class GamesOverviewComponent implements OnInit {
   }
 
   selectGame(game: Game) {
-    this.selectedGame = game;
-    this.showPopup = true;
-  }
-
-  updateGame() {
-    //this.tournamentService.updatePoolGame
-    this.selectedGame = undefined;
-    this.showPopup = false;
-  }
-
-  deselectGame() {
-    this.selectedGame = undefined;
-    this.showPopup = false;
+    this.editGameService.showEdit(game.id);
   }
 }

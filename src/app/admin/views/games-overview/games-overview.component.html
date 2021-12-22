@@ -9,7 +9,7 @@
                     <app-court-item [game]="game" [field]="game.field" (gameEvent)="selectGame($event)"></app-court-item>
                 </div>
             </div>
-            <ng-template #no_active>Er worden geen poulewedstrijden gespeeld</ng-template>
+            <ng-template #no_active>Er worden geen wedstrijden gespeeld</ng-template>
         </div>
         <div class="bodyColumn">
             <div class="columnElement">
@@ -17,18 +17,18 @@
                     Volgende wedstrijd
                 </div>
                 <app-game-court-item [games]="nextGame" *ngIf="nextGame[0] != undefined; else no_next"></app-game-court-item>
-                <ng-template #no_next>Er is geen volgende poulewedstrijd</ng-template>
+                <ng-template #no_next>Er is geen volgende wedstrijd</ng-template>
             </div>
             <div class="columnElement">
                 <div class="elementHeader">
                     Komende wedstrijden
                 </div>
-                <app-game-court-item [games]=futureGames *ngIf="activeGames.length > 0; else no_future"></app-game-court-item>
-                <ng-template #no_future>Er zijn geen komende poulewedstrijden</ng-template>
+                <app-game-court-item [games]=futureGames *ngIf="futureGames.length > 0; else no_future"></app-game-court-item>
+                <ng-template #no_future>Er zijn geen komende wedstrijden</ng-template>
             </div>
         </div>
     </div>
 </div>
-<app-edit-game class="scorePopup" [class.visible]="showPopup"></app-edit-game>
+<app-edit-game class="scorePopup" [class.visible]="editGameService.showPopUp"></app-edit-game>
 
 
