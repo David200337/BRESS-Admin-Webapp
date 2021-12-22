@@ -45,8 +45,12 @@ export class TournamentService extends ResourceService<Tournament> {
 	}
 
 	public getAllCategories(tournamentId: number): Observable<Category[]> {
-		return this.httpClient.get<Category[]>(
+		return this.httpClient.get<any>(
 			`${this.APIUrl}/${tournamentId}/category`
+		).pipe(
+			map((item) => {
+				return item.result;
+			})
 		);
 	}
 

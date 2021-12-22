@@ -2,23 +2,16 @@
     <div class="title-bar">
         <h1>Speeltoernooi beginners</h1>
         <div>
-            <app-category-selector [categoryList]=categoryList></app-category-selector>
+            <button [routerLink]="['/dashboard']" class="button-dark">Terug</button>
         </div>
+    </div>
+    <div class="categoryBar">
+        <app-category-selector [categoryList]=categoryList (selectedCategoryEvent)="switchCategory($event)"></app-category-selector>
     </div>
     <div class="pools">
         <div *ngFor="let i of [1,2,3]">
             <a routerLink="./pool/A"><h3>Poule A</h3></a>
             <app-pool-players-item></app-pool-players-item>
-        </div>
-    </div>
-    <div class="bottom-buttons">
-        <div class="button-group-l">
-            <button [routerLink]="['/dashboard']" class="button-dark">Terug</button>
-        </div>
-        <div class="button-group-r">
-            <button class="left-button button-light">Toernooi starten</button>
-            <button class="left-button button-dark">Toernooi beëindigen</button>
-            <button class="left-button button-light">Live tussenstand</button>
         </div>
     </div>
 </div>
