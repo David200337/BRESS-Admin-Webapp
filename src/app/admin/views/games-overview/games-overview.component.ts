@@ -5,6 +5,7 @@ import { Field } from 'src/app/models/field.model';
 import { Game } from 'src/app/models/game.model';
 import { Player } from 'src/app/models/player.model';
 import { SkillLevel } from 'src/app/models/skillLevel.model';
+import { Tournament } from 'src/app/models/tournament.model';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -13,7 +14,8 @@ import { TournamentService } from 'src/app/services/tournament.service';
   styleUrls: ['./games-overview.component.scss']
 })
 export class GamesOverviewComponent implements OnInit {
-  tournamentId! : number;
+  tournamentId!: number;
+  tournament!: Tournament
   games!: Game[];
   activeGames!: Game[];
   futureGames!: Game[];
@@ -47,14 +49,17 @@ export class GamesOverviewComponent implements OnInit {
    */
   sortGames(games: Game[]) {
     games.forEach(g => {
-      if (g.gameStarted) {
-        g.field = new Field(0, "test field", true);
-        this.activeGames.push(g);
-      } else {
-        this.futureGames.push(g);
+      if (!g.winner) {
+        if (g.gameStarted) {
+          g.field = new Field(0, "test field", true);
+          this.activeGames.push(g);
+        } else {
+          this.futureGames.push(g);
+        }
       }
     });
-    
     this.nextGame = [this.futureGames.shift()!];
+    console.log(this.nextGame);
+    
   }
 }
