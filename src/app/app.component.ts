@@ -133,7 +133,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('https://bress-api.azurewebsites.net/api/tournament/2').subscribe((res: any) => {
+    this.http.get('https://bress-api.azurewebsites.net/api/tournament/1').subscribe((res: any) => {
       console.log(res.result);
       const cat0 = res.result.categories[0];
 
@@ -159,18 +159,19 @@ export class AppComponent implements OnInit {
         }
       });
 
-      let index: number = 0;
-      let isDone: boolean = false;
-      this.myTournamentData.rounds.forEach((obj: any) => {
-        if (obj.matches[0].teams[0].name == 'Not determined' && !isDone) {
-          index++;
-        } else {
-          isDone = true;
+
+      let newlist = [];
+      let isFirst: boolean = true;
+      for (let i = 0; i < this.myTournamentData.rounds.length; i++) {
+        if (this.myTournamentData.rounds[i].matches[0].teams[0].name != 'Not determined') {
+          newlist.push(this.myTournamentData.rounds[i]);
+          isFirst = false;
+        } else if (!isFirst) {
+          newlist.push(this.myTournamentData.rounds[i]);
         }
-      });
-      console.log(index);
-      const newdata = this.myTournamentData.rounds.splice(index, this.myTournamentData.rounds.length - (cat0.rounds.length - 1));
-      this.myTournamentData = { rounds: newdata };
+      }
+
+      this.myTournamentData = { rounds: newlist };
     });
   }
 }
