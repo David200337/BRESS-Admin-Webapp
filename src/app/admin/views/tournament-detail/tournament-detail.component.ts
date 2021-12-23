@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, switchMap, tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -8,11 +9,15 @@ import { TournamentService } from 'src/app/services/tournament.service';
   templateUrl: './tournament-detail.component.html',
   styleUrls: ['./tournament-detail.component.scss']
 })
-export class TournamentDetailComponent implements OnInit, OnDestroy{
+export class TournamentDetailComponent implements OnInit, OnDestroy {
   categoryList!: Category[];
   categorySubscription!: Subscription;
 
-  constructor(private tournamentService: TournamentService) { 
+  constructor(
+    private tournamentService: TournamentService,
+    private loaderToggle: LoaderToggleService
+  ) {
+    loaderToggle.loaderVisible();
     this.categoryList = new Array();
   }
 
@@ -22,8 +27,11 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.categorySubscription = this.tournamentService.getAllCategories(1)
-        .pipe(tap(c => console.info(c)))
-        .subscribe(c => this.categoryList = c);
+      .pipe(tap(c => console.info(c)))
+      .subscribe(c => {
+        this.categoryList = c;
+        this.loaderToggle.loaderInvisible();
+      });
   }
 
   /**
