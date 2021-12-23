@@ -240,4 +240,14 @@ export class TournamentService extends ResourceService<Tournament> {
 				})
 			);
 	}
+
+	getFinaleQueue(tournamentId : number) : Observable<Game[]> {
+		return this.httpClient
+			.get<any>(`${this.APIUrl}/${tournamentId}/GenerateFinaleQueue`)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
+	}
 }

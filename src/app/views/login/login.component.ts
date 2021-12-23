@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.toggleLoader.loaderVisible();
     this.submitted = true;
     if (this.form.valid) {
+      this.toggleLoader.loaderVisible();
       this.authService
         .login(this.form.value.email, this.form.value.password)
         .subscribe({
