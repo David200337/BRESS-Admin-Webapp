@@ -13,8 +13,8 @@ import { PlayerService } from "src/app/services/player.service";
 })
 export class CreatePlayerComponent implements OnInit {
 	public form!: FormGroup;
-    public skillLevels!: SkillLevel[];
-    
+	public skillLevels!: SkillLevel[];
+	public selectedSkillLevel: string = "";
 
 	constructor(
 		private router: Router,
@@ -30,22 +30,30 @@ export class CreatePlayerComponent implements OnInit {
 			skillLevel: ["", Validators.required]
 		});
 
-        this.skillLevels = [new SkillLevel(0, "Beginner"), new SkillLevel(1, "Half-Gevorderden"), new SkillLevel(2, "Gevorderden")]
+		this.skillLevels = [
+			new SkillLevel(0, "Beginner"),
+			new SkillLevel(1, "Half-Gevorderden"),
+			new SkillLevel(2, "Gevorderden")
+		];
 	}
 
-    changeSkillLevel(e: any) {
-        console.log(e.target!.value);
-        this.form.patchValue({skillLevel: e.target!.value.split(" ")[1]})
+	changeSkillLevel(e: any) {
+		let skillLevelName = e.target!.value.split(" ")[1];
+		let selectedSkillLevel = this.skillLevels.filter(
+			(skillLevel) => skillLevel.name === skillLevelName
+		);
 
-        // this.form.value.skillLevel.setValue(e.target!.value, {
-        //     onlySelf: true
-        // })
-    }
+		this.selectedSkillLevel = skillLevelName;
+
+		this.form.patchValue({
+			skillLevel: selectedSkillLevel
+		});
+	}
 
 	onSubmit(): void {
 		if (this.form.valid) {
-            this.loaderToggle.loaderVisible();
-            const player = new Player(
+			this.loaderToggle.loaderVisible();
+			const player = new Player(
 				-1,
 				this.form.value.name,
 				this.form.value.email,
@@ -53,18 +61,16 @@ export class CreatePlayerComponent implements OnInit {
 				this.form.value.skillLevel
 			);
 
-            console.log(JSON.stringify(player));
-
-            this.playerService.add(player).subscribe({
-                next: (res) => {
-                    console.log(res);
-                    this.router.navigate(["dashboard"]);
-                },
-                error: (err) => {
-                    console.log(err);
-                    this.loaderToggle.loaderInvisible();
-                }
-            })
+			this.playerService.add(player).subscribe({
+				next: (res) => {
+					console.log("RESPONSE: " + JSON.stringify(res));
+					this.router.navigate(["dashboard"]);
+				},
+				error: (err) => {
+					console.log(err);
+					this.loaderToggle.loaderInvisible();
+				}
+			});
 		} else {
 			return;
 		}
