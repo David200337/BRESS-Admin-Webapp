@@ -21,9 +21,8 @@ export class TournamentDetailComponent implements OnInit, OnDestroy {
   constructor(
     private tournamentService: TournamentService,
     private route: ActivatedRoute,
-    ) { 
     private loaderToggle: LoaderToggleService
-  ) {
+    ) { 
     loaderToggle.loaderVisible();
     this.categoryList = new Array();
   }
