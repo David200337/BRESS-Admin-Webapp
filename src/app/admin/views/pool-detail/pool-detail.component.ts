@@ -13,7 +13,7 @@ export class PoolDetailComponent implements OnInit {
    * @todo Implement domain model
    */
   tournament: String = "Speeltoernooi beginners"
-  poolName:String = "Poule A"
+  poolName: String = "Poule A"
 
   constructor() { }
 

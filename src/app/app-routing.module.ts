@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoryBracketComponent } from './admin/views/category-bracket/category-bracket.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
 import { DashboardComponent } from './admin/views/dashboard/dashboard.component';
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
@@ -7,6 +8,7 @@ import { GamesOverviewComponent } from './admin/views/games-overview/games-overv
 import { PoolDetailComponent } from './admin/views/pool-detail/pool-detail.component';
 import { TournamentDetailComponent } from './admin/views/tournament-detail/tournament-detail.component';
 import { TournamentOverviewComponent } from './admin/views/tournament-overview/tournament-overview.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: "tournament/:id/games", pathMatch: "full", component: GamesOverviewComponent },
   { path: "tournament/:id/score-overview", pathMatch: "full", component: TournamentDetailComponent },
   { path: "tournament/:id/edit-tournament", pathMatch: "full", component: EditTournamentComponent },
-  { path: "tournament/:id/pool/:id", pathMatch: "full", component: PoolDetailComponent }
+  { path: "tournament/:id/pool/:id", pathMatch: "full", component: PoolDetailComponent },
+  { path: "tournament/:tournamentId/bracket", pathMatch: "full", component: CategoryBracketComponent },
+  { path: "svg", pathMatch: "full", component: LoaderComponent },
 ];
 
 @NgModule({

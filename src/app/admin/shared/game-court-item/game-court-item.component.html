@@ -8,7 +8,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let game of games">
+            <tr *ngFor="let game of games" (click)="onClick(game)"> 
                 <td>{{game.player1.name}}</td>
                 <td>{{game.player2.name}}</td>
                 <td>{{game.field?.name ?? "onbekend"}}</td>

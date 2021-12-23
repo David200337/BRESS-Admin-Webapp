@@ -12,6 +12,7 @@ import { RegisterComponent } from './views/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './services/token.interceptor';
 import { DatePipe } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DatePipe } from '@angular/common';
     AdminModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   exports: [],
   providers: [
@@ -34,4 +36,4 @@ import { DatePipe } from '@angular/common';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
