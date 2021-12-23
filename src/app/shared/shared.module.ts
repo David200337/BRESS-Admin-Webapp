@@ -4,6 +4,7 @@ import { PoolPlayersItemComponent } from './pool-players-item/pool-players-item.
 import { PoolGamesItemComponent } from './pool-games-item/pool-games-item.component';
 import { SingleEliminationTreeComponent } from './tournament-bracket/single-elimination-tree/single-elimination-tree.component';
 import { MatchComponent } from './tournament-bracket/match/match.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MatchComponent } from './tournament-bracket/match/match.component';
     PoolPlayersItemComponent,
     PoolGamesItemComponent,
     SingleEliminationTreeComponent,
-    MatchComponent
+    MatchComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule
@@ -20,7 +22,8 @@ import { MatchComponent } from './tournament-bracket/match/match.component';
     PoolGamesItemComponent,
     PoolPlayersItemComponent,
     SingleEliminationTreeComponent,
-    MatchComponent
+    MatchComponent,
+    LoaderComponent
   ],
 })
 export class SharedModule { }

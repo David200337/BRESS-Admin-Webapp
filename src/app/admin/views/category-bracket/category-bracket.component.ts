@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { Tournament } from 'src/app/shared/tournament-bracket/declarations/interfaces';
 
@@ -141,10 +142,12 @@ export class CategoryBracketComponent implements OnInit {
   constructor(
     private tournamentService: TournamentService,
     private route: ActivatedRoute,
-    public editGame: EditGameService
-  ) { }
+    public editGame: EditGameService,
+    public toggleLoader: LoaderToggleService
+  ) { this.toggleLoader.loaderVisible(); }
 
   ngOnInit(): void {
+    this.toggleLoader.loaderVisible();
     this.hideGameEdit()
     this.route.paramMap.pipe(
       switchMap((params) => {
@@ -161,6 +164,7 @@ export class CategoryBracketComponent implements OnInit {
   }
 
   createBracket(categoryId: number): void {
+
     let category: any = {};
     this.tournament.categories.forEach((cat: any) => {
       if (cat.id == categoryId) {
@@ -201,6 +205,7 @@ export class CategoryBracketComponent implements OnInit {
       }
     }
     this.myTournamentData = { rounds: newlist };
+    this.toggleLoader.loaderInvisible();
   }
 
   updateGameScore(game: any) {
