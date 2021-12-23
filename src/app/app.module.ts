@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './services/token.interceptor';
 import { DatePipe } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SharedModule } from './shared/shared.module';
     AdminModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   exports: [],
   providers: [
