@@ -1,0 +1,22 @@
+<div class="form-container">
+    <div class="form-sub-container">
+        <h1>Skilllevel aanmaken</h1>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input id="name" formControlName="name" type="text" placeholder="Naam" />
+            </div>
+
+            <div class="form-group buttons">
+                <div>
+                    <button type="submit" class="button-dark">
+                        Sla op
+                    </button>
+                    <button [routerLink]="['/dashboard']" class="button-dark cancel">
+                        Annuleer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
