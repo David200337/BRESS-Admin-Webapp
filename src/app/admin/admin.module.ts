@@ -17,6 +17,8 @@ import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
+import { EditPlayerComponent } from './views/edit-player/edit-player.component';
+import { CreatePlayerComponent } from './views/create-player/create-player.component';
 
 
 
@@ -36,6 +38,8 @@ import { CategoryBracketComponent } from './views/category-bracket/category-brac
     CourtItemComponent,
     GameCourtItemComponent,
     CategoryBracketComponent,
+    EditPlayerComponent,
+    CreatePlayerComponent,
   ],
   imports: [
     CommonModule,
