@@ -167,10 +167,10 @@ export class TournamentService extends ResourceService<Tournament> {
 	public updatePoolGame(
 		tournamentId: number,
 		gameId: number,
-		game: PoolGame
+		score: boolean[]
 	): Observable<PoolGame> {
 		return this.httpClient
-			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, game)
+			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, score)
 			.pipe(
 				map((item) => {
 					return item.result;
