@@ -7,7 +7,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let game of games" (click)="onClick()">
+        <tr *ngFor="let game of games" [class.clickable]="game.score == null"
+            (click)="game.score == null && onClick(game.id)">
             <td>{{game.player1.name}}</td>
             <td>{{game.player2.name}}</td>
             <td>{{game.score}}</td>

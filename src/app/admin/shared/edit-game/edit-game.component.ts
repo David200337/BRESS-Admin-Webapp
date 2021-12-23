@@ -35,7 +35,6 @@ export class EditGameComponent implements OnInit {
       score[i] = this.playerScores[0][i] === 1 ? true : false;
     }
     this.editGame.enterScore(score).subscribe((res) => {
-      console.log(res)
       this.sumbitEvent.emit({ id: this.editGame.gameId, score: score });
     });
 
