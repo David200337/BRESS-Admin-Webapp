@@ -7,6 +7,10 @@
 }
 
 .poolHeader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 25px;
     margin-top: 50px;
     margin-bottom: 25px;
 }
@@ -23,4 +27,13 @@
 .buttonGroup {
     justify-self: end;
     padding-bottom: 25px;
+}
+
+.scorePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }

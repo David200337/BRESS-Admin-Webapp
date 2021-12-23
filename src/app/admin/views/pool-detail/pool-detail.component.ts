@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { Pool } from 'src/app/models/pool.model';
+import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
   selector: 'app-pool-detail',
@@ -14,10 +18,25 @@ export class PoolDetailComponent implements OnInit {
    */
   tournament: String = "Speeltoernooi beginners"
   poolName: String = "Poule A"
+  tournamentId: any;
+  poolId: any;
+  pool$!: Observable<Pool>;
+  categoryId: any;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private tournamentService: TournamentService,
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.tournamentId = params['id'];
+      this.poolId = params['poolId'];
+      this.categoryId = params['categoryId'];
+    });
+
+    this.pool$ = this.tournamentService.getPool(this.tournamentId, this.categoryId, this.poolId)
+    .pipe(tap(pool => console.info(pool)))
   }
 
   showGameEdit() {
