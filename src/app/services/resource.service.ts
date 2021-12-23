@@ -28,7 +28,12 @@ export abstract class ResourceService<T> {
 	public get(id: number): Observable<T> {
 		return this.httpClient
 			.get<T>(`${this.APIUrl}/${id}`)
-			.pipe(catchError(this.handleError));
+			.pipe(
+				map((item: any) => {
+					return item.result;
+				}),
+				catchError(this.handleError)
+			);
 	}
 
 	public add(resource: T): Observable<any> {
