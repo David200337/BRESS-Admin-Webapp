@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryBracketComponent } from './admin/views/category-bracket/category-bracket.component';
+import { CreatePlayerComponent } from './admin/views/create-player/create-player.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
 import { DashboardComponent } from './admin/views/dashboard/dashboard.component';
+import { EditPlayerComponent } from './admin/views/edit-player/edit-player.component';
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
 import { GamesOverviewComponent } from './admin/views/games-overview/games-overview.component';
 import { PoolDetailComponent } from './admin/views/pool-detail/pool-detail.component';
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: "tournament/:id/edit-tournament", pathMatch: "full", component: EditTournamentComponent },
   { path: "tournament/:id/score-overview/:categoryId/:poolId", pathMatch: "full", component: PoolDetailComponent },
   { path: "tournament/:tournamentId/bracket", pathMatch: "full", component: CategoryBracketComponent },
+  { path: "create-player", pathMatch: "full", component: CreatePlayerComponent },
+  { path: "player/:id/edit", pathMatch: "full", component: EditPlayerComponent },
   { path: "svg", pathMatch: "full", component: LoaderComponent },
 ];
 
