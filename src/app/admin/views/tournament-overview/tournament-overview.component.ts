@@ -44,7 +44,7 @@ export class TournamentOverviewComponent implements OnInit {
     }
   }
 
-  clickMethod(): void {
+  deleteTournament(): void {
     if (confirm(`Weet u zeker dat u ${this.tournament?.title} wilt verwijderen?`)) {
       this.tournamentService.delete(this.tournamentId).subscribe({next:(response) => {
         console.log(response)
