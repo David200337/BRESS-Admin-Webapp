@@ -28,7 +28,7 @@
 
     <div class="popup" [class.invisible]="!editGame.showPopUp">
         <div class="popup-editor">
-            <app-edit-game (sumbitEvent)="hideGameEdit()"></app-edit-game>
+            <app-edit-game (sumbitEvent)="updateGameScore($event)"></app-edit-game>
         </div>
     </div>
 </div>
