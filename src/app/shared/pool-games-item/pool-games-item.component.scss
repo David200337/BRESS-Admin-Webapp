@@ -1,10 +1,12 @@
 tbody {
     tr:nth-child(even):hover {
-        cursor: pointer;
         background-color: #DDDDDD;
     }
     tr:hover {
-        cursor: pointer;
         background-color: #EEEEEE;
     }
+}
+
+.clickable{
+    cursor: pointer;
 }

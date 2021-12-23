@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { Pool } from 'src/app/models/pool.model';
+import { EditGameService } from 'src/app/services/edit-game.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -26,25 +27,26 @@ export class PoolDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tournamentService: TournamentService,
-  ) { }
+    public editGame: EditGameService
+  ) { editGame.hideEdit() }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.tournamentId = params['id'];
       this.poolId = params['poolId'];
       this.categoryId = params['categoryId'];
+      this.editGame.tournamentId = params['id'];
     });
 
     this.pool$ = this.tournamentService.getPool(this.tournamentId, this.categoryId, this.poolId)
-    .pipe(tap(pool => console.info(pool)))
-  }
-
-  showGameEdit() {
-    this.gameEditDisplay = "block"
+      .pipe(tap(pool => console.info(pool)))
   }
 
   hideGameEdit() {
-    this.gameEditDisplay = "none"
+    this.editGame.hideEdit();
   }
 
+  onClick(id: number) {
+    this.editGame.showEdit(id);
+  }
 }

@@ -1,18 +1,22 @@
-<div class="poolWrapper">
-    <div class="poolHeader">
-        <h1>{{tournament}} - {{poolName}}</h1>
-        <button [routerLink]="['../../']" class="button-dark">Terug</button>
-    </div>
-    <div class="poolBody">
-        <div *ngIf="pool$ | async as pool">
-            <app-pool-players-item [pool]="pool"></app-pool-players-item>
+<div class="container">
+    <div class="poolWrapper">
+        <div class="poolHeader">
+            <h1>{{tournament}} - {{poolName}}</h1>
+            <button [routerLink]="['../../']" class="button-dark">Terug</button>
         </div>
-        <div *ngIf="pool$ | async as pool">
-            <app-pool-games-item [games]="pool.games" (gameEvent)="showGameEdit()"></app-pool-games-item>
+        <div class="poolBody">
+            <div *ngIf="pool$ | async as pool">
+                <app-pool-players-item [pool]="pool"></app-pool-players-item>
+            </div>
+            <div *ngIf="pool$ | async as pool">
+                <app-pool-games-item [games]="pool.games"></app-pool-games-item>
+            </div>
         </div>
     </div>
-    <div class="buttonGroup">
-        
+
+    <div class="popup" [class.invisible]="!editGame.showPopUp">
+        <div class="popup-editor">
+            <app-edit-game (sumbitEvent)="ngOnInit()"></app-edit-game>
+        </div>
     </div>
 </div>
-<app-edit-game class="scorePopup" [style.display]="gameEditDisplay" (sumbitEvent)="hideGameEdit()"></app-edit-game>
