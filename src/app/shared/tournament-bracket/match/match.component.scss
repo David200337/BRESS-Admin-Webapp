@@ -15,10 +15,6 @@
     padding: 10px 25px 10px 25px;
 }
 
-.ngtt__team-wrapper:hover {
-    cursor: pointer;
-}
-
 .ngtt__team-wrapper:nth-child(1) {
     border-bottom: none;
 }
@@ -40,4 +36,8 @@
     background-color: $orange-primary;
     font-weight: bold;
     color: white;
+}
+
+.clickable{
+    cursor: pointer;
 }

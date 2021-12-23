@@ -1,3 +1,27 @@
 main {
     margin-inline: clamp(0px, 10%, 100px);
 }
+
+.website-wrapper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { Tournament } from 'src/app/shared/tournament-bracket/declarations/interfaces';
 
@@ -136,14 +137,18 @@ export class CategoryBracketComponent implements OnInit {
 
   public tournament: any = {};
   public categoryList: Category[] = [];
+  public selectedCategoryIndex: number = 0;
 
   constructor(
     private tournamentService: TournamentService,
     private route: ActivatedRoute,
-    public editGame: EditGameService
-  ) { }
+    public editGame: EditGameService,
+    public toggleLoader: LoaderToggleService
+  ) { this.toggleLoader.loaderVisible(); }
 
   ngOnInit(): void {
+    this.toggleLoader.loaderVisible();
+    this.hideGameEdit()
     this.route.paramMap.pipe(
       switchMap((params) => {
         const tournamentId = +params.get("tournamentId")!;
@@ -153,12 +158,13 @@ export class CategoryBracketComponent implements OnInit {
     ).subscribe((result: any) => {
       this.tournament = result.result;
       this.categoryList = this.tournament.categories;
-      this.createBracket(this.tournament.categories[0].id);
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
       this.editGame.tournamentId = this.tournament.id
     });
   }
 
   createBracket(categoryId: number): void {
+
     let category: any = {};
     this.tournament.categories.forEach((cat: any) => {
       if (cat.id == categoryId) {
@@ -177,8 +183,8 @@ export class CategoryBracketComponent implements OnInit {
               const game = item.games[i];
               const scorePlayer1: number = game.score == null ? 0 : game.score.split(" - ")[0];
               const scorePlayer2: number = game.score == null ? 0 : game.score.split(" - ")[1];
-
-              gameList.push({ teams: [{ name: game.player1.name, score: scorePlayer1 }, { name: game.player2.name, score: scorePlayer2 }], id: game.id });
+              const gamePlayed: boolean = scorePlayer1 != 0 || scorePlayer2 != 0;
+              gameList.push({ teams: [{ name: game.player1.name, score: scorePlayer1, gamePlayed }, { name: game.player2.name, score: scorePlayer2, gamePlayed }], id: game.id });
             }
 
             round.matches = gameList;
@@ -199,11 +205,39 @@ export class CategoryBracketComponent implements OnInit {
       }
     }
     this.myTournamentData = { rounds: newlist };
+    this.toggleLoader.loaderInvisible();
+  }
+
+  updateGameScore(game: any) {
+    console.log(game)
+    this.myTournamentData.rounds.forEach((round) => {
+      round.matches.forEach((match) => {
+        if (match.id == game.id) {
+          let player1 = 0;
+          let player2 = 0;
+          game.score.forEach((set: boolean) => {
+            if (set) {
+              player1++;
+            } else {
+              player2++;
+            }
+          })
+          match.teams[0].score = player1;
+          match.teams[1].score = player2;
+        }
+      })
+    })
+    this.myTournamentData = { rounds: this.myTournamentData.rounds };
   }
 
 
   switchCategory(category: Category) {
     if (category != null) this.createBracket(category.id);
+    for (let i = 0; i < this.categoryList.length; i++) {
+      if (this.categoryList[i].id == category.id) {
+        this.selectedCategoryIndex = i;
+      }
+    }
   }
 
   hideGameEdit() {
