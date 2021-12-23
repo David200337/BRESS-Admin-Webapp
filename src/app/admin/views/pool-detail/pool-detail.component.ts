@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { Pool } from 'src/app/models/pool.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -27,8 +28,12 @@ export class PoolDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tournamentService: TournamentService,
-    public editGame: EditGameService
-  ) { editGame.hideEdit() }
+    public editGame: EditGameService,
+    public toggleLoader: LoaderToggleService
+  ) {
+    editGame.hideEdit();
+    toggleLoader.loaderVisible();
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -39,7 +44,7 @@ export class PoolDetailComponent implements OnInit {
     });
 
     this.pool$ = this.tournamentService.getPool(this.tournamentId, this.categoryId, this.poolId)
-      .pipe(tap(pool => console.info(pool)))
+      .pipe(tap(() => this.toggleLoader.loaderInvisible()))
   }
 
   hideGameEdit() {
