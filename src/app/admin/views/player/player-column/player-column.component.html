@@ -1,0 +1,18 @@
+<div class="overviewWrapper">
+	<div class="overviewHeader">
+		<h1 class="overviewHeaderTitle">Spelers overzicht</h1>
+		<div class="overViewHeaderButtonGroup">
+			<button [routerLink]="['..']" class="button-dark">
+				Terug
+			</button>
+		</div>
+	</div>
+	<div class="overviewBody">
+		<div class="overviewBodyCollumn">
+            <app-player-list></app-player-list>
+        </div>
+        <div class="overviewBodyColumn">
+            <router-outlet></router-outlet>
+        </div>
+	</div>
+</div>

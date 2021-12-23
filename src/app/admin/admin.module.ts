@@ -20,6 +20,9 @@ import { CategoryBracketComponent } from './views/category-bracket/category-brac
 import { EditPlayerComponent } from './views/edit-player/edit-player.component';
 import { CreatePlayerComponent } from './views/create-player/create-player.component';
 import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
+import { PlayerListComponent } from './views/player/player-list/player-list.component';
+import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
+import { PlayerColumnComponent } from './views/player/player-column/player-column.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skil
     EditPlayerComponent,
     CreatePlayerComponent,
     CreateSkilllevelComponent,
+    PlayerListComponent,
+    PlayerDetailComponent,
+    PlayerColumnComponent,
   ],
   imports: [
     CommonModule,
