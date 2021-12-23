@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tournament } from 'src/app/models/tournament.model';
 import { TournamentService } from 'src/app/services/tournament.service';
+import { futureDateValidator } from 'src/app/shared/validation/validators';
 
 @Component({
   selector: 'app-create-tournament',
@@ -10,6 +11,9 @@ import { TournamentService } from 'src/app/services/tournament.service';
   styleUrls: ['./create-tournament.component.scss'],
 })
 export class CreateTournamentComponent implements OnInit {
+  submitted: boolean = false;
+  errorMessage: string | undefined = undefined;
+
   form!: FormGroup;
 
   constructor(
@@ -20,14 +24,15 @@ export class CreateTournamentComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      title: ['', Validators.required],
-      beginDateTime: ['', Validators.required],
-      maxPlayers: ['', Validators.required],
-      entryFee: ['', Validators.required],
+      title: ['', Validators.required], 
+      beginDateTime: ['', [Validators.required, futureDateValidator()]],
+      maxPlayers: ['', [Validators.required, Validators.min(0)]],
+      entryFee: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
   onSubmit(): void {
+    this.submitted = true;
     if (this.form.valid) {
       const tournament = new Tournament(
         -1,
@@ -47,9 +52,14 @@ export class CreateTournamentComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
-          console.log(err);
+          if (err.status === 401) {
+            this.errorMessage = "U bent niet ingelogd of bevoegd."
+          } else if (err.status === 500) {
+            this.errorMessage = "Server kan aanvraag niet verwerken."
+          }
         },
       });
+      this.submitted = false
     } else {
       return;
     }

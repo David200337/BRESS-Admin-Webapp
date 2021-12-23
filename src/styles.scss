@@ -12,7 +12,6 @@ $black-bg-hover: #444444;
 @font-face {
     font-family: "Open Sans";
     src: url('./assets//fonts//openSans/OpenSans-VariableFont_wdth\,wght.ttf');
-    
 }
 
 html {
@@ -111,4 +110,19 @@ table {
             }
         }
     }
+}
+
+// Form validation
+.inputElement {
+    width: 100%;
+    input {
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+
+.errorElement {
+    margin-top: 5px;
+    padding: 10px;
+    background-color: $black-bg;
 }
