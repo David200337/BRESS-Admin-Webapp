@@ -43,7 +43,7 @@ export abstract class ResourceService<T> {
 			.pipe(catchError(this.handleError));
 	}
 
-	private handleError(error: HttpErrorResponse) {
+	protected handleError(error: HttpErrorResponse) {
 		// Handle HTTP errors
 		console.log(error);
 
