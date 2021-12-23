@@ -45,7 +45,6 @@ export class GamesOverviewComponent implements OnInit {
     this.tournamentService.getPoolQueue(this.tournamentId)
         .pipe(
           tap(g => this.games = Array.from(g)),
-          tap(() => this.games.push(new Game(-1, "", 0, true, true, undefined, new Player(-1, "A", "", new SkillLevel(-1, "")), new Player(-1, "B", "", new SkillLevel(-1, ""))))),
           tap(() => this.sortGames(this.games)),
         ).subscribe(); 
   }
