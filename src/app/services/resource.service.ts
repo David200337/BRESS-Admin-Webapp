@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, throwError } from "rxjs";
+import { catchError, map, Observable, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -16,7 +16,13 @@ export abstract class ResourceService<T> {
 	public getList(): Observable<T[]> {
 		return this.httpClient
 			.get<T[]>(`${this.APIUrl}`)
-			.pipe(catchError(this.handleError));
+			.pipe(catchError(this.handleError))
+			.pipe(
+				map((item: any) => {
+					return item.result;
+				}),
+				catchError(this.handleError)
+			);
 	}
 
 	public get(id: number): Observable<T> {

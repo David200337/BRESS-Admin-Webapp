@@ -5,6 +5,7 @@ import { Player } from "src/app/models/player.model";
 import { SkillLevel } from "src/app/models/skillLevel.model";
 import { LoaderToggleService } from "src/app/services/loader-toggle.service";
 import { PlayerService } from "src/app/services/player.service";
+import { SkillLevelService } from "src/app/services/skill-level.service";
 
 @Component({
 	selector: "app-create-player",
@@ -20,7 +21,8 @@ export class CreatePlayerComponent implements OnInit {
 		private router: Router,
 		private playerService: PlayerService,
 		private formBuilder: FormBuilder,
-		private loaderToggle: LoaderToggleService
+		private loaderToggle: LoaderToggleService,
+        private skillLevelService: SkillLevelService
 	) {}
 
 	ngOnInit(): void {
@@ -30,11 +32,15 @@ export class CreatePlayerComponent implements OnInit {
 			skillLevel: ["", Validators.required]
 		});
 
-		this.skillLevels = [
-			new SkillLevel(0, "Beginner"),
-			new SkillLevel(1, "Half-Gevorderden"),
-			new SkillLevel(2, "Gevorderden")
-		];
+        this.skillLevelService.getList().subscribe({
+            next: (skillLevels) => {                
+                this.skillLevels = skillLevels;
+            },
+            error: (err) => {
+                // TODO: Handle error
+                console.log(err);
+            }
+        });
 	}
 
 	changeSkillLevel(e: any) {
