@@ -32,7 +32,7 @@
 </div>
 <div class="popup">
     <div class="popup-editor">
-        <app-edit-game class="scorePopup" [class.visible]="editGameService.showPopUp"></app-edit-game>
+        <app-edit-game class="scorePopup" [class.visible]="editGameService.showPopUp" (sumbitEvent)="refreshGames()"></app-edit-game>
     </div>
 </div>
 

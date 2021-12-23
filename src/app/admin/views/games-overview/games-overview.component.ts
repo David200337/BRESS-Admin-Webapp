@@ -55,7 +55,8 @@ export class GamesOverviewComponent implements OnInit {
       tap(g => this.games.push(...g)),
       tap(() => console.info(this.games)),
       tap(() => this.sortGames(this.games)),
-    ).subscribe(() => this.loaderToggle.loaderInvisible());
+    ).subscribe()
+    .add(() => this.loaderToggle.loaderInvisible());
   }
 
   /**
@@ -84,6 +85,20 @@ export class GamesOverviewComponent implements OnInit {
   }
 
   selectGame(game: Game) {
-    this.editGameService.showEdit(game.id, true);
+    this.editGameService.showEdit(game.id);
+  }
+
+  refreshGames() {
+    this.loaderToggle.loaderVisible();
+    concat(
+      this.tournamentService.getPoolQueue(this.tournamentId),
+      this.tournamentService.getFinaleQueue(this.tournamentId)
+    ).pipe(
+      tap(g => console.info(g)),
+      tap(g => this.games.push(...g)),
+      tap(() => console.info(this.games)),
+      tap(() => this.sortGames(this.games)),
+    ).subscribe()
+    .add(() => this.loaderToggle.loaderInvisible());
   }
 }
