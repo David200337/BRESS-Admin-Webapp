@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.tournamentService.getList().subscribe({
       next: (response: any) => {
-        this.tournaments = response.result;
+        this.tournaments = response;
         this.loaderToggle.loaderInvisible();
       },
       error: (err) => console.log(err),
