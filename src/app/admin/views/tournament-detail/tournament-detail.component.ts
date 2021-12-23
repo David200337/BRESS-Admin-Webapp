@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
+import { Pool } from 'src/app/models/pool.model';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -11,8 +13,13 @@ import { TournamentService } from 'src/app/services/tournament.service';
 export class TournamentDetailComponent implements OnInit, OnDestroy{
   categoryList!: Category[];
   categorySubscription!: Subscription;
+  pools! : Observable<Pool[]>;
+  tournamentId!: number;
 
-  constructor(private tournamentService: TournamentService) { 
+  constructor(
+    private tournamentService: TournamentService,
+    private route: ActivatedRoute,
+    ) { 
     this.categoryList = new Array();
   }
 
@@ -21,9 +28,15 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.categorySubscription = this.tournamentService.getAllCategories(1)
+    this.route.params.subscribe(params => {
+      this.tournamentId = params['id'];
+    }); 
+
+    this.categorySubscription = this.tournamentService.getAllCategories(this.tournamentId)
         .pipe(tap(c => console.info(c)))
         .subscribe(c => this.categoryList = c);
+
+    this.pools = this.tournamentService.getAllPools(this.tournamentId, 1).pipe(tap(pools => console.info(pools)));
   }
 
   /**
@@ -32,6 +45,6 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
    * Display the tournament info for the selected category
    */
   switchCategory(category: Category) {
-    console.warn(`Method not implemented. \n@param category: ${JSON.stringify(category)}`);
+    this.pools = this.tournamentService.getAllPools(this.tournamentId, category.id)
   }
 }
