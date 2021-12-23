@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         })
       this.submitted = false;
     } else {
+      this.toggleLoader.loaderInvisible();
       return;
     }
   }
