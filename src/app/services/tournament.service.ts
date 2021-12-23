@@ -162,7 +162,7 @@ export class TournamentService extends ResourceService<Tournament> {
 		gameId: number
 	): Observable<Game> {
 		return this.httpClient
-			.delete<any>(
+			.get<any>(
 				`${this.APIUrl}/${tournamentId}/category/${categoryId}/poolgame/${gameId}`
 			)
 			.pipe(
@@ -178,7 +178,7 @@ export class TournamentService extends ResourceService<Tournament> {
 		score: boolean[]
 	): Observable<PoolGame> {
 		return this.httpClient
-			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, score)
+			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, { sets: score })
 			.pipe(
 				map((item) => {
 					return item.result;
