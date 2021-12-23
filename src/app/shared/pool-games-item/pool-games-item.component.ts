@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Game } from 'src/app/models/game.model';
 
 @Component({
   selector: 'app-pool-games-item',
@@ -7,6 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class PoolGamesItemComponent implements OnInit {
   @Output() gameEvent = new EventEmitter<void>();
+  @Input() games!: Game[];
 
   constructor() { }
 

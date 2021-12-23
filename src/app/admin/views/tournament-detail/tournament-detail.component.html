@@ -10,7 +10,7 @@
     </div>
     <div class="pools">
         <div *ngFor="let pool of pools | async">
-            <a routerLink="./pool/A"><h3>Poule {{pool.id}}</h3></a>
+            <a routerLink="{{categoryId}}/{{pool.id}}"><h3>Poule {{pool.id}}</h3></a>
             <app-pool-players-item [pool]="pool"></app-pool-players-item>
         </div>
     </div>

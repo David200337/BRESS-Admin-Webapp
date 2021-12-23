@@ -15,6 +15,7 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
   categorySubscription!: Subscription;
   pools! : Observable<Pool[]>;
   tournamentId!: number;
+  categoryId!: number;
 
   constructor(
     private tournamentService: TournamentService,
@@ -30,13 +31,14 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.tournamentId = params['id'];
-    }); 
-
+    });
+    
     this.categorySubscription = this.tournamentService.getAllCategories(this.tournamentId)
         .pipe(tap(c => console.info(c)))
         .subscribe(c => this.categoryList = c);
 
-    this.pools = this.tournamentService.getAllPools(this.tournamentId, 1).pipe(tap(pools => console.info(pools)));
+    this.pools = this.tournamentService.getAllPools(this.tournamentId, 1)
+        .pipe(tap(pools => console.info(pools)));
   }
 
   /**
@@ -45,6 +47,7 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
    * Display the tournament info for the selected category
    */
   switchCategory(category: Category) {
-    this.pools = this.tournamentService.getAllPools(this.tournamentId, category.id)
+    this.pools = this.tournamentService.getAllPools(this.tournamentId, category.id);
+    this.categoryId = category.id;
   }
 }
