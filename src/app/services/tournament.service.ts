@@ -28,20 +28,26 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public addPlayer(
-		tournamentId: number,
-		playerId: number
-	): Observable<Player[]> {
-		return this.httpClient.post<Player[]>(
-			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
-			{}
+	public getAllAvailablePlayers(tournamentId: number): Observable<Player[]> {
+		return this.httpClient.get<Player[]>(
+			`${this.APIUrl}/${tournamentId}/availablePlayers`
 		);
 	}
 
-	public deletePlayer(tournamentId: number, playerId: number) {
-		return this.httpClient.delete<Player>(
-			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
-			{}
+	public addPlayer(
+		tournamentId: number,
+		playerIds: number[]
+	): Observable<any> {
+		return this.httpClient.post<Player[]>(
+			`${this.APIUrl}/${tournamentId}/players`,
+			playerIds
+		);
+	}
+
+	public deletePlayer(tournamentId: number, playerIds: number[]) {
+		return this.httpClient.delete<any>(
+			`${this.APIUrl}/${tournamentId}/players`,
+			{body: playerIds}
 		);
 	}
 
