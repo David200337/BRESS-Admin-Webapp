@@ -17,6 +17,7 @@ import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
+import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
 
 
 
@@ -36,6 +37,7 @@ import { CategoryBracketComponent } from './views/category-bracket/category-brac
     CourtItemComponent,
     GameCourtItemComponent,
     CategoryBracketComponent,
+    CreateSkilllevelComponent,
   ],
   imports: [
     CommonModule,

@@ -98,8 +98,12 @@ export class TournamentService extends ResourceService<Tournament> {
 		tournamentId: number,
 		categoryId: number
 	): Observable<Pool[]> {
-		return this.httpClient.get<Pool[]>(
+		return this.httpClient.get<any>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool`
+		).pipe(
+			map((item) => {
+				return item.result;
+			})
 		);
 	}
 
@@ -108,8 +112,12 @@ export class TournamentService extends ResourceService<Tournament> {
 		categoryId: number,
 		poolId: number
 	): Observable<Pool> {
-		return this.httpClient.get<Pool>(
+		return this.httpClient.get<any>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`
+		).pipe(
+			map((item) => {
+				return item.result;
+			})
 		);
 	}
 
@@ -167,10 +175,10 @@ export class TournamentService extends ResourceService<Tournament> {
 	public updatePoolGame(
 		tournamentId: number,
 		gameId: number,
-		game: PoolGame
+		score: boolean[]
 	): Observable<PoolGame> {
 		return this.httpClient
-			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, game)
+			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, score)
 			.pipe(
 				map((item) => {
 					return item.result;

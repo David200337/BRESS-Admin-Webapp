@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryBracketComponent } from './admin/views/category-bracket/category-bracket.component';
+import { CreateSkilllevelComponent } from './admin/views/create-skilllevel/create-skilllevel.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
 import { DashboardComponent } from './admin/views/dashboard/dashboard.component';
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
@@ -22,9 +23,9 @@ const routes: Routes = [
   { path: "tournament/:id/games", pathMatch: "full", component: GamesOverviewComponent },
   { path: "tournament/:id/score-overview", pathMatch: "full", component: TournamentDetailComponent },
   { path: "tournament/:id/edit-tournament", pathMatch: "full", component: EditTournamentComponent },
-  { path: "tournament/:id/pool/:id", pathMatch: "full", component: PoolDetailComponent },
+  { path: "tournament/:id/score-overview/:categoryId/:poolId", pathMatch: "full", component: PoolDetailComponent },
   { path: "tournament/:tournamentId/bracket", pathMatch: "full", component: CategoryBracketComponent },
-  { path: "svg", pathMatch: "full", component: LoaderComponent },
+  { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent },
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { Tournament } from 'src/app/models/tournament.model';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -23,8 +24,11 @@ export class EditTournamentComponent implements OnInit {
     private router: Router,
     private tournamentService: TournamentService,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe
-  ) {}
+    private datePipe: DatePipe,
+    private loaderToggle: LoaderToggleService
+  ) {
+    loaderToggle.loaderVisible();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -48,9 +52,11 @@ export class EditTournamentComponent implements OnInit {
             maxPlayers: this.tournament?.maxPlayers,
             entryFee: this.tournament?.entryFee,
           })
+          this.loaderToggle.loaderInvisible();
         },
         error: (err) => {
           console.log(err);
+          this.loaderToggle.loaderInvisible();
         },
       });
     }
@@ -64,18 +70,20 @@ export class EditTournamentComponent implements OnInit {
 
   onSubmit(): void {
     if (this.tournament && this.form.valid) {
+      this.loaderToggle.loaderVisible();
       this.tournament.title = this.form.value.title
       this.tournament.beginDateTime = this.form.value.beginDateTime
       this.tournament.entryFee = this.form.value.entryFee
       this.tournament.maxPlayers = this.form.value.maxPlayers
 
-      this.tournamentService.update(this.tournamentId! ,this.tournament).subscribe({
+      this.tournamentService.update(this.tournamentId!, this.tournament).subscribe({
         next: (res) => {
           console.log(res);
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           console.log(err);
+          this.loaderToggle.loaderInvisible();
         },
       });
     } else {

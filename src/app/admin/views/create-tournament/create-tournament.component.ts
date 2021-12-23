@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tournament } from 'src/app/models/tournament.model';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { futureDateValidator } from 'src/app/shared/validation/validators';
 
@@ -19,8 +20,10 @@ export class CreateTournamentComponent implements OnInit {
   constructor(
     private router: Router,
     private tournamentService: TournamentService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private loaderToggle: LoaderToggleService
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -34,6 +37,7 @@ export class CreateTournamentComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if (this.form.valid) {
+      this.loaderToggle.loaderVisible();
       const tournament = new Tournament(
         -1,
         this.form.value.title,
@@ -45,7 +49,7 @@ export class CreateTournamentComponent implements OnInit {
         [],
         []
       );
-      
+
       this.tournamentService.add(tournament).subscribe({
         next: (res) => {
           console.log(res);
@@ -57,6 +61,7 @@ export class CreateTournamentComponent implements OnInit {
           } else if (err.status === 500) {
             this.errorMessage = "Server kan aanvraag niet verwerken."
           }
+          this.loaderToggle.loaderInvisible();
         },
       });
       this.submitted = false

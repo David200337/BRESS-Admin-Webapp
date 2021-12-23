@@ -1,11 +1,18 @@
 <div class="poolWrapper">
-    <h1 class="poolHeader">{{tournament}} - {{poolName}}</h1>
-    <div class="poolBody">
-        <app-pool-players-item></app-pool-players-item>
-        <app-pool-games-item (gameEvent)="showGameEdit()"></app-pool-games-item>
-        <app-edit-game [style.display]="gameEditDisplay" (sumbitEvent)="hideGameEdit()"></app-edit-game>
-    </div>
-    <div class="buttonGroup">
+    <div class="poolHeader">
+        <h1>{{tournament}} - {{poolName}}</h1>
         <button [routerLink]="['../../']" class="button-dark">Terug</button>
     </div>
+    <div class="poolBody">
+        <div *ngIf="pool$ | async as pool">
+            <app-pool-players-item [pool]="pool"></app-pool-players-item>
+        </div>
+        <div *ngIf="pool$ | async as pool">
+            <app-pool-games-item [games]="pool.games" (gameEvent)="showGameEdit()"></app-pool-games-item>
+        </div>
+    </div>
+    <div class="buttonGroup">
+        
+    </div>
 </div>
+<app-edit-game class="scorePopup" [style.display]="gameEditDisplay" (sumbitEvent)="hideGameEdit()"></app-edit-game>

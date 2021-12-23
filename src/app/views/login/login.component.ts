@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthenticationService
-  ) {}
+    private authService: AuthenticationService,
+    private toggleLoader: LoaderToggleService
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -28,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.toggleLoader.loaderVisible();
     this.submitted = true;
     if (this.form.valid) {
       this.authService
@@ -37,6 +40,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
+            this.toggleLoader.loaderInvisible();
             if (err.status === 400) {
               this.errorMessage = "Email of wachtwoord is verkeerd."
             }

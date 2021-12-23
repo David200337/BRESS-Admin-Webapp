@@ -7,25 +7,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr (click)="onClick()">
-            <td>Robin Schellius</td>
-            <td>Robin Schellius</td>
-            <td>2-1</td>
-        </tr>
-        <tr (click)="onClick()">
-            <td>Robin Schellius</td>
-            <td>Robin Schellius</td>
-            <td>2-0</td>
-        </tr>
-        <tr (click)="onClick()">
-            <td>Robin Schellius</td>
-            <td>Robin Schellius</td>
-            <td>n/a</td>
-        </tr>
-        <tr (click)="onClick()">
-            <td>Robin Schellius</td>
-            <td>Robin Schellius</td>
-            <td>0-2</td>
+        <tr *ngFor="let game of games" (click)="onClick()">
+            <td>{{game.player1.name}}</td>
+            <td>{{game.player2.name}}</td>
+            <td>{{game.score}}</td>
         </tr>
     </tbody>
 </table>

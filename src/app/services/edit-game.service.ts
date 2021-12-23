@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Game } from '../models/game.model';
+import { PoolGame } from '../models/poolGame.model';
 import { TournamentService } from './tournament.service';
 
 @Injectable({
@@ -27,5 +28,10 @@ export class EditGameService {
   enterScore(score: boolean[]): Observable<any> {
     this.showPopUp = false;
     return this.tournamentService.updateFinalGame(this.tournamentId, this.gameId, score);
+  }
+
+  enterPoolGameScore(score: boolean[]): Observable<PoolGame> {
+    this.showPopUp = false;
+    return this.tournamentService.updatePoolGame(this.tournamentId, this.gameId, score);
   }
 }

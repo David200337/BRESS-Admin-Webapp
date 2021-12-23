@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
 import { Tournament } from 'src/app/models/tournament.model';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -17,8 +18,11 @@ export class TournamentOverviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private tournamentService: TournamentService
-  ) {}
+    private tournamentService: TournamentService,
+    private loaderToggle: LoaderToggleService
+  ) {
+    loaderToggle.loaderVisible();
+  }
 
   ngOnInit(): void {
     this.sub = this.route.paramMap
@@ -31,8 +35,10 @@ export class TournamentOverviewComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.tournament = response.result;
+          this.loaderToggle.loaderInvisible();
         },
         error: (err) => {
+          this.loaderToggle.loaderInvisible();
           console.log(err);
         },
       })
@@ -46,12 +52,16 @@ export class TournamentOverviewComponent implements OnInit {
 
   deleteTournament(): void {
     if (confirm(`Weet u zeker dat u ${this.tournament?.title} wilt verwijderen?`)) {
-      this.tournamentService.delete(this.tournamentId).subscribe({next:(response) => {
-        console.log(response)
-        this.router.navigate(["/dashboard"])
-      }, error: (err) => {
-        console.log(err)
-      }})
+      this.loaderToggle.loaderVisible();
+      this.tournamentService.delete(this.tournamentId).subscribe({
+        next: (response) => {
+          console.log(response)
+          this.router.navigate(["/dashboard"])
+        }, error: (err) => {
+          console.log(err)
+          this.loaderToggle.loaderInvisible();
+        }
+      })
     }
   }
 }
