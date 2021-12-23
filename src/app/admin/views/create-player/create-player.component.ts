@@ -14,7 +14,7 @@ import { PlayerService } from "src/app/services/player.service";
 export class CreatePlayerComponent implements OnInit {
 	public form!: FormGroup;
 	public skillLevels!: SkillLevel[];
-	public selectedSkillLevel: string = "";
+	public selectedSkillLevel: SkillLevel = new SkillLevel(-1, "");
 
 	constructor(
 		private router: Router,
@@ -43,23 +43,19 @@ export class CreatePlayerComponent implements OnInit {
 			(skillLevel) => skillLevel.name === skillLevelName
 		);
 
-		this.selectedSkillLevel = skillLevelName;
-
-		this.form.patchValue({
-			skillLevel: selectedSkillLevel
-		});
+		this.selectedSkillLevel = selectedSkillLevel[0];
 	}
 
-	onSubmit(): void {
-		if (this.form.valid) {
+	onSubmit(): void {        
+		if (this.form.valid && this.selectedSkillLevel.id !== -1) {
 			this.loaderToggle.loaderVisible();
 			const player = new Player(
 				-1,
 				this.form.value.name,
 				this.form.value.email,
 				0,
-				this.form.value.skillLevel
-			);
+				this.selectedSkillLevel
+			);            
 
 			this.playerService.add(player).subscribe({
 				next: (res) => {
