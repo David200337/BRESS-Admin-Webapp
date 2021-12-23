@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
 import { Tournament } from 'src/app/models/tournament.model';
 import { TournamentService } from 'src/app/services/tournament.service';
@@ -16,6 +16,7 @@ export class TournamentOverviewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private tournamentService: TournamentService
   ) {}
 
@@ -40,6 +41,17 @@ export class TournamentOverviewComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe()
+    }
+  }
+
+  clickMethod(): void {
+    if (confirm(`Weet u zeker dat u ${this.tournament?.title} wilt verwijderen?`)) {
+      this.tournamentService.delete(this.tournamentId).subscribe({next:(response) => {
+        console.log(response)
+        this.router.navigate(["/dashboard"])
+      }, error: (err) => {
+        console.log(err)
+      }})
     }
   }
 }
