@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Player } from "src/app/models/player.model";
+import { SkillLevel } from "src/app/models/skillLevel.model";
 import { LoaderToggleService } from "src/app/services/loader-toggle.service";
 import { PlayerService } from "src/app/services/player.service";
 
@@ -11,7 +12,9 @@ import { PlayerService } from "src/app/services/player.service";
 	styleUrls: ["./create-player.component.scss"]
 })
 export class CreatePlayerComponent implements OnInit {
-	form!: FormGroup;
+	public form!: FormGroup;
+    public skillLevels!: SkillLevel[];
+    
 
 	constructor(
 		private router: Router,
@@ -26,7 +29,18 @@ export class CreatePlayerComponent implements OnInit {
 			email: ["", Validators.required],
 			skillLevel: ["", Validators.required]
 		});
+
+        this.skillLevels = [new SkillLevel(0, "Beginner"), new SkillLevel(1, "Half-Gevorderden"), new SkillLevel(2, "Gevorderden")]
 	}
+
+    changeSkillLevel(e: any) {
+        console.log(e.target!.value);
+        this.form.patchValue({skillLevel: e.target!.value.split(" ")[1]})
+
+        // this.form.value.skillLevel.setValue(e.target!.value, {
+        //     onlySelf: true
+        // })
+    }
 
 	onSubmit(): void {
 		if (this.form.valid) {

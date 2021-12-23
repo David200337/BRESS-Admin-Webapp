@@ -11,12 +11,15 @@
                 <label for="email">Email</label>
                 <input id="email" formControlName="email" type="email" placeholder="Email" />
             </div>
-    
+
             <div class="form-group">
                 <label for="skillLevel">Skill Level</label>
-                <input id="skillLevel" formControlName="skillLevel" type="text" placeholder="Skill Level" />
+                <select class="form-select" (change)="changeSkillLevel($event)" formControlName="skillLevel">
+                    <option value="" disabled>Kies een skill level</option>
+                    <option *ngFor="let skillLevel of skillLevels" [ngValue]="skillLevel.name"></option>
+                </select>
             </div>
-    
+        
             <div class="form-group buttons">
                 <div>
                     <button type="submit" class="button-dark">
