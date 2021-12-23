@@ -228,6 +228,23 @@ export class CategoryBracketComponent implements OnInit {
       })
     })
     this.myTournamentData = { rounds: this.myTournamentData.rounds };
+
+    this.tournament.categories[this.selectedCategoryIndex].rounds.forEach((round: any) => {
+      round.games.forEach((match: any) => {
+        if (match.id == game.id) {
+          let player1 = 0;
+          let player2 = 0;
+          game.score.forEach((set: boolean) => {
+            if (set) {
+              player1++;
+            } else {
+              player2++;
+            }
+          })
+          match.score = player1 + ' - ' + player2;
+        }
+      })
+    })
   }
 
 
