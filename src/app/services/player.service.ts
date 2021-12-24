@@ -27,4 +27,17 @@ export class PlayerService extends ResourceService<Player> {
 			.post(`${this.APIUrl}`, body)
 			.pipe(catchError(this.handleError));
     }
+
+    public override update(id: number, resource: Player): Observable<Player> {
+        const body = {
+            name: resource.name,
+            email: resource.email,
+            skillLevelId: resource.skillLevel.id
+        }
+
+        return this.httpClient.put<Player>(
+			`${this.APIUrl}/${id}`,
+			body
+		);
+    }
 }
