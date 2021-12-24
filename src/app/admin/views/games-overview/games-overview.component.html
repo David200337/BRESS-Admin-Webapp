@@ -1,6 +1,6 @@
 <div class="gamesWrapper">
     <div class="gamesHeader">
-        <h1>Speeltoernooi</h1>
+        <h1 *ngIf="tournament">{{tournament.title}}</h1>
         <button [routerLink]="['../']" class="button-dark">Terug</button>
     </div>
     <div class="gamesBody">

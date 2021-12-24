@@ -47,6 +47,9 @@ export class GamesOverviewComponent implements OnInit {
 
     this.editGameService.tournamentId = this.tournamentId;
 
+    this.tournamentService.get(this.tournamentId)
+        .subscribe(res => this.tournament = res)
+
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
@@ -57,6 +60,7 @@ export class GamesOverviewComponent implements OnInit {
       tap(() => this.sortGames(this.games)),
     ).subscribe()
     .add(() => this.loaderToggle.loaderInvisible());
+    
   }
 
   /**
