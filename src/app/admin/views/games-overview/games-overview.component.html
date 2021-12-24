@@ -1,11 +1,12 @@
 <div class="gamesWrapper">
     <div class="gamesHeader">
         <h1>Speeltoernooi</h1>
+        <button [routerLink]="['../']" class="button-dark">Terug</button>
     </div>
     <div class="gamesBody">
         <div class="bodyColumn">
             <div *ngIf="activeGames.length > 0; else no_active">
-                <div class="columnElement" *ngFor="let game of activeGames">
+                <div class="columnElement courtItem" *ngFor="let game of activeGames">
                     <app-court-item [game]="game" [field]="game.field" (gameEvent)="selectGame($event)"></app-court-item>
                 </div>
             </div>
@@ -29,6 +30,11 @@
         </div>
     </div>
 </div>
-<app-edit-game class="scorePopup" [class.visible]="editGameService.showPopUp"></app-edit-game>
+<div class="popup">
+    <div class="popup-editor">
+        <app-edit-game class="scorePopup" [class.visible]="editGameService.showPopUp" (sumbitEvent)="refreshGames()"></app-edit-game>
+    </div>
+</div>
+
 
 

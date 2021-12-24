@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs';
+import { concat, map, switchMap, tap } from 'rxjs';
 import { Field } from 'src/app/models/field.model';
 import { Game } from 'src/app/models/game.model';
 import { Player } from 'src/app/models/player.model';
 import { SkillLevel } from 'src/app/models/skillLevel.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -28,9 +29,11 @@ export class GamesOverviewComponent implements OnInit {
   constructor(
     private tournamentService: TournamentService,
     public editGameService: EditGameService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loaderToggle: LoaderToggleService,
   ) { 
     this.showPopup = false;
+    loaderToggle.loaderVisible();
   }
 
   ngOnInit(): void {
@@ -40,13 +43,20 @@ export class GamesOverviewComponent implements OnInit {
   
     this.route.params.subscribe(params => {
       this.tournamentId = params['id'];
-    }); 
+    });
 
-    this.tournamentService.getPoolQueue(this.tournamentId)
-        .pipe(
-          tap(g => this.games = Array.from(g)),
-          tap(() => this.sortGames(this.games)),
-        ).subscribe(); 
+    this.editGameService.tournamentId = this.tournamentId;
+
+    concat(
+      this.tournamentService.getPoolQueue(this.tournamentId),
+      this.tournamentService.getFinaleQueue(this.tournamentId)
+    ).pipe(
+      tap(g => console.info(g)),
+      tap(g => this.games.push(...g)),
+      tap(() => console.info(this.games)),
+      tap(() => this.sortGames(this.games)),
+    ).subscribe()
+    .add(() => this.loaderToggle.loaderInvisible());
   }
 
   /**
@@ -55,21 +65,45 @@ export class GamesOverviewComponent implements OnInit {
    * sort the provided games array into started games, the next game and all future games
    */
   sortGames(games: Game[]) {
+    console.log(games);
+    let sortedActive: Game[] = [];
+    let sortedFuture: Game[] = [];
+    
     games.forEach(g => {
-      if (!g.winner) {
-        if (g.gameStarted) {
-          g.field = new Field(0, "test field", true);
-          this.activeGames.push(g);
+      if (!g.score) {
+        if (g.field) {
+          sortedActive.push(g);
         } else {
-          this.futureGames.push(g);
+          sortedFuture.push(g);
         }
       }
     });
+    this.activeGames = sortedActive;
+    this.futureGames = sortedFuture;
     this.nextGame = [this.futureGames.shift()!];
-    console.log(this.nextGame);
+    console.info(this.activeGames);
   }
 
   selectGame(game: Game) {
     this.editGameService.showEdit(game.id);
+  }
+
+  refreshGames() {
+    console.log("refresh games");
+    this.loaderToggle.loaderVisible();
+    this.games = [];
+    this.activeGames = [];
+    this.futureGames = [];
+    
+    concat(
+      this.tournamentService.getPoolQueue(this.tournamentId),
+      this.tournamentService.getFinaleQueue(this.tournamentId)
+    ).pipe(
+      tap(g => console.info(g)),
+      tap(g => this.games.push(...g)),
+      tap(() => console.info(this.games)),
+      tap(() => this.sortGames(this.games)),
+    ).subscribe()
+    .add(() => this.loaderToggle.loaderInvisible());
   }
 }
