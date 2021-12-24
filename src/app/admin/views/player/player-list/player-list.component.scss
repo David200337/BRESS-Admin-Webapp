@@ -1,0 +1,27 @@
+table {
+	border: none;
+	width: 100%;
+	td {
+		div {
+			display: flex;
+			p {
+				margin: auto 0;
+			}
+			button {
+				margin-left: auto;
+				border: none;
+				background: none;
+				margin: auto 0 auto auto;
+				cursor: pointer;
+			}
+		}
+	}
+
+	tr {
+		cursor: pointer;
+	}
+}
+
+input {
+    border-radius: 0;
+}

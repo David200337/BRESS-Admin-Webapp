@@ -58,7 +58,8 @@ export class EditPlayerComponent implements OnInit {
 		if (this.playerId) {
 			this.sub = this.playerService.get(this.playerId).subscribe({
 				next: (response: any) => {
-					this.player = response.result;
+					this.player = response;
+					console.log(this.player);
 
 					if (this.player?.skillLevel) {
 						this.form.setValue({
@@ -97,22 +98,23 @@ export class EditPlayerComponent implements OnInit {
 
 	onSubmit(): void {
 		if (
-            this.playerId &&
+			this.playerId &&
 			this.form.valid &&
 			this.player &&
 			this.selectedSkillLevel.id !== -1
 		) {
-            const updatedPlayer = new Player(
-                this.playerId,
-                this.form.value.name,
-                this.form.value.email,
-                this.player.score,
-                this.selectedSkillLevel
-            )
+			const updatedPlayer = new Player(
+				this.playerId,
+				this.form.value.name,
+				this.form.value.email,
+				this.player.score,
+				this.selectedSkillLevel
+			);
 
 			this.playerService.update(this.playerId, updatedPlayer).subscribe({
 				next: (res) => {
-					this.router.navigate(["dashboard"]);
+					this.loaderToggle.loaderInvisible();
+					this.router.navigate([".."], { relativeTo: this.route });
 				},
 				error: (err) => {
 					console.log(err);

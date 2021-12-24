@@ -1,0 +1,37 @@
+@import "../../../../../styles.scss";
+
+.overviewWrapper {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 25px;
+}
+
+.overviewHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 25px;
+	flex-wrap: wrap;
+
+	margin-block: 50px;
+}
+
+button {
+    margin-left: 20px;
+}
+
+.overviewBody {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+
+	gap: 100px;
+}
+
+.overviewBodyColumn {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+
+}
