@@ -45,7 +45,7 @@ export class EditTournamentComponent implements OnInit {
     if (this.tournamentId) {
       this.sub = this.tournamentService.get(this.tournamentId).subscribe({
         next: (response: any) => {
-          this.tournament = response.result;
+          this.tournament = response;
           this.form.setValue({
             title: this.tournament?.title,
             beginDateTime: this.datePipe.transform(this.tournament?.beginDateTime, 'yyyy-MM-dd'),

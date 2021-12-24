@@ -34,7 +34,7 @@ export class TournamentOverviewComponent implements OnInit {
       )
       .subscribe({
         next: (response: any) => {
-          this.tournament = response.result;
+          this.tournament = response;
           this.loaderToggle.loaderInvisible();
         },
         error: (err) => {

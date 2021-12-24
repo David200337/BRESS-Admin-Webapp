@@ -37,7 +37,7 @@ export class TournamentDetailComponent implements OnInit {
     this.tournamentService.get(this.tournamentId)
       .subscribe((result: any) => {
         console.log(result.result);
-        this.tournament = result.result;
+        this.tournament = result;
         this.categoryList = this.tournament.categories; 
         this.categoryId = this.categoryList[0].id;
         this.pools$ = this.tournamentService.getAllPools(this.tournamentId, this.categoryId);
