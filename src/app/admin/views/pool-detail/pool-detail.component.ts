@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { concat, Observable, tap } from 'rxjs';
 import { Pool } from 'src/app/models/pool.model';
+import { Tournament } from 'src/app/models/tournament.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
@@ -18,12 +19,12 @@ export class PoolDetailComponent implements OnInit {
   /**
    * @todo Implement domain model
    */
-  tournament: String = "Speeltoernooi beginners"
   poolName: String = "Poule A"
   tournamentId: any;
   poolId: any;
   pool$!: Observable<Pool>;
   categoryId: any;
+  tournament!: Tournament;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,9 +43,21 @@ export class PoolDetailComponent implements OnInit {
       this.categoryId = params['categoryId'];
       this.editGame.tournamentId = params['id'];
     });
+    
+    this.tournamentService.get(this.tournamentId)
+        .subscribe(res => {
+          if (this.pool$) {
+            this.toggleLoader.loaderInvisible()
+          }
+          return this.tournament = res;
+        })
 
     this.pool$ = this.tournamentService.getPool(this.tournamentId, this.categoryId, this.poolId)
-      .pipe(tap(() => this.toggleLoader.loaderInvisible()))
+      .pipe(tap(() => {
+        if (this.tournament) {
+          this.toggleLoader.loaderInvisible()
+        }
+      }))
   }
 
   hideGameEdit() {
