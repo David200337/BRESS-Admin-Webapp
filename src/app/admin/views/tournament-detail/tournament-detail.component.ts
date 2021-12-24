@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable, Subscription, switchMap, tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
+import { Pool } from 'src/app/models/pool.model';
+import { Tournament } from 'src/app/models/tournament.model';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -8,22 +12,37 @@ import { TournamentService } from 'src/app/services/tournament.service';
   templateUrl: './tournament-detail.component.html',
   styleUrls: ['./tournament-detail.component.scss']
 })
-export class TournamentDetailComponent implements OnInit, OnDestroy{
+export class TournamentDetailComponent implements OnInit {
   categoryList!: Category[];
   categorySubscription!: Subscription;
+  pools$! : Observable<Pool[]>;
+  tournamentId!: number;
+  categoryId!: number;
+  tournament!: Tournament;
 
-  constructor(private tournamentService: TournamentService) { 
+  constructor(
+    private tournamentService: TournamentService,
+    private route: ActivatedRoute,
+    private loaderToggle: LoaderToggleService
+    ) { 
+    loaderToggle.loaderVisible();
     this.categoryList = new Array();
   }
 
-  ngOnDestroy(): void {
-    this.categorySubscription.unsubscribe();
-  }
-
   ngOnInit(): void {
-    this.categorySubscription = this.tournamentService.getAllCategories(1)
-        .pipe(tap(c => console.info(c)))
-        .subscribe(c => this.categoryList = c);
+    this.route.params.subscribe(params => {
+      this.tournamentId = params['id'];
+    });
+
+    this.tournamentService.get(this.tournamentId)
+      .subscribe((result: any) => {
+        console.log(result.result);
+        this.tournament = result;
+        this.categoryList = this.tournament.categories; 
+        this.categoryId = this.categoryList[0].id;
+        this.pools$ = this.tournamentService.getAllPools(this.tournamentId, this.categoryId);
+      })
+      .add(() => this.loaderToggle.loaderInvisible());
   }
 
   /**
@@ -32,6 +51,7 @@ export class TournamentDetailComponent implements OnInit, OnDestroy{
    * Display the tournament info for the selected category
    */
   switchCategory(category: Category) {
-    console.warn(`Method not implemented. \n@param category: ${JSON.stringify(category)}`);
+    this.pools$ = this.tournamentService.getAllPools(this.tournamentId, category.id);
+    this.categoryId = category.id;
   }
 }

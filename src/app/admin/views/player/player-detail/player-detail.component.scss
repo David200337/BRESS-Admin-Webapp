@@ -1,0 +1,30 @@
+@import '../../../../../styles.scss';
+
+.overviewBodyElement {
+    width: 100%;
+}
+
+.button-long {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.overViewBodyButtonGroup {
+    display: flex; 
+    flex-direction: row;
+    gap: 25px
+}
+
+.overviewBodyData {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    background-color: $white-bg-dark;
+    padding: 25px;
+}
+
+.dataLabel {
+    font-weight: 700;
+}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table'
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { TournamentItemComponent } from './shared/tournament-item/tournament-item.component';
 import { CreateTournamentComponent } from './views/create-tournament/create-tournament.component';
@@ -16,9 +17,16 @@ import { GamesOverviewComponent } from './views/games-overview/games-overview.co
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
+import { EditPlayerComponent } from './views/edit-player/edit-player.component';
+import { CreatePlayerComponent } from './views/create-player/create-player.component';
+import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
+import { PlayerListComponent } from './views/player/player-list/player-list.component';
+import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
+import { PlayerColumnComponent } from './views/player/player-column/player-column.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -34,12 +42,23 @@ import { ReactiveFormsModule } from '@angular/forms';
     GamesOverviewComponent,
     CourtItemComponent,
     GameCourtItemComponent,
+    CategoryBracketComponent,
+    EditPlayerComponent,
+    CreatePlayerComponent,
+    CreateSkilllevelComponent,
+    PlayerListComponent,
+    PlayerDetailComponent,
+    PlayerColumnComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     DashboardComponent,
@@ -47,7 +66,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PoolDetailComponent,
     EditTournamentComponent,
     TournamentDetailComponent,
-    TournamentOverviewComponent
+    TournamentOverviewComponent,
+    CategoryBracketComponent
   ],
   providers: [
     TournamentService

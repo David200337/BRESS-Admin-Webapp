@@ -1,6 +1,11 @@
-<div class="website-wrapper">
-    <app-navbar></app-navbar>
-    <main role="main">
-        <router-outlet></router-outlet>
-    </main>
-</div>
+<body>
+    <div class="website-wrapper">
+        <app-navbar></app-navbar>
+        <main role="main">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+    <div *ngIf="loaderToggle.showLoader" class="container">
+        <app-loader class="container-loader"></app-loader>
+    </div>
+</body>

@@ -1,5 +1,11 @@
+@import '../../../../styles.scss';
+
 .gamesHeader {
     margin: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-between;
 }
 
 .gamesBody {
@@ -18,7 +24,26 @@
     padding-bottom: 25px;
 }
 
+.courtItem {
+    margin-bottom: 25px;
+}
+
 .elementHeader {
     font-weight: 700;
     margin-bottom: 5px;
+}
+
+.scorePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 10px 30px black;
+    z-index: 11;
+}
+
+.visible {
+    display: block;
 }

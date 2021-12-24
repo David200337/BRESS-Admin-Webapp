@@ -2,16 +2,16 @@
     <div class="title-bar">
         <h1>Speeltoernooi beginners</h1>
         <div>
-            <button [routerLink]="['/dashboard']" class="button-dark">Terug</button>
+            <button [routerLink]="['../']" class="button-dark">Terug</button>
         </div>
     </div>
     <div class="categoryBar">
         <app-category-selector [categoryList]=categoryList (selectedCategoryEvent)="switchCategory($event)"></app-category-selector>
     </div>
     <div class="pools">
-        <div *ngFor="let i of [1,2,3]">
-            <a routerLink="./pool/A"><h3>Poule A</h3></a>
-            <app-pool-players-item></app-pool-players-item>
+        <div *ngFor="let pool of pools$ | async">
+            <a routerLink="{{categoryId}}/{{pool.id}}"><h3>Poule {{pool.id}}</h3></a>
+            <app-pool-players-item [pool]="pool"></app-pool-players-item>
         </div>
     </div>
 </div>

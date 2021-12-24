@@ -12,6 +12,8 @@ import { RegisterComponent } from './views/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './services/token.interceptor';
 import { DatePipe } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { DatePipe } from '@angular/common';
     AdminModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
+    BrowserAnimationsModule,
   ],
   exports: [],
   providers: [
@@ -34,4 +38,4 @@ import { DatePipe } from '@angular/common';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

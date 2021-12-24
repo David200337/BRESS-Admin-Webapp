@@ -1,0 +1,35 @@
+<div class="form-container">
+    <div class="form-sub-container">
+        <h1>Speler aanmaken</h1>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input id="name" formControlName="name" type="text" placeholder="Naam" />
+            </div>
+    
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" type="email" placeholder="Email" />
+            </div>
+
+            <div class="form-group">
+                <label for="skillLevel">Skill Level</label>
+                <select class="form-select" (change)="changeSkillLevel($event)" formControlName="skillLevel" [ngModel]="selectedSkillLevel.name">
+                    <option value="" disabled>Kies een skill level</option>
+                    <option *ngFor="let skillLevel of skillLevels" [ngValue]="skillLevel.name">{{skillLevel.name}}</option>
+                </select>
+            </div>
+        
+            <div class="form-group buttons">
+                <div>
+                    <button type="submit" class="button-dark">
+                        Sla op
+                    </button>
+                    <button [routerLink]="['..']" class="button-dark cancel">
+                        Annuleer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

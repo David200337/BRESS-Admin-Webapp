@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { of, Subscription, switchMap } from 'rxjs';
 import { Player } from 'src/app/models/player.model';
 import { Tournament } from 'src/app/models/tournament.model';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -29,8 +30,11 @@ export class EditTournamentComponent implements OnInit {
     private router: Router,
     private tournamentService: TournamentService,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe
-  ) {}
+    private datePipe: DatePipe,
+    private loaderToggle: LoaderToggleService
+  ) {
+    loaderToggle.loaderVisible();
+  }
 
   ngOnInit(): void {
     // Create formcontrols
@@ -65,9 +69,11 @@ export class EditTournamentComponent implements OnInit {
       next: (response: any) => {
         this.availablePlayers = response.result;
         this.filteredList = response.result;
+        this.loaderToggle.loaderInvisible();
       },
       error: (err) => {
         console.log(err);
+        this.loaderToggle.loaderInvisible();
       },
     });
   }
@@ -80,6 +86,7 @@ export class EditTournamentComponent implements OnInit {
 
   onSubmit(): void {
     if (this.tournament && this.form.valid) {
+      this.loaderToggle.loaderVisible();
       this.tournament.title = this.form.value.title
       this.tournament.beginDateTime = this.form.value.beginDateTime
       this.tournament.entryFee = this.form.value.entryFee
@@ -93,6 +100,7 @@ export class EditTournamentComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
+          this.loaderToggle.loaderInvisible();
         },
       });
 
