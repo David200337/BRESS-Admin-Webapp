@@ -19,11 +19,11 @@ export class CreatePlayerComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-        private route: ActivatedRoute,
+		private route: ActivatedRoute,
 		private playerService: PlayerService,
 		private formBuilder: FormBuilder,
 		private loaderToggle: LoaderToggleService,
-        private skillLevelService: SkillLevelService
+		private skillLevelService: SkillLevelService
 	) {}
 
 	ngOnInit(): void {
@@ -33,15 +33,15 @@ export class CreatePlayerComponent implements OnInit {
 			skillLevel: ["", Validators.required]
 		});
 
-        this.skillLevelService.getList().subscribe({
-            next: (skillLevels) => {                
-                this.skillLevels = skillLevels;
-            },
-            error: (err) => {
-                // TODO: Handle error
-                console.log(err);
-            }
-        });
+		this.skillLevelService.getList().subscribe({
+			next: (skillLevels) => {
+				this.skillLevels = skillLevels;
+			},
+			error: (err) => {
+				// TODO: Handle error
+				console.log(err);
+			}
+		});
 	}
 
 	changeSkillLevel(e: any) {
@@ -53,7 +53,7 @@ export class CreatePlayerComponent implements OnInit {
 		this.selectedSkillLevel = selectedSkillLevel[0];
 	}
 
-	onSubmit(): void {        
+	onSubmit(): void {
 		if (this.form.valid && this.selectedSkillLevel.id !== -1) {
 			this.loaderToggle.loaderVisible();
 			const player = new Player(
@@ -62,10 +62,11 @@ export class CreatePlayerComponent implements OnInit {
 				this.form.value.email,
 				0,
 				this.selectedSkillLevel
-			);            
+			);
 
 			this.playerService.add(player).subscribe({
 				next: (res) => {
+					this.loaderToggle.loaderInvisible();
 					this.router.navigate([".."], { relativeTo: this.route });
 				},
 				error: (err) => {

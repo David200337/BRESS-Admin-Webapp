@@ -113,6 +113,7 @@ export class EditPlayerComponent implements OnInit {
 
 			this.playerService.update(this.playerId, updatedPlayer).subscribe({
 				next: (res) => {
+					this.loaderToggle.loaderInvisible();
 					this.router.navigate([".."], { relativeTo: this.route });
 				},
 				error: (err) => {
