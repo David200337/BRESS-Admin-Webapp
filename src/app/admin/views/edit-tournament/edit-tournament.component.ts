@@ -56,7 +56,7 @@ export class EditTournamentComponent implements OnInit {
         }
       }),
       switchMap((response: any) => {
-        this.tournament = response.result;
+        this.tournament = response;
         this.form.setValue({
           title: this.tournament?.title,
           beginDateTime: this.datePipe.transform(this.tournament?.beginDateTime, 'yyyy-MM-dd'),
