@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EditGameService } from 'src/app/services/edit-game.service';
+import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 
 @Component({
   selector: 'app-edit-game',
@@ -11,7 +12,9 @@ export class EditGameComponent implements OnInit {
   playerScores!: number[][]
 
   constructor(
-    private editGame: EditGameService) {
+    private editGame: EditGameService,
+    private toggleLoader: LoaderToggleService
+  ) {
     this.playerScores = [[0, 0, 0], [0, 0, 0]]
   }
 
@@ -30,7 +33,10 @@ export class EditGameComponent implements OnInit {
   }
 
   onSubmit() {
+    this.toggleLoader.loaderVisible();
+
     let score: boolean[] = [];
+
     for (let i = 0; i < this.playerScores[0].length; i++) {
       score[i] = this.playerScores[0][i] === 1 ? true : false;
     }

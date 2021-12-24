@@ -245,6 +245,8 @@ export class CategoryBracketComponent implements OnInit {
         }
       })
     })
+
+    this.toggleLoader.loaderInvisible();
   }
 
 
