@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditTournamentComponent } from './edit-tournament.component';
+import { CreateSkilllevelComponent } from './create-skilllevel.component';
 
-describe('EditTournamentComponent', () => {
-  let component: EditTournamentComponent;
-  let fixture: ComponentFixture<EditTournamentComponent>;
+describe('CreateSkilllevelComponent', () => {
+  let component: CreateSkilllevelComponent;
+  let fixture: ComponentFixture<CreateSkilllevelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTournamentComponent ]
+      declarations: [ CreateSkilllevelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditTournamentComponent);
+    fixture = TestBed.createComponent(CreateSkilllevelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

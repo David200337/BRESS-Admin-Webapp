@@ -1,0 +1,18 @@
+<div class="courtWrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Speler 1</th>
+                <th>Speler 2</th>
+                <th>Baan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let game of games" (click)="onClick(game)"> 
+                <td>{{game.player1.name}}</td>
+                <td>{{game.player2.name}}</td>
+                <td>{{game.field?.name ?? "onbekend"}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

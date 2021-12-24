@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Tournament } from 'src/app/models/tournament.model';
 
 @Component({
   selector: 'app-tournament-item',
@@ -9,18 +10,9 @@ export class TournamentItemComponent implements OnInit {
   /**
    * @todo Implent domain model class
    */
-  title!: String;
-  date!: Date;
-  skillLevel!: String;
-  playerCount!: number;
-  playerMax!: number
+  @Input() tournament: Tournament | undefined = undefined
 
   constructor() {
-    this.title = "Speeltoernoei beginners"
-    this.date = new Date();
-    this.skillLevel = "Beginners"
-    this.playerCount = 18;
-    this.playerMax = 32;
    }
 
   ngOnInit(): void {

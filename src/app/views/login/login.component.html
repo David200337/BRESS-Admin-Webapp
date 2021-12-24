@@ -3,18 +3,53 @@
         <div class="formHeader">
             Inloggen
         </div>
-        <div class="formBody">
+        <form (ngSubmit)="onSubmit()" class="formBody" [formGroup]="form">
+            <div class="errorElement" *ngIf="errorMessage">
+                <small>
+                    {{errorMessage}}
+                </small>
+            </div>
+
             <div class="formElement">
-                Gebruikersnaam
-                <input placeholder="Gebruikersnaam"/>
+                Email
+                <div class="inputElement">
+                    <input formControlName="email" placeholder="Email" />
+                    <div *ngIf="
+                      (submitted && form.controls['email'].invalid) ||
+                      (form.controls['email'].invalid && form.controls['email'].dirty)
+                    " class="alert mb-0 p-0">
+                        <div class="errorElement">
+                            <small *ngIf="form.controls['email'].hasError('required')">
+                                Email is verplicht.
+                            </small>
+                            <small *ngIf="form.controls['email'].hasError('email')">
+                                Voer in een geldig email.
+                            </small>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="formElement">
                 Wachtwoord
-                <input type="password" placeholder="Wachtwoord"/>
+                <div class="inputElement">
+                    <input formControlName="password" type="password" placeholder="Wachtwoord" />
+                    <div *ngIf="
+                    (submitted && form.controls['password'].invalid) ||
+                    (form.controls['password'].invalid && form.controls['password'].dirty)
+                  " class="alert mb-0 p-0">
+                        <div class="errorElement">
+                            <small *ngIf="form.controls['password'].hasError('required')">
+                              Wachtwoord is verplicht.
+                          </small>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <p>Nog geen account? Registreer <a routerLink="/register">hier</a>.</p>
+
             <div class="formButtonGroup">
-                <button [routerLink]="['/dashboard']" class="button-dark">Log in</button>
+                <button type="submit" class="button-dark">Log in</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

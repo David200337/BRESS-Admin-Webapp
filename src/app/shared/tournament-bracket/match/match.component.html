@@ -1,0 +1,9 @@
+<div class="ngtt__match-wrapper">
+    <div class="ngtt__team-wrapper" [class.winner]="team.score >= 2" *ngFor="let team of match?.teams"
+        (click)="!team.gamePlayed && team.name != 'Not determined' && onClick(match?.id)"
+        [class.clickable]="!team.gamePlayed && team.name != 'Not determined'">
+        <!-- <div class="ngtt__team-avatar"></div> -->
+        <p class="ngtt__team-title">{{team?.name}}</p>
+        <div class="ngtt__team-score">{{team?.score}}</div>
+    </div>
+</div>

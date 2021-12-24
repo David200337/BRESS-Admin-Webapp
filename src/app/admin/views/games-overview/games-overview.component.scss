@@ -1,0 +1,49 @@
+@import '../../../../styles.scss';
+
+.gamesHeader {
+    margin: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+.gamesBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 50px;
+}
+
+.bodyColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 25px;
+    padding-bottom: 25px;
+}
+
+.courtItem {
+    margin-bottom: 25px;
+}
+
+.elementHeader {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.scorePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 10px 30px black;
+    z-index: 11;
+}
+
+.visible {
+    display: block;
+}
