@@ -7,6 +7,7 @@ import { Player } from 'src/app/models/player.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
+import { futureDateValidator } from 'src/app/shared/validation/validators';
 
 @Component({
   selector: 'app-edit-tournament',
@@ -14,6 +15,8 @@ import { TournamentService } from 'src/app/services/tournament.service';
   styleUrls: ['./edit-tournament.component.scss'],
 })
 export class EditTournamentComponent implements OnInit {
+  submitted: boolean = false;
+  errorMessage: string | undefined = undefined;
   tournamentId: number | undefined = undefined;
   tournament: Tournament | undefined = undefined;
   toBeRemoved: number[] = [];
@@ -40,9 +43,9 @@ export class EditTournamentComponent implements OnInit {
     // Create formcontrols
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
-      beginDateTime: ['', Validators.required],
-      maxPlayers: ['', Validators.required],
-      entryFee: ['', Validators.required],
+      beginDateTime: ['', [Validators.required, futureDateValidator()]],
+      maxPlayers: ['', [Validators.required, Validators.min(0)]],
+      entryFee: ['', [Validators.required, Validators.min(0)]],
     })
 
     // Get tournament details and available players
@@ -85,10 +88,10 @@ export class EditTournamentComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.submitted = true;
     if (this.tournament && this.form.valid) {
       this.loaderToggle.loaderVisible();
       this.tournament.title = this.form.value.title
-      this.tournament.beginDateTime = this.form.value.beginDateTime
       this.tournament.entryFee = this.form.value.entryFee
       this.tournament.maxPlayers = this.form.value.maxPlayers
       
@@ -99,7 +102,11 @@ export class EditTournamentComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
-          console.log(err);
+          if (err.status === 401) {
+            this.errorMessage = "U bent niet ingelogd of bevoegd."
+          } else if (err.status === 500) {
+            this.errorMessage = "Server kan aanvraag niet verwerken."
+          }
           this.loaderToggle.loaderInvisible();
         },
       });
@@ -121,7 +128,7 @@ export class EditTournamentComponent implements OnInit {
             console.log("unsubscribe")
           })
       }
-
+      this.submitted = false;
     } else {
       return
     }
