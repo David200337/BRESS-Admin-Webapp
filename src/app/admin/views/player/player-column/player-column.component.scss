@@ -3,7 +3,6 @@
 .overviewWrapper {
 	display: flex;
 	flex-direction: column;
-
 	padding-bottom: 25px;
 }
 
@@ -15,6 +14,10 @@
 	flex-wrap: wrap;
 
 	margin-block: 50px;
+}
+
+button {
+    margin-left: 20px;
 }
 
 .overviewBody {

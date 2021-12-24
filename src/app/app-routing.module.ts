@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: "tournament/:id/edit-tournament", pathMatch: "full", component: EditTournamentComponent },
   { path: "tournament/:id/score-overview/:categoryId/:poolId", pathMatch: "full", component: PoolDetailComponent },
   { path: "tournament/:tournamentId/bracket", pathMatch: "full", component: CategoryBracketComponent },
-  { path: "create-player", pathMatch: "full", component: CreatePlayerComponent },
+  { path: "players/create", pathMatch: "full", component: CreatePlayerComponent },
   { path: "players/:id/edit", pathMatch: "full", component: EditPlayerComponent },
   { path: "svg", pathMatch: "full", component: LoaderComponent },
   { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent },

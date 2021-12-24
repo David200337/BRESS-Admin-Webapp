@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Player } from "src/app/models/player.model";
 import { SkillLevel } from "src/app/models/skillLevel.model";
 import { LoaderToggleService } from "src/app/services/loader-toggle.service";
@@ -19,6 +19,7 @@ export class CreatePlayerComponent implements OnInit {
 
 	constructor(
 		private router: Router,
+        private route: ActivatedRoute,
 		private playerService: PlayerService,
 		private formBuilder: FormBuilder,
 		private loaderToggle: LoaderToggleService,
@@ -65,8 +66,7 @@ export class CreatePlayerComponent implements OnInit {
 
 			this.playerService.add(player).subscribe({
 				next: (res) => {
-					console.log("RESPONSE: " + JSON.stringify(res));
-					this.router.navigate(["dashboard"]);
+					this.router.navigate([".."], { relativeTo: this.route });
 				},
 				error: (err) => {
 					console.log(err);
