@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table'
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { TournamentItemComponent } from './shared/tournament-item/tournament-item.component';
 import { CreateTournamentComponent } from './views/create-tournament/create-tournament.component';
@@ -23,6 +24,9 @@ import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skil
 import { PlayerListComponent } from './views/player/player-list/player-list.component';
 import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
 import { PlayerColumnComponent } from './views/player/player-column/player-column.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { PlayerColumnComponent } from './views/player/player-column/player-colum
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     DashboardComponent,

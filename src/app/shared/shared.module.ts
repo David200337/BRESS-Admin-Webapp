@@ -16,14 +16,14 @@ import { LoaderComponent } from './loader/loader.component';
     LoaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     PoolGamesItemComponent,
     PoolPlayersItemComponent,
     SingleEliminationTreeComponent,
     MatchComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
 })
 export class SharedModule { }
