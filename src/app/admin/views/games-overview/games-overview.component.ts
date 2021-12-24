@@ -90,8 +90,11 @@ export class GamesOverviewComponent implements OnInit {
 
   refreshGames() {
     console.log("refresh games");
-  
     this.loaderToggle.loaderVisible();
+    this.games = [];
+    this.activeGames = [];
+    this.futureGames = [];
+    
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
