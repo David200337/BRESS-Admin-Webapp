@@ -156,7 +156,7 @@ export class CategoryBracketComponent implements OnInit {
         return this.tournamentService.get(tournamentId);
       })
     ).subscribe((result: any) => {
-      this.tournament = result.result;
+      this.tournament = result;
       this.categoryList = this.tournament.categories;
       this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
       this.editGame.tournamentId = this.tournament.id
