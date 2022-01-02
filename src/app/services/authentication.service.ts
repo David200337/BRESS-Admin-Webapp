@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
   protected readonly APIUrl = "https://bress-api.azurewebsites.net/api";
 
   public login(email: string, password: string): Observable<any> {
@@ -45,10 +45,17 @@ export class AuthenticationService {
   }
 
   public isLoggedIn(): boolean {
-    return (
-      this.getCurrentUser().expireDate &&
-      new Date(this.getCurrentUser().expireDate) < new Date()
-    );
+    if (this.getCurrentUser().expireDate != undefined) {
+      return new Date(this.getCurrentUser().expireDate) > new Date();
+    } else {
+      return false;
+    }
+  }
+
+  public logOut(): any {
+    localStorage.removeItem('user');
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
   }
 
   // TODO: Review for possible changes
