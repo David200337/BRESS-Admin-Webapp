@@ -58,6 +58,12 @@ a:visited {
 
 .button-light:hover {
     background-color: $orange-dark-hover;
+    cursor: pointer;
+}
+
+.button-light:disabled {
+    background-color: $black-bg-hover;
+    cursor:not-allowed;
 }
 
 .button-dark {
@@ -73,6 +79,12 @@ a:visited {
 
 .button-dark:hover {
     background-color: $black-bg-hover;
+    cursor: pointer;
+}
+
+.button-dark:disabled {
+    background-color: $black-bg-hover;
+    cursor:not-allowed;
 }
 
 input,

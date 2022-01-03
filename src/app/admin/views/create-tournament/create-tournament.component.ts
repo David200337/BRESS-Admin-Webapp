@@ -27,7 +27,7 @@ export class CreateTournamentComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      title: ['', Validators.required], 
+      title: ['', Validators.required],
       beginDateTime: ['', [Validators.required, futureDateValidator()]],
       maxPlayers: ['', [Validators.required, Validators.min(0)]],
       entryFee: ['', [Validators.required, Validators.min(0)]],
@@ -47,7 +47,8 @@ export class CreateTournamentComponent implements OnInit {
         0,
         0,
         [],
-        []
+        [],
+        false
       );
 
       this.tournamentService.add(tournament).subscribe({
