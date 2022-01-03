@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { concat, map, switchMap, tap } from 'rxjs';
-import { Field } from 'src/app/models/field.model';
+import { concat, tap } from 'rxjs';
 import { Game } from 'src/app/models/game.model';
-import { Player } from 'src/app/models/player.model';
-import { SkillLevel } from 'src/app/models/skillLevel.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
@@ -31,16 +28,14 @@ export class GamesOverviewComponent implements OnInit {
     public editGameService: EditGameService,
     private route: ActivatedRoute,
     private loaderToggle: LoaderToggleService,
-  ) { 
+  ) {
     this.showPopup = false;
     loaderToggle.loaderVisible();
   }
 
   ngOnInit(): void {
-    this.games = [];
-    this.activeGames = [];
-    this.futureGames = [];
-  
+    let gamesList: Game[] = [];
+
     this.route.params.subscribe(params => {
       this.tournamentId = params['id'];
     });
@@ -51,12 +46,13 @@ export class GamesOverviewComponent implements OnInit {
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
     ).pipe(
-      tap(g => console.info(g)),
-      tap(g => this.games.push(...g)),
-      tap(() => console.info(this.games)),
-      tap(() => this.sortGames(this.games)),
+      tap(g => gamesList.push(...g)),
+      tap(() => this.sortGames(gamesList)),
     ).subscribe()
-    .add(() => this.loaderToggle.loaderInvisible());
+      .add(() => {
+        this.games = gamesList;
+        this.loaderToggle.loaderInvisible();
+      });
   }
 
   /**
@@ -65,10 +61,9 @@ export class GamesOverviewComponent implements OnInit {
    * sort the provided games array into started games, the next game and all future games
    */
   sortGames(games: Game[]) {
-    console.log(games);
     let sortedActive: Game[] = [];
     let sortedFuture: Game[] = [];
-    
+
     games.forEach(g => {
       if (!g.score) {
         if (g.field) {
@@ -81,7 +76,6 @@ export class GamesOverviewComponent implements OnInit {
     this.activeGames = sortedActive;
     this.futureGames = sortedFuture;
     this.nextGame = [this.futureGames.shift()!];
-    console.info(this.activeGames);
   }
 
   selectGame(game: Game) {
@@ -89,21 +83,20 @@ export class GamesOverviewComponent implements OnInit {
   }
 
   refreshGames() {
-    console.log("refresh games");
     this.loaderToggle.loaderVisible();
-    this.games = [];
-    this.activeGames = [];
-    this.futureGames = [];
-    
+
+    let gameList: Game[] = [];
+
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
     ).pipe(
-      tap(g => console.info(g)),
-      tap(g => this.games.push(...g)),
-      tap(() => console.info(this.games)),
-      tap(() => this.sortGames(this.games)),
+      tap(g => gameList.push(...g)),
+      tap(() => this.sortGames(gameList)),
     ).subscribe()
-    .add(() => this.loaderToggle.loaderInvisible());
+      .add(() => {
+        this.games = gameList;
+        this.loaderToggle.loaderInvisible();
+      });
   }
 }
