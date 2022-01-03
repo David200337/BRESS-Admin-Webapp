@@ -247,6 +247,19 @@ export class CategoryBracketComponent implements OnInit {
     })
 
     this.toggleLoader.loaderInvisible();
+
+    this.route.paramMap.pipe(
+      switchMap((params) => {
+        const tournamentId = +params.get("tournamentId")!;
+
+        return this.tournamentService.get(tournamentId);
+      })
+    ).subscribe((result: any) => {
+      this.tournament = result;
+      this.categoryList = this.tournament.categories;
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
+      this.editGame.tournamentId = this.tournament.id
+    });
   }
 
 
