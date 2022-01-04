@@ -138,6 +138,7 @@ export class CategoryBracketComponent implements OnInit {
   public tournament: any = {};
   public categoryList: Category[] = [];
   public selectedCategoryIndex: number = 0;
+  public hasFinales = false;
 
   constructor(
     private tournamentService: TournamentService,
@@ -152,7 +153,6 @@ export class CategoryBracketComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params) => {
         const tournamentId = +params.get("tournamentId")!;
-
         return this.tournamentService.get(tournamentId);
       })
     ).subscribe((result: any) => {
@@ -164,16 +164,17 @@ export class CategoryBracketComponent implements OnInit {
   }
 
   createBracket(categoryId: number): void {
-
     let category: any = {};
     this.tournament.categories.forEach((cat: any) => {
       if (cat.id == categoryId) {
         category = cat;
       }
     })
-    category.rounds.forEach((item: any) => {
 
+    let hasFinales = false;
+    category.rounds.forEach((item: any) => {
       if (!item.isPoolRound) {
+        hasFinales = true;
         this.myTournamentData.rounds.forEach((round: any) => {
 
           if (item.games.length === round.matches.length) {
@@ -193,18 +194,21 @@ export class CategoryBracketComponent implements OnInit {
       }
     });
 
-
-    let newlist = [];
-    let isFirst: boolean = true;
-    for (let i = 0; i < this.myTournamentData.rounds.length; i++) {
-      if (this.myTournamentData.rounds[i].matches[0].teams[0].name != 'Not determined') {
-        newlist.push(this.myTournamentData.rounds[i]);
-        isFirst = false;
-      } else if (!isFirst) {
-        newlist.push(this.myTournamentData.rounds[i]);
+    if (hasFinales) {
+      let newlist = [];
+      let isFirst: boolean = true;
+      for (let i = 0; i < this.myTournamentData.rounds.length; i++) {
+        if (this.myTournamentData.rounds[i].matches[0].teams[0].name != 'Not determined') {
+          newlist.push(this.myTournamentData.rounds[i]);
+          isFirst = false;
+        } else if (!isFirst) {
+          newlist.push(this.myTournamentData.rounds[i]);
+        }
       }
+      this.myTournamentData = { rounds: newlist };
     }
-    this.myTournamentData = { rounds: newlist };
+
+    this.hasFinales = hasFinales;
     this.toggleLoader.loaderInvisible();
   }
 
@@ -247,6 +251,18 @@ export class CategoryBracketComponent implements OnInit {
     })
 
     this.toggleLoader.loaderInvisible();
+
+    this.route.paramMap.pipe(
+      switchMap((params) => {
+        const tournamentId = +params.get("tournamentId")!;
+        return this.tournamentService.get(tournamentId);
+      })
+    ).subscribe((result: any) => {
+      this.tournament = result;
+      this.categoryList = this.tournament.categories;
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
+      this.editGame.tournamentId = this.tournament.id
+    });
   }
 
 

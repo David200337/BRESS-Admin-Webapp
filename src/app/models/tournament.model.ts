@@ -11,6 +11,7 @@ export class Tournament extends GenericModel {
 	public idealPoolSize: number;
 	public categories: Category[];
 	public players: Player[];
+	public hasStarted: boolean;
 
 	constructor(
 		id: number,
@@ -21,7 +22,8 @@ export class Tournament extends GenericModel {
 		minPlayers: number,
 		idealPoolSize: number,
 		categories: Category[],
-		players: Player[]
+		players: Player[],
+		hasStarted: boolean
 	) {
 		super(id);
 		this.title = title;
@@ -32,5 +34,6 @@ export class Tournament extends GenericModel {
 		this.idealPoolSize = idealPoolSize;
 		this.categories = categories;
 		this.players = players;
+		this.hasStarted = hasStarted;
 	}
 }
