@@ -38,11 +38,20 @@ export class EditGameComponent implements OnInit {
     let score: boolean[] = [];
 
     for (let i = 0; i < this.playerScores[0].length; i++) {
-      score[i] = this.playerScores[0][i] === 1 ? true : false;
+      if (this.playerScores[0][i] === 1) {
+        score[i] = true;
+      }
     }
+
+    for (let i = 0; i < this.playerScores[1].length; i++) {
+      if (this.playerScores[1][i] === 1) {
+        score[i] = false;
+      }
+    }
+    console.log(score);
     this.editGame.enterScore(score).subscribe((res) => {
       console.log(res);
-      
+
       this.sumbitEvent.emit({ id: this.editGame.gameId, score: score });
     });
 
