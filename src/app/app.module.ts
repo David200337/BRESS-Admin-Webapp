@@ -14,6 +14,11 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { DatePipe } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { AngularFireModule } from '@angular/fire/compat';
+import { MessagingService } from './services/messaging.service';
+
 
 @NgModule({
   declarations: [
@@ -30,11 +35,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     SharedModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule
   ],
   exports: [],
   providers: [
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    MessagingService
   ],
   bootstrap: [AppComponent],
 })

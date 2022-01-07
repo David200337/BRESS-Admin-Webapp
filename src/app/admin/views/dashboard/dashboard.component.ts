@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   ) { loaderToggle.loaderVisible() }
 
   ngOnInit(): void {
+
     this.tournamentService.getList().subscribe({
       next: (response: any) => {
         this.tournaments = response;

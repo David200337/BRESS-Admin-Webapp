@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { FirebaseApp } from '@angular/fire/app';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { getMessaging, onMessage } from 'firebase/messaging';
 import { LoaderToggleService } from './services/loader-toggle.service';
-import { Tournament } from './shared/tournament-bracket/declarations/interfaces';
+import { MessagingService } from './services/messaging.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,16 @@ import { Tournament } from './shared/tournament-bracket/declarations/interfaces'
 export class AppComponent implements OnInit {
 
   title = 'bress-admin-webapp';
+  message: any;
 
-  constructor(public loaderToggle: LoaderToggleService) { }
+  constructor(public loaderToggle: LoaderToggleService, private messagingService: MessagingService) { }
 
   ngOnInit(): void {
+    this.messagingService.requestPermission();
+    this.messagingService.receiveMessage
+    this.message = this.messagingService.currentMessage
+
   }
+
+
 }
