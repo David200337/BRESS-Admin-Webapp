@@ -23,6 +23,8 @@ export class GamesOverviewComponent implements OnInit {
   selectedGame: Game | undefined;
   showPopup: boolean;
 
+  interval: any;
+
   constructor(
     private tournamentService: TournamentService,
     public editGameService: EditGameService,
@@ -52,7 +54,14 @@ export class GamesOverviewComponent implements OnInit {
       .add(() => {
         this.games = gamesList;
         this.loaderToggle.loaderInvisible();
+        this.startRefresh()
       });
+  }
+
+  startRefresh() {
+    this.interval = setInterval(() => {
+      this.refreshGames()
+    }, 10000);
   }
 
   /**
@@ -83,8 +92,6 @@ export class GamesOverviewComponent implements OnInit {
   }
 
   refreshGames() {
-    this.loaderToggle.loaderVisible();
-
     let gameList: Game[] = [];
 
     concat(
@@ -96,7 +103,6 @@ export class GamesOverviewComponent implements OnInit {
     ).subscribe()
       .add(() => {
         this.games = gameList;
-        this.loaderToggle.loaderInvisible();
       });
   }
 }
