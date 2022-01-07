@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { concat, tap } from 'rxjs';
 import { Game } from 'src/app/models/game.model';
@@ -12,7 +12,7 @@ import { TournamentService } from 'src/app/services/tournament.service';
   templateUrl: './games-overview.component.html',
   styleUrls: ['./games-overview.component.scss']
 })
-export class GamesOverviewComponent implements OnInit {
+export class GamesOverviewComponent implements OnInit, OnDestroy {
   tournamentId!: number;
   tournament!: Tournament
   games!: Game[];
@@ -38,7 +38,7 @@ export class GamesOverviewComponent implements OnInit {
   ngOnInit(): void {
     let gamesList: Game[] = [];
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: any) => {
       this.tournamentId = params['id'];
     });
 
@@ -56,6 +56,10 @@ export class GamesOverviewComponent implements OnInit {
         this.loaderToggle.loaderInvisible();
         this.startRefresh()
       });
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.interval)
   }
 
   startRefresh() {
@@ -85,6 +89,7 @@ export class GamesOverviewComponent implements OnInit {
     this.activeGames = sortedActive;
     this.futureGames = sortedFuture;
     this.nextGame = [this.futureGames.shift()!];
+    this.games = games;
   }
 
   selectGame(game: Game) {
@@ -98,11 +103,9 @@ export class GamesOverviewComponent implements OnInit {
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
     ).pipe(
-      tap(g => gameList.push(...g)),
-      tap(() => this.sortGames(gameList)),
-    ).subscribe()
-      .add(() => {
-        this.games = gameList;
-      });
+      tap(g => gameList.push(...g))
+    ).subscribe().add(() => {
+      this.sortGames(gameList)
+    })
   }
 }
