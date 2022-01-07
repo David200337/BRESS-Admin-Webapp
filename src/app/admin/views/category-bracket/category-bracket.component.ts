@@ -135,10 +135,13 @@ export class CategoryBracketComponent implements OnInit {
     ],
   };
 
+
+
   public tournament: any = {};
   public categoryList: Category[] = [];
   public selectedCategoryIndex: number = 0;
   public hasFinales = false;
+  public interval: any;
 
   constructor(
     private tournamentService: TournamentService,
@@ -151,16 +154,32 @@ export class CategoryBracketComponent implements OnInit {
     this.toggleLoader.loaderVisible();
     this.hideGameEdit()
     this.route.paramMap.pipe(
-      switchMap((params) => {
+      switchMap((params: any) => {
         const tournamentId = +params.get("tournamentId")!;
         return this.tournamentService.get(tournamentId);
       })
     ).subscribe((result: any) => {
       this.tournament = result;
       this.categoryList = this.tournament.categories;
-      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
       this.editGame.tournamentId = this.tournament.id
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
+      this.startRefresh()
     });
+  }
+
+  startRefresh() {
+    this.refreshData();
+    this.interval = setInterval(() => {
+      console.log("refresh")
+      this.refreshData();
+    }, 10000);
+  }
+
+  refreshData() {
+    this.tournamentService.get(this.tournament.id).subscribe((result) => {
+      this.tournament = result;
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
+    })
   }
 
   createBracket(categoryId: number): void {
@@ -253,7 +272,7 @@ export class CategoryBracketComponent implements OnInit {
     this.toggleLoader.loaderInvisible();
 
     this.route.paramMap.pipe(
-      switchMap((params) => {
+      switchMap((params: any) => {
         const tournamentId = +params.get("tournamentId")!;
         return this.tournamentService.get(tournamentId);
       })
