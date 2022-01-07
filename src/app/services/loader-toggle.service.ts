@@ -9,12 +9,10 @@ export class LoaderToggleService {
   constructor() { }
 
   loaderVisible() {
-    console.log('show loader')
     this.showLoader = true;
   }
 
   loaderInvisible() {
-    console.log('unshow loader')
     this.showLoader = false;
   }
 }
