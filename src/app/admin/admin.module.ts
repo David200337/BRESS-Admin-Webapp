@@ -27,6 +27,7 @@ import { PlayerColumnComponent } from './views/player/player-column/player-colum
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateFieldComponent } from './views/create-field/create-field.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatInputModule } from '@angular/material/input';
     PlayerListComponent,
     PlayerDetailComponent,
     PlayerColumnComponent,
+    CreateFieldComponent,
   ],
   imports: [
     CommonModule,
