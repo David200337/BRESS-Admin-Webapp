@@ -29,6 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateFieldComponent } from './views/create-field/create-field.component';
 import { FieldListComponent } from './views/field/field-list/field-list.component';
+import { EditFieldComponent } from './views/edit-field/edit-field.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { FieldListComponent } from './views/field/field-list/field-list.componen
     PlayerColumnComponent,
     CreateFieldComponent,
     FieldListComponent,
+    EditFieldComponent,
   ],
   imports: [
     CommonModule,
