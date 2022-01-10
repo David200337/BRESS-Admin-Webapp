@@ -44,6 +44,9 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
 
     this.editGameService.tournamentId = this.tournamentId;
 
+    this.tournamentService.get(this.tournamentId)
+        .subscribe(res => this.tournament = res)
+
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
