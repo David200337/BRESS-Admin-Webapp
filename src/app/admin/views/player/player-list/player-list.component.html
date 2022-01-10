@@ -8,7 +8,7 @@
 		<!-- Name column -->
 		<ng-container matColumnDef="name">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header>Naam</th>
-			<td mat-cell *matCellDef="let player" routerLink="{{ player.id }}">
+			<td mat-cell *matCellDef="let player" [routerLink]="['../players/' + player.id]">
 				<div>
 					<p>{{ player.name }}</p>
 					<button (click)="onDelete(player.id)">

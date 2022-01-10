@@ -10,3 +10,17 @@
 .buttonGroup {
     margin-top: 50px;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 100px;
+}
+
+.container-item {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
