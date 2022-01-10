@@ -44,4 +44,22 @@ export class FieldListComponent implements OnInit {
 		}
 	}
 
+  
+
+	public onDelete(id: number): void {
+		this.fieldService.delete(id).subscribe({
+			next: (res) => {
+				if (res.result === "Success") {
+          // TODO: Fix refresh on table when item removed
+          this.dataSource.data = this.dataSource.data.filter((f) => f.id !== id);
+					alert("Veld/zaal successvol verwijderd.");
+				}
+			},
+			error: (err) => {
+				// TODO: Handle error
+				console.log(err);
+			}
+		});
+	}
+
 }

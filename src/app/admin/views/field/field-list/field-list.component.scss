@@ -1,3 +1,26 @@
 .mat-paginator-container {
     width: 0;
 }
+
+table {
+    border: none;
+    width: 100%;
+    tr {
+        cursor: pointer;
+    }
+}
+
+.table-cell-container {
+    display: flex;
+    button {
+        margin-left: auto;
+        border: none;
+        background: none;
+        margin: auto 0 auto auto;
+        cursor: pointer;
+    }
+}
+
+input {
+    border-radius: 0;
+}
