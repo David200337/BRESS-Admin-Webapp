@@ -8,44 +8,44 @@
     <div class="overviewBody">
         <div class="overviewBodyCollumn">
             <div class="overviewBodyElement">
-                <button [routerLink]="['edit-tournament']" class="button-light button-long">
+                <button [routerLink]="['edit-tournament']" class="button-light button-long" [disabled]="canStart">
                     Toernooi bewerken
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div [routerLink]="['score-overview']" class="overviewBodyElement">
-                <button class="button-light button-long">
+                <button class="button-light button-long" [disabled]="!canStart">
                     Pouleoverzicht
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div [routerLink]="['bracket']" class="overviewBodyElement">
-                <button class="button-light button-long">
+                <button class="button-light button-long" [disabled]="!canStart">
                     Finaleoverzicht
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div class="overviewBodyElement">
-                <button [routerLink]="['games']" class="button-light button-long">
+                <button [routerLink]="['games']" class="button-light button-long" [disabled]="!canStart">
                     Wedstrijdoverzicht
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div class="overviewBodyElement">
-                <button [routerLink]="['']" class="button-light button-long">
+                <button [routerLink]="['']" class="button-light button-long" [disabled]="!canStart">
                     Live tussenstand
                     <img src="../../../../assets/images/chevron-right.svg">
                 </button>
             </div>
             <div class="overviewBodyElement">
                 <div class="overViewBodyButtonGroup">
-                    <button class="button-light">
+                    <button class="button-light" [disabled]="canStart" (click)="startTournament()">
                         Toernooi starten
                     </button>
-                    <button class="button-dark">
+                    <button *ngIf="false" class="button-dark" disabled>
                         Toernooi beëindigen
                     </button>
-                    <button type="button" (click)="deleteTournament()" class="button-light">
+                    <button type="button" [disabled]="canStart" (click)="deleteTournament()" class="button-light">
                         Toernooi verwijderen
                     </button>
                 </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
 import { Tournament } from 'src/app/models/tournament.model';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
+import { RpcService } from 'src/app/services/rpc.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
@@ -14,12 +15,14 @@ export class TournamentOverviewComponent implements OnInit {
   tournamentId!: number;
   tournament: Tournament | undefined = undefined;
   sub!: Subscription
+  canStart: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private tournamentService: TournamentService,
-    private loaderToggle: LoaderToggleService
+    private loaderToggle: LoaderToggleService,
+    private rpcService: RpcService
   ) {
     loaderToggle.loaderVisible();
   }
@@ -35,6 +38,7 @@ export class TournamentOverviewComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.tournament = response;
+          this.canStart = this.tournament!.hasStarted;
           this.loaderToggle.loaderInvisible();
         },
         error: (err) => {
@@ -63,5 +67,13 @@ export class TournamentOverviewComponent implements OnInit {
         }
       })
     }
+  }
+
+  startTournament(): void {
+    this.loaderToggle.loaderVisible();
+    this.rpcService.startTournament(this.tournamentId).subscribe((res) => {
+      this.canStart = true;
+      this.loaderToggle.loaderInvisible();
+    });
   }
 }

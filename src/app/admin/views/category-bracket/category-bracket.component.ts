@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
@@ -13,7 +13,7 @@ import { Tournament } from 'src/app/shared/tournament-bracket/declarations/inter
   templateUrl: './category-bracket.component.html',
   styleUrls: ['./category-bracket.component.scss']
 })
-export class CategoryBracketComponent implements OnInit {
+export class CategoryBracketComponent implements OnInit, OnDestroy {
 
   myTournamentData: Tournament = {
     rounds: [
@@ -135,9 +135,13 @@ export class CategoryBracketComponent implements OnInit {
     ],
   };
 
+
+
   public tournament: any = {};
   public categoryList: Category[] = [];
   public selectedCategoryIndex: number = 0;
+  public hasFinales = false;
+  public interval: any;
 
   constructor(
     private tournamentService: TournamentService,
@@ -150,30 +154,49 @@ export class CategoryBracketComponent implements OnInit {
     this.toggleLoader.loaderVisible();
     this.hideGameEdit()
     this.route.paramMap.pipe(
-      switchMap((params) => {
+      switchMap((params: any) => {
         const tournamentId = +params.get("tournamentId")!;
-
         return this.tournamentService.get(tournamentId);
       })
     ).subscribe((result: any) => {
       this.tournament = result;
       this.categoryList = this.tournament.categories;
-      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
       this.editGame.tournamentId = this.tournament.id
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
+      this.startRefresh()
     });
   }
 
-  createBracket(categoryId: number): void {
+  ngOnDestroy(): void {
+    clearInterval(this.interval)
+  }
 
+  startRefresh() {
+    this.refreshData();
+    this.interval = setInterval(() => {
+      this.refreshData();
+    }, 10000);
+  }
+
+  refreshData() {
+    this.tournamentService.get(this.tournament.id).subscribe((result) => {
+      this.tournament = result;
+      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
+    })
+  }
+
+  createBracket(categoryId: number): void {
     let category: any = {};
     this.tournament.categories.forEach((cat: any) => {
       if (cat.id == categoryId) {
         category = cat;
       }
     })
-    category.rounds.forEach((item: any) => {
 
+    let hasFinales = false;
+    category.rounds.forEach((item: any) => {
       if (!item.isPoolRound) {
+        hasFinales = true;
         this.myTournamentData.rounds.forEach((round: any) => {
 
           if (item.games.length === round.matches.length) {
@@ -193,60 +216,28 @@ export class CategoryBracketComponent implements OnInit {
       }
     });
 
-
-    let newlist = [];
-    let isFirst: boolean = true;
-    for (let i = 0; i < this.myTournamentData.rounds.length; i++) {
-      if (this.myTournamentData.rounds[i].matches[0].teams[0].name != 'Not determined') {
-        newlist.push(this.myTournamentData.rounds[i]);
-        isFirst = false;
-      } else if (!isFirst) {
-        newlist.push(this.myTournamentData.rounds[i]);
+    if (hasFinales) {
+      let newlist = [];
+      let isFirst: boolean = true;
+      for (let i = 0; i < this.myTournamentData.rounds.length; i++) {
+        if (this.myTournamentData.rounds[i].matches[0].teams[0].name != 'Not determined') {
+          newlist.push(this.myTournamentData.rounds[i]);
+          isFirst = false;
+        } else if (!isFirst) {
+          newlist.push(this.myTournamentData.rounds[i]);
+        }
       }
+      this.myTournamentData = { rounds: newlist };
     }
-    this.myTournamentData = { rounds: newlist };
+
+    this.hasFinales = hasFinales;
     this.toggleLoader.loaderInvisible();
   }
 
   updateGameScore(game: any) {
-    console.log(game)
-    this.myTournamentData.rounds.forEach((round) => {
-      round.matches.forEach((match) => {
-        if (match.id == game.id) {
-          let player1 = 0;
-          let player2 = 0;
-          game.score.forEach((set: boolean) => {
-            if (set) {
-              player1++;
-            } else {
-              player2++;
-            }
-          })
-          match.teams[0].score = player1;
-          match.teams[1].score = player2;
-        }
-      })
-    })
-    this.myTournamentData = { rounds: this.myTournamentData.rounds };
-
-    this.tournament.categories[this.selectedCategoryIndex].rounds.forEach((round: any) => {
-      round.games.forEach((match: any) => {
-        if (match.id == game.id) {
-          let player1 = 0;
-          let player2 = 0;
-          game.score.forEach((set: boolean) => {
-            if (set) {
-              player1++;
-            } else {
-              player2++;
-            }
-          })
-          match.score = player1 + ' - ' + player2;
-        }
-      })
-    })
-
     this.toggleLoader.loaderInvisible();
+
+    this.refreshData()
   }
 
 

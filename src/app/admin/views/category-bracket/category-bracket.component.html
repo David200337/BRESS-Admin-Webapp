@@ -9,19 +9,22 @@
                 <button class="button-dark" routerLink="..">Terug</button>
             </div>
         </div>
-        <div class="bracket-category" *ngIf="categoryList.length != 0">
+        <div class="bracket-category" *ngIf="categoryList.length != 0 && hasFinales">
             <div class="categoryBar bracket-category-selector">
                 <app-category-selector [categoryList]=categoryList (selectedCategoryEvent)="switchCategory($event)">
                 </app-category-selector>
             </div>
         </div>
-        <div class="bracket-visual" *ngIf="categoryList.length != 0">
+        <div class="bracket-visual" *ngIf="categoryList.length != 0 && hasFinales">
             <app-single-elimination-tree [tournament]="myTournamentData" [matchTemplate]="myMatchTemplate">
             </app-single-elimination-tree>
 
             <ng-template #myMatchTemplate let-match>
                 <app-match [match]="match"></app-match>
             </ng-template>
+        </div>
+        <div class="bracket-no-finales" *ngIf="!hasFinales">
+            <h3>Er zijn nog geen finales. Maak eerst de poule ronde af.</h3>
         </div>
     </div>
 

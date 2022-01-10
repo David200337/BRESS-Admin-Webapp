@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: "https://bress-api.azurewebsites.net/api"
+  production: false
 };
 
 /*

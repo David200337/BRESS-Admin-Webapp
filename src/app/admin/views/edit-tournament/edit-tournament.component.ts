@@ -43,7 +43,7 @@ export class EditTournamentComponent implements OnInit {
     // Create formcontrols
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
-      beginDateTime: ['', [Validators.required, futureDateValidator()]],
+      beginDateTime: ['', [Validators.required]],
       maxPlayers: ['', [Validators.required, Validators.min(0)]],
       entryFee: ['', [Validators.required, Validators.min(0)]],
     })
