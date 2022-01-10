@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryBracketComponent } from './admin/views/category-bracket/category-bracket.component';
-import { CreatePlayerComponent } from './admin/views/create-player/create-player.component';
+import { CreatePlayerComponent } from './admin/views/player/create-player/create-player.component';
 import { CreateSkilllevelComponent } from './admin/views/create-skilllevel/create-skilllevel.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
 import { DashboardComponent } from './admin/views/dashboard/dashboard.component';
@@ -34,15 +34,8 @@ const routes: Routes = [
   { path: "tournament/:id/live-score", pathMatch: "full", component: LiveScoreComponent, canActivate: [AuthGuard] },
   { path: "players/create", pathMatch: "full", component: CreatePlayerComponent, canActivate: [AuthGuard] },
   { path: "players/:id/edit", pathMatch: "full", component: EditPlayerComponent, canActivate: [AuthGuard] },
-  { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] },
-  {
-    path: "players",
-    component: PlayerColumnComponent,
-    children: [
-      { path: ":id", pathMatch: "full", component: PlayerDetailComponent }
-    ],
-    canActivate: [AuthGuard]
-  }
+  { path: "players/:id", pathMatch: "full", component: PlayerDetailComponent, canActivate: [AuthGuard] },
+  { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
