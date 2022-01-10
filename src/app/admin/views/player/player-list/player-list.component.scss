@@ -23,5 +23,13 @@ table {
 }
 
 input {
-    border-radius: 0;
+	border-radius: 0;
+}
+
+.overviewHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 25px;
+	flex-wrap: wrap;
 }
