@@ -2,6 +2,11 @@
     <div class="buttonGroup">
         <button [routerLink]="['/create-tournament']" class="button-light">Maak een toernooi aan</button>
     </div>
+
+    <div class="buttonGroup">
+        <button [routerLink]="['/create-field']" class="button-light">Voeg een zaal of veld toe</button>
+    </div>
+
     <div class="tournamentList">
         <app-tournament-item [tournament]="i" class="tournamentItem" *ngFor="let i of tournaments"></app-tournament-item>
     </div>

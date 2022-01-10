@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryBracketComponent } from './admin/views/category-bracket/category-bracket.component';
+import { CreateFieldComponent } from './admin/views/create-field/create-field.component';
 import { CreatePlayerComponent } from './admin/views/create-player/create-player.component';
 import { CreateSkilllevelComponent } from './admin/views/create-skilllevel/create-skilllevel.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: "players/create", pathMatch: "full", component: CreatePlayerComponent, canActivate: [AuthGuard] },
   { path: "players/:id/edit", pathMatch: "full", component: EditPlayerComponent, canActivate: [AuthGuard] },
   { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] },
+  { path: "create-field", pathMatch: "full", component: CreateFieldComponent, canActivate: [AuthGuard]},
   {
     path: "players",
     component: PlayerColumnComponent,
