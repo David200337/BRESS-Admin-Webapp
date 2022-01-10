@@ -1,7 +1,9 @@
 <div class="container">
     <div class="poolWrapper">
         <div class="poolHeader">
-            <h1>{{tournament}} - {{poolName}}</h1>
+        <div *ngIf="pool$ | async as pool">
+            <h1>{{tournament.title}} - Poule {{pool.id}}</h1>
+        </div>
             <button [routerLink]="['../../']" class="button-dark">Terug</button>
         </div>
         <div class="poolBody">

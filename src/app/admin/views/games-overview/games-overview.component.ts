@@ -44,6 +44,9 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
 
     this.editGameService.tournamentId = this.tournamentId;
 
+    this.tournamentService.get(this.tournamentId)
+        .subscribe(res => this.tournament = res)
+
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
@@ -74,6 +77,7 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
    * sort the provided games array into started games, the next game and all future games
    */
   sortGames(games: Game[]) {
+
     let sortedActive: Game[] = [];
     let sortedFuture: Game[] = [];
 
@@ -90,9 +94,11 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     this.futureGames = sortedFuture;
     this.nextGame = [this.futureGames.shift()!];
     this.games = games;
+    this.loaderToggle.loaderInvisible();
   }
 
   selectGame(game: Game) {
+    this.loaderToggle.loaderInvisible();
     this.editGameService.showEdit(game.id);
   }
 
