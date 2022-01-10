@@ -8,6 +8,8 @@ import { DashboardComponent } from './admin/views/dashboard/dashboard.component'
 import { EditPlayerComponent } from './admin/views/edit-player/edit-player.component';
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
 import { GamesOverviewComponent } from './admin/views/games-overview/games-overview.component';
+import { LiveScoreComponent } from './admin/views/live-score/live-score.component';
+import { PlayerColumnComponent } from './admin/views/player/player-column/player-column.component';
 import { PlayerDetailComponent } from './admin/views/player/player-detail/player-detail.component';
 import { PoolDetailComponent } from './admin/views/pool-detail/pool-detail.component';
 import { TournamentDetailComponent } from './admin/views/tournament-detail/tournament-detail.component';
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: "tournament/:id/edit-tournament", pathMatch: "full", component: EditTournamentComponent, canActivate: [AuthGuard] },
   { path: "tournament/:id/score-overview/:categoryId/:poolId", pathMatch: "full", component: PoolDetailComponent, canActivate: [AuthGuard] },
   { path: "tournament/:tournamentId/bracket", pathMatch: "full", component: CategoryBracketComponent, canActivate: [AuthGuard] },
+  { path: "tournament/:id/live-score", pathMatch: "full", component: LiveScoreComponent, canActivate: [AuthGuard] },
   { path: "players/create", pathMatch: "full", component: CreatePlayerComponent, canActivate: [AuthGuard] },
   { path: "players/:id/edit", pathMatch: "full", component: EditPlayerComponent, canActivate: [AuthGuard] },
   { path: "players/:id", pathMatch: "full", component: PlayerDetailComponent, canActivate: [AuthGuard] },

@@ -26,6 +26,7 @@ import { PlayerDetailComponent } from './views/player/player-detail/player-detai
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { LiveScoreComponent } from './views/live-score/live-score.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { MatInputModule } from '@angular/material/input';
     CreateSkilllevelComponent,
     PlayerListComponent,
     PlayerDetailComponent,
+    PlayerColumnComponent,
+    LiveScoreComponent,
   ],
   imports: [
     CommonModule,

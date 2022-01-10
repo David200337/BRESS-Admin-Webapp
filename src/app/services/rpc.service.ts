@@ -8,7 +8,7 @@ import { catchError, concatMap, map, Observable, of, throwError } from 'rxjs';
 export class RpcService {
 
   constructor(private httpClient: HttpClient) { }
-  protected readonly APIUrl = "https://bress-api.azurewebsites.net/api";
+  protected readonly APIUrl = "http://85.215.212.200:8082/api";
 
   public startTournament(tournamentId: number): Observable<any> {
     return this.httpClient
