@@ -6,6 +6,7 @@ import { CreatePlayerComponent } from './admin/views/create-player/create-player
 import { CreateSkilllevelComponent } from './admin/views/create-skilllevel/create-skilllevel.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
 import { DashboardComponent } from './admin/views/dashboard/dashboard.component';
+import { EditFieldComponent } from './admin/views/edit-field/edit-field.component';
 import { EditPlayerComponent } from './admin/views/edit-player/edit-player.component';
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
 import { GamesOverviewComponent } from './admin/views/games-overview/games-overview.component';
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: "players/create", pathMatch: "full", component: CreatePlayerComponent, canActivate: [AuthGuard] },
   { path: "players/:id/edit", pathMatch: "full", component: EditPlayerComponent, canActivate: [AuthGuard] },
   { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] },
-  { path: "create-field", pathMatch: "full", component: CreateFieldComponent, canActivate: [AuthGuard]},
+  { path: "fields/create", pathMatch: "full", component: CreateFieldComponent, canActivate: [AuthGuard]},
+  { path: "fields/:id", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard]},
   {
     path: "players",
     component: PlayerColumnComponent,

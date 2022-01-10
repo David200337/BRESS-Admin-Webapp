@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Field } from 'src/app/models/field.model';
 import { FieldService } from 'src/app/services/field.service';
@@ -19,6 +19,7 @@ export class EditFieldComponent implements OnInit {
   public submitted: Boolean = false;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
     private fieldService: FieldService,
@@ -28,6 +29,10 @@ export class EditFieldComponent implements OnInit {
   }
 
   ngOnInit(): void {
+		this.route.paramMap.subscribe((paramMap: ParamMap) => {
+			this.fieldId = Number.parseInt(paramMap.get("id")!);
+		});
+
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
     });
