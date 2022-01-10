@@ -25,6 +25,7 @@ export class CreateFieldComponent implements OnInit {
     if (this.form.valid) {
       const field = new Field(-1, this.form.value.name, false)
 
+      // TODO: Get back to this to test.
       this.fieldService.add(field).subscribe({next: (res) => {
         console.log(res)
       }, error: (err) => {
