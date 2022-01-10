@@ -7,35 +7,40 @@ import { FieldService } from 'src/app/services/field.service';
 @Component({
   selector: 'app-create-field',
   templateUrl: './create-field.component.html',
-  styleUrls: ['./create-field.component.scss']
+  styleUrls: ['./create-field.component.scss'],
 })
 export class CreateFieldComponent implements OnInit {
-  public form!: FormGroup
-  private submitted: Boolean = false;
+  public form!: FormGroup;
+  public submitted: Boolean = false;
 
-  constructor(private router: Router ,private formBuilder: FormBuilder, private fieldService: FieldService) { }
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private fieldService: FieldService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: ["", Validators.required]
-    })
+      name: ['', Validators.required],
+    });
   }
 
   onSubmit(): void {
     this.submitted = true;
     if (this.form.valid) {
-      const field = new Field(-1, this.form.value.name, false)
+      const field = new Field(-1, this.form.value.name, false);
 
       // TODO: Get back to this to test.
-      this.fieldService.add(field).subscribe({next: (res) => {
-        console.log(res)
-        this.router.navigate(["/dashboard"])
-      }, error: (err) => {
-        console.log(err)
-      }}).add(() => {
-        console.log("DONE")
-        this.submitted = false;
-      })
+      this.fieldService
+        .add(field)
+        .subscribe({
+          next: (res) => {
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
     } else {
       return;
     }
