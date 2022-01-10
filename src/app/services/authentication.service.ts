@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
-  protected readonly APIUrl = "https://bress-api.azurewebsites.net/api";
+  protected readonly APIUrl = "http://85.215.212.200:8082/api";
 
   public login(email: string, password: string): Observable<any> {
     return this.httpClient

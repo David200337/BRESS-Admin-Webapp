@@ -1,19 +1,41 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { concat, Observable, switchMap, tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
+import { Game } from 'src/app/models/game.model';
+import { Pool } from 'src/app/models/pool.model';
+import { Tournament } from 'src/app/models/tournament.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { TournamentInterface } from 'src/app/shared/tournament-bracket/declarations/interfaces';
+import { CategorySelectorComponent } from '../../shared/category-selector/category-selector.component';
+
 
 @Component({
-  selector: 'app-category-bracket',
-  templateUrl: './category-bracket.component.html',
-  styleUrls: ['./category-bracket.component.scss']
+  selector: 'app-live-score',
+  templateUrl: './live-score.component.html',
+  styleUrls: ['./live-score.component.scss']
 })
-export class CategoryBracketComponent implements OnInit, OnDestroy {
+export class LiveScoreComponent implements OnInit, AfterViewInit {
+  @ViewChild(CategorySelectorComponent) categorySelector!: CategorySelectorComponent;
+
+  tournamentId!: number;
+  tournament!: Tournament
+  games!: Game[];
+  activeGames!: Game[];
+  futureGames!: Game[];
+  nextGame!: Game[];
+  pools$!: Observable<Pool[]>;
+
+  selectedGame: Game | undefined;
+  showPopup: boolean;
+
+  interval: any;
+
+  categoryList: Category[] = [];
+  selectedCategoryIndex: number = 0;
+  hasFinales: Boolean = false;
 
   myTournamentData: TournamentInterface = {
     rounds: [
@@ -135,30 +157,52 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
     ],
   };
 
-
-
-  public tournament: any = {};
-  public categoryList: Category[] = [];
-  public selectedCategoryIndex: number = 0;
-  public hasFinales = false;
-  public interval: any;
-
   constructor(
     private tournamentService: TournamentService,
+    public editGameService: EditGameService,
     private route: ActivatedRoute,
-    public editGame: EditGameService,
-    public toggleLoader: LoaderToggleService
-  ) { this.toggleLoader.loaderVisible(); }
+    private loaderToggle: LoaderToggleService,
+    private editGame: EditGameService
+  ) {
+    this.showPopup = false;
+    loaderToggle.loaderVisible();
+  }
+  ngAfterViewInit(): void {
+    this.categorySelector.selectCategoryByIndex(this.selectedCategoryIndex)
+  }
 
   ngOnInit(): void {
-    this.toggleLoader.loaderVisible();
+    let gamesList: Game[] = [];
+
+    this.route.params.subscribe((params: any) => {
+      this.tournamentId = params['id'];
+    });
+
+    this.editGameService.tournamentId = this.tournamentId;
+
+    this.tournamentService.get(this.tournamentId)
+      .subscribe(res => this.tournament = res)
+
+    concat(
+      this.tournamentService.getPoolQueue(this.tournamentId),
+      this.tournamentService.getFinaleQueue(this.tournamentId)
+    ).pipe(
+      tap(g => gamesList.push(...g)),
+      tap(() => this.sortGames(gamesList)),
+    ).subscribe()
+      .add(() => {
+        this.games = gamesList;
+        this.loaderToggle.loaderInvisible();
+      });
+
     this.hideGameEdit()
     this.route.paramMap.pipe(
       switchMap((params: any) => {
-        const tournamentId = +params.get("tournamentId")!;
+        const tournamentId = +params.get("id")!;
         return this.tournamentService.get(tournamentId);
       })
     ).subscribe((result: any) => {
+      console.log(result)
       this.tournament = result;
       this.categoryList = this.tournament.categories;
       this.editGame.tournamentId = this.tournament.id
@@ -172,10 +216,59 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
   }
 
   startRefresh() {
-    this.refreshData();
     this.interval = setInterval(() => {
+      this.selectedCategoryIndex++;
+      if (this.selectedCategoryIndex > 2) {
+        this.selectedCategoryIndex = 0;
+      }
+      this.categorySelector.selectCategoryByIndex(this.selectedCategoryIndex)
+      this.refreshGames()
       this.refreshData();
     }, 10000);
+  }
+
+  /**
+   * @function sortGames
+   * @param games the array of games to sort
+   * sort the provided games array into started games, the next game and all future games
+   */
+  sortGames(games: Game[]) {
+
+    let sortedActive: Game[] = [];
+    let sortedFuture: Game[] = [];
+
+    games.forEach(g => {
+      if (!g.score) {
+        if (g.field) {
+          sortedActive.push(g);
+        } else {
+          sortedFuture.push(g);
+        }
+      }
+    });
+    this.activeGames = sortedActive;
+    this.futureGames = sortedFuture;
+    this.nextGame = [this.futureGames.shift()!];
+    this.games = games;
+    this.loaderToggle.loaderInvisible();
+  }
+
+  selectGame(game: Game) {
+    this.loaderToggle.loaderInvisible();
+    this.editGameService.showEdit(game.id);
+  }
+
+  refreshGames() {
+    let gameList: Game[] = [];
+
+    concat(
+      this.tournamentService.getPoolQueue(this.tournamentId),
+      this.tournamentService.getFinaleQueue(this.tournamentId)
+    ).pipe(
+      tap(g => gameList.push(...g))
+    ).subscribe().add(() => {
+      this.sortGames(gameList)
+    })
   }
 
   refreshData() {
@@ -229,13 +322,13 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
       }
       this.myTournamentData = { rounds: newlist };
     }
-
+    this.pools$ = this.tournamentService.getAllPools(this.tournamentId, categoryId);
     this.hasFinales = hasFinales;
-    this.toggleLoader.loaderInvisible();
+    this.loaderToggle.loaderInvisible();
   }
 
   updateGameScore(game: any) {
-    this.toggleLoader.loaderInvisible();
+    this.loaderToggle.loaderInvisible();
 
     this.refreshData()
   }
@@ -253,4 +346,7 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
   hideGameEdit() {
     this.editGame.hideEdit();
   }
+
+
+
 }
