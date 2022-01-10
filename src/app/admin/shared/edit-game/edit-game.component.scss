@@ -14,7 +14,9 @@
 .editInput{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 10px
     
 }
 
@@ -56,4 +58,15 @@ img.true {
     button{
         margin: 10px;
     }
+}
+
+.scoreInput {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    width: 7ch;
+    padding: 10px;
+}
+
+span {
+    padding: 0 10px;
 }
