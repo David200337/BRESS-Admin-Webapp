@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Field } from 'src/app/models/field.model';
 import { FieldService } from 'src/app/services/field.service';
 
@@ -12,7 +13,7 @@ export class CreateFieldComponent implements OnInit {
   public form!: FormGroup
   private submitted: Boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private fieldService: FieldService) { }
+  constructor(private router: Router ,private formBuilder: FormBuilder, private fieldService: FieldService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -28,6 +29,7 @@ export class CreateFieldComponent implements OnInit {
       // TODO: Get back to this to test.
       this.fieldService.add(field).subscribe({next: (res) => {
         console.log(res)
+        this.router.navigate(["/dashboard"])
       }, error: (err) => {
         console.log(err)
       }}).add(() => {
