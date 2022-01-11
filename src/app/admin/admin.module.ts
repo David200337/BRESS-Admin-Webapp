@@ -17,7 +17,7 @@ import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
-import { EditPlayerComponent } from './views/edit-player/edit-player.component';
+import { EditPlayerComponent } from './views/player/edit-player/edit-player.component';
 import { CreatePlayerComponent } from './views/player/create-player/create-player.component';
 import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
 import { PlayerListComponent } from './views/player/player-list/player-list.component';
