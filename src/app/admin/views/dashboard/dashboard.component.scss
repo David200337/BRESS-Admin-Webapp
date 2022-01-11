@@ -2,7 +2,6 @@
     display: grid;
     gap: 150px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -17,10 +16,11 @@
     flex-wrap: wrap;
     width: 100%;
     gap: 100px;
+    margin: 25px 0 25px 0;
 }
 
 .container-item {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
