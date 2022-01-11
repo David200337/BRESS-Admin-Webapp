@@ -25,6 +25,9 @@ import { PlayerDetailComponent } from './views/player/player-detail/player-detai
 import { LiveScoreComponent } from './views/live-score/live-score.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CreateFieldComponent } from './views/create-field/create-field.component';
+import { FieldListComponent } from './views/field/field-list/field-list.component';
+import { EditFieldComponent } from './views/edit-field/edit-field.component';
 
 @NgModule({
   declarations: [
