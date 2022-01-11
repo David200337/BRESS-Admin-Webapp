@@ -16,7 +16,7 @@ import { TournamentService } from '../services/tournament.service';
 import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
 import { EditPlayerComponent } from './views/edit-player/edit-player.component';
 import { CreatePlayerComponent } from './views/player/create-player/create-player.component';
@@ -64,7 +64,8 @@ import { LiveScoreComponent } from './views/live-score/live-score.component';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
   ],
   exports: [
     DashboardComponent,

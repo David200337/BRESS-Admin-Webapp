@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, delay, Observable, of, switchMap } from 'rxjs';
+import { catchError, delay, Observable, of, switchMap, tap } from 'rxjs';
 import { Game } from '../models/game.model';
 import { PoolGame } from '../models/poolGame.model';
 import { TournamentService } from './tournament.service';
@@ -25,19 +25,24 @@ export class EditGameService {
     this.gameId = 0;
   }
 
-  enterScore(score: boolean[]): Observable<any> {
+  enterScore(score: number[][]): Observable<any> {
     this.showPopUp = false;
     return this.tournamentService.getFinalGame(this.tournamentId, 0, this.gameId)
+      .pipe(tap((res) => console.log(res)))
       .pipe(switchMap(() => { return this.enterFinalGameScore(score) }), catchError(() => { return this.enterPoolGameScore(score) }));
   }
 
-  enterPoolGameScore(score: boolean[]): Observable<PoolGame> {
+  enterPoolGameScore(score: number[][]): Observable<PoolGame> {
     this.showPopUp = false;
+    console.log("enterPoolGameScore");
+    
     return this.tournamentService.updatePoolGame(this.tournamentId, this.gameId, score);
   }
 
-  enterFinalGameScore(score: boolean[]): Observable<PoolGame> {
+  enterFinalGameScore(score: number[][]): Observable<PoolGame> {
     this.showPopUp = false;
+    console.log("enterFinalGameScore");
+    
     return this.tournamentService.updateFinalGame(this.tournamentId, this.gameId, score);
   }
 }
