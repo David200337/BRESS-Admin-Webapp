@@ -22,6 +22,7 @@
 						| filterPipe: searchTerm
 						| paginate
 							: {
+									id: 'playerTable',
 									itemsPerPage: tableSize,
 									currentPage: page,
 									totalItems: count
@@ -102,6 +103,7 @@
 
 	<div class="tableControls">
 		<pagination-controls
+            id="playerTable"
 			[responsive]="true"
 			previousLabel="Vorige"
 			nextLabel="Volgende"
