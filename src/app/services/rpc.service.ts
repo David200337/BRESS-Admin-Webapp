@@ -8,7 +8,7 @@ import { catchError, concatMap, map, Observable, of, throwError } from 'rxjs';
 export class RpcService {
 
   constructor(private httpClient: HttpClient) { }
-  protected readonly APIUrl = "http://85.215.212.200:8082/api";
+  protected readonly APIUrl = "https://serverbuijsen.nl/api";
 
   public startTournament(tournamentId: number): Observable<any> {
     return this.httpClient
