@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryBracketComponent } from './admin/views/category-bracket/category-bracket.component';
-import { CreateFieldComponent } from './admin/views/create-field/create-field.component';
+import { CreateFieldComponent } from './admin/views/field/create-field/create-field.component';
 import { CreatePlayerComponent } from './admin/views/player/create-player/create-player.component';
 import { CreateSkilllevelComponent } from './admin/views/create-skilllevel/create-skilllevel.component';
 import { CreateTournamentComponent } from './admin/views/create-tournament/create-tournament.component';
 import { DashboardComponent } from './admin/views/dashboard/dashboard.component';
-import { EditFieldComponent } from './admin/views/edit-field/edit-field.component';
+import { EditFieldComponent } from './admin/views/field/edit-field/edit-field.component';
 import { EditPlayerComponent } from './admin/views/player/edit-player/edit-player.component';
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
 import { GamesOverviewComponent } from './admin/views/games-overview/games-overview.component';
