@@ -19,7 +19,6 @@ export class CreatePlayerComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private route: ActivatedRoute,
 		private playerService: PlayerService,
 		private formBuilder: FormBuilder,
 		private loaderToggle: LoaderToggleService,
@@ -67,7 +66,7 @@ export class CreatePlayerComponent implements OnInit {
 			this.playerService.add(player).subscribe({
 				next: (res) => {
 					this.loaderToggle.loaderInvisible();
-					this.router.navigate([".."], { relativeTo: this.route });
+					this.router.navigate(["../../dashboard"]);
 				},
 				error: (err) => {
 					console.log(err);
