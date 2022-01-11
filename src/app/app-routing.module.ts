@@ -16,7 +16,6 @@ import { PoolDetailComponent } from './admin/views/pool-detail/pool-detail.compo
 import { TournamentDetailComponent } from './admin/views/tournament-detail/tournament-detail.component';
 import { TournamentOverviewComponent } from './admin/views/tournament-overview/tournament-overview.component';
 import { AuthGuard } from './auth.guard';
-import { LoaderComponent } from './shared/loader/loader.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
