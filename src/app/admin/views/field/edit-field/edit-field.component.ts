@@ -35,6 +35,7 @@ export class EditFieldComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
+      isAvailable: ['', Validators.required],
     });
 
     if (this.fieldId) {
@@ -45,6 +46,7 @@ export class EditFieldComponent implements OnInit {
 
           this.form.setValue({
             name: this.field?.name,
+            isAvailable: this.field?.isAvailable,
           });
 
           this.loaderToggle.loaderInvisible();
@@ -67,6 +69,7 @@ export class EditFieldComponent implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       this.field!.name = this.form.value.name;
+      this.field!.isAvailable = this.form.value.isAvailable;
       this.fieldService.update(this.fieldId!, this.field!).subscribe({
         next: (res) => {
           this.router.navigate(['/dashboard']);

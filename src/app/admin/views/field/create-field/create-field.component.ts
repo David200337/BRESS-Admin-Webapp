@@ -28,9 +28,8 @@ export class CreateFieldComponent implements OnInit {
 	onSubmit(): void {
 		this.submitted = true;
 		if (this.form.valid) {
-			const field = new Field(-1, this.form.value.name, false);
+			const field = new Field(-1, this.form.value.name, true);
 
-			// TODO: Get back to this to test.
 			this.fieldService.add(field).subscribe({
 				next: (res) => {
 					this.router.navigate(["../../dashboard"]);
