@@ -15,7 +15,6 @@ export class CreateFieldComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private route: ActivatedRoute,
 		private formBuilder: FormBuilder,
 		private fieldService: FieldService
 	) {}
