@@ -1,57 +1,44 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Field } from 'src/app/models/field.model';
-import { FieldService } from 'src/app/services/field.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Field } from "src/app/models/field.model";
+import { FieldService } from "src/app/services/field.service";
 
 @Component({
-  selector: 'app-field-list',
-  templateUrl: './field-list.component.html',
-  styleUrls: ['./field-list.component.scss']
+	selector: "app-field-list",
+	templateUrl: "./field-list.component.html",
+	styleUrls: ["./field-list.component.scss"]
 })
 export class FieldListComponent implements OnInit {
-	public tableColumns = ["name"];
-	public dataSource!: MatTableDataSource<Field>;
+	public fields!: Field[];
+	public searchTerm!: string;
+	public tableSizes: number[] = [10, 25, 100];
+	public tableSize: number = this.tableSizes[0];
+	public page = 1;
+	public count = 0;
 
-	@ViewChild(MatPaginator) paginator!: MatPaginator;
-	@ViewChild(MatSort) sort!: MatSort;
-  
-  constructor(private fieldService: FieldService) { }
+	constructor(private fieldService: FieldService) {}
 
-  ngOnInit(): void {
-    this.loadFields()
-  }
-
-  public loadFields(): void {
-    this.fieldService.getList().subscribe({next: (fields) => {
-      this.dataSource = new MatTableDataSource(fields);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort
-      console.log(this.dataSource)
-    }, error: (err) => {
-      // TODO: Handle error
-      console.log(err)
-    }})
-  }
-
-	public applyFilter(event: Event): void {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
-		}
+	ngOnInit(): void {
+		this.loadFields();
 	}
 
-  
+	public loadFields(): void {
+		this.fieldService.getList().subscribe({
+			next: (fields) => {
+				this.fields = fields;
+			},
+			error: (err) => {
+				// TODO: Handle error
+				console.log(err);
+			}
+		});
+	}
 
 	public onDelete(id: number): void {
 		this.fieldService.delete(id).subscribe({
 			next: (res) => {
 				if (res.result === "Success") {
-          // TODO: Fix refresh on table when item removed
-          this.dataSource.data = this.dataSource.data.filter((f) => f.id !== id);
+					// TODO: Fix refresh on table when item removed
+					this.fields = this.fields.filter((f) => f.id !== id);
 					alert("Veld/zaal successvol verwijderd.");
 				}
 			},
@@ -62,4 +49,14 @@ export class FieldListComponent implements OnInit {
 		});
 	}
 
+    public onTableDataChange(event: any): void {
+        this.page = event;
+        this.loadFields();
+    }
+
+    public onTableSizeChange(event: any): void {
+        this.tableSize = event.target.value;
+        this.page = 1;
+        this.loadFields();
+    }
 }
