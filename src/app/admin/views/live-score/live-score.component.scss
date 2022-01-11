@@ -1,0 +1,208 @@
+@import '../../../../styles.scss';
+
+.gamesHeader {
+    margin: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+.gamesBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 50px;
+    max-height: 100%;
+}
+
+.currentGamesList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex: 1;
+    gap: 25px;
+    padding-bottom: 25px;
+}
+
+.gamesWrapper{
+    max-height: 100%;
+}
+
+.courtItem {
+    margin-bottom: 25px;
+}
+
+.elementHeader {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.scorePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 10px 30px black;
+    z-index: 11;
+}
+
+.visible {
+    display: block;
+}
+
+.bracket{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    height: 100%;
+    align-content: baseline;
+    position: absolute;
+
+    &-title{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 30px;
+    }
+
+    &-category{
+        width: 100%;
+        margin-top: 20px;
+
+        &-selector{
+            width: fit-content;
+        }
+    }
+
+    &-visual{
+        margin-top: 20px;
+        margin-left: -25px;
+    }
+}
+
+.poolWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.poolHeader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+ 
+.poolBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    gap: 150px;
+    row-gap: 50px;
+}
+
+.buttonGroup {
+    justify-self: end;
+    padding-bottom: 25px;
+}
+
+.scorePopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.invisible{
+    display: none !important;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pools {
+    display: flex;
+    flex: 1;
+    gap: 125px;
+    flex-wrap: wrap;
+    row-gap: 25px;
+    justify-content: center;
+
+    padding-bottom: 25px;
+}
+
+.all{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 90%;
+    max-height: 100%;
+
+    &-games{
+        width: 40%;
+        margin-left: 2%;
+    }
+
+    &-standing{
+        width: 55%;
+        margin-right: 2%;
+    }
+
+    &-pools{
+        margin-top: 30px
+    }
+}
+
+.bodyColumn{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 100%;
+
+    h3{
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 70px);
+    background-image: url('../../../../assets/images/Squash.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.overlay{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    
+}

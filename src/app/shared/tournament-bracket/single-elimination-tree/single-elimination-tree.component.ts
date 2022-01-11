@@ -10,7 +10,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { Game } from 'src/app/models/game.model';
-import { Round, Tournament } from '../declarations/interfaces';
+import { Round, TournamentInterface } from '../declarations/interfaces';
 
 @Component({
   selector: 'app-single-elimination-tree',
@@ -19,7 +19,7 @@ import { Round, Tournament } from '../declarations/interfaces';
 })
 export class SingleEliminationTreeComponent implements OnInit, OnChanges {
   @Input() matchTemplate!: TemplateRef<any>;
-  @Input() tournament!: Tournament;
+  @Input() tournament!: TournamentInterface;
 
   public winnersBracket!: Round[];
   //@ts-ignore

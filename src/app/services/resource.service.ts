@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 export abstract class ResourceService<T> {
 	protected readonly APIUrl = `https://serverbuijsen.nl/api${this.getResourceUrl()}`;
 
-	constructor(protected httpClient: HttpClient) {}
+	constructor(protected httpClient: HttpClient) { }
 
 	abstract getResourceUrl(): string;
 

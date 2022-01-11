@@ -1,4 +1,4 @@
-export interface Tournament {
+export interface TournamentInterface {
   rounds: Round[];
 }
 

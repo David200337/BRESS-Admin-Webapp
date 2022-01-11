@@ -33,9 +33,13 @@
 }
 
 .winner{
-    background-color: $orange-primary;
+    background-color: $orange-primary !important;
     font-weight: bold;
     color: white;
+}
+
+.background{
+    background-color: #fff;
 }
 
 .clickable{

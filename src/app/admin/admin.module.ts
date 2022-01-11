@@ -19,14 +19,17 @@ import { GameCourtItemComponent } from './shared/game-court-item/game-court-item
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
 import { EditPlayerComponent } from './views/edit-player/edit-player.component';
-import { CreatePlayerComponent } from './views/create-player/create-player.component';
+import { CreatePlayerComponent } from './views/player/create-player/create-player.component';
 import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
 import { PlayerListComponent } from './views/player/player-list/player-list.component';
 import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
-import { PlayerColumnComponent } from './views/player/player-column/player-column.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateFieldComponent } from './views/create-field/create-field.component';
+import { FieldListComponent } from './views/field/field-list/field-list.component';
+import { EditFieldComponent } from './views/edit-field/edit-field.component';
+import { LiveScoreComponent } from './views/live-score/live-score.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { MatInputModule } from '@angular/material/input';
     CreateSkilllevelComponent,
     PlayerListComponent,
     PlayerDetailComponent,
-    PlayerColumnComponent,
+    CreateFieldComponent,
+    FieldListComponent,
+    EditFieldComponent,
+    LiveScoreComponent,
   ],
   imports: [
     CommonModule,

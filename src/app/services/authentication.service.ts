@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
-  protected readonly APIUrl = "https://serverbuijsen.nl";
+  protected readonly APIUrl = "https://serverbuijsen.nl/api";
 
   public login(email: string, password: string): Observable<any> {
     return this.httpClient

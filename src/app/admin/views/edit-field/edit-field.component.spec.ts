@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayerColumnComponent } from './player-column.component';
+import { EditFieldComponent } from './edit-field.component';
 
-describe('PlayerColumnComponent', () => {
-  let component: PlayerColumnComponent;
-  let fixture: ComponentFixture<PlayerColumnComponent>;
+describe('EditFieldComponent', () => {
+  let component: EditFieldComponent;
+  let fixture: ComponentFixture<EditFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayerColumnComponent ]
+      declarations: [ EditFieldComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayerColumnComponent);
+    fixture = TestBed.createComponent(EditFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
