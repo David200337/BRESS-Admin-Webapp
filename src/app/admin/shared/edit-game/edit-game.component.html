@@ -19,6 +19,7 @@
             <input type="number" placeholder="Speler 2" class="scoreInput" [(ngModel)]="playerScores[1][2]">
         </div>
     </div>
+    <span id="errorMsg" [style.display]="errorVisible">{{errorMessage}}</span>
     <div class="editButtonGroup">
         <button class="button-dark" (click)="close()">Sluiten</button>
         <button class="button-dark" (click)="onSubmit()">Bevestig score</button>

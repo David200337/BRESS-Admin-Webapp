@@ -65,8 +65,14 @@ img.true {
     -moz-appearance: textfield;
     width: 7ch;
     padding: 10px;
+    text-align: center;
 }
 
 span {
     padding: 0 10px;
+}
+
+#errorMsg {
+    padding: 0;
+    color: red;
 }
