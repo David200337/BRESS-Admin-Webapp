@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
 import { createSpyFromClass, Spy } from "jasmine-auto-spies";
+import { of } from "rxjs";
 import { Tournament } from "../models/tournament.model";
 
 import { TournamentService } from "./tournament.service";
@@ -8,7 +9,7 @@ import { TournamentService } from "./tournament.service";
 describe("TournamentService", () => {
 	let service: TournamentService;
 	let httpSpy: Spy<HttpClient>;
-	let fakeTournaments: Tournament[] = [
+	let fakeTournaments = { result: [
 		{
 			id: 0,
 			title: "Tournament 0",
@@ -32,8 +33,8 @@ describe("TournamentService", () => {
 			categories: [],
 			players: [],
 			hasStarted: false
-		}
-	];
+		}]
+	}
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -55,11 +56,13 @@ describe("TournamentService", () => {
 	});
 
 	it("should return an expected list of tournaments", (done: DoneFn) => {
-		httpSpy.get.and.nextWith(fakeTournaments);
+		httpSpy.get.and.returnValue(of(fakeTournaments));
 
 		service.getList().subscribe({
 			next: (tournaments) => {
-				expect(tournaments).toHaveSize(fakeTournaments.length);
+				console.log(fakeTournaments.result.length)
+				console.log(tournaments)
+				expect(tournaments).toHaveSize(fakeTournaments.result.length);
 				done();
 			},
 			error: () => {
@@ -98,7 +101,7 @@ describe("TournamentService", () => {
 	});
 
 	it("should update a tournament with a given tournament id", (done: DoneFn) => {
-		let tournament = fakeTournaments[0];
+		let tournament = fakeTournaments.result[0];
 		tournament.title = "Updated Tournament";
 
 		httpSpy.put.and.nextWith(tournament);

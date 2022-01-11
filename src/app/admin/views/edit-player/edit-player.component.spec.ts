@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing'
 
 import { EditPlayerComponent } from './edit-player.component';
 
@@ -8,6 +12,8 @@ describe('EditPlayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ HttpClientModule, ReactiveFormsModule, RouterTestingModule ],
+      providers: [ DatePipe ],
       declarations: [ EditPlayerComponent ]
     })
     .compileComponents();
