@@ -25,7 +25,7 @@ export class FieldListComponent implements OnInit {
 		this.fieldService.getList().subscribe({
 			next: (fields) => {
 				this.fields = fields;
-                console.log(fields);
+				console.log(fields);
 			},
 			error: (err) => {
 				// TODO: Handle error
@@ -38,7 +38,10 @@ export class FieldListComponent implements OnInit {
 		this.fieldService.delete(id).subscribe({
 			next: (res) => {
 				if (res.result) {
-					this.fields = this.fields.filter((f) => f.id !== id);                    
+					this.fields = this.fields.filter((f) => f.id !== id);
+					this.count = this.fields.length;
+					this.updatePageOnDelete();
+
 					alert("Zaal successvol verwijderd.");
 				}
 			},
@@ -49,14 +52,20 @@ export class FieldListComponent implements OnInit {
 		});
 	}
 
-    public onTableDataChange(event: any): void {
-        this.page = event;
-        this.loadFields();
-    }
+	public onTableDataChange(event: any): void {
+		this.page = event;
+		this.loadFields();
+	}
 
-    public onTableSizeChange(event: any): void {
-        this.tableSize = event.target.value;
-        this.page = 1;
-        this.loadFields();
-    }
+	public onTableSizeChange(event: any): void {
+		this.tableSize = event.target.value;
+		this.page = 1;
+		this.loadFields();
+	}
+
+	private updatePageOnDelete() {
+		if (this.count % this.tableSize === 0) {
+			this.page--;
+		}
+	}
 }
