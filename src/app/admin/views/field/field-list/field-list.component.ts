@@ -25,6 +25,7 @@ export class FieldListComponent implements OnInit {
 		this.fieldService.getList().subscribe({
 			next: (fields) => {
 				this.fields = fields;
+                console.log(fields);
 			},
 			error: (err) => {
 				// TODO: Handle error

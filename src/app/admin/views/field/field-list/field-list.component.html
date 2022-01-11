@@ -31,7 +31,7 @@
 				"
 				[class.active]="i === page"
 			>
-				<td [routerLink]="['../../edit-field/' + field.id]">
+				<td [routerLink]="['../fields/' + field.id + '/edit']">
 					<div>
 						<p>{{ field.name }}</p>
 						<button>
