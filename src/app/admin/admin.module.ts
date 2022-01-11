@@ -26,6 +26,9 @@ import { PlayerDetailComponent } from './views/player/player-detail/player-detai
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateFieldComponent } from './views/create-field/create-field.component';
+import { FieldListComponent } from './views/field/field-list/field-list.component';
+import { EditFieldComponent } from './views/edit-field/edit-field.component';
 import { LiveScoreComponent } from './views/live-score/live-score.component';
 
 @NgModule({
@@ -48,7 +51,9 @@ import { LiveScoreComponent } from './views/live-score/live-score.component';
     CreateSkilllevelComponent,
     PlayerListComponent,
     PlayerDetailComponent,
-    PlayerColumnComponent,
+    CreateFieldComponent,
+    FieldListComponent,
+    EditFieldComponent,
     LiveScoreComponent,
   ],
   imports: [
