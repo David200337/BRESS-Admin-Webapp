@@ -15,7 +15,7 @@
 
 		<tbody>
 			<tr *ngFor="let player of players">
-                <td>
+                <td [routerLink]="['../players/' + player.id]">
                     <div>
                         <p>{{ player.name }}</p>
                         <button >
