@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table'
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { TournamentItemComponent } from './shared/tournament-item/tournament-item.component';
 import { CreateTournamentComponent } from './views/create-tournament/create-tournament.component';
@@ -23,13 +22,9 @@ import { CreatePlayerComponent } from './views/player/create-player/create-playe
 import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
 import { PlayerListComponent } from './views/player/player-list/player-list.component';
 import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { CreateFieldComponent } from './views/create-field/create-field.component';
-import { FieldListComponent } from './views/field/field-list/field-list.component';
-import { EditFieldComponent } from './views/edit-field/edit-field.component';
 import { LiveScoreComponent } from './views/live-score/live-score.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -55,17 +50,15 @@ import { LiveScoreComponent } from './views/live-score/live-score.component';
     FieldListComponent,
     EditFieldComponent,
     LiveScoreComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
+    NgxPaginationModule,
   ],
   exports: [
     DashboardComponent,

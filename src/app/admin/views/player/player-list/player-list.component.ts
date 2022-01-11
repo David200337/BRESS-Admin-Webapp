@@ -1,7 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
+import { Component, OnInit } from "@angular/core";
 import { Player } from "src/app/models/player.model";
 import { PlayerService } from "src/app/services/player.service";
 
@@ -11,11 +8,12 @@ import { PlayerService } from "src/app/services/player.service";
 	styleUrls: ["./player-list.component.scss"]
 })
 export class PlayerListComponent implements OnInit {
-	public tableColumns = ["name"];
-	public dataSource!: MatTableDataSource<Player>;
-
-	@ViewChild(MatPaginator) paginator!: MatPaginator;
-	@ViewChild(MatSort) sort!: MatSort;
+	public players!: Player[];
+    public searchTerm!: string;
+    public tableSizes: number[] = [10, 25, 100];
+    public tableSize: number = this.tableSizes[0];
+    public page = 1;
+    public count = 0;
 
 	constructor(private playerService: PlayerService) {}
 
@@ -26,10 +24,7 @@ export class PlayerListComponent implements OnInit {
 	public loadPlayers(): void {
 		this.playerService.getList().subscribe({
 			next: (players) => {
-				this.dataSource = new MatTableDataSource(players);
-                this.dataSource.paginator = this.paginator;
-		        this.dataSource.sort = this.sort;
-				console.log(this.dataSource);
+				this.players = players;
 			},
 			error: (err) => {
 				// TODO: Handle error
@@ -38,20 +33,11 @@ export class PlayerListComponent implements OnInit {
 		});
 	}
 
-	public applyFilter(event: Event): void {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
-		}
-	}
-
 	public onDelete(id: number): void {
 		this.playerService.delete(id).subscribe({
 			next: (res) => {
 				if (res.result === "Success") {
-                    this.dataSource.data = this.dataSource.data.filter((p) => p.id !== id);
+                    this.players = this.players.filter((p) => p.id !== id);
 					alert("Speler successvol verwijderd.");
 				}
 			},
@@ -61,4 +47,15 @@ export class PlayerListComponent implements OnInit {
 			}
 		});
 	}
+
+    public onTableDataChange(event: any): void {
+        this.page = event;
+        this.loadPlayers();
+    }
+
+    public onTableSizeChange(event: any): void {        
+        this.tableSize = event.target.value;
+        this.page = 1;
+        this.loadPlayers();
+    }
 }
