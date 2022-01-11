@@ -24,6 +24,7 @@ import { PlayerListComponent } from './views/player/player-list/player-list.comp
 import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
 import { LiveScoreComponent } from './views/live-score/live-score.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
   ],
   exports: [
     DashboardComponent,

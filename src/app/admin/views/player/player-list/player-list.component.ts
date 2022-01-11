@@ -10,7 +10,10 @@ import { PlayerService } from "src/app/services/player.service";
 export class PlayerListComponent implements OnInit {
 	public players!: Player[];
     public searchTerm!: string;
-
+    public tableSizes: number[] = [10, 25, 100];
+    public tableSize: number = this.tableSizes[0];
+    public page = 1;
+    public count = 0;
 
 	constructor(private playerService: PlayerService) {}
 
@@ -44,4 +47,15 @@ export class PlayerListComponent implements OnInit {
 			}
 		});
 	}
+
+    public onTableDataChange(event: any): void {
+        this.page = event;
+        this.loadPlayers();
+    }
+
+    public onTableSizeChange(event: any): void {        
+        this.tableSize = event.target.value;
+        this.page = 1;
+        this.loadPlayers();
+    }
 }
