@@ -34,7 +34,7 @@
 				<td [routerLink]="['../fields/' + field.id + '/edit']">
 					<div>
 						<p>{{ field.name }}</p>
-						<button>
+						<button (click)="onDelete(field.id)">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="24"
