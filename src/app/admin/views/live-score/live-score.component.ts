@@ -192,17 +192,10 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
     ).subscribe()
       .add(() => {
         this.games = gamesList;
-        this.loaderToggle.loaderInvisible();
       });
 
     this.hideGameEdit()
-    this.route.paramMap.pipe(
-      switchMap((params: any) => {
-        const tournamentId = +params.get("id")!;
-        return this.tournamentService.get(tournamentId);
-      })
-    ).subscribe((result: any) => {
-      console.log(result)
+    this.tournamentService.get(this.tournamentId).subscribe((result: any) => {
       this.tournament = result;
       this.categoryList = this.tournament.categories;
       this.editGame.tournamentId = this.tournament.id
