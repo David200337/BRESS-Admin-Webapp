@@ -1,24 +1,28 @@
 table {
 	border: none;
 	width: 100%;
-	div {
+	td {
 		display: flex;
+        margin-top: 0;
+
 		p {
 			margin: auto 0;
 		}
-		button {
-			margin-left: auto;
-			border: none;
-			background: none;
-			margin: auto 0 auto auto;
-			cursor: pointer;
-		}
+
+        button {
+            margin-left: auto;
+            border: none;
+            background: none;
+            margin: auto 0 auto auto;
+            cursor: pointer;
+        }
 	}
 
 	tr {
 		cursor: pointer;
 	}
 }
+
 input {
 	border-radius: 0;
 }
