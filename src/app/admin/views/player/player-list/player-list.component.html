@@ -6,6 +6,8 @@
 </div>
 
 <div>
+    <input placeholder="Zoeken" [(ngModel)]="searchTerm">
+
 	<table>
 		<thead>
 			<tr>
@@ -14,7 +16,7 @@
 		</thead>
 
 		<tbody>
-			<tr *ngFor="let player of players">
+			<tr *ngFor="let player of players | filterPipe: searchTerm">
                 <td [routerLink]="['../players/' + player.id]">
                     <div>
                         <p>{{ player.name }}</p>

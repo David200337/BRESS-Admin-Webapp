@@ -9,6 +9,7 @@ import { PlayerService } from "src/app/services/player.service";
 })
 export class PlayerListComponent implements OnInit {
 	public players!: Player[];
+    public searchTerm!: string;
 
 
 	constructor(private playerService: PlayerService) {}
