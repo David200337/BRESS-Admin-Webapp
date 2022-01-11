@@ -140,3 +140,8 @@ table {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Pagination
+.ngx-pagination .current {
+    background: #FF7C00 !important;
+}

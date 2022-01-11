@@ -1,58 +1,65 @@
-<div class="all">
-    <div class="bracket-title">
-        <div class="bracket-title-text">
-            <h1>{{tournament.title}}</h1>
-        </div>
-        <div class="bracket-title-button">
-            <button class="button-dark" routerLink="..">Terug</button>
-        </div>
-    </div>
-    <div class="all-standing">
-        <div class="all-standings-categoryshown">
-            <div class="bracket-standings-category" *ngIf="categoryList.length != 0">
-                <div class="categoryBar bracket-category-selector">
-                    <app-category-selector [categoryList]=categoryList (selectedCategoryEvent)="switchCategory($event)">
-                    </app-category-selector>
+<div class="wrapper">
+    <div class="overlay">
+        <div class="all">
+            <div class="bracket-title">
+                <div class="bracket-title-text">
+                    <h1>{{tournament.title}}</h1>
+                </div>
+                <div class="bracket-title-button">
+                    <button class="button-dark" routerLink="..">Terug</button>
                 </div>
             </div>
-        </div>
-        <div class="all-pools" *ngIf="!hasFinales">
-            <div class="pools">
-                <div *ngFor="let pool of pools$ | async">
-                    <h3>Poule {{pool.id}}</h3>
-
-                    <app-pool-players-item [pool]="pool"></app-pool-players-item>
-                </div>
-            </div>
-        </div>
-        <div class="all-standings-bracket" *ngIf="hasFinales">
-            <div class="bracket">
-
-                <div class="bracket-visual" *ngIf="categoryList.length != 0 && hasFinales">
-                    <app-single-elimination-tree [tournament]="myTournamentData" [matchTemplate]="myMatchTemplate">
-                    </app-single-elimination-tree>
-
-                    <ng-template #myMatchTemplate let-match>
-                        <app-match [match]="match"></app-match>
-                    </ng-template>
-                </div>
-                <div class="bracket-no-finales" *ngIf="!hasFinales">
-                    <h3>Er zijn nog geen finales. Maak eerst de poule ronde af.</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="all-games">
-        <div class="gamesWrapper">
-            <div class="gamesBody">
-                <div class="bodyColumn">
-                    <div *ngIf="activeGames.length > 0; else no_active">
-                        <div class="columnElement courtItem" *ngFor="let game of activeGames">
-                            <app-court-item [game]="game" [field]="game.field" (gameEvent)="selectGame($event)">
-                            </app-court-item>
+            <div class="all-standing">
+                <div class="all-standings-categoryshown">
+                    <div class="bracket-standings-category" *ngIf="categoryList.length != 0">
+                        <div class="categoryBar bracket-category-selector">
+                            <app-category-selector [categoryList]=categoryList
+                                (selectedCategoryEvent)="switchCategory($event)">
+                            </app-category-selector>
                         </div>
                     </div>
-                    <ng-template #no_active>Er worden geen wedstrijden gespeeld</ng-template>
+                </div>
+                <div class="all-pools" *ngIf="!hasFinales">
+                    <div class="pools">
+                        <div *ngFor="let pool of pools$ | async">
+                            <h3>Poule {{pool.id}}</h3>
+
+                            <app-pool-players-item [pool]="pool"></app-pool-players-item>
+                        </div>
+                    </div>
+                </div>
+                <div class="all-standings-bracket" *ngIf="hasFinales">
+                    <div class="bracket">
+
+                        <div class="bracket-visual" *ngIf="categoryList.length != 0 && hasFinales">
+                            <app-single-elimination-tree [tournament]="myTournamentData"
+                                [matchTemplate]="myMatchTemplate">
+                            </app-single-elimination-tree>
+
+                            <ng-template #myMatchTemplate let-match>
+                                <app-match [match]="match"></app-match>
+                            </ng-template>
+                        </div>
+                        <div class="bracket-no-finales" *ngIf="!hasFinales">
+                            <h3>Er zijn nog geen finales. Maak eerst de poule ronde af.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="all-games">
+                <div class="gamesWrapper">
+                    <div class="gamesBody">
+                        <div class="bodyColumn">
+                            <h3><strong>Huidige wedstrijden:</strong></h3>
+                            <div *ngIf="activeGames.length > 0; else no_active" class="currentGamesList">
+                                <div class="columnElement courtItem" *ngFor="let game of activeGames">
+                                    <app-court-item [game]="game" [field]="game.field" (gameEvent)="selectGame($event)">
+                                    </app-court-item>
+                                </div>
+                            </div>
+                            <ng-template #no_active>Er worden geen wedstrijden gespeeld</ng-template>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
