@@ -30,15 +30,6 @@ export class PlayerListComponent implements OnInit {
 		});
 	}
 
-	public applyFilter(event: Event): void {
-		const filterValue = (event.target as HTMLInputElement).value;
-		// this.dataSource.filter = filterValue.trim().toLowerCase();
-
-		// if (this.dataSource.paginator) {
-		// 	this.dataSource.paginator.firstPage();
-		// }
-	}
-
 	public onDelete(id: number): void {
 		this.playerService.delete(id).subscribe({
 			next: (res) => {
