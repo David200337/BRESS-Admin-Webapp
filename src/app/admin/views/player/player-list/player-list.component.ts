@@ -11,11 +11,8 @@ import { PlayerService } from "src/app/services/player.service";
 	styleUrls: ["./player-list.component.scss"]
 })
 export class PlayerListComponent implements OnInit {
-	public tableColumns = ["name"];
-	public dataSource!: MatTableDataSource<Player>;
+	public players!: Player[];
 
-	@ViewChild(MatPaginator) paginator!: MatPaginator;
-	@ViewChild(MatSort) sort!: MatSort;
 
 	constructor(private playerService: PlayerService) {}
 
@@ -26,10 +23,7 @@ export class PlayerListComponent implements OnInit {
 	public loadPlayers(): void {
 		this.playerService.getList().subscribe({
 			next: (players) => {
-				this.dataSource = new MatTableDataSource(players);
-                this.dataSource.paginator = this.paginator;
-		        this.dataSource.sort = this.sort;
-				console.log(this.dataSource);
+				this.players = players;
 			},
 			error: (err) => {
 				// TODO: Handle error
@@ -40,18 +34,18 @@ export class PlayerListComponent implements OnInit {
 
 	public applyFilter(event: Event): void {
 		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
+		// this.dataSource.filter = filterValue.trim().toLowerCase();
 
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
-		}
+		// if (this.dataSource.paginator) {
+		// 	this.dataSource.paginator.firstPage();
+		// }
 	}
 
 	public onDelete(id: number): void {
 		this.playerService.delete(id).subscribe({
 			next: (res) => {
 				if (res.result === "Success") {
-                    this.dataSource.data = this.dataSource.data.filter((p) => p.id !== id);
+                    this.players = this.players.filter((p) => p.id !== id);
 					alert("Speler successvol verwijderd.");
 				}
 			},

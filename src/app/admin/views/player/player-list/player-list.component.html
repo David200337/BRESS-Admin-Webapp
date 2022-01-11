@@ -1,18 +1,49 @@
 <div class="overviewHeader">
-    <h1>Spelers</h1>
-    <button [routerLink]="['/players/create']" class="button-dark">Toevoegen</button>
+	<h1>Spelers</h1>
+	<button [routerLink]="['/players/create']" class="button-dark">
+		Toevoegen
+	</button>
 </div>
-<mat-form-field appearance="standard">
-    <mat-label>Zoeken</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Zoeken" #input>
-</mat-form-field>
 
-<div class="mat-elevation-z8">
-	<table mat-table [dataSource]="dataSource" matSort>
-		<!-- Name column -->
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Naam</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr *ngFor="let player of players">
+                <td>
+                    <div>
+                        <p>{{ player.name }}</p>
+                        <button >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-x"
+                            >
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+			</tr>
+		</tbody>
+
+		<!-- Name column
 		<ng-container matColumnDef="name">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header>Naam</th>
-			<td mat-cell *matCellDef="let player" [routerLink]="['../players/' + player.id]">
+			<th>Naam</th>
+			<td  [routerLink]="['../players/' + player.id]">
 				<div>
 					<p>{{ player.name }}</p>
 					<button (click)="onDelete(player.id)">
@@ -41,13 +72,13 @@
 
 		<tr class="mat-row" *matNoDataRow>
 			<td class="mat-cell" colspan="1">Geen resultaten gevonden.</td>
-		</tr>
+		</tr> -->
 	</table>
 
-	<mat-paginator
+	<!-- <mat-paginator
 		[pageSizeOptions]="[10, 25, 100, 200]"
 		aria-label="Select page"
-	></mat-paginator>
+	></mat-paginator> -->
 </div>
 
 <!-- <table>

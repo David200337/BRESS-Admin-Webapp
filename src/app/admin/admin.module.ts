@@ -48,7 +48,6 @@ import { LiveScoreComponent } from './views/live-score/live-score.component';
     CreateSkilllevelComponent,
     PlayerListComponent,
     PlayerDetailComponent,
-    PlayerColumnComponent,
     LiveScoreComponent,
   ],
   imports: [

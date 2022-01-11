@@ -9,7 +9,6 @@ import { EditPlayerComponent } from './admin/views/edit-player/edit-player.compo
 import { EditTournamentComponent } from './admin/views/edit-tournament/edit-tournament.component';
 import { GamesOverviewComponent } from './admin/views/games-overview/games-overview.component';
 import { LiveScoreComponent } from './admin/views/live-score/live-score.component';
-import { PlayerColumnComponent } from './admin/views/player/player-column/player-column.component';
 import { PlayerDetailComponent } from './admin/views/player/player-detail/player-detail.component';
 import { PoolDetailComponent } from './admin/views/pool-detail/pool-detail.component';
 import { TournamentDetailComponent } from './admin/views/tournament-detail/tournament-detail.component';
