@@ -25,6 +25,7 @@ export class FieldListComponent implements OnInit {
 		this.fieldService.getList().subscribe({
 			next: (fields) => {
 				this.fields = fields;
+                console.log(fields);
 			},
 			error: (err) => {
 				// TODO: Handle error
@@ -36,10 +37,9 @@ export class FieldListComponent implements OnInit {
 	public onDelete(id: number): void {
 		this.fieldService.delete(id).subscribe({
 			next: (res) => {
-				if (res.result === "Success") {
-					// TODO: Fix refresh on table when item removed
-					this.fields = this.fields.filter((f) => f.id !== id);
-					alert("Veld/zaal successvol verwijderd.");
+				if (res.result) {
+					this.fields = this.fields.filter((f) => f.id !== id);                    
+					alert("Zaal successvol verwijderd.");
 				}
 			},
 			error: (err) => {
