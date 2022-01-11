@@ -6,9 +6,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let player of pool.players">
-            <td>{{player.name}}</td>
-            <td>{{player.score}}</td>
-        </tr>
+        <div *ngIf="pool != undefined">
+            <tr *ngFor="let player of pool.players">
+                <td>{{player.name}}</td>
+                <td>{{player.score}}</td>
+            </tr>
+        </div>
     </tbody>
 </table>
