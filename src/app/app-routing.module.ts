@@ -37,6 +37,7 @@ const routes: Routes = [
   { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] },
   { path: "fields/create", pathMatch: "full", component: CreateFieldComponent, canActivate: [AuthGuard]},
   { path: "fields/:id", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard]},
+  { path: "fields/:id/edit", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard]},
   { path: "players/:id", pathMatch: "full", component: PlayerDetailComponent, canActivate: [AuthGuard] },
   { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] }
 ];

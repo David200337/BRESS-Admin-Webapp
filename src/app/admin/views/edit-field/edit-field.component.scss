@@ -21,6 +21,12 @@ form {
             margin: 0 0 5px 0;
         }
     }
+    .checkbox {
+        flex-direction: row;
+        label {
+            margin: auto 0;
+        }
+    }
     .buttons {
         margin-bottom: 0;
     }

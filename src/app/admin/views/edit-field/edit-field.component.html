@@ -17,12 +17,17 @@
                 </div>
             </div>
 
+            <div class="form-group checkbox">
+                <label for="isAvailable">Beschikbaar</label>
+                <input id="isAvailable" formControlName="isAvailable" type="checkbox" placeholder="isAvailable" />
+            </div>
+
             <div class="form-group buttons">
                 <div>
                     <button type="submit" class="button-dark">
                         Wijzig
                     </button>
-                    <button [routerLink]="['..']" class="button-dark cancel">
+                    <button [routerLink]="['/dashboard']" class="button-dark cancel">
                         Annuleer
                     </button>
                 </div>
