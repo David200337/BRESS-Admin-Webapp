@@ -1,3 +1,7 @@
+<div class="overviewHeader">
+    <h1>Spelers</h1>
+    <button [routerLink]="['/players/create']" class="button-dark">Toevoegen</button>
+</div>
 <mat-form-field appearance="standard">
     <mat-label>Zoeken</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Zoeken" #input>

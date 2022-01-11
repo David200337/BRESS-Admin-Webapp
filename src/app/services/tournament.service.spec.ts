@@ -18,7 +18,8 @@ describe("TournamentService", () => {
 			minPlayers: 4,
 			idealPoolSize: 5,
 			categories: [],
-			players: []
+			players: [],
+			hasStarted: false
 		},
 		{
 			id: 1,
@@ -29,7 +30,8 @@ describe("TournamentService", () => {
 			minPlayers: 4,
 			idealPoolSize: 5,
 			categories: [],
-			players: []
+			players: [],
+			hasStarted: false
 		}
 	];
 
@@ -78,7 +80,8 @@ describe("TournamentService", () => {
 			minPlayers: 4,
 			idealPoolSize: 5,
 			categories: [],
-			players: []
+			players: [],
+            hasStarted: false
 		};
 
 		httpSpy.post.and.nextWith(newTournament);
@@ -118,16 +121,16 @@ describe("TournamentService", () => {
 			})
 		);
 
-        service.delete(1).subscribe({
-            next: (response) => {
-                expect(response.status).toEqual(200);
-                done();
-            },
-            error: () => {
-                done.fail;
-            }
-        })
+		service.delete(1).subscribe({
+			next: (response) => {
+				expect(response.status).toEqual(200);
+				done();
+			},
+			error: () => {
+				done.fail;
+			}
+		});
 
-        expect(httpSpy.delete.calls.count()).toBe(1);
+		expect(httpSpy.delete.calls.count()).toBe(1);
 	});
 });
