@@ -101,7 +101,7 @@ describe("CreatePlayerComponent", () => {
 			expect(isFormValid).toBeTruthy;
 		});
 
-		const playerEmailInputElement = inputElements[0];
+		const playerEmailInputElement = inputElements[1];
 		playerEmailInputElement.value = "speler@email.com";
 		playerEmailInputElement.dispatchEvent(new Event("input"));
 		fixture.detectChanges();
