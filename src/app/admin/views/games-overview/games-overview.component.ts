@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { concat, tap } from 'rxjs';
+import { concat, map, switchMap, tap } from 'rxjs';
 import { Game } from 'src/app/models/game.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
@@ -51,6 +51,7 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
     ).pipe(
+      tap(res => console.log(res)),
       tap(g => gamesList.push(...g)),
       tap(() => this.sortGames(gamesList)),
     ).subscribe()
