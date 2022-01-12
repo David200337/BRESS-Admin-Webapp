@@ -57,6 +57,10 @@ describe("CreatePlayerComponent", () => {
 			fixture.debugElement.nativeElement
 				.querySelector("form")
 				.querySelectorAll("input");
+		const selectElements: HTMLSelectElement[] =
+			fixture.debugElement.nativeElement
+				.querySelector("form")
+				.querySelectorAll("select");
 
 		const playerNameInputElement: HTMLInputElement = inputElements[0];
 		const playerNameValue = component.form.get("name");
@@ -70,10 +74,7 @@ describe("CreatePlayerComponent", () => {
 		expect(playerEmailValue?.errors).not.toBeNull();
 		expect(playerEmailValue?.errors).toBeTruthy();
 
-		const skillLevelSelectElement: HTMLSelectElement =
-			fixture.debugElement.nativeElement
-				.querySelector("form")
-				.querySelectorAll("select")[0];
+		const skillLevelSelectElement: HTMLSelectElement = selectElements[0];
 		const skillLevelSelectValue = component.form.get("skillLevel");
 		expect(skillLevelSelectElement.value).toEqual(
 			skillLevelSelectValue?.value
@@ -111,7 +112,7 @@ describe("CreatePlayerComponent", () => {
 		});
 
 		const skillLevelSelectElement: HTMLSelectElement = selectElements[0];
-        skillLevelSelectElement.value = "Beginners";
+		skillLevelSelectElement.value = "Beginners";
 		skillLevelSelectElement.dispatchEvent(new Event("select"));
 		fixture.detectChanges();
 		fixture.whenStable().then(() => {
