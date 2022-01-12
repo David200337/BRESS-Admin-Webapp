@@ -188,7 +188,7 @@ export class TournamentService extends ResourceService<Tournament> {
 			.pipe(
 				map((item) => {
 					return item.result;
-				})
+				}),
 			);
 	}
 
