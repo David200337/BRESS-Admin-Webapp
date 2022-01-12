@@ -53,7 +53,7 @@ describe('CreateFieldComponent', () => {
     expect(fieldNameValue?.errors).toBeTruthy();
   });
 
-  it('should check if formControls required validation is correct', () => {
+  it('should check if form is valid', () => {
     const fieldNameInputElement: HTMLInputElement =
       fixture.debugElement.nativeElement
         .querySelector('form')
@@ -61,6 +61,9 @@ describe('CreateFieldComponent', () => {
     fieldNameInputElement.value = 'Zaal 1';
     fieldNameInputElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    
+    fixture.whenStable().then(() => {
+      const isFormValid = component.form.valid;
+      expect(isFormValid).toBeTruthy;
+    });
   });
 });
