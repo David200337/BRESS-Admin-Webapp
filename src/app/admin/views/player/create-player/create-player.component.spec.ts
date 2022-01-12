@@ -97,19 +97,11 @@ describe("CreatePlayerComponent", () => {
 		playerNameInputElement.value = "Speler 1";
 		playerNameInputElement.dispatchEvent(new Event("input"));
 		fixture.detectChanges();
-		fixture.whenStable().then(() => {
-			const isFormValid = component.form.valid;
-			expect(isFormValid).toBeTruthy;
-		});
 
 		const playerEmailInputElement = inputElements[1];
 		playerEmailInputElement.value = "speler@email.com";
 		playerEmailInputElement.dispatchEvent(new Event("input"));
 		fixture.detectChanges();
-		fixture.whenStable().then(() => {
-			const isFormValid = component.form.valid;
-			expect(isFormValid).toBeTruthy;
-		});
 
 		const skillLevelSelectElement: HTMLSelectElement = selectElements[0];
 		skillLevelSelectElement.value = "Beginners";
