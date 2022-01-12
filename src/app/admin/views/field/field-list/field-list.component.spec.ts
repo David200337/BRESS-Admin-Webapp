@@ -1,5 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from 'src/app/admin/pipes/filter.pipe';
 
 import { FieldListComponent } from './field-list.component';
 
@@ -9,8 +11,8 @@ describe('FieldListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HttpClientModule ],
-      declarations: [ FieldListComponent ]
+      imports: [ HttpClientModule, NgxPaginationModule ],
+      declarations: [ FieldListComponent, FilterPipe ]
     })
     .compileComponents();
   });
