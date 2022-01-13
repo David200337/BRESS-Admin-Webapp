@@ -26,8 +26,9 @@ describe("EditFieldComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (done: DoneFn) => {
 		expect(component).toBeTruthy();
+        done();
 	});
 
 	it("should contain the same number of ui input elements as reactiveFormControls", (done: DoneFn) => {
