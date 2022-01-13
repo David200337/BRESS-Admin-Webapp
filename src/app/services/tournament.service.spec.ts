@@ -60,8 +60,6 @@ describe("TournamentService", () => {
 
 		service.getList().subscribe({
 			next: (tournaments) => {
-				console.log(fakeTournaments.result.length)
-				console.log(tournaments)
 				expect(tournaments).toHaveSize(fakeTournaments.result.length);
 				done();
 			},

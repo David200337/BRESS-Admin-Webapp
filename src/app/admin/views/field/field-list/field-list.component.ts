@@ -8,7 +8,7 @@ import { FieldService } from "src/app/services/field.service";
 	styleUrls: ["./field-list.component.scss"]
 })
 export class FieldListComponent implements OnInit {
-	public fields!: Field[];
+	public fields: Field[] = [];
 	public searchTerm!: string;
 	public tableSizes: number[] = [10, 25, 100];
 	public tableSize: number = this.tableSizes[0];

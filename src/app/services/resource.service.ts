@@ -56,7 +56,7 @@ export abstract class ResourceService<T> {
 
 	protected handleError(error: HttpErrorResponse) {
 		// Handle HTTP errors
-		console.log(error);
+		// console.log(error);
 
 		return throwError(() => error);
 	}
