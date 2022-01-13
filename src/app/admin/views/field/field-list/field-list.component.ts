@@ -23,7 +23,7 @@ export class FieldListComponent implements OnInit {
 
 	public loadFields(): void {
 		this.fieldService.getList().subscribe({
-			next: (fields) => {
+			next: (fields: any) => {
 				this.fields = fields;
 				console.log(fields);
 			},
