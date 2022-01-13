@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './services/token.interceptor';
 import { DatePipe } from '@angular/common';
@@ -20,7 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent,
   ],
   imports: [
     BrowserModule,

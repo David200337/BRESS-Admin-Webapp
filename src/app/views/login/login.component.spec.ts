@@ -2,22 +2,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CreateSkilllevelComponent } from './create-skilllevel.component';
+import { LoginComponent } from './login.component';
 
-describe('CreateSkilllevelComponent', () => {
-  let component: CreateSkilllevelComponent;
-  let fixture: ComponentFixture<CreateSkilllevelComponent>;
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, ReactiveFormsModule, RouterTestingModule],
       providers: [FormBuilder],
-      declarations: [CreateSkilllevelComponent],
+      declarations: [ LoginComponent ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateSkilllevelComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -31,27 +31,35 @@ describe('CreateSkilllevelComponent', () => {
       fixture.debugElement.nativeElement.querySelector('form');
     const inputElements = formElement.querySelectorAll('input');
 
-    expect(inputElements.length).toEqual(1);
+    expect(inputElements.length).toEqual(2);
   });
 
   it('should check if formGroup is correct', () => {
-    const skilllevelFromGroup = component.form;
-    const skilllevelFormValues = {
-      name: '',
+    const userLoginFromGroup = component.form;
+    const userLoginFormValues = {
+      email: '',
+      password: '',
     };
 
-    expect(skilllevelFromGroup.value).toEqual(skilllevelFormValues);
+    expect(userLoginFromGroup.value).toEqual(userLoginFormValues);
   });
 
   it('should check if formControls required validation is correct', () => {
     const inputElements: HTMLInputElement[] = fixture.debugElement.nativeElement
       .querySelector('form')
       .querySelectorAll('input');
-    const categoryNameInputElement: HTMLInputElement = inputElements[0];
-    const categoryNameValue = component.form.get('name');
-    expect(categoryNameInputElement.value).toEqual(categoryNameValue?.value);
-    expect(categoryNameValue?.errors).not.toBeNull();
-    expect(categoryNameValue?.errors!['required']).toBeTruthy();
+
+    const userEmailInputElement: HTMLInputElement = inputElements[0];
+    const userEmailValue = component.form.get('email');
+    expect(userEmailInputElement.value).toEqual(userEmailValue?.value);
+    expect(userEmailValue?.errors).not.toBeNull();
+    expect(userEmailValue?.errors!['required']).toBeTruthy();
+
+    const userPasswordInputElement: HTMLInputElement = inputElements[1];
+    const userPasswordValue = component.form.get('password');
+    expect(userPasswordInputElement.value).toEqual(userPasswordValue?.value);
+    expect(userPasswordValue?.errors).not.toBeNull();
+    expect(userPasswordValue?.errors!['required']).toBeTruthy();
   });
 
   it('should check if the form is valid', (done: DoneFn) => {
@@ -59,10 +67,14 @@ describe('CreateSkilllevelComponent', () => {
       .querySelector('form')
       .querySelectorAll('input');
 
-    const categoryNameInputElement = inputElements[0];
-    categoryNameInputElement.value = 'Gevorderd';
-    categoryNameInputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges()
+    const userEmailInputElement = inputElements[0];
+    const userPasswordInputElement = inputElements[1];
+    userEmailInputElement.value = 'account@mail.com';
+    userPasswordInputElement.value = 'supersecret123';
+    userEmailInputElement.dispatchEvent(new Event('input'));
+    userPasswordInputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
     const isFormValid = component.form.valid;
     fixture.whenStable().then(() => {
       expect(isFormValid).toBeTruthy();
