@@ -57,7 +57,8 @@ export class CreatePlayerComponent implements OnInit {
 			this.loaderToggle.loaderVisible();
 			const player = new Player(
 				-1,
-				this.form.value.name,
+				this.form.value.name.split(' ')[0],
+				this.form.value.name.split(' ')[1],
 				this.form.value.email,
 				0,
 				this.selectedSkillLevel

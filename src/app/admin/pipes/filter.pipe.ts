@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { Player } from "src/app/models/player.model";
 
 @Pipe({
 	name: "filterPipe"
@@ -10,7 +11,7 @@ export class FilterPipe implements PipeTransform {
 		searchTerm = searchTerm.toLowerCase();
 
 		return items.filter(
-			(elem) => elem.name.toLowerCase().indexOf(searchTerm) > -1
+			(elem) => (`${elem.firstName} ${elem.lastName}`).toLowerCase().indexOf(searchTerm) > -1
 		);
 	}
 }

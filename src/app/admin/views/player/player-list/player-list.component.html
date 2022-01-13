@@ -31,7 +31,7 @@
 					" [class.active]="i == page">
                     <td>
                         <p [routerLink]="['../players/' + player.id]">
-                            {{ player.name }}
+                            {{ player.firstName}} {{player.lastName }}
                         </p>
                         <button (click)="onDelete(player.id)">
 							<svg

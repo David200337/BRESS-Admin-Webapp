@@ -168,7 +168,7 @@ export class EditTournamentComponent implements OnInit {
 
   onSearch(event: any) {
     let key = event.target.value.toLowerCase();
-    this.filteredList = this.availablePlayers?.filter(p => p.name.toLowerCase().includes(key))
+    this.filteredList = this.availablePlayers?.filter(p => (`${p.firstName} ${p.lastName}`).toLowerCase().includes(key))
   }
 
 }
