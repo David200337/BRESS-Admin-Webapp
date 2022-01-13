@@ -94,7 +94,7 @@ describe("CreateTournamentComponent", () => {
 		expect(tournamentEntryFeeValue?.errors).not.toBeNull();
 		expect(tournamentEntryFeeValue?.errors).toBeTruthy();
 
-		done();
+        done();
 	});
 
 	it("should check if the form is valid", (done: DoneFn) => {
