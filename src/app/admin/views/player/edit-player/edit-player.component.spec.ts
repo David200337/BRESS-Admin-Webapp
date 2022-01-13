@@ -97,12 +97,10 @@ describe("EditPlayerComponent", () => {
 		const playerNameInputElement = inputElements[0];
 		playerNameInputElement.value = "Speler 1";
 		playerNameInputElement.dispatchEvent(new Event("input"));
-		fixture.detectChanges();
 
 		const playerEmailInputElement = inputElements[1];
 		playerEmailInputElement.value = "speler@email.com";
 		playerEmailInputElement.dispatchEvent(new Event("input"));
-		fixture.detectChanges();
 
 		const skillLevelSelectElement: HTMLSelectElement = selectElements[0];
 		skillLevelSelectElement.value = "Beginners";
