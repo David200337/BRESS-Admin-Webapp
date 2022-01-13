@@ -18,9 +18,7 @@ describe('EditFieldComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule],
-      providers: [
-        FormBuilder,
-      ],
+      providers: [FormBuilder],
       declarations: [EditFieldComponent],
     }).compileComponents();
   });
@@ -58,32 +56,38 @@ describe('EditFieldComponent', () => {
       .querySelector('form')
       .querySelectorAll('input');
     const fieldNameInputElement = inputElements[0];
-    fixture.detectChanges()
+    fixture.detectChanges();
     fixture.whenStable().then(() => {
       const fieldNameValue = component.form.get('name');
       expect(fieldNameInputElement.value).toEqual(fieldNameValue?.value);
       expect(fieldNameValue?.errors).not.toBeNull();
       done();
-    })
+    });
   });
 
-  // TODO: Fix this
+  // TODO: Check this for a fix - For David 
   it('should check if form is valid', (done: DoneFn) => {
     const inputElements: HTMLInputElement[] = fixture.debugElement.nativeElement
       .querySelector('form')
       .querySelectorAll('input');
     const fieldNameInputElement = inputElements[0];
-    fieldNameInputElement.value = 'Zaal 1'
+    fieldNameInputElement.value = 'Zaal 1';
     const fieldAvailabilityInputElement = inputElements[1];
-    fieldNameInputElement.dispatchEvent(new Event('input'))
-    fieldAvailabilityInputElement.dispatchEvent(new Event('click'))
-    fixture.detectChanges()
+    fieldNameInputElement.dispatchEvent(new Event('input'));
+    dispatchEvent(new Event('click'))
+    fixture.detectChanges();
     fixture.whenStable().then(() => {
-      console.warn(component.form.get('name')?.value, component.form.get('isAvailable')?.value)
-      console.warn(fieldNameInputElement.value, fieldAvailabilityInputElement.value)
+      console.warn(
+        component.form.get('name')?.value,
+        component.form.get('isAvailable')?.value
+      );
+      console.warn(
+        fieldNameInputElement.value,
+        fieldAvailabilityInputElement.value
+      );
       const isFormValid = component.form.valid;
-      expect(isFormValid).toBeTruthy()
+      expect(isFormValid).toBeTruthy();
       done();
-    })
+    });
   });
 });
