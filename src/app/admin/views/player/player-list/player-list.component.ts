@@ -8,7 +8,7 @@ import { PlayerService } from "src/app/services/player.service";
 	styleUrls: ["./player-list.component.scss"]
 })
 export class PlayerListComponent implements OnInit {
-	public players!: Player[];
+	public players: Player[] = [];
 	public searchTerm!: string;
 	public tableSizes: number[] = [10, 25, 100];
 	public tableSize: number = this.tableSizes[0];

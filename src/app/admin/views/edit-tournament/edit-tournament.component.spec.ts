@@ -28,19 +28,21 @@ describe("EditTournamentComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should edit", () => {
+	it("should edit", (done: DoneFn) => {
 		expect(component).toBeTruthy();
+        done();
 	});
 
-	it("should contain the same number of ui input elements as reactiveFormControls", () => {
+	it("should contain the same number of ui input elements as reactiveFormControls", (done: DoneFn) => {
 		const formElement =
 			fixture.debugElement.nativeElement.querySelector("form");
 		const inputElements = formElement.querySelectorAll("input");
 
 		expect(inputElements.length).toEqual(4);
+        done();
 	});
 
-	it("should check if formGroup is correct", () => {
+	it("should check if formGroup is correct", (done: DoneFn) => {
 		const playerFromGroup = component.form;
 		const playerFormValues = {
 			title: "",
@@ -50,9 +52,10 @@ describe("EditTournamentComponent", () => {
 		};
 
 		expect(playerFromGroup.value).toEqual(playerFormValues);
+        done();
 	});
 
-	it("should check if formControls required validation is correct", () => {
+	it("should check if formControls required validation is correct", (done: DoneFn) => {
 		const inputElements: HTMLInputElement[] =
 			fixture.debugElement.nativeElement
 				.querySelector("form")
@@ -91,9 +94,11 @@ describe("EditTournamentComponent", () => {
 		);
 		expect(tournamentEntryFeeValue?.errors).not.toBeNull();
 		expect(tournamentEntryFeeValue?.errors).toBeTruthy();
+
+        done();
 	});
 
-	it("should check if the form is valid", () => {
+	it("should check if the form is valid", (done: DoneFn) => {
 		const inputElements: HTMLInputElement[] =
 			fixture.debugElement.nativeElement
 				.querySelector("form")
@@ -117,5 +122,13 @@ describe("EditTournamentComponent", () => {
 		const tournamentEntryFeeInputElement = inputElements[3];
 		tournamentEntryFeeInputElement.value = "1";
 		tournamentEntryFeeInputElement.dispatchEvent(new Event("input"));
+
+        fixture.detectChanges();
+		fixture.whenStable().then(() => {
+			const isFormValid = component.form.valid;
+
+			expect(isFormValid).toBeTruthy();
+            done();
+		});
 	});
 });
