@@ -1,7 +1,10 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
 import { createSpyFromClass, Spy } from "jasmine-auto-spies";
-import { of } from "rxjs";
+import { map, of, tap } from "rxjs";
+import { Game } from "../models/game.model";
+import { Player } from "../models/player.model";
+import { SkillLevel } from "../models/skillLevel.model";
 import { Tournament } from "../models/tournament.model";
 
 import { TournamentService } from "./tournament.service";
@@ -9,6 +12,33 @@ import { TournamentService } from "./tournament.service";
 describe("TournamentService", () => {
 	let service: TournamentService;
 	let httpSpy: Spy<HttpClient>;
+	const mockPlayer1 = new Player(
+		1,
+		'player1',
+		'email',
+		0,
+		new SkillLevel(0, 'skillLever')
+	);
+	const mockPlayer2 = new Player(
+		2,
+		'player2',
+		'email',
+		0,
+		new SkillLevel(0, 'skillLever')
+	);
+	const mockGame = new Game(
+		0,
+		'score',
+		0,
+		true,
+		false,
+		undefined,
+		mockPlayer1,
+		mockPlayer2
+	);
+	const mockGameQueueResponse =  { result: [
+		mockGame
+	]};
 	let fakeTournaments = { result: [
 		{
 			id: 0,
@@ -35,6 +65,10 @@ describe("TournamentService", () => {
 			hasStarted: false
 		}]
 	}
+	const mockScores = [
+		[11, 9, 11],
+		[9, 11, 9]
+	];
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -135,5 +169,67 @@ describe("TournamentService", () => {
 		});
 
 		expect(httpSpy.delete.calls.count()).toBe(1);
+	});
+	
+    it('shoul return a poolGame queue for a given tournamentId', (done: DoneFn) => {
+		httpSpy.get.and.nextWith(mockGameQueueResponse);
+		service.getPoolQueue(0).subscribe({
+			next: (response) => {			
+				expect(response).toEqual(mockGameQueueResponse.result);
+				done();
+			},
+			error: () => {
+				done.fail()
+			}
+		});
+	})
+
+	it('shoul return a finalGame queue for a given tournamentId', (done: DoneFn) => {
+		httpSpy.get.and.nextWith(mockGameQueueResponse);
+		service.getFinaleQueue(0).subscribe({
+			next: (response) => {			
+				expect(response).toEqual(mockGameQueueResponse.result);
+				done();
+			},
+			error: () => {
+				done.fail()
+			}
+		});
+	});
+
+	it('should update poolGame scores', (done: DoneFn) => {
+		const updatedGameResponse = { result: mockGame };
+		updatedGameResponse.result.score = '2 - 1'
+
+		httpSpy.put.and.nextWith(updatedGameResponse);
+		service.updatePoolGame(0, mockGame.id, mockScores).subscribe({
+			next: (response) => {
+				expect(response).toEqual(updatedGameResponse.result);
+				done();
+			},
+			error: () => {
+				done.fail()
+			}
+		});
+	});
+
+	it('should update finalGame scores', (done: DoneFn) => {
+		const updatedGameResponse = { result: mockGame };
+		updatedGameResponse.result.score = '2 - 1'
+
+		httpSpy.put.and.nextWith(updatedGameResponse);
+		service.updateFinalGame(0, mockGame.id, mockScores).pipe(
+            map((item: any) => {
+                return item.result;
+            })
+        ).subscribe({
+			next: (response) => {			
+				expect(response).toEqual(updatedGameResponse.result);
+				done();
+			},
+			error: () => {
+				done.fail()
+			}
+		});
 	});
 });
