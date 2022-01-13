@@ -17,12 +17,10 @@ import { TournamentDetailComponent } from './admin/views/tournament-detail/tourn
 import { TournamentOverviewComponent } from './admin/views/tournament-overview/tournament-overview.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
   { path: "login", pathMatch: "full", component: LoginComponent },
-  { path: "register", pathMatch: "full", component: RegisterComponent },
   { path: "dashboard", pathMatch: "full", component: DashboardComponent, canActivate: [AuthGuard] },
   { path: "create-tournament", pathMatch: "full", component: CreateTournamentComponent, canActivate: [AuthGuard] },
   { path: "tournament/:id", pathMatch: "full", component: TournamentOverviewComponent, canActivate: [AuthGuard] },
