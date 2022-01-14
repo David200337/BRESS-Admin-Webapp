@@ -14,14 +14,16 @@ describe('PlayerService', () => {
     let mockPlayers = [
         new Player(
             0,
-            'name0',
+            'name',
+            "0",
             'email',
             0,
             mockSkillLevel,
         ),
         new Player(
             1,
-            'name1',
+            'name',
+            "1",
             'email',
             0,
             mockSkillLevel,
@@ -50,7 +52,8 @@ describe('PlayerService', () => {
     it('should create a new player', (done: DoneFn) => {
         const newPlayer = new Player(
             200,
-            'name200',
+            'name',
+            "200",
             'email',
             0,
             mockSkillLevel
@@ -72,7 +75,8 @@ describe('PlayerService', () => {
     it('should update a player with a given id', (done: DoneFn) => {
         const updatedPlayer = new Player(
             0,
-            'name200',
+            'name',
+            "200",
             'email',
             0,
             mockSkillLevel
