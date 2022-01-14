@@ -94,7 +94,7 @@ Cypress.Commands.add('getFields', () => {
 
   Cypress.Commands.add('getPoolGames', () => {
     cy.intercept(
-      { method: 'GET', url: '**​/api​/tournament​/15​/generatepoolqueue' },
+      { method: 'GET', url: '**/api/tournament/15/generatepoolqueue' },
       {
         statusCode: 200,
         fixture: 'poolQueue.json',
@@ -104,7 +104,7 @@ Cypress.Commands.add('getFields', () => {
 
   Cypress.Commands.add('getFinaleGames', () => {
     cy.intercept(
-      { method: 'GET', url: '**/api/tournament/15/generatefinalequeue' },
+      { method: 'GET', url: '**/api/tournament/15/GenerateFinaleQueue' },
       {
         statusCode: 200,
         fixture: 'finaleQueue.json',
@@ -114,7 +114,7 @@ Cypress.Commands.add('getFields', () => {
 
   Cypress.Commands.add('getTournament', () => {
     cy.intercept(
-      { method: 'GET', url: '**​/api​/tournament​/15​' },
+      { method: 'GET', url: '**/api/tournament/15' },
       {
         statusCode: 200,
         fixture: 'tournament.json',
@@ -136,9 +136,7 @@ Cypress.Commands.add('login', () => {
   Cypress.Commands.add('gamesOverview', () => {
     cy.getTournament();
     cy.get('.tournamentList').find('.tournamentItem').eq(0).find('button').click();
-
     cy.getPoolGames();
     cy.getFinaleGames();
     cy.get('.overviewBodyCollumn').find('.overviewBodyElement').eq(3).find('button').click();
-    
   });
