@@ -22,7 +22,7 @@
                 <div class="all-pools" *ngIf="!hasFinales">
                     <div class="pools">
                         <div *ngFor="let pool of pools$ | async">
-                            <h3>Poule {{pool.id}}</h3>
+                            <h3>Poule {{pool.poolNumber}}</h3>
 
                             <app-pool-players-item [pool]="pool"></app-pool-players-item>
                         </div>

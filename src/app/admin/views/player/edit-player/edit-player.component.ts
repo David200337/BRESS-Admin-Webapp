@@ -63,7 +63,7 @@ export class EditPlayerComponent implements OnInit {
 
 					if (this.player?.skillLevel) {
 						this.form.setValue({
-							name: this.player?.name,
+							name: this.player?.firstName,
 							email: this.player?.email,
 							skillLevel: this.player?.skillLevel
 						});
@@ -105,7 +105,8 @@ export class EditPlayerComponent implements OnInit {
 		) {
 			const updatedPlayer = new Player(
 				this.playerId,
-				this.form.value.name,
+				this.form.value.name.split(' ')[0],
+				this.form.value.name.split(' ')[1],
 				this.form.value.email,
 				this.player.score,
 				this.selectedSkillLevel

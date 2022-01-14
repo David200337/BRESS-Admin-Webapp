@@ -18,7 +18,8 @@ export class PlayerService extends ResourceService<Player> {
 
     public override add(resource: Player): Observable<any> {
         const body = {
-            name: resource.name,
+            firstName: resource.firstName,
+            lastName: resource.lastName,
             email: resource.email,
             skillLevelId: resource.skillLevel.id
         };
@@ -30,7 +31,8 @@ export class PlayerService extends ResourceService<Player> {
 
     public override update(id: number, resource: Player): Observable<Player> {
         const body = {
-            name: resource.name,
+            firstName: resource.firstName,
+            lastName: resource.lastName,
             email: resource.email,
             skillLevelId: resource.skillLevel.id
         }

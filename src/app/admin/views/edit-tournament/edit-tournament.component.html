@@ -124,7 +124,7 @@
                     <tr *ngFor="let player of tournament?.players">
                         <td *ngIf="!showSearch">
                             <div>
-                                <p>{{player.name}}</p>
+                                <p>{{player.firstName}} {{player.lastName}}</p>
                                 <button (click)="onRemovePlayer(player.id)">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@
                     <tr *ngFor="let player of filteredList">
                         <td *ngIf="showSearch">
                             <div>
-                                <p>{{player.name}}</p>
+                                <p>{{player.firstName}} {{player.lastName}}</p>
                                 <button (click)="onAddPlayer(player.id)">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
