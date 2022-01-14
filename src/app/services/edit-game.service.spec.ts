@@ -17,7 +17,7 @@ describe('EditGameService', () => {
 
     const mockField = new Field(0, "mockField", false);
     const mockSkillLevel = new SkillLevel(0, "mockSkillLevel");
-    const mockPlayer = new Player(0, "mockPlayer", "email", 0, mockSkillLevel);
+    const mockPlayer = new Player(0, "mock", "Player", "email", 0, mockSkillLevel);
     let mockPoolGame = new PoolGame(
         0,
         "",

@@ -14,14 +14,16 @@ describe("TournamentService", () => {
 	let httpSpy: Spy<HttpClient>;
 	const mockPlayer1 = new Player(
 		1,
-		'player1',
+		'player',
+		'1',
 		'email',
 		0,
 		new SkillLevel(0, 'skillLever')
 	);
 	const mockPlayer2 = new Player(
 		2,
-		'player2',
+		'player',
+		'2',
 		'email',
 		0,
 		new SkillLevel(0, 'skillLever')

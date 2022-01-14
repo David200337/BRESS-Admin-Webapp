@@ -108,7 +108,7 @@ export class EditPlayerComponent implements OnInit {
 				this.form.value.name.split(' ')[0],
 				this.form.value.name.split(' ')[1],
 				this.form.value.email,
-				this.player.score,
+				this.player.scores,
 				this.selectedSkillLevel
 			);
 
