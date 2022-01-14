@@ -22,8 +22,6 @@ export class PoolPlayersItemComponent implements OnInit {
 
     this.pool.players.forEach(p => {
       p.score = p.scores.filter(s => {
-        console.log(s);
-        
         return s.tournament?.id?? 0 == this.tournamentId;
       })[0].score;
     })
