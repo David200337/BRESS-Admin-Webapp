@@ -17,6 +17,9 @@
 // import './commands';
 
 declare namespace Cypress {
+    interface Chainable<Subject = any> {
+        login(): Chainable<null>;
+    }
   interface Chainable<Subject = any> {
     userLogin(): Chainable<null>;
   }
@@ -75,4 +78,16 @@ Cypress.Commands.add('getFields', () => {
         fixture: 'fields.json',
       }
     ).as('getFields');
+  });
+
+  
+Cypress.Commands.add('login', () => {
+    cy.visit('/login')
+    cy.get('input').eq(0).type('j.doe@email.nl')
+    cy.get('input').eq(1).type('supersecret')
+    cy.userLogin()
+    cy.getTournaments()
+    cy.getPlayers()
+    cy.getFields()
+    cy.get('button').click()
   });
