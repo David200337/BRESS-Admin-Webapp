@@ -32,6 +32,18 @@ declare namespace Cypress {
   interface Chainable<Subject = any> {
     getFields(): Chainable<null>;
   }
+  interface Chainable<Subject = any> {
+    getPoolGames(): Chainable<null>;
+  }
+  interface Chainable<Subject = any> {
+    getFinaleGames(): Chainable<null>;
+  }
+  interface Chainable<Subject = any> {
+    gamesOverview(): Chainable<null>;
+  }
+  interface Chainable<Subject = any> {
+    getTournament(): Chainable<null>;
+  }
 }
 
 Cypress.Commands.add('userLogin', () => {
@@ -89,4 +101,62 @@ Cypress.Commands.add('login', () => {
   cy.getPlayers();
   cy.getFields();
   cy.get('button').click();
+});
+
+Cypress.Commands.add('getPoolGames', () => {
+  cy.intercept(
+    { method: 'GET', url: '**​/api​/tournament​/15​/generatepoolqueue' },
+    {
+      statusCode: 200,
+      fixture: 'poolQueue.json',
+    }
+  ).as('getPoolQueue');
+});
+
+Cypress.Commands.add('getFinaleGames', () => {
+  cy.intercept(
+    { method: 'GET', url: '**/api/tournament/15/generatefinalequeue' },
+    {
+      statusCode: 200,
+      fixture: 'finaleQueue.json',
+    }
+  ).as('getFinaleQueue');
+});
+
+Cypress.Commands.add('getTournament', () => {
+  cy.intercept(
+    { method: 'GET', url: '**​/api​/tournament​/15​' },
+    {
+      statusCode: 200,
+      fixture: 'tournament.json',
+    }
+  ).as('getTournament');
+});
+
+Cypress.Commands.add('login', () => {
+  cy.visit('/login');
+  cy.get('input').eq(0).type('j.doe@email.nl');
+  cy.get('input').eq(1).type('supersecret');
+  cy.userLogin();
+  cy.getTournaments();
+  cy.getPlayers();
+  cy.getFields();
+  cy.get('button').click();
+});
+
+Cypress.Commands.add('gamesOverview', () => {
+  cy.getTournament();
+  cy.get('.tournamentList')
+    .find('.tournamentItem')
+    .eq(0)
+    .find('button')
+    .click();
+
+  cy.getPoolGames();
+  cy.getFinaleGames();
+  cy.get('.overviewBodyCollumn')
+    .find('.overviewBodyElement')
+    .eq(3)
+    .find('button')
+    .click();
 });

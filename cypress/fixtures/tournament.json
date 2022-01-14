@@ -1,0 +1,47 @@
+{
+    "result": {
+            "id": 15,
+            "title": "toernooi",
+            "beginDateTime": "2022-01-12T00:00:00",
+            "entryFee": 1,
+            "maxPlayers": 32,
+            "minPlayers": 0,
+            "idealPoolSize": 0,
+            "hasStarted": true,
+            "categories": null,
+            "players": [{
+                    "id": 1,
+                    "firstName": "Sem",
+                    "lastName": "Pfizer",
+                    "email": "Sem@gmail.com",
+                    "skillLevel": null,
+                    "fbToken": "fbToken",
+                    "scores": null,
+                    "tournaments": [null],
+                    "pools": null
+                },
+                {
+                    "id": 2,
+                    "firstName": "Daan",
+                    "lastName": "Janssen",
+                    "email": "Daan@gmail.com",
+                    "skillLevel": null,
+                    "fbToken": null,
+                    "scores": null,
+                    "tournaments": [null],
+                    "pools": null
+                },
+                {
+                    "id": 3,
+                    "firstName": "Luuk",
+                    "lastName": "Janssen",
+                    "email": "Luuk@gmail.com",
+                    "skillLevel": null,
+                    "fbToken": null,
+                    "scores": null,
+                    "tournaments": [null],
+                    "pools": null
+                }
+            ]
+        }
+}
