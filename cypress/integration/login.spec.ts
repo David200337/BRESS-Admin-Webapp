@@ -40,7 +40,7 @@ describe('Login test', () => {
   })
 
   it('should succesfully log in', () => {
-    cy.visit('/')
+    cy.visit('/login')
     cy.get('input').eq(0).type('j.doe@email.nl')
     cy.get('input').eq(1).type('supersecret')
     cy.get('button').should('have.length', 1)
