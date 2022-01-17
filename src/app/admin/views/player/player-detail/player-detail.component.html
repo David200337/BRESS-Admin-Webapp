@@ -1,15 +1,19 @@
-<div class="overviewBodyData">
-	<div class="overviewBodyElement">
-		<div class="dataLabel">Naam</div>
-		<div class="dataContent">{{ player?.name }}</div>
+<div class="container">
+	<div class="card">
+		<h1>{{ player?.firstName }} {{ player?.lastName }}</h1>
+		<div class="card-element">
+			<b>Email</b>
+			<div>{{ player?.email }}</div>
+		</div>
+		<div class="card-element">
+			<b>Skill level</b>
+			<div>{{ player?.skillLevel?.name }}</div>
+		</div>
+
+        <div class="overViewBodyButtonGroup">
+            <button class="button-dark" routerLink="edit">Wijzigen</button>
+            <button class="button-dark" routerLink="../../dashboard">Annuleren</button>
+        </div>
+
 	</div>
-	<div class="overviewBodyElement">
-		<div class="dataLabel">Email</div>
-		<div class="dataContent">{{player?.email}}</div>
-	</div>
-	<div class="overviewBodyElement">
-		<div class="dataLabel">Skill level</div>
-		<div class="dataContent">{{player?.skillLevel?.name}}</div>
-	</div>
-    <button class="button-dark" routerLink="edit">Wijzigen</button>
 </div>

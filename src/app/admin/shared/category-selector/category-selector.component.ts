@@ -18,7 +18,7 @@ export class CategorySelectorComponent implements OnInit {
     this.selectedCategoryList = new Array(this.categoryList.length).fill(false);
     this.selectedCategoryList[0] = true;
     this.selectedCategoryEvent.emit(this.categoryList[0]);
-    
+
   }
 
   /**
@@ -30,5 +30,11 @@ export class CategorySelectorComponent implements OnInit {
     this.selectedCategoryList = new Array(this.categoryList.length).fill(false);
     this.selectedCategoryList[i] = true;
     this.selectedCategoryEvent.emit(c);
+  }
+
+  selectCategoryByIndex(i: number) {
+    this.selectedCategoryList = new Array(this.categoryList.length).fill(false);
+    this.selectedCategoryList[i] = true;
+    this.selectedCategoryEvent.emit(this.categoryList[i]);
   }
 }

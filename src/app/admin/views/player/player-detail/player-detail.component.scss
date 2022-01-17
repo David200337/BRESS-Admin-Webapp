@@ -1,30 +1,35 @@
-@import '../../../../../styles.scss';
+@import "../../../../../styles.scss";
 
-.overviewBodyElement {
-    width: 100%;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: 100%;
 }
 
-.button-long {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.card {
+    width: 50vw;
+    height: auto;
+    padding: 20px;
+    background-color: $orange-primary;
+    color: #FFF;
+}
+
+.card-element {
+	width: 100%;
+    margin-top: 10px;
+
+    div {
+        margin-bottom: 10px;
+    }
 }
 
 .overViewBodyButtonGroup {
-    display: flex; 
-    flex-direction: row;
-    gap: 25px
+	display: flex;
+	flex-direction: row;
+	gap: 25px;
 }
 
-.overviewBodyData {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    background-color: $white-bg-dark;
-    padding: 25px;
-}
-
-.dataLabel {
-    font-weight: 700;
+button {
+    margin-top: 20px;
 }

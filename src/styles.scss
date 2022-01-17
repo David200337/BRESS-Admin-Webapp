@@ -116,6 +116,7 @@ table {
             background-color: #EEEEEE;
         }
         tr {
+            background-color: #FFFFFF;
             border-top: 1px solid #707070;
             td {
                 padding: 10px 20px;
@@ -140,3 +141,8 @@ table {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Pagination
+.ngx-pagination .current {
+    background: #FF7C00 !important;
+}

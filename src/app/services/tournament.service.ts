@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { Category } from "../models/category.model";
 import { FinalGame } from "../models/finalGame.model";
 import { Game } from "../models/game.model";
@@ -181,14 +181,14 @@ export class TournamentService extends ResourceService<Tournament> {
 	public updatePoolGame(
 		tournamentId: number,
 		gameId: number,
-		score: boolean[]
+		score: number[][]
 	): Observable<PoolGame> {
 		return this.httpClient
-			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, { sets: score })
+			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, { scorePlayer1: score[0], scorePlayer2: score[1] })
 			.pipe(
 				map((item) => {
 					return item.result;
-				})
+				}),
 			);
 	}
 
@@ -206,6 +206,8 @@ export class TournamentService extends ResourceService<Tournament> {
 		categoryId: number,
 		finaleId: number
 	): Observable<FinalGame> {
+		console.log(`${tournamentId}, ${categoryId}, ${finaleId}`);
+		
 		return this.httpClient.get<FinalGame>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/finale/${finaleId}`
 		);
@@ -214,11 +216,11 @@ export class TournamentService extends ResourceService<Tournament> {
 	public updateFinalGame(
 		tournamentId: number,
 		finaleId: number,
-		score: boolean[]
+		score: number[][]
 	): Observable<FinalGame> {
 		return this.httpClient.put<FinalGame>(
 			`${this.APIUrl}/${tournamentId}/finale/${finaleId}`,
-			{ sets: score }
+			{ scorePlayer1: score[0], scorePlayer2: score[1] }
 		);
 	}
 

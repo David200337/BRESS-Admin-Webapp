@@ -7,9 +7,9 @@ import { environment } from "src/environments/environment";
 	providedIn: "root"
 })
 export abstract class ResourceService<T> {
-	protected readonly APIUrl = `https://bress-api.azurewebsites.net/api${this.getResourceUrl()}`;
+	protected readonly APIUrl = `https://serverbuijsen.nl/api${this.getResourceUrl()}`;
 
-	constructor(protected httpClient: HttpClient) {}
+	constructor(protected httpClient: HttpClient) { }
 
 	abstract getResourceUrl(): string;
 
@@ -56,7 +56,7 @@ export abstract class ResourceService<T> {
 
 	protected handleError(error: HttpErrorResponse) {
 		// Handle HTTP errors
-		console.log(error);
+		// console.log(error);
 
 		return throwError(() => error);
 	}

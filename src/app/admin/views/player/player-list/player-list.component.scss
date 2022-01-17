@@ -1,21 +1,22 @@
 table {
 	border: none;
 	width: 100%;
-	td {
-		div {
-			display: flex;
-			p {
-				margin: auto 0;
-			}
-			button {
-				margin-left: auto;
-				border: none;
-				background: none;
-				margin: auto 0 auto auto;
-				cursor: pointer;
-			}
+    td {
+        display: flex;
+        margin-top: 0;
+
+        p {
+			margin: auto 0;
 		}
-	}
+
+        button {
+			margin-left: auto;
+			border: none;
+			background: none;
+			margin: auto 0 auto auto;
+			cursor: pointer;
+		}
+    }
 
 	tr {
 		cursor: pointer;
@@ -23,5 +24,44 @@ table {
 }
 
 input {
-    border-radius: 0;
+	border-radius: 0;
+}
+
+.overviewHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 25px;
+	flex-wrap: wrap;
+}
+
+.tableControls {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	select {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+}
+
+input {
+	width: 100%;
+	padding: 14px 20px;
+	margin-top: 8px;
+	background: #746e6e;
+	box-sizing: border-box;
+	color: #fff;
+}
+
+input::placeholder {
+	color: #fff;
+	opacity: 1;
+	font-size: 16px;
 }

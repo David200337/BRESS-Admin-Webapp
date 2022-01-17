@@ -6,7 +6,7 @@ import { Category } from 'src/app/models/category.model';
 import { EditGameService } from 'src/app/services/edit-game.service';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { TournamentService } from 'src/app/services/tournament.service';
-import { Tournament } from 'src/app/shared/tournament-bracket/declarations/interfaces';
+import { TournamentInterface } from 'src/app/shared/tournament-bracket/declarations/interfaces';
 
 @Component({
   selector: 'app-category-bracket',
@@ -15,7 +15,7 @@ import { Tournament } from 'src/app/shared/tournament-bracket/declarations/inter
 })
 export class CategoryBracketComponent implements OnInit, OnDestroy {
 
-  myTournamentData: Tournament = {
+  myTournamentData: TournamentInterface = {
     rounds: [
       {
         type: 'Winnerbracket',
@@ -207,7 +207,7 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
               const scorePlayer1: number = game.score == null ? 0 : game.score.split(" - ")[0];
               const scorePlayer2: number = game.score == null ? 0 : game.score.split(" - ")[1];
               const gamePlayed: boolean = scorePlayer1 != 0 || scorePlayer2 != 0;
-              gameList.push({ teams: [{ name: game.player1.name, score: scorePlayer1, gamePlayed }, { name: game.player2.name, score: scorePlayer2, gamePlayed }], id: game.id });
+              gameList.push({ teams: [{ name: game.player1.firstName, score: scorePlayer1, gamePlayed }, { name: game.player2.firstName, score: scorePlayer2, gamePlayed }], id: game.id });
             }
 
             round.matches = gameList;

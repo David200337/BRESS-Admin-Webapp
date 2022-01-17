@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="pool != undefined">
     <thead>
         <tr>
             <th>Speler</th>
@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let player of pool.players">
-            <td>{{player.name}}</td>
+            <td>{{player.firstName}} {{player.lastName}}</td>
             <td>{{player.score}}</td>
         </tr>
     </tbody>
