@@ -108,6 +108,7 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
       return 0;
     });
     this.games = games;
+    this.loaderToggle.loaderInvisible();
   }
 
   selectGame(game: Game) {
