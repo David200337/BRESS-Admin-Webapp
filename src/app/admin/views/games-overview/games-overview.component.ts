@@ -10,11 +10,11 @@ import { TournamentService } from 'src/app/services/tournament.service';
 @Component({
   selector: 'app-games-overview',
   templateUrl: './games-overview.component.html',
-  styleUrls: ['./games-overview.component.scss']
+  styleUrls: ['./games-overview.component.scss'],
 })
 export class GamesOverviewComponent implements OnInit, OnDestroy {
   tournamentId!: number;
-  tournament!: Tournament
+  tournament!: Tournament;
   games!: Game[];
   activeGames!: Game[];
   futureGames!: Game[];
@@ -29,7 +29,7 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     private tournamentService: TournamentService,
     public editGameService: EditGameService,
     private route: ActivatedRoute,
-    private loaderToggle: LoaderToggleService,
+    private loaderToggle: LoaderToggleService
   ) {
     this.showPopup = false;
     loaderToggle.loaderVisible();
@@ -44,31 +44,34 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
 
     this.editGameService.tournamentId = this.tournamentId;
 
-    this.tournamentService.get(this.tournamentId)
-        .subscribe(res => this.tournament = res)
+    this.tournamentService
+      .get(this.tournamentId)
+      .subscribe((res) => (this.tournament = res));
 
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
-    ).pipe(
-      tap(res => console.log(res)),
-      tap(g => gamesList.push(...g)),
-      tap(() => this.sortGames(gamesList)),
-    ).subscribe()
+    )
+      .pipe(
+        tap((res) => console.log(res)),
+        tap((g) => gamesList.push(...g)),
+        tap(() => this.sortGames(gamesList))
+      )
+      .subscribe()
       .add(() => {
         this.games = gamesList;
         this.loaderToggle.loaderInvisible();
-        this.startRefresh()
+        this.startRefresh();
       });
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   }
 
   startRefresh() {
     this.interval = setInterval(() => {
-      this.refreshGames()
+      this.refreshGames();
     }, 10000);
   }
 
@@ -78,11 +81,10 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
    * sort the provided games array into started games, the next game and all future games
    */
   sortGames(games: Game[]) {
-
     let sortedActive: Game[] = [];
     let sortedFuture: Game[] = [];
 
-    games.forEach(g => {
+    games.forEach((g) => {
       if (!g.score) {
         if (g.field) {
           sortedActive.push(g);
@@ -94,6 +96,17 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     this.activeGames = sortedActive;
     this.futureGames = sortedFuture;
     this.nextGame = [this.futureGames.shift()!];
+    this.activeGames = this.activeGames.sort((a, b) => {
+      if (a.field!.name > b.field!.name) {
+        return 1;
+      }
+
+      if (a.field!.name < b.field!.name) {
+        return -1;
+      }
+
+      return 0;
+    });
     this.games = games;
   }
 
@@ -108,10 +121,11 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     concat(
       this.tournamentService.getPoolQueue(this.tournamentId),
       this.tournamentService.getFinaleQueue(this.tournamentId)
-    ).pipe(
-      tap(g => gameList.push(...g))
-    ).subscribe().add(() => {
-      this.sortGames(gameList)
-    })
+    )
+      .pipe(tap((g) => gameList.push(...g)))
+      .subscribe()
+      .add(() => {
+        this.sortGames(gameList);
+      });
   }
 }
