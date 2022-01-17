@@ -221,7 +221,6 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
 
   startRefresh() {
     this.interval = setInterval(() => {
-      this.setDefaultBracket();
       this.selectedCategoryIndex++;
       if (this.selectedCategoryIndex > 2) {
         this.selectedCategoryIndex = 0;
@@ -286,6 +285,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   }
 
   createBracket(categoryId: number): void {
+    this.setDefaultBracket();
     let category: any = {};
     this.tournament.categories.forEach((cat: any) => {
       if (cat.id == categoryId) {
