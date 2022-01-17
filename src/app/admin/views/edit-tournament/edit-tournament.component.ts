@@ -155,6 +155,7 @@ export class EditTournamentComponent implements OnInit {
     searchbar.value = '';
 
     this.toBeAdded.push(playerId)
+    this.tournament?.players.push()
   }
 
 
