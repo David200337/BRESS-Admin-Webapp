@@ -1,0 +1,43 @@
+{
+    "result": [{
+            "id": 1,
+            "name": "Zaal 1",
+            "isAvailable": false
+        },
+        {
+            "id": 2,
+            "name": "Zaal 2",
+            "isAvailable": false
+        },
+        {
+            "id": 3,
+            "name": "Zaal 3",
+            "isAvailable": false
+        },
+        {
+            "id": 4,
+            "name": "Zaal 4",
+            "isAvailable": false
+        },
+        {
+            "id": 5,
+            "name": "Zaal 5",
+            "isAvailable": false
+        },
+        {
+            "id": 6,
+            "name": "Zaal 6",
+            "isAvailable": false
+        },
+        {
+            "id": 11,
+            "name": "Zaal 7",
+            "isAvailable": false
+        },
+        {
+            "id": 12,
+            "name": "Zaal 8",
+            "isAvailable": false
+        }
+    ]
+}

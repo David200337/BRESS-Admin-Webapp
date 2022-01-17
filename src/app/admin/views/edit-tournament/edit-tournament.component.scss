@@ -1,3 +1,4 @@
+@import '../../../../styles.scss';
 
 h1 {
     margin-top: 50px;
@@ -114,4 +115,16 @@ form {
 
 .invisible{
     display: none !important;
+}
+
+.noPlayers {
+    border: none;
+    font-size: small;
+    color: $grey-primary;
+    text-align: center;
+    padding: 25px;
+
+    tr {
+        border: none;
+    }
 }
