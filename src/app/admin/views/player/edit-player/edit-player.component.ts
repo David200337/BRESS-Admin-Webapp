@@ -50,7 +50,8 @@ export class EditPlayerComponent implements OnInit {
 		});
 
 		this.form = this.formBuilder.group({
-			name: ["", Validators.required],
+			firstName: ["", Validators.required],
+            lastName: ["", Validators.required],
 			email: ["", Validators.required],
 			skillLevel: ["", Validators.required]
 		});
@@ -59,11 +60,11 @@ export class EditPlayerComponent implements OnInit {
 			this.sub = this.playerService.get(this.playerId).subscribe({
 				next: (response: any) => {
 					this.player = response;
-					console.log(this.player);
 
 					if (this.player?.skillLevel) {
 						this.form.setValue({
-							name: this.player?.firstName,
+							firstName: this.player?.firstName,
+                            lastName: this.player?.lastName,
 							email: this.player?.email,
 							skillLevel: this.player?.skillLevel
 						});
@@ -105,8 +106,8 @@ export class EditPlayerComponent implements OnInit {
 		) {
 			const updatedPlayer = new Player(
 				this.playerId,
-				this.form.value.name.split(' ')[0],
-				this.form.value.name.split(' ')[1],
+				this.form.value.firstName,
+				this.form.value.lastName,
 				this.form.value.email,
 				this.player.scores,
 				this.selectedSkillLevel
