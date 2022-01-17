@@ -95,7 +95,6 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     this.futureGames = sortedFuture;
     this.nextGame = [this.futureGames.shift()!];
     this.games = games;
-    this.loaderToggle.loaderInvisible();
   }
 
   selectGame(game: Game) {
