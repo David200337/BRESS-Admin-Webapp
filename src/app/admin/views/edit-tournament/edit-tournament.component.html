@@ -111,16 +111,51 @@
                         <td class="search-box" [class.invisible]="!showSearch">
                             <div class="form-group" class="search-box-container">
                                 <label for="searchPlayers" class="search-box-container-label">Voeg speler toe:</label>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x search-box-container-close"
-                                    (click)="searchInvisible()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x search-box-container-close" (click)="searchInvisible()">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
-                                <input id="searchPlayers" class="search-box-container-input" type="text" placeholder="Zoeken..."  (keyup)="onSearch($event)"/>
+                                <div *ngIf="playersErrorMessage" class="errorElement">
+                                    <small>
+                                        {{ playersErrorMessage }}
+                                    </small>
+                                </div>
+                                <input id="searchPlayers" class="search-box-container-input" type="text" placeholder="Zoeken..." (keyup)="onSearch($event)" />
                             </div>
                         </td>
                     </tr>
+                    <ng-container *ngIf="!showSearch && toBeAdded.length > 0">
+                        <tr>
+                            <td>
+                                <div>
+                                    Geselecteerde spelers voor toevoegen:
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let player of toBeAdded">
+                            <td>
+                                <div>
+                                    {{ player.firstName }} {{player.lastName}}
+                                    <button (click)="onRemoveToBeAddedPlayer(player)">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-x">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
                     <tr *ngFor="let player of tournament?.players">
                         <td *ngIf="!showSearch">
                             <div>
@@ -149,7 +184,7 @@
                         <td *ngIf="showSearch">
                             <div>
                                 <p>{{player.firstName}} {{player.lastName}}</p>
-                                <button (click)="onAddPlayer(player.id)">
+                                <button (click)="onAddPlayer(player)">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"

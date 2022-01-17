@@ -63,7 +63,7 @@ a:visited {
 
 .button-light:disabled {
     background-color: $black-bg-hover;
-    cursor:not-allowed;
+    cursor: not-allowed;
 }
 
 .button-dark {
@@ -84,7 +84,7 @@ a:visited {
 
 .button-dark:disabled {
     background-color: $black-bg-hover;
-    cursor:not-allowed;
+    cursor: not-allowed;
 }
 
 input,
@@ -138,9 +138,20 @@ table {
     margin-top: 5px;
     padding: 10px;
     background-color: $black-bg;
+    small {
+        color: #FFFFFF;
+    }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 // Pagination
 .ngx-pagination .current {
