@@ -17,10 +17,11 @@ import { futureDateValidator } from 'src/app/shared/validation/validators';
 export class EditTournamentComponent implements OnInit {
   submitted: boolean = false;
   errorMessage: string | undefined = undefined;
+  playersErrorMessage: string | undefined = undefined;
   tournamentId: number | undefined = undefined;
   tournament: Tournament | undefined = undefined;
   toBeRemoved: number[] = [];
-  toBeAdded: number[] = [];
+  toBeAdded: Player[] = [];
   sub!: Subscription;
   showSearch : boolean = false;
   availablePlayers: Player[] | undefined = undefined;
@@ -122,7 +123,11 @@ export class EditTournamentComponent implements OnInit {
 
       // Add players
       if(this.tournamentId != null && this.toBeAdded.length != 0) {
-        this.tournamentService.addPlayer(this.tournamentId, this.toBeAdded)
+        const addedIds: number[] = []
+        this.toBeAdded.forEach((p) => {
+          addedIds.push(p.id)
+        })
+        this.tournamentService.addPlayer(this.tournamentId, addedIds)
           .subscribe()
           .add(() => {
             console.log("unsubscribe")
@@ -142,11 +147,38 @@ export class EditTournamentComponent implements OnInit {
     this.tournament?.players.splice(index, 1);
   }
 
-  onAddPlayer(playerId: number): void {
+  onRemoveToBeAddedPlayer(removedAddedPlayer: Player): void {
+    console.log("SIUUUU")
+    let index = -1
+
+    this.toBeAdded.forEach((player, i) => {
+      if (player.id == removedAddedPlayer.id) {index = i}
+    })
+    if (index > -1) {
+      this.toBeAdded.splice(index, 1);
+      this.availablePlayers?.push(removedAddedPlayer)
+      this.availablePlayers = this.availablePlayers!.sort((a, b) => {
+        if (a.firstName > b.firstName) {
+          return 1
+        }
+        if (a.firstName < b.firstName) {
+          return -1
+        }
+        return 0;
+      })
+    }
+  }
+
+  onAddPlayer(toBeAddedPlayer: Player): void {
+    if (this.toBeAdded.length + this.tournament!.players.length >= this.tournament!.maxPlayers) {
+      this.playersErrorMessage = "Speler kan niet toegevoegd worden, maximaal spelers in een wedstrijd bereikt."
+      return
+    }
+
     let index1 = -1;
     let index2 = -1;
     this.availablePlayers?.forEach((player, i) => {
-      if (player.id == playerId) {index1 = i;}
+      if (player.id == toBeAddedPlayer.id) {index1 = i;}
     })
     console.log(index1, index2)
     this.availablePlayers?.splice(index1, 1);
@@ -154,8 +186,7 @@ export class EditTournamentComponent implements OnInit {
     let searchbar: HTMLInputElement = document.getElementById("searchPlayers")! as HTMLInputElement;
     searchbar.value = '';
 
-    this.toBeAdded.push(playerId)
-    this.tournament?.players.push()
+    this.toBeAdded.push(toBeAddedPlayer)
   }
 
 
