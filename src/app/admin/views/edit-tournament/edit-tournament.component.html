@@ -124,6 +124,17 @@
                             </div>
                         </td>
                     </tr>
+                    <ng-container *ngIf="!showSearch && toBeAdded.length < 1">
+                        <tr class="noPlayers">
+                            <td>
+                                <div>
+                                    <p class="noPlayersText">
+                                        Er zijn geen spelers aanwezig in het toernooi.
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
                     <ng-container *ngIf="!showSearch && toBeAdded.length > 0">
                         <tr>
                             <td>
@@ -135,7 +146,7 @@
                         <tr *ngFor="let player of toBeAdded">
                             <td>
                                 <div>
-                                    {{ player.firstName }} {{player.lastName}}
+                                    <p>{{ player.firstName }} {{player.lastName}}</p>
                                     <button (click)="onRemoveToBeAddedPlayer(player)">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +190,6 @@
                             </div>
                         </td>
                     </tr>
-
                     <tr *ngFor="let player of filteredList">
                         <td *ngIf="showSearch">
                             <div>
