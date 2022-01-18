@@ -44,7 +44,7 @@ export class EditTournamentComponent implements OnInit {
     // Create formcontrols
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
-      beginDateTime: ['', [Validators.required]],
+      beginDateTime: ['', [Validators.required, futureDateValidator()]],
       maxPlayers: ['', [Validators.required, Validators.min(0)]],
       entryFee: ['', [Validators.required, Validators.min(0)]],
     })
@@ -148,7 +148,6 @@ export class EditTournamentComponent implements OnInit {
   }
 
   onRemoveToBeAddedPlayer(removedAddedPlayer: Player): void {
-    console.log("SIUUUU")
     let index = -1
 
     this.toBeAdded.forEach((player, i) => {
