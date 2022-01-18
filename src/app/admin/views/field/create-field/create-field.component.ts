@@ -21,14 +21,15 @@ export class CreateFieldComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.form = this.formBuilder.group({
-			name: ["", Validators.required]
+			name: ["", Validators.required],
+			primary: [false]
 		});
 	}
 
 	onSubmit(): void {
 		this.submitted = true;
 		if (this.form.valid) {
-			const field = new Field(-1, this.form.value.name, true);
+			const field = new Field(-1, this.form.value.name, true, this.form.value.primary);
 
 			this.fieldService.add(field).subscribe({
 				next: (res) => {
