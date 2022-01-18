@@ -95,7 +95,6 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     });
     this.activeGames = sortedActive;
     this.futureGames = sortedFuture;
-    this.nextGame = [this.futureGames.shift()!];
     this.activeGames = this.activeGames.sort((a, b) => {
       if (a.field!.name > b.field!.name) {
         return 1;
@@ -108,10 +107,10 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
       return 0;
     });
     this.games = games;
+    this.loaderToggle.loaderInvisible();
   }
 
   selectGame(game: Game) {
-    this.loaderToggle.loaderInvisible();
     this.editGameService.showEdit(game.id);
   }
 

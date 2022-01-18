@@ -25,6 +25,16 @@ export class PoolPlayersItemComponent implements OnInit {
         return s.tournament?.id?? 0 == this.tournamentId;
       })[0].score;
     })
-  }
 
+    this.pool.players = this.pool.players.sort((a, b) => {
+            if (a.score! > b.score!) {
+              return -1;
+            }
+            if (a.score! < b.score!) {
+              return 1;
+            }
+            return 0;
+          }
+    );
+  }
 }

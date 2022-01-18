@@ -24,7 +24,20 @@
                     <div class="form-group">
                         <label for="date">Datum</label>
                         <div class="inputElement">
-                            <input id="date" [attr.disabled]="true" formControlName="beginDateTime" type="date" placeholder="Datum" />
+                            <input id="date" formControlName="beginDateTime" type="date" placeholder="Datum" />
+                            <div *ngIf="
+                              (submitted && form.controls['beginDateTime'].invalid) ||
+                              (form.controls['beginDateTime'].invalid && form.controls['beginDateTime'].dirty)
+                            " class="alert mb-0 p-0">
+                                <div class="errorElement">
+                                    <small *ngIf="form.controls['beginDateTime'].hasError('required')">
+                                        De datum van start voor het toernooi is verplicht.
+                                    </small>
+                                    <small *ngIf="form.controls['beginDateTime'].hasError('futureDate')">
+                                        Een toernooi mag niet vezet worden naar het verleden.
+                                    </small>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -111,22 +124,43 @@
                         <td class="search-box" [class.invisible]="!showSearch">
                             <div class="form-group" class="search-box-container">
                                 <label for="searchPlayers" class="search-box-container-label">Voeg speler toe:</label>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x search-box-container-close"
-                                    (click)="searchInvisible()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x search-box-container-close" (click)="searchInvisible()">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
-                                <input id="searchPlayers" class="search-box-container-input" type="text" placeholder="Zoeken..."  (keyup)="onSearch($event)"/>
+                                <div *ngIf="playersErrorMessage" class="errorElement">
+                                    <small>
+                                        {{ playersErrorMessage }}
+                                    </small>
+                                </div>
+                                <input id="searchPlayers" class="search-box-container-input" type="text" placeholder="Zoeken..." (keyup)="onSearch($event)" />
                             </div>
                         </td>
                     </tr>
-                    <ng-container *ngIf="tournament!.players.length > 0 else no_players">
-                        <tr *ngFor="let player of tournament?.players">
-                            <td *ngIf="!showSearch">
+                    <ng-container *ngIf="!showSearch && toBeAdded.length < 1">
+                        <tr class="noPlayers">
+                            <td>
                                 <div>
-                                    <p>{{player.firstName}} {{player.lastName}}</p>
-                                    <button (click)="onRemovePlayer(player.id)">
+                                    <p class="noPlayersText">
+                                        Er zijn geen spelers aanwezig in het toernooi.
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="!showSearch && toBeAdded.length > 0">
+                        <tr>
+                            <td>
+                                <div>
+                                    Geselecteerde spelers voor toevoegen:
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let player of toBeAdded">
+                            <td>
+                                <div>
+                                    <p>{{ player.firstName }} {{player.lastName}}</p>
+                                    <button (click)="onRemoveToBeAddedPlayer(player)">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="24"
@@ -146,17 +180,34 @@
                             </td>
                         </tr>
                     </ng-container>
-                    <ng-template #no_players>
-                        <div class="noPlayers" *ngIf="!showSearch">
-                            Er zijn nog geen spelers, <br/>voeg spelers toe en sla je veranderingen op om zie hier to zien
-                        </div> 
-                    </ng-template>
-
+                    <tr *ngFor="let player of tournament?.players">
+                        <td *ngIf="!showSearch">
+                            <div>
+                                <p>{{player.firstName}} {{player.lastName}}</p>
+                                <button (click)="onRemovePlayer(player.id)">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
                     <tr *ngFor="let player of filteredList">
                         <td *ngIf="showSearch">
                             <div>
                                 <p>{{player.firstName}} {{player.lastName}}</p>
-                                <button (click)="onAddPlayer(player.id)">
+                                <button (click)="onAddPlayer(player)">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"

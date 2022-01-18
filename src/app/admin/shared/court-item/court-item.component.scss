@@ -9,9 +9,16 @@
     background-color: #fff;
 }
 
+table {
+    table-layout: fixed;
+    td {
+        width: 17ch;
+    }
+}
+
 tbody {
     tr:hover {
         cursor: pointer;
-        background-color: #EEEEEE;
+        background-color: #EEE !important;
     }
 }
