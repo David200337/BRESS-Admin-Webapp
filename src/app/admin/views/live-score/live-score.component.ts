@@ -230,7 +230,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
       this.refreshGames();
       this.refreshData();
       this.categorySelector.selectCategoryByIndex(this.selectedCategoryIndex);
-    }, 10000);
+    }, 15000);
   }
 
   /**
