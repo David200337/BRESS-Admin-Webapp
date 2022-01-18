@@ -38,7 +38,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   hasFinales: Boolean = false;
 
   myTournamentData: TournamentInterface = { rounds: [] };
-  visible: string  = 'invisible';
+  visible: string  = 'visible';
 
   constructor(
     private tournamentService: TournamentService,
