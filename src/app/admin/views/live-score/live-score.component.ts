@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { concat, Observable, switchMap, tap } from 'rxjs';
+import { concat, Observable, of, switchMap, tap } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Game } from 'src/app/models/game.model';
 import { Pool } from 'src/app/models/pool.model';
@@ -38,6 +38,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   hasFinales: Boolean = false;
 
   myTournamentData: TournamentInterface = { rounds: [] };
+  visible: string  = 'invisible';
 
   constructor(
     private tournamentService: TournamentService,
@@ -220,14 +221,15 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   }
 
   startRefresh() {
-    this.interval = setInterval(() => {
+    this.interval = setInterval(async () => {
       this.selectedCategoryIndex++;
       if (this.selectedCategoryIndex > 2) {
         this.selectedCategoryIndex = 0;
       }
-      this.categorySelector.selectCategoryByIndex(this.selectedCategoryIndex);
+      this.visible = 'invisible'
       this.refreshGames();
       this.refreshData();
+      this.categorySelector.selectCategoryByIndex(this.selectedCategoryIndex);
     }, 10000);
   }
 
@@ -272,6 +274,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
       .subscribe()
       .add(() => {
         this.sortGames(gameList);
+        return of(true);
       });
   }
 
@@ -281,6 +284,8 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
       this.createBracket(
         this.tournament.categories[this.selectedCategoryIndex].id
       );
+      this.visible = 'visible';
+      return of(true);
     });
   }
 

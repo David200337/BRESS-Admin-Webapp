@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="all-pools" *ngIf="!hasFinales">
-                    <div class="pools">
+                    <div class="pools" [class]='visible'>
                         <div *ngFor="let pool of pools$ | async">
                             <h3>Poule {{pool.poolNumber}}</h3>
 
