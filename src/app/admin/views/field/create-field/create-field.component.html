@@ -5,6 +5,10 @@
             <div class="form-group">
                 <label for="name">Naam</label>
                 <input id="name" formControlName="name" type="text" placeholder="Naam" />
+                <div class="primaryGroup">
+                    <label for="primary">Hoofdveld</label>
+                    <input type="checkbox" id="primary" formControlName="primary" />
+                </div>
                 <div *ngIf="
 						(submitted && form.controls['name'].invalid) ||
 						(form.controls['name'].invalid &&
