@@ -15,13 +15,6 @@
         <div class="bodyColumn">
             <div class="columnElement">
                 <div class="elementHeader">
-                    Volgende wedstrijd
-                </div>
-                <app-game-court-item [games]="nextGame" *ngIf="nextGame[0] != undefined; else no_next"></app-game-court-item>
-                <ng-template #no_next>Er is geen volgende wedstrijd</ng-template>
-            </div>
-            <div class="columnElement">
-                <div class="elementHeader">
                     Komende wedstrijden
                 </div>
                 <app-game-court-item [games]=futureGames *ngIf="futureGames.length > 0; else no_future"></app-game-court-item>
