@@ -36,7 +36,7 @@ describe("EditFieldComponent", () => {
 			fixture.debugElement.nativeElement.querySelector("form");
 		const inputElements = formElement.querySelectorAll("input");
 
-		expect(inputElements.length).toEqual(2);
+		expect(inputElements.length).toEqual(3);
 		done();
 	});
 
