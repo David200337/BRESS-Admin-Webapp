@@ -45,7 +45,8 @@ describe("EditPlayerComponent", () => {
     it("should check if formGroup is correct", () => {
 		const playerFromGroup = component.form;
 		const playerFormValues = {
-			name: "",
+			firstName: "",
+            lastName: "",
 			email: "",
 			skillLevel: ""
 		};
