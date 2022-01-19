@@ -109,10 +109,10 @@ describe("EditTournamentComponent", () => {
 		tournamentTitleInputElement.dispatchEvent(new Event("input"));
 
 		const tournamentDateInputElement = inputElements[1];
-		const currentDate = new Date();
-		tournamentDateInputElement.value = currentDate
-			.toISOString()
-			.split("T")[0];
+		const nextDate: Date = new Date(new Date().getTime() + 86400000);
+		tournamentDateInputElement.value = 
+			nextDate
+			.toISOString().split('T')[0];
 		tournamentDateInputElement.dispatchEvent(new Event("input"));
 
 		const tournamentMaxPlayersInputElement = inputElements[2];
@@ -122,6 +122,7 @@ describe("EditTournamentComponent", () => {
 		const tournamentEntryFeeInputElement = inputElements[3];
 		tournamentEntryFeeInputElement.value = "1";
 		tournamentEntryFeeInputElement.dispatchEvent(new Event("input"));
+		console.warn(inputElements)
 
         fixture.detectChanges();
 		fixture.whenStable().then(() => {
