@@ -38,7 +38,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   hasFinales: Boolean = false;
 
   myTournamentData: TournamentInterface = { rounds: [] };
-  visible: string  = 'visible';
+  visible: string = 'visible';
 
   constructor(
     private tournamentService: TournamentService,
@@ -223,10 +223,10 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   startRefresh() {
     this.interval = setInterval(async () => {
       this.selectedCategoryIndex++;
-      if (this.selectedCategoryIndex > 2) {
+      if (this.selectedCategoryIndex > this.categoryList.length - 1) {
         this.selectedCategoryIndex = 0;
       }
-      this.visible = 'invisible'
+      this.visible = 'invisible';
       this.refreshGames();
       this.refreshData();
       this.categorySelector.selectCategoryByIndex(this.selectedCategoryIndex);
