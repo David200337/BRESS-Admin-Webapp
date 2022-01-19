@@ -30,11 +30,13 @@
 					let i = index
 				" [class.active]="i === page">
                     <td>
-                        <p [routerLink]="['../fields/' + field.id + '/edit']">
-                            {{ field.name }}
-                        </p>
-
-                        <button (click)="onDelete(field.id)">
+                        <div class="link" [routerLink]="['../fields/' + field.id + '/edit']">
+                            <p>
+                                {{ field.name }}
+                            </p>
+                        </div>
+                        <div class="delete">
+                            <button (click)="onDelete(field.id)">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="24"
@@ -51,6 +53,7 @@
 								<line x1="6" y1="6" x2="18" y2="18"></line>
 							</svg>
 						</button>
+                        </div>
                     </td>
                 </tr>
             </ng-container>
