@@ -39,7 +39,10 @@ export class EditGameComponent implements OnInit {
 
         if (bothSet || bothNull) {
           if (bothSet) {
-            if (set[0] == set[1]) {
+            if (set[0] < 11 && set[1] < 11) {
+              this.errorMessage = `Er is niet minimaal 11 punten in set ${index + 1} voor de winnaar`;
+              return false;
+            } else if (set[0] == set[1]) {
               if (Math.abs(set[0] - set[1]) != 2) {
                 this.errorMessage = `Er is een gelijk spel in set ${index + 1}`;
                 return false;
