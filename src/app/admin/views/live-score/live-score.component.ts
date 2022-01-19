@@ -253,6 +253,17 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
     });
     this.activeGames = sortedActive;
     this.futureGames = sortedFuture;
+    this.activeGames = this.activeGames.sort((a, b) => {
+      if (a.field!.name > b.field!.name) {
+        return 1;
+      }
+
+      if (a.field!.name < b.field!.name) {
+        return -1;
+      }
+
+      return 0;
+    });
     this.nextGame = [this.futureGames.shift()!];
     this.games = games;
     this.loaderToggle.loaderInvisible();
