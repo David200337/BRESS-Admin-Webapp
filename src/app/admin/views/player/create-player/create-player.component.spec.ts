@@ -37,7 +37,7 @@ describe("CreatePlayerComponent", () => {
 		const inputElements = formElement.querySelectorAll("input");
 		const selectElements = formElement.querySelectorAll("select");
 
-		expect(inputElements.length).toEqual(2);
+		expect(inputElements.length).toEqual(3);
 		expect(selectElements.length).toEqual(1);
 	});
 
@@ -45,7 +45,7 @@ describe("CreatePlayerComponent", () => {
 		const playerFromGroup = component.form;
 		const playerFormValues = {
 			firstName: "",
-            lastName: "",
+			lastName: "",
 			email: "",
 			skillLevel: ""
 		};
