@@ -32,7 +32,7 @@ describe('CreateFieldComponent', () => {
     const formElement =
       fixture.debugElement.nativeElement.querySelector('form');
     const inputElements = formElement.querySelectorAll('input');
-    expect(inputElements.length).toEqual(1);
+    expect(inputElements.length).toEqual(2);
     done()
   });
 
