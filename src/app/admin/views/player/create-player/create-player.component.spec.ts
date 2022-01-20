@@ -37,14 +37,15 @@ describe("CreatePlayerComponent", () => {
 		const inputElements = formElement.querySelectorAll("input");
 		const selectElements = formElement.querySelectorAll("select");
 
-		expect(inputElements.length).toEqual(2);
+		expect(inputElements.length).toEqual(3);
 		expect(selectElements.length).toEqual(1);
 	});
 
 	it("should check if formGroup is correct", () => {
 		const playerFromGroup = component.form;
 		const playerFormValues = {
-			name: "",
+			firstName: "",
+			lastName: "",
 			email: "",
 			skillLevel: ""
 		};

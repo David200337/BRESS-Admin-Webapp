@@ -1,6 +1,6 @@
 .form-container {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -11,22 +11,21 @@
 }
 
 form {
-	padding: 20px;
-	color: white;
-	background-color: #ff7d00;
-
+    padding: 20px;
+    color: white;
+    background-color: #ff7d00;
     .form-group {
-		display: flex;
-		flex-direction: column;
-		margin-bottom: 10px;
-		label {
-			margin: 0 0 5px 0;
-		}
-	}
-	.buttons {
-		margin-bottom: 0;
-	}
-	.cancel {
-		margin-left: 6px;
-	}
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        label {
+            margin: 0 0 5px 0;
+        }
+    }
+    .buttons {
+        margin-bottom: 0;
+    }
+    .cancel {
+        margin-left: 6px;
+    }
 }

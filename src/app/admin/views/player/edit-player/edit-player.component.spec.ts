@@ -38,14 +38,15 @@ describe("EditPlayerComponent", () => {
 		const inputElements = formElement.querySelectorAll("input");
 		const selectElements = formElement.querySelectorAll("select");
 
-		expect(inputElements.length).toEqual(2);
+		expect(inputElements.length).toEqual(3);
 		expect(selectElements.length).toEqual(1);
 	});
 
     it("should check if formGroup is correct", () => {
 		const playerFromGroup = component.form;
 		const playerFormValues = {
-			name: "",
+			firstName: "",
+            lastName: "",
 			email: "",
 			skillLevel: ""
 		};
@@ -63,13 +64,19 @@ describe("EditPlayerComponent", () => {
 				.querySelector("form")
 				.querySelectorAll("select");
 
-		const playerNameInputElement: HTMLInputElement = inputElements[0];
-		const playerNameValue = component.form.get("name");
-		expect(playerNameInputElement.value).toEqual(playerNameValue?.value);
-		expect(playerNameValue?.errors).not.toBeNull();
-		expect(playerNameValue?.errors).toBeTruthy();
+		const playerFirstNameInputElement: HTMLInputElement = inputElements[0];
+		const playerFirstNameValue = component.form.get("firstName");
+		expect(playerFirstNameInputElement.value).toEqual(playerFirstNameValue?.value);
+		expect(playerFirstNameValue?.errors).not.toBeNull();
+		expect(playerFirstNameValue?.errors).toBeTruthy();
 
-		const playerEmailInputElement: HTMLInputElement = inputElements[1];
+		const playerLastNameInputElement: HTMLInputElement = inputElements[1];
+		const playerLastNameValue = component.form.get("lastName");
+		expect(playerLastNameInputElement.value).toEqual(playerLastNameValue?.value);
+		expect(playerLastNameValue?.errors).not.toBeNull();
+		expect(playerLastNameValue?.errors).toBeTruthy();
+
+		const playerEmailInputElement: HTMLInputElement = inputElements[2];
 		const playerEmailValue = component.form.get("email");
 		expect(playerEmailInputElement.value).toEqual(playerEmailValue?.value);
 		expect(playerEmailValue?.errors).not.toBeNull();
