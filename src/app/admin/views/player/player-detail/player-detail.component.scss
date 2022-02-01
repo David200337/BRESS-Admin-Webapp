@@ -1,0 +1,35 @@
+@import "../../../../../styles.scss";
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: 100%;
+}
+
+.card {
+    width: 50vw;
+    height: auto;
+    padding: 20px;
+    background-color: $orange-primary;
+    color: #FFF;
+}
+
+.card-element {
+	width: 100%;
+    margin-top: 10px;
+
+    div {
+        margin-bottom: 10px;
+    }
+}
+
+.overViewBodyButtonGroup {
+	display: flex;
+	flex-direction: row;
+	gap: 25px;
+}
+
+button {
+    margin-top: 20px;
+}

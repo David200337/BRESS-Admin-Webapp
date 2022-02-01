@@ -1,51 +1,27 @@
 <div class="editWrapper">
     <div class="editInput">
-        <table>
-            <tr>
-                <td></td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td class="long">Speler 1</td>
-                <td>
-                    <button class="buttonCheckbox" (click)="toggle(0, 0)">
-                        <img [class.true]="playerScores[0][0]" src="../../../../assets/images/cross.svg" alt=""/>
-                    </button>
-                </td>
-                <td>
-                    <button class="buttonCheckbox" (click)="toggle(0, 1)">
-                        <img [class.true]="playerScores[0][1]" src="../../../../assets/images/cross.svg" alt=""/>
-                    </button>
-                </td>
-                <td>
-                    <button class="buttonCheckbox" (click)="toggle(0, 2)">
-                        <img [class.true]="playerScores[0][2]" src="../../../../assets/images/cross.svg" alt=""/>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="long">Speler 2</td>
-                <td>
-                    <button class="buttonCheckbox" (click)="toggle(1, 0)">
-                        <img [class.true]="playerScores[1][0]" src="../../../../assets/images/cross.svg" alt=""/>
-                    </button>
-                </td>
-                <td>
-                    <button class="buttonCheckbox" (click)="toggle(1, 1)">
-                        <img [class.true]="playerScores[1][1]" src="../../../../assets/images/cross.svg" alt=""/>
-                    </button>
-                </td>
-                <td>
-                    <button class="buttonCheckbox" (click)="toggle(1, 2)">
-                        <img [class.true]="playerScores[1][2]" src="../../../../assets/images/cross.svg" alt=""/>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="setElement">
+            <span>Set 1</span>
+            <input type="number" placeholder="Speler 1" class="scoreInput" [(ngModel)]="playerScores[0][0]">
+            <span> - </span>
+            <input type="number" placeholder="Speler 2" class="scoreInput" [(ngModel)]="playerScores[1][0]">
+        </div>
+        <div class="setElement">
+            <span>Set 2</span>
+            <input type="number" placeholder="Speler 1" class="scoreInput" [(ngModel)]="playerScores[0][1]">
+            <span> - </span>
+            <input type="number" placeholder="Speler 2" class="scoreInput" [(ngModel)]="playerScores[1][1]">
+        </div>
+        <div class="setElement">
+            <span>Set 3</span>
+            <input type="number" placeholder="Speler 1" class="scoreInput" [(ngModel)]="playerScores[0][2]">
+            <span> - </span>
+            <input type="number" placeholder="Speler 2" class="scoreInput" [(ngModel)]="playerScores[1][2]">
+        </div>
     </div>
+    <span id="errorMsg" [style.display]="errorVisible">{{errorMessage}}</span>
     <div class="editButtonGroup">
+        <button class="button-dark" (click)="close()">Sluiten</button>
         <button class="button-dark" (click)="onSubmit()">Bevestig score</button>
     </div>
 </div>

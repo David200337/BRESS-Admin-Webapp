@@ -1,0 +1,31 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-sub-container {
+    width: 50vw;
+    height: auto;
+    margin-top: 50px;
+}
+
+form {
+    padding: 20px;
+    color: white;
+    background-color: #ff7d00;
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        label {
+            margin: 0 0 5px 0;
+        }
+    }
+    .buttons {
+        margin-bottom: 0;
+    }
+    .cancel {
+        margin-left: 6px;
+    }
+}

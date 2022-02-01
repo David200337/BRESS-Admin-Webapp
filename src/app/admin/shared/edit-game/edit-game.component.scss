@@ -1,26 +1,31 @@
 @import '../../../../styles.scss';
-
 .editWrapper {
     display: flex;
     flex-direction: column;
     gap: 25px;
-
     background-color: $white-bg-dark;
-
     padding-block: 25px;
     padding-inline: 50px;
 }
 
-table, tr, td {
+.editInput {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: column;
+    gap: 10px
+}
+
+table,
+tr,
+td {
     background-color: $white-bg;
     border: 1px solid $grey-primary;
     border-collapse: collapse;
-
     td {
         padding: 5px;
         text-align: center;
         white-space: nowrap;
-
         &.long {
             padding: 10px;
             padding-inline: 20px;
@@ -43,7 +48,26 @@ img.true {
 
 .editButtonGroup {
     display: flex;
-    justify-content: flex-end;
-
+    justify-content: center;
     width: 100%;
+    button {
+        margin: 10px;
+    }
+}
+
+.scoreInput {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    width: 10ch;
+    padding: 10px;
+    text-align: center;
+}
+
+span {
+    padding: 0 10px;
+}
+
+#errorMsg {
+    padding: 0;
+    color: red;
 }

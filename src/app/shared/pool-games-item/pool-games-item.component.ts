@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Game } from 'src/app/models/game.model';
+import { EditGameService } from 'src/app/services/edit-game.service';
 
 @Component({
   selector: 'app-pool-games-item',
@@ -7,13 +9,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class PoolGamesItemComponent implements OnInit {
   @Output() gameEvent = new EventEmitter<void>();
+  @Input() games!: Game[];
 
-  constructor() { }
+  constructor(
+    private editGameService: EditGameService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onClick() {
+  onClick(id: number) {
+    this.editGameService.showEdit(id);
     this.gameEvent.emit()
   }
 

@@ -1,8 +1,16 @@
 <div class="dashboardWrapper">
     <div class="buttonGroup">
-        <button [routerLink]="['/create-tournament']" class="button-light">Maak een toernooi aan</button>
+        <button [routerLink]="['/create-tournament']" class="button-light">
+			Maak een toernooi aan
+		</button>
     </div>
     <div class="tournamentList">
         <app-tournament-item [tournament]="i" class="tournamentItem" *ngFor="let i of tournaments"></app-tournament-item>
+    </div>
+
+    <div class="container">
+        <app-player-list class="container-item"></app-player-list>
+        <app-field-list class="container-item"></app-field-list>
+
     </div>
 </div>

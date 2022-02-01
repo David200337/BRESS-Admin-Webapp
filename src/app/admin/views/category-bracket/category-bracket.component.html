@@ -1,0 +1,37 @@
+<div class="container">
+
+    <div class="bracket">
+        <div class="bracket-title">
+            <div class="bracket-title-text">
+                <h1>{{tournament.title}}</h1>
+            </div>
+            <div class="bracket-title-button">
+                <button class="button-dark" routerLink="..">Terug</button>
+            </div>
+        </div>
+        <div class="bracket-category" *ngIf="categoryList.length != 0 && hasFinales">
+            <div class="categoryBar bracket-category-selector">
+                <app-category-selector [categoryList]=categoryList (selectedCategoryEvent)="switchCategory($event)">
+                </app-category-selector>
+            </div>
+        </div>
+        <div class="bracket-visual" *ngIf="categoryList.length != 0 && hasFinales">
+            <app-single-elimination-tree [tournament]="myTournamentData" [matchTemplate]="myMatchTemplate">
+            </app-single-elimination-tree>
+
+            <ng-template #myMatchTemplate let-match>
+                <app-match [match]="match"></app-match>
+            </ng-template>
+        </div>
+        <div class="bracket-no-finales" *ngIf="!hasFinales">
+            <h3>Er zijn nog geen finales. Maak eerst de poule ronde af.</h3>
+        </div>
+    </div>
+
+
+    <div class="popup" [class.invisible]="!editGame.showPopUp">
+        <div class="popup-editor">
+            <app-edit-game (sumbitEvent)="updateGameScore($event)"></app-edit-game>
+        </div>
+    </div>
+</div>

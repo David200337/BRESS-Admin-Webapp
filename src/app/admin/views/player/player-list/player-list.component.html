@@ -1,0 +1,79 @@
+<div class="overviewHeader">
+    <h1>Spelers</h1>
+    <button [routerLink]="['/players/create']" class="button-dark">
+		Toevoegen
+	</button>
+</div>
+
+<div>
+    <input placeholder="Zoeken" [(ngModel)]="searchTerm" />
+
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <ng-container *ngIf="players !== undefined && players.length > 0">
+                <tr *ngFor="
+						let player of players
+							| filterPipe: searchTerm
+							| paginate
+								: {
+										id: 'playerTable',
+										itemsPerPage: tableSize,
+										currentPage: page,
+										totalItems: count
+								};
+						let i = index
+					" [class.active]="i == page">
+                    <td>
+                        <p [routerLink]="['../players/' + player.id]">
+                            {{ player.firstName}} {{player.lastName }}
+                        </p>
+                        <button (click)="onDelete(player.id)">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="feather feather-x"
+							>
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						</button>
+                    </td>
+                </tr>
+            </ng-container>
+
+
+            <tr *ngIf="players === undefined || (players !== undefined && (players | filterPipe: searchTerm).length === 0)">
+                <td>
+                    <div>
+                        <p style="padding: 5px 0px">
+                            Geen resultaten gevonden.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="tableControls">
+        <pagination-controls id="playerTable" [responsive]="true" previousLabel="Vorige" nextLabel="Volgende" (pageChange)="onTableDataChange($event)"></pagination-controls>
+
+        <select (change)="onTableSizeChange($event)">
+			<option *ngFor="let size of tableSizes" [ngValue]="tableSize">
+				{{ size }}
+			</option>
+		</select>
+    </div>
+</div>

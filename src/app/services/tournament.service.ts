@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { Category } from "../models/category.model";
 import { FinalGame } from "../models/finalGame.model";
 import { Game } from "../models/game.model";
@@ -28,20 +28,26 @@ export class TournamentService extends ResourceService<Tournament> {
 		);
 	}
 
-	public addPlayer(
-		tournamentId: number,
-		playerId: number
-	): Observable<Player[]> {
-		return this.httpClient.post<Player[]>(
-			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
-			{}
+	public getAllAvailablePlayers(tournamentId: number): Observable<Player[]> {
+		return this.httpClient.get<Player[]>(
+			`${this.APIUrl}/${tournamentId}/availablePlayers`
 		);
 	}
 
-	public deletePlayer(tournamentId: number, playerId: number) {
-		return this.httpClient.delete<Player>(
-			`${this.APIUrl}/${tournamentId}/player/${playerId}`,
-			{}
+	public addPlayer(
+		tournamentId: number,
+		playerIds: number[]
+	): Observable<any> {
+		return this.httpClient.post<Player[]>(
+			`${this.APIUrl}/${tournamentId}/players`,
+			playerIds
+		);
+	}
+
+	public deletePlayer(tournamentId: number, playerIds: number[]) {
+		return this.httpClient.delete<any>(
+			`${this.APIUrl}/${tournamentId}/players`,
+			{body: playerIds}
 		);
 	}
 
@@ -98,8 +104,12 @@ export class TournamentService extends ResourceService<Tournament> {
 		tournamentId: number,
 		categoryId: number
 	): Observable<Pool[]> {
-		return this.httpClient.get<Pool[]>(
+		return this.httpClient.get<any>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool`
+		).pipe(
+			map((item) => {
+				return item.result;
+			})
 		);
 	}
 
@@ -108,8 +118,12 @@ export class TournamentService extends ResourceService<Tournament> {
 		categoryId: number,
 		poolId: number
 	): Observable<Pool> {
-		return this.httpClient.get<Pool>(
+		return this.httpClient.get<any>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/pool/${poolId}`
+		).pipe(
+			map((item) => {
+				return item.result;
+			})
 		);
 	}
 
@@ -154,7 +168,7 @@ export class TournamentService extends ResourceService<Tournament> {
 		gameId: number
 	): Observable<Game> {
 		return this.httpClient
-			.delete<any>(
+			.get<any>(
 				`${this.APIUrl}/${tournamentId}/category/${categoryId}/poolgame/${gameId}`
 			)
 			.pipe(
@@ -167,14 +181,14 @@ export class TournamentService extends ResourceService<Tournament> {
 	public updatePoolGame(
 		tournamentId: number,
 		gameId: number,
-		game: PoolGame
+		score: number[][]
 	): Observable<PoolGame> {
 		return this.httpClient
-			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, game)
+			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, { scorePlayer1: score[0], scorePlayer2: score[1] })
 			.pipe(
 				map((item) => {
 					return item.result;
-				})
+				}),
 			);
 	}
 
@@ -192,20 +206,21 @@ export class TournamentService extends ResourceService<Tournament> {
 		categoryId: number,
 		finaleId: number
 	): Observable<FinalGame> {
+		console.log(`${tournamentId}, ${categoryId}, ${finaleId}`);
+		
 		return this.httpClient.get<FinalGame>(
-			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale/${finaleId}`
+			`${this.APIUrl}/${tournamentId}/category/${categoryId}/finale/${finaleId}`
 		);
 	}
 
 	public updateFinalGame(
 		tournamentId: number,
-		categoryId: number,
 		finaleId: number,
-		finalGame: FinalGame
+		score: number[][]
 	): Observable<FinalGame> {
-		return this.httpClient.post<FinalGame>(
-			`${this.APIUrl}/tournament/${tournamentId}/category/${categoryId}/finale/${finaleId}`,
-			finalGame
+		return this.httpClient.put<FinalGame>(
+			`${this.APIUrl}/${tournamentId}/finale/${finaleId}`,
+			{ scorePlayer1: score[0], scorePlayer2: score[1] }
 		);
 	}
 
@@ -227,6 +242,16 @@ export class TournamentService extends ResourceService<Tournament> {
 			.get<any>(
 				`${this.APIUrl}/${tournamentId}/category/${categoryId}/ranking`
 			)
+			.pipe(
+				map((item) => {
+					return item.result;
+				})
+			);
+	}
+
+	getFinaleQueue(tournamentId : number) : Observable<Game[]> {
+		return this.httpClient
+			.get<any>(`${this.APIUrl}/${tournamentId}/GenerateFinaleQueue`)
 			.pipe(
 				map((item) => {
 					return item.result;

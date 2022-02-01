@@ -15,10 +15,19 @@ import { TournamentService } from '../services/tournament.service';
 import { GamesOverviewComponent } from './views/games-overview/games-overview.component';
 import { CourtItemComponent } from './shared/court-item/court-item.component';
 import { GameCourtItemComponent } from './shared/game-court-item/game-court-item.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoryBracketComponent } from './views/category-bracket/category-bracket.component';
+import { EditPlayerComponent } from './views/player/edit-player/edit-player.component';
+import { CreatePlayerComponent } from './views/player/create-player/create-player.component';
+import { CreateSkilllevelComponent } from './views/create-skilllevel/create-skilllevel.component';
+import { PlayerListComponent } from './views/player/player-list/player-list.component';
+import { PlayerDetailComponent } from './views/player/player-detail/player-detail.component';
+import { LiveScoreComponent } from './views/live-score/live-score.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CreateFieldComponent } from './views/field/create-field/create-field.component';
+import { FieldListComponent } from './views/field/field-list/field-list.component';
+import { EditFieldComponent } from './views/field/edit-field/edit-field.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +43,25 @@ import { ReactiveFormsModule } from '@angular/forms';
     GamesOverviewComponent,
     CourtItemComponent,
     GameCourtItemComponent,
+    CategoryBracketComponent,
+    EditPlayerComponent,
+    CreatePlayerComponent,
+    CreateSkilllevelComponent,
+    PlayerListComponent,
+    PlayerDetailComponent,
+    CreateFieldComponent,
+    FieldListComponent,
+    EditFieldComponent,
+    LiveScoreComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgxPaginationModule,
   ],
   exports: [
     DashboardComponent,
@@ -47,7 +69,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PoolDetailComponent,
     EditTournamentComponent,
     TournamentDetailComponent,
-    TournamentOverviewComponent
+    TournamentOverviewComponent,
+    CategoryBracketComponent
   ],
   providers: [
     TournamentService

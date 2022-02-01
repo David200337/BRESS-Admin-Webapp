@@ -1,0 +1,34 @@
+<div class="form-container">
+    <div class="form-sub-container">
+        <h1>Zaal aanmaken</h1>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form" id="form">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input id="name" formControlName="name" type="text" placeholder="Naam" />
+                <div class="primaryGroup">
+                    <label for="primary">Hoofdveld</label>
+                    <input type="checkbox" id="primary" formControlName="primary" />
+                </div>
+                <div *ngIf="
+						(submitted && form.controls['name'].invalid) ||
+						(form.controls['name'].invalid &&
+							form.controls['name'].dirty)" class="alert mb-0 p-0">
+                    <div class="errorElement">
+                        <small *ngIf="form.controls['name'].hasError('required')">
+							Naam is verplicht.
+						</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group buttons">
+                <div>
+                    <button type="submit" class="button-dark">Sla op</button>
+                    <button [routerLink]="['../../dashboard']" class="button-dark cancel">
+						Annuleer
+					</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

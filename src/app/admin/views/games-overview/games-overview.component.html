@@ -1,26 +1,33 @@
 <div class="gamesWrapper">
     <div class="gamesHeader">
-        <h1>Speeltoernooi</h1>
+        <h1 *ngIf="tournament">{{tournament.title}}</h1>
+        <button [routerLink]="['../']" class="button-dark">Terug</button>
     </div>
     <div class="gamesBody">
         <div class="bodyColumn">
-            <div class="columnElement" *ngFor="let game of activeGames">
-                <app-court-item [game]="game" [field]="game.field"></app-court-item>
+            <div *ngIf="activeGames.length > 0; else no_active">
+                <div class="columnElement courtItem" *ngFor="let game of activeGames">
+                    <app-court-item [game]="game" [field]="game.field" (gameEvent)="selectGame($event)"></app-court-item>
+                </div>
             </div>
+            <ng-template #no_active>Er worden geen wedstrijden gespeeld</ng-template>
         </div>
         <div class="bodyColumn">
-            <div class="columnElement">
-                <div class="elementHeader">
-                    Volgende wedstrijd
-                </div>
-                <app-game-court-item [games]="nextGame"></app-game-court-item>
-            </div>
             <div class="columnElement">
                 <div class="elementHeader">
                     Komende wedstrijden
                 </div>
-                <app-game-court-item [games]=futureGames></app-game-court-item>
+                <app-game-court-item [games]=futureGames *ngIf="futureGames.length > 0; else no_future"></app-game-court-item>
+                <ng-template #no_future>Er zijn geen komende wedstrijden</ng-template>
             </div>
         </div>
     </div>
 </div>
+<div class="popup">
+    <div class="popup-editor">
+        <app-edit-game class="scorePopup" [class.visible]="editGameService.showPopUp" (sumbitEvent)="refreshGames()"></app-edit-game>
+    </div>
+</div>
+
+
+
