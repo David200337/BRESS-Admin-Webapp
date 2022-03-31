@@ -29,20 +29,13 @@ export class EditGameService {
     this.showPopUp = false;
     return this.tournamentService.getFinalGame(this.tournamentId, 0, this.gameId)
       .pipe(tap((res) => console.log(res)))
-      .pipe(switchMap(() => { return this.enterFinalGameScore(score) }), catchError(() => { return this.enterPoolGameScore(score) }));
+      .pipe(() => { return this.enterGameScore(score) });
   }
 
-  enterPoolGameScore(score: number[][]): Observable<PoolGame> {
+  enterGameScore(score: number[][]): Observable<PoolGame> {
     this.showPopUp = false;
     console.log("enterPoolGameScore");
-    
-    return this.tournamentService.updatePoolGame(this.tournamentId, this.gameId, score);
-  }
 
-  enterFinalGameScore(score: number[][]): Observable<PoolGame> {
-    this.showPopUp = false;
-    console.log("enterFinalGameScore");
-    
-    return this.tournamentService.updateFinalGame(this.tournamentId, this.gameId, score);
+    return this.tournamentService.updateGame(this.tournamentId, this.gameId, score);
   }
 }

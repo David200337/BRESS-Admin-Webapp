@@ -28,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateFieldComponent } from './views/field/create-field/create-field.component';
 import { FieldListComponent } from './views/field/field-list/field-list.component';
 import { EditFieldComponent } from './views/field/edit-field/edit-field.component';
+import { LoaderToggleService } from '../services/loader-toggle.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { EditFieldComponent } from './views/field/edit-field/edit-field.componen
     CategoryBracketComponent
   ],
   providers: [
-    TournamentService
+    TournamentService,
   ]
 })
 export class AdminModule { }

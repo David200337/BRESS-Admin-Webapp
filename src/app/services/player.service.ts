@@ -2,19 +2,20 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable } from "rxjs";
 import { Player } from "../models/player.model";
+import { LoaderToggleService } from "./loader-toggle.service";
 import { ResourceService } from "./resource.service";
 
 @Injectable({
-	providedIn: "root"
+    providedIn: "root"
 })
 export class PlayerService extends ResourceService<Player> {
-	constructor(protected override httpClient: HttpClient) {
-		super(httpClient);
-	}
+    constructor(protected override httpClient: HttpClient, protected override loaderToggle: LoaderToggleService) {
+        super(httpClient, loaderToggle);
+    }
 
-	public getResourceUrl(): string {
-		return "/player"
-	}
+    public getResourceUrl(): string {
+        return "/player"
+    }
 
     public override add(resource: Player): Observable<any> {
         const body = {
@@ -25,8 +26,8 @@ export class PlayerService extends ResourceService<Player> {
         };
 
         return this.httpClient
-			.post(`${this.APIUrl}`, body)
-			.pipe(catchError(this.handleError));
+            .post(`${this.APIUrl}`, body)
+            .pipe(catchError(this.handleError));
     }
 
     public override update(id: number, resource: Player): Observable<Player> {
@@ -38,8 +39,8 @@ export class PlayerService extends ResourceService<Player> {
         }
 
         return this.httpClient.put<Player>(
-			`${this.APIUrl}/${id}`,
-			body
-		);
+            `${this.APIUrl}/${id}`,
+            body
+        );
     }
 }

@@ -11,7 +11,7 @@ import { TournamentService } from 'src/app/services/tournament.service';
 @Component({
   selector: 'app-tournament-overview',
   templateUrl: './tournament-overview.component.html',
-  styleUrls: ['./tournament-overview.component.scss'],
+  styleUrls: ['./tournament-overview.component.scss']
 })
 export class TournamentOverviewComponent implements OnInit {
   tournamentId!: number;
@@ -33,15 +33,15 @@ export class TournamentOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.fieldService.getList().subscribe({
-			next: (fields: any) => {
-				this.fields = fields;
-				console.log(fields);
-			},
-			error: (err) => {
-				// TODO: Handle error
-				console.log(err);
-			}
-		});
+      next: (fields: any) => {
+        this.fields = fields;
+        console.log(fields);
+      },
+      error: (err) => {
+        // TODO: Handle error
+        console.log(err);
+      }
+    });
     this.sub = this.route.paramMap
       .pipe(
         switchMap((paramMap: ParamMap) => {
@@ -87,6 +87,7 @@ export class TournamentOverviewComponent implements OnInit {
     this.loaderToggle.loaderVisible();
     this.rpcService.startTournament(this.tournamentId).subscribe((res) => {
       this.canStart = true;
+    }).add(() => {
       this.loaderToggle.loaderInvisible();
     });
   }

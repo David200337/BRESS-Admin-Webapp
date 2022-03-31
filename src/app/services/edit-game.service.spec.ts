@@ -38,31 +38,31 @@ describe('EditGameService', () => {
         mockPlayer,
         mockPlayer
     )
-    
+
     beforeEach(() => {
         TestBed.configureTestingModule({
-			providers: [
-				EditGameService,
-				{
-					provide: TournamentService,
-					useValue: createSpyFromClass(TournamentService)
-				}
+            providers: [
+                EditGameService,
+                {
+                    provide: TournamentService,
+                    useValue: createSpyFromClass(TournamentService)
+                }
             ]
-		});
+        });
 
         service = TestBed.inject(EditGameService);
         tournamentSpy = TestBed.inject<any>(TournamentService);
     });
 
     it('should be created', () => {
-		expect(service).toBeTruthy();
-	});
-   
+        expect(service).toBeTruthy();
+    });
+
     it('should update poolGame scores and return the poolGame', (done: DoneFn) => {
         const scores = [[11, 9, 11], [9, 11, 9]];
 
         tournamentSpy.getFinalGame.and.throwWith(new Error("Not found"));
-        tournamentSpy.updatePoolGame.and.nextWith(mockPoolGame);
+        tournamentSpy.updateGame.and.nextWith(mockPoolGame);
 
         service.tournamentId = 0;
         service.showEdit(0);
@@ -82,7 +82,7 @@ describe('EditGameService', () => {
         const scores = [[11, 9, 11], [9, 11, 9]];
 
         tournamentSpy.getFinalGame.and.nextWith(mockFinalGame);
-        tournamentSpy.updateFinalGame.and.nextWith(mockFinalGame);
+        tournamentSpy.updateGame.and.nextWith(mockFinalGame);
 
         service.tournamentId = 0;
         service.showEdit(1);
