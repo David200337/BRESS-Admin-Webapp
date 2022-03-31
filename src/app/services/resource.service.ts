@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
+import { LoaderToggleService } from "./loader-toggle.service";
 
 @Injectable({
 	providedIn: "root"
@@ -9,7 +10,7 @@ import { environment } from "src/environments/environment";
 export abstract class ResourceService<T> {
 	protected readonly APIUrl = `https://bress-toernooi.nl/api${this.getResourceUrl()}`;
 
-	constructor(protected httpClient: HttpClient) { }
+	constructor(protected httpClient: HttpClient, protected loaderToggle: LoaderToggleService) { }
 
 	abstract getResourceUrl(): string;
 
@@ -56,8 +57,9 @@ export abstract class ResourceService<T> {
 
 	protected handleError(error: HttpErrorResponse) {
 		// Handle HTTP errors
-		// console.log(error);
-
+		console.log(error);
+		confirm(error.message)
+		this.loaderToggle.loaderInvisible();
 		return throwError(() => error);
 	}
 }

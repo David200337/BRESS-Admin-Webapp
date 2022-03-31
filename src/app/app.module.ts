@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import localeNL from '@angular/common/locales/nl';
 import localeNLExtra from '@angular/common/locales/extra/nl';
+import { LoaderToggleService } from './services/loader-toggle.service';
+import { RpcService } from './services/rpc.service';
+import { ResourceService } from './services/resource.service';
 
 registerLocaleData(localeNL, "nl-NL", localeNLExtra);
 
@@ -23,7 +26,7 @@ registerLocaleData(localeNL, "nl-NL", localeNLExtra);
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,10 +35,11 @@ registerLocaleData(localeNL, "nl-NL", localeNLExtra);
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   exports: [],
   providers: [
+    LoaderToggleService,
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: "nl-NL" }
