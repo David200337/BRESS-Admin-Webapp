@@ -15,7 +15,7 @@ export class FieldListComponent implements OnInit {
 	public page = 1;
 	public count = 0;
 
-	constructor(private fieldService: FieldService) {}
+	constructor(private fieldService: FieldService) { }
 
 	ngOnInit(): void {
 		this.loadFields();
@@ -32,6 +32,12 @@ export class FieldListComponent implements OnInit {
 				console.log(err);
 			}
 		});
+	}
+
+	public setFieldsAvailable(): void {
+		this.fieldService.setFieldsAvailable().subscribe((res) => {
+			console.log(res);
+		})
 	}
 
 	public onDelete(id: number): void {

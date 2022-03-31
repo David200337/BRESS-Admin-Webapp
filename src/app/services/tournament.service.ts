@@ -8,14 +8,15 @@ import { Player } from "../models/player.model";
 import { Pool } from "../models/pool.model";
 import { PoolGame } from "../models/poolGame.model";
 import { Tournament } from "../models/tournament.model";
+import { LoaderToggleService } from "./loader-toggle.service";
 import { ResourceService } from "./resource.service";
 
 @Injectable({
 	providedIn: "root"
 })
 export class TournamentService extends ResourceService<Tournament> {
-	constructor(protected override httpClient: HttpClient) {
-		super(httpClient);
+	constructor(protected override httpClient: HttpClient, protected override loaderToggle: LoaderToggleService) {
+		super(httpClient, loaderToggle);
 	}
 
 	public getResourceUrl(): string {
@@ -47,7 +48,7 @@ export class TournamentService extends ResourceService<Tournament> {
 	public deletePlayer(tournamentId: number, playerIds: number[]) {
 		return this.httpClient.delete<any>(
 			`${this.APIUrl}/${tournamentId}/players`,
-			{body: playerIds}
+			{ body: playerIds }
 		);
 	}
 
@@ -178,13 +179,13 @@ export class TournamentService extends ResourceService<Tournament> {
 			);
 	}
 
-	public updatePoolGame(
+	public updateGame(
 		tournamentId: number,
 		gameId: number,
 		score: number[][]
 	): Observable<PoolGame> {
 		return this.httpClient
-			.put<any>(`${this.APIUrl}/${tournamentId}/pool/${gameId}`, { scorePlayer1: score[0], scorePlayer2: score[1] })
+			.put<any>(`${this.APIUrl}/${tournamentId}/${gameId}`, { scorePlayer1: score[0], scorePlayer2: score[1] })
 			.pipe(
 				map((item) => {
 					return item.result;
@@ -207,22 +208,12 @@ export class TournamentService extends ResourceService<Tournament> {
 		finaleId: number
 	): Observable<FinalGame> {
 		console.log(`${tournamentId}, ${categoryId}, ${finaleId}`);
-		
+
 		return this.httpClient.get<FinalGame>(
 			`${this.APIUrl}/${tournamentId}/category/${categoryId}/finale/${finaleId}`
 		);
 	}
 
-	public updateFinalGame(
-		tournamentId: number,
-		finaleId: number,
-		score: number[][]
-	): Observable<FinalGame> {
-		return this.httpClient.put<FinalGame>(
-			`${this.APIUrl}/${tournamentId}/finale/${finaleId}`,
-			{ scorePlayer1: score[0], scorePlayer2: score[1] }
-		);
-	}
 
 	public getPoolQueue(tournamentId: number): Observable<Game[]> {
 		return this.httpClient
@@ -249,7 +240,7 @@ export class TournamentService extends ResourceService<Tournament> {
 			);
 	}
 
-	getFinaleQueue(tournamentId : number) : Observable<Game[]> {
+	getFinaleQueue(tournamentId: number): Observable<Game[]> {
 		return this.httpClient
 			.get<any>(`${this.APIUrl}/${tournamentId}/GenerateFinaleQueue`)
 			.pipe(

@@ -38,34 +38,37 @@ describe("TournamentService", () => {
 		mockPlayer1,
 		mockPlayer2
 	);
-	const mockGameQueueResponse =  { result: [
-		mockGame
-	]};
-	let fakeTournaments = { result: [
-		{
-			id: 0,
-			title: "Tournament 0",
-			beginDateTime: new Date(),
-			entryFee: 7.5,
-			maxPlayers: 32,
-			minPlayers: 4,
-			idealPoolSize: 5,
-			categories: [],
-			players: [],
-			hasStarted: false
-		},
-		{
-			id: 1,
-			title: "Tournament 1",
-			beginDateTime: new Date(),
-			entryFee: 7.5,
-			maxPlayers: 32,
-			minPlayers: 4,
-			idealPoolSize: 5,
-			categories: [],
-			players: [],
-			hasStarted: false
-		}]
+	const mockGameQueueResponse = {
+		result: [
+			mockGame
+		]
+	};
+	let fakeTournaments = {
+		result: [
+			{
+				id: 0,
+				title: "Tournament 0",
+				beginDateTime: new Date(),
+				entryFee: 7.5,
+				maxPlayers: 32,
+				minPlayers: 4,
+				idealPoolSize: 5,
+				categories: [],
+				players: [],
+				hasStarted: false
+			},
+			{
+				id: 1,
+				title: "Tournament 1",
+				beginDateTime: new Date(),
+				entryFee: 7.5,
+				maxPlayers: 32,
+				minPlayers: 4,
+				idealPoolSize: 5,
+				categories: [],
+				players: [],
+				hasStarted: false
+			}]
 	}
 	const mockScores = [
 		[11, 9, 11],
@@ -118,7 +121,7 @@ describe("TournamentService", () => {
 			idealPoolSize: 5,
 			categories: [],
 			players: [],
-            hasStarted: false
+			hasStarted: false
 		};
 
 		httpSpy.post.and.nextWith(newTournament);
@@ -170,11 +173,11 @@ describe("TournamentService", () => {
 
 		expect(httpSpy.delete.calls.count()).toBe(1);
 	});
-	
-    it('shoul return a poolGame queue for a given tournamentId', (done: DoneFn) => {
+
+	it('shoul return a poolGame queue for a given tournamentId', (done: DoneFn) => {
 		httpSpy.get.and.nextWith(mockGameQueueResponse);
 		service.getPoolQueue(0).subscribe({
-			next: (response) => {			
+			next: (response) => {
 				expect(response).toEqual(mockGameQueueResponse.result);
 				done();
 			},
@@ -187,7 +190,7 @@ describe("TournamentService", () => {
 	it('shoul return a finalGame queue for a given tournamentId', (done: DoneFn) => {
 		httpSpy.get.and.nextWith(mockGameQueueResponse);
 		service.getFinaleQueue(0).subscribe({
-			next: (response) => {			
+			next: (response) => {
 				expect(response).toEqual(mockGameQueueResponse.result);
 				done();
 			},
@@ -202,7 +205,7 @@ describe("TournamentService", () => {
 		updatedGameResponse.result.score = '2 - 1'
 
 		httpSpy.put.and.nextWith(updatedGameResponse);
-		service.updatePoolGame(0, mockGame.id, mockScores).subscribe({
+		service.updateGame(0, mockGame.id, mockScores).subscribe({
 			next: (response) => {
 				expect(response).toEqual(updatedGameResponse.result);
 				done();
@@ -218,12 +221,12 @@ describe("TournamentService", () => {
 		updatedGameResponse.result.score = '2 - 1'
 
 		httpSpy.put.and.nextWith(updatedGameResponse);
-		service.updateFinalGame(0, mockGame.id, mockScores).pipe(
-            map((item: any) => {
-                return item.result;
-            })
-        ).subscribe({
-			next: (response) => {			
+		service.updateGame(0, mockGame.id, mockScores).pipe(
+			map((item: any) => {
+				return item.result;
+			})
+		).subscribe({
+			next: (response) => {
 				expect(response).toEqual(updatedGameResponse.result);
 				done();
 			},
