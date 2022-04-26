@@ -4,12 +4,14 @@
         <table>
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Speler 1</th>
                     <th>Speler 2</th>
                 </tr>
             </thead>
             <tbody>
                 <tr (click)="onClick()">
+                    <td class="game-id">#{{game.id}}</td>
                     <td>{{game.player1.firstName + " " + game.player1.lastName}}</td>
                     <td>{{game.player2.firstName + " " + game.player2.lastName}}</td>
                 </tr>
