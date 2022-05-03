@@ -11,131 +11,10 @@ import { TournamentInterface } from 'src/app/shared/tournament-bracket/declarati
 @Component({
   selector: 'app-category-bracket',
   templateUrl: './category-bracket.component.html',
-  styleUrls: ['./category-bracket.component.scss']
+  styleUrls: ['./category-bracket.component.scss'],
 })
 export class CategoryBracketComponent implements OnInit, OnDestroy {
-
-  myTournamentData: TournamentInterface = {
-    rounds: [
-      {
-        type: 'Winnerbracket',
-        name: "",
-        matches: [
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-            id: 0
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'Winnerbracket',
-        name: "",
-        matches: [
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'Winnerbracket',
-        name: "",
-        matches: [
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'Final',
-        name: "",
-        matches: [
-          {
-            teams: [
-              { name: 'Not determined', score: 0 },
-              { name: 'Not determined', score: 0 },
-            ],
-          },
-        ],
-      },
-    ],
-  };
-
-
+  myTournamentData: TournamentInterface = { rounds: [] };
 
   public tournament: any = {};
   public categoryList: Category[] = [];
@@ -148,27 +27,156 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public editGame: EditGameService,
     public toggleLoader: LoaderToggleService
-  ) { this.toggleLoader.loaderVisible(); }
+  ) {
+    this.toggleLoader.loaderVisible();
+  }
 
   ngOnInit(): void {
     this.toggleLoader.loaderVisible();
-    this.hideGameEdit()
-    this.route.paramMap.pipe(
-      switchMap((params: any) => {
-        const tournamentId = +params.get("tournamentId")!;
-        return this.tournamentService.get(tournamentId);
-      })
-    ).subscribe((result: any) => {
-      this.tournament = result;
-      this.categoryList = this.tournament.categories;
-      this.editGame.tournamentId = this.tournament.id
-      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
-      this.startRefresh()
-    });
+    this.setDefaultBracket();
+    this.hideGameEdit();
+    this.route.paramMap
+      .pipe(
+        switchMap((params: any) => {
+          const tournamentId = +params.get('tournamentId')!;
+          return this.tournamentService.get(tournamentId);
+        })
+      )
+      .subscribe((result: any) => {
+        this.tournament = result;
+        this.categoryList = this.tournament.categories;
+        this.editGame.tournamentId = this.tournament.id;
+        this.createBracket(
+          this.tournament.categories[this.selectedCategoryIndex].id
+        );
+        this.startRefresh();
+      });
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
+  }
+
+  setDefaultBracket() {
+    this.myTournamentData = {
+      rounds: [
+        {
+          type: 'Winnerbracket',
+          name: '',
+          matches: [
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+              id: 0,
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'Winnerbracket',
+          name: '',
+          matches: [
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'Winnerbracket',
+          name: '',
+          matches: [
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'Final',
+          name: '',
+          matches: [
+            {
+              teams: [
+                { name: 'Not determined', score: 0 },
+                { name: 'Not determined', score: 0 },
+              ],
+            },
+          ],
+        },
+      ],
+    };
   }
 
   startRefresh() {
@@ -181,38 +189,57 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
   refreshData() {
     this.tournamentService.get(this.tournament.id).subscribe((result) => {
       this.tournament = result;
-      this.createBracket(this.tournament.categories[this.selectedCategoryIndex].id);
-    })
+      this.createBracket(
+        this.tournament.categories[this.selectedCategoryIndex].id
+      );
+    });
   }
 
   createBracket(categoryId: number): void {
+    this.setDefaultBracket();
     let category: any = {};
     this.tournament.categories.forEach((cat: any) => {
       if (cat.id == categoryId) {
         category = cat;
       }
-    })
+    });
 
     let hasFinales = false;
     category.rounds.forEach((item: any) => {
       if (!item.isPoolRound) {
         hasFinales = true;
         this.myTournamentData.rounds.forEach((round: any) => {
-
           if (item.games.length === round.matches.length) {
             let gameList: any = [];
 
             for (let i = 0; i < round.matches.length; i++) {
               const game = item.games[i];
-              const scorePlayer1: number = game.score == null ? 0 : game.score.split(" - ")[0];
-              const scorePlayer2: number = game.score == null ? 0 : game.score.split(" - ")[1];
-              const gamePlayed: boolean = scorePlayer1 != 0 || scorePlayer2 != 0;
-              gameList.push({ teams: [{ name: game.player1.firstName + " " + game.player1.lastName, score: scorePlayer1, gamePlayed }, { name: game.player2.firstName + " " + game.player2.lastName, score: scorePlayer2, gamePlayed }], id: game.id });
+              const scorePlayer1: number =
+                game.score == null ? 0 : game.score.split(' - ')[0];
+              const scorePlayer2: number =
+                game.score == null ? 0 : game.score.split(' - ')[1];
+              const gamePlayed: boolean =
+                scorePlayer1 != 0 || scorePlayer2 != 0;
+              gameList.push({
+                teams: [
+                  {
+                    name: game.player1.firstName + ' ' + game.player1.lastName,
+                    score: scorePlayer1,
+                    gamePlayed,
+                  },
+                  {
+                    name: game.player2.firstName + ' ' + game.player2.lastName,
+                    score: scorePlayer2,
+                    gamePlayed,
+                  },
+                ],
+                id: game.id,
+              });
             }
 
             round.matches = gameList;
           }
-        })
+        });
       }
     });
 
@@ -220,7 +247,10 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
       let newlist = [];
       let isFirst: boolean = true;
       for (let i = 0; i < this.myTournamentData.rounds.length; i++) {
-        if (this.myTournamentData.rounds[i].matches[0].teams[0].name != 'Not determined') {
+        if (
+          this.myTournamentData.rounds[i].matches[0].teams[0].name !=
+          'Not determined'
+        ) {
           newlist.push(this.myTournamentData.rounds[i]);
           isFirst = false;
         } else if (!isFirst) {
@@ -237,9 +267,8 @@ export class CategoryBracketComponent implements OnInit, OnDestroy {
   updateGameScore(game: any) {
     this.toggleLoader.loaderInvisible();
 
-    this.refreshData()
+    this.refreshData();
   }
-
 
   switchCategory(category: Category) {
     if (category != null) this.createBracket(category.id);
