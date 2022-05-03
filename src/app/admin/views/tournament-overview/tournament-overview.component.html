@@ -1,99 +1,114 @@
 <div class="overviewWrapper">
-    <div class="overviewHeader">
-        <h1 class="overviewHeaderTitle">{{tournament?.title}}</h1>
-        <div class="overViewHeaderButtonGroup">
-            <button [routerLink]="['../../dashboard']" class="button-dark">Terug</button>
-        </div>
+  <div class="overviewHeader">
+    <h1 class="overviewHeaderTitle">{{ tournament?.title }}</h1>
+    <div class="overViewHeaderButtonGroup">
+      <button [routerLink]="['../../dashboard']" class="button-dark">
+        Terug
+      </button>
     </div>
-    <div class="overviewBody">
-        <div class="overviewBodyCollumn">
-            <div class="overviewBodyElement">
-                <button [routerLink]="['edit-tournament']" class="button-light button-long" [disabled]="canStart">
-                    Toernooi bewerken
-                    <img src="../../../../assets/images/chevron-right.svg">
-                </button>
-            </div>
-            <div [routerLink]="['score-overview']" class="overviewBodyElement">
-                <button class="button-light button-long" [disabled]="!canStart">
-                    Pouleoverzicht
-                    <img src="../../../../assets/images/chevron-right.svg">
-                </button>
-            </div>
-            <div [routerLink]="['bracket']" class="overviewBodyElement">
-                <button class="button-light button-long" [disabled]="!canStart">
-                    Finaleoverzicht
-                    <img src="../../../../assets/images/chevron-right.svg">
-                </button>
-            </div>
-            <div class="overviewBodyElement">
-                <button [routerLink]="['games']" class="button-light button-long" [disabled]="!canStart">
-                    Wedstrijdoverzicht
-                    <img src="../../../../assets/images/chevron-right.svg">
-                </button>
-            </div>
-            <div class="overviewBodyElement">
-                <button [routerLink]="['live-score']" class="button-light button-long" [disabled]="!canStart">
-                    Live tussenstand
-                    <img src="../../../../assets/images/chevron-right.svg">
-                </button>
-            </div>
-            <div class="overviewBodyElement">
-                <div class="overViewBodyButtonGroup">
-                    <button class="button-light" [disabled]="canStart" (click)="startTournament()">
-                        Toernooi starten
-                    </button>
-                    <button *ngIf="false" class="button-dark" disabled>
-                        Toernooi beëindigen
-                    </button>
-                    <button type="button" (click)="deleteTournament()" class="button-light">
-                        Toernooi verwijderen
-                    </button>
-                </div>
-            </div>
+  </div>
+  <div class="overviewBody">
+    <div class="overviewBodyCollumn">
+      <div class="overviewBodyElement">
+        <button
+          [routerLink]="['edit-tournament']"
+          class="button-light button-long"
+          [disabled]="canStart"
+        >
+          Toernooi bewerken
+          <img src="../../../../assets/images/chevron-right.svg" />
+        </button>
+      </div>
+      <div [routerLink]="['score-overview']" class="overviewBodyElement">
+        <button class="button-light button-long" [disabled]="!canStart">
+          Pouleoverzicht
+          <img src="../../../../assets/images/chevron-right.svg" />
+        </button>
+      </div>
+      <div [routerLink]="['bracket']" class="overviewBodyElement">
+        <button class="button-light button-long" [disabled]="!canStart">
+          Finaleoverzicht
+          <img src="../../../../assets/images/chevron-right.svg" />
+        </button>
+      </div>
+      <div class="overviewBodyElement">
+        <button
+          [routerLink]="['games']"
+          class="button-light button-long"
+          [disabled]="!canStart"
+        >
+          Wedstrijdoverzicht
+          <img src="../../../../assets/images/chevron-right.svg" />
+        </button>
+      </div>
+      <div class="overviewBodyElement">
+        <button
+          [routerLink]="['live-score']"
+          class="button-light button-long"
+          [disabled]="!canStart"
+        >
+          Live tussenstand
+          <img src="../../../../assets/images/chevron-right.svg" />
+        </button>
+      </div>
+      <div class="overviewBodyElement">
+        <div class="overViewBodyButtonGroup">
+          <button
+            class="button-light"
+            [disabled]="canStart"
+            (click)="startTournament()"
+          >
+            Toernooi starten
+          </button>
+          <button *ngIf="false" class="button-dark" disabled>
+            Toernooi beëindigen
+          </button>
+          <button
+            type="button"
+            (click)="deleteTournament()"
+            class="button-light"
+          >
+            Toernooi verwijderen
+          </button>
+          <button class="button-light" (click)="generatePDF()">
+            Toernooi pdf backup
+          </button>
         </div>
-        <div class="overviewBodyCollumn">
-            <div class="overviewBodyData">
-                <div class="overviewBodyElement">
-                    <div class="dataLabel">
-                        Datum
-                    </div>
-                    <div class="dataContent">
-                        {{tournament?.beginDateTime | date: "EEEE d MMMM"}}
-                    </div>
-                </div>
-                <div class="overviewBodyElement">
-                    <div class="dataLabel">
-                        Aantal spelers
-                    </div>
-                    <div class="dataContent">
-                        {{tournament?.players?.length}}
-                    </div>
-                </div>
-                <div class="overviewBodyElement">
-                    <div class="dataLabel">
-                        Maximaal aantal spelers
-                    </div>
-                    <div class="dataContent">
-                        {{tournament?.maxPlayers}}
-                    </div>
-                </div>
-                <div class="overviewBodyElement">
-                    <div class="dataLabel">
-                        Entreeprijs
-                    </div>
-                    <div class="dataContent">
-                        €{{tournament?.entryFee | number: '1.2-2'}}
-                    </div>
-                </div>
-                <div class="overviewBodyElement">
-                    <div class="dataLabel">
-                        Aantal speelruimtes
-                    </div>
-                    <div class="dataContent">
-                        {{fields.length}}
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="overviewBodyCollumn">
+      <div class="overviewBodyData">
+        <div class="overviewBodyElement">
+          <div class="dataLabel">Datum</div>
+          <div class="dataContent">
+            {{ tournament?.beginDateTime | date: "EEEE d MMMM" }}
+          </div>
+        </div>
+        <div class="overviewBodyElement">
+          <div class="dataLabel">Aantal spelers</div>
+          <div class="dataContent">
+            {{ tournament?.players?.length }}
+          </div>
+        </div>
+        <div class="overviewBodyElement">
+          <div class="dataLabel">Maximaal aantal spelers</div>
+          <div class="dataContent">
+            {{ tournament?.maxPlayers }}
+          </div>
+        </div>
+        <div class="overviewBodyElement">
+          <div class="dataLabel">Entreeprijs</div>
+          <div class="dataContent">
+            €{{ tournament?.entryFee | number: "1.2-2" }}
+          </div>
+        </div>
+        <div class="overviewBodyElement">
+          <div class="dataLabel">Aantal speelruimtes</div>
+          <div class="dataContent">
+            {{ fields.length }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

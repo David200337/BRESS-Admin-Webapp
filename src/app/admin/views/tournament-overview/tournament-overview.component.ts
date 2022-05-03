@@ -7,16 +7,17 @@ import { FieldService } from 'src/app/services/field.service';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { RpcService } from 'src/app/services/rpc.service';
 import { TournamentService } from 'src/app/services/tournament.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-tournament-overview',
   templateUrl: './tournament-overview.component.html',
-  styleUrls: ['./tournament-overview.component.scss']
+  styleUrls: ['./tournament-overview.component.scss'],
 })
 export class TournamentOverviewComponent implements OnInit {
   tournamentId!: number;
   tournament: Tournament | undefined = undefined;
-  sub!: Subscription
+  sub!: Subscription;
   canStart: boolean = true;
   fields!: Field[];
 
@@ -40,7 +41,7 @@ export class TournamentOverviewComponent implements OnInit {
       error: (err) => {
         // TODO: Handle error
         console.log(err);
-      }
+      },
     });
     this.sub = this.route.paramMap
       .pipe(
@@ -59,36 +60,66 @@ export class TournamentOverviewComponent implements OnInit {
           this.loaderToggle.loaderInvisible();
           console.log(err);
         },
-      })
+      });
   }
 
   ngOnDestroy(): void {
     if (this.sub) {
-      this.sub.unsubscribe()
+      this.sub.unsubscribe();
     }
   }
 
   deleteTournament(): void {
-    if (confirm(`Weet u zeker dat u ${this.tournament?.title} wilt verwijderen?`)) {
+    if (
+      confirm(`Weet u zeker dat u ${this.tournament?.title} wilt verwijderen?`)
+    ) {
       this.loaderToggle.loaderVisible();
       this.tournamentService.delete(this.tournamentId).subscribe({
         next: (response) => {
-          console.log(response)
-          this.router.navigate(["/dashboard"])
-        }, error: (err) => {
-          console.log(err)
+          console.log(response);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.log(err);
           this.loaderToggle.loaderInvisible();
-        }
-      })
+        },
+      });
     }
   }
 
   startTournament(): void {
     this.loaderToggle.loaderVisible();
-    this.rpcService.startTournament(this.tournamentId).subscribe((res) => {
-      this.canStart = true;
-    }).add(() => {
-      this.loaderToggle.loaderInvisible();
+    this.rpcService
+      .startTournament(this.tournamentId)
+      .subscribe((res) => {
+        this.canStart = true;
+      })
+      .add(() => {
+        this.loaderToggle.loaderInvisible();
+      });
+  }
+
+  generatePDF() {
+    console.log('pdf');
+    const pdf = new jsPDF({
+      orientation: 'landscape',
     });
+
+    console.log(this.tournament);
+
+    pdf.text(this.tournament!.title, 10, 10);
+    // pdf.text(this.tournament!.beginDateTime.toLocaleDateString(), 10, 100);
+
+    var categoryIndex = 0;
+    this.tournament?.categories.forEach((category) => {
+      let startX = 10 + 100 * categoryIndex;
+      pdf.text(category.name, startX, 20);
+
+      var poolIndex = 0;
+
+      categoryIndex += 1;
+    });
+
+    pdf.save(`${this.tournament!.title}.pdf`);
   }
 }
