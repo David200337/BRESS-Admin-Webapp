@@ -8,7 +8,8 @@ import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { RpcService } from 'src/app/services/rpc.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { jsPDF } from 'jspdf';
-import { Pool } from 'src/app/models/pool.model';
+import autoTable, { RowInput } from 'jspdf-autotable';
+import { Player } from 'src/app/models/player.model';
 
 @Component({
   selector: 'app-tournament-overview',
@@ -102,79 +103,59 @@ export class TournamentOverviewComponent implements OnInit {
 
   createPDF() {
     const pdf = new jsPDF({
-      orientation: 'portrait',
-      format: [600, 400],
+      orientation: 'landscape',
     });
-    for (let i = 0; i < 2; i++) {
-      this.generatePDF(i == 0, pdf);
-      pdf.addPage();
-    }
+    this.generatePDF(pdf);
   }
 
-  generatePDF(games: boolean, pdf: jsPDF) {
+  generatePDF(pdf: jsPDF) {
     pdf.setFontSize(20);
-    pdf.setTextColor('#FB7D01');
-    pdf.text(
-      `${this.tournament!.title} ${
-        games ? ' - Poolindelingen' : ' - Wedstrijden in poule'
-      }`,
-      10,
-      10
-    );
-    // pdf.text(this.tournament!.beginDateTime.toLocaleDateString(), 10, 100);
 
-    var categoryIndex = 0;
+    var firstPool = true;
+
     this.tournament?.categories.forEach((category) => {
-      let startX = 10 + 100 * categoryIndex;
-      pdf.setFontSize(15);
-      pdf.setTextColor('#FB7D01');
-      pdf.text(category.name, startX, 20);
-
-      pdf.setFontSize(11);
-
-      var poolIndex = 0;
-      var amountOfPeople = 0;
-
       category.pools.forEach((pool) => {
-        pdf.setFont('helvetica', 'bold');
-        pdf.setTextColor('#FB7D01');
-        pdf.text(
-          `Pool ${pool.poolNumber + 1}`,
-          startX,
-          30 + amountOfPeople * 11
-        );
-
-        pdf.setFont('helvetica', 'normal');
-        pdf.setTextColor('#000000');
-
-        if (games) {
-          var playerIndex = 0;
-          pool.players.forEach((player) => {
-            pdf.text(
-              `${player.firstName} ${player.lastName}`,
-              startX,
-              30 + amountOfPeople * 11 + playerIndex * 10 + 10
-            );
-            playerIndex += 1;
-          });
-          poolIndex += 1;
-          amountOfPeople += pool.players.length;
-        } else {
-          var playerIndex = 0;
-          pool.games.forEach((game) => {
-            pdf.text(
-              `${game.player1.firstName} - ${game.player2.firstName}`,
-              startX,
-              30 + amountOfPeople * 11 + playerIndex * 10 + 10
-            );
-            playerIndex += 1;
-          });
-          poolIndex += 1;
-          amountOfPeople += pool.games.length;
+        if (!firstPool) {
+          pdf.addPage();
         }
-      });
+        firstPool = false;
 
-      categoryIndex += 1;
+        pdf.text(`${category.name} - poule ${pool.poolNumber + 1}`, 10, 10);
+
+        var players: RowInput[] = pool.players.map((player) => {
+          return [
+            String(player.id),
+            String(player.firstName),
+            String(player.lastName),
+            String(player.email),
+            String(player.skillLevel.name),
+            String(`Poule ${pool.poolNumber + 1}`),
+          ];
+        });
+
+        autoTable(pdf, {
+          headStyles: { fillColor: [251, 125, 1] },
+          head: [['Id', 'Voornaam', 'Achternaam', 'Email', 'Niveau', 'Poule']],
+          body: players,
+        });
+
+        var games: RowInput[] = pool.games.map((game) => {
+          return [
+            String(game.id),
+            String(`${game.player1.firstName} ${game.player1.lastName}`),
+            String(`${game.player2.firstName} ${game.player2.lastName}`),
+            String(game.player1.skillLevel.name),
+            String(`Poule ${pool.poolNumber + 1}`),
+            String(game.score),
+          ];
+        });
+
+        autoTable(pdf, {
+          headStyles: { fillColor: [251, 125, 1] },
+          head: [['Id', 'Speler 1', 'Speler 2', 'Niveau', 'Poule', 'Score']],
+          body: games,
+        });
+      });
     });
 
     pdf.save(`${this.tournament!.title}.pdf`);
