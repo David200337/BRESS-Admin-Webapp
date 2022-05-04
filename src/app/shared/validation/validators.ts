@@ -6,6 +6,6 @@ export function futureDateValidator(): ValidatorFn {
         if (!date) {
             return null;
         }
-        return date < new Date() ? {futureDate:true} : null
+        return date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) ? { futureDate: true } : null
     }
 }
