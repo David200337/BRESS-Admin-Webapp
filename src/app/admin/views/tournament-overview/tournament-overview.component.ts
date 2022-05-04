@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, switchMap, lastValueFrom } from 'rxjs';
 import { Field } from 'src/app/models/field.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { FieldService } from 'src/app/services/field.service';
@@ -8,6 +8,7 @@ import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
 import { RpcService } from 'src/app/services/rpc.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { jsPDF } from 'jspdf';
+import { Pool } from 'src/app/models/pool.model';
 
 @Component({
   selector: 'app-tournament-overview',
@@ -99,23 +100,79 @@ export class TournamentOverviewComponent implements OnInit {
       });
   }
 
-  generatePDF() {
-    console.log('pdf');
+  createPDF() {
     const pdf = new jsPDF({
-      orientation: 'landscape',
+      orientation: 'portrait',
+      format: [600, 400],
     });
+    for (let i = 0; i < 2; i++) {
+      this.generatePDF(i == 0, pdf);
+      pdf.addPage();
+    }
+  }
 
-    console.log(this.tournament);
-
-    pdf.text(this.tournament!.title, 10, 10);
+  generatePDF(games: boolean, pdf: jsPDF) {
+    pdf.setFontSize(20);
+    pdf.setTextColor('#FB7D01');
+    pdf.text(
+      `${this.tournament!.title} ${
+        games ? ' - Poolindelingen' : ' - Wedstrijden in poule'
+      }`,
+      10,
+      10
+    );
     // pdf.text(this.tournament!.beginDateTime.toLocaleDateString(), 10, 100);
 
     var categoryIndex = 0;
     this.tournament?.categories.forEach((category) => {
       let startX = 10 + 100 * categoryIndex;
+      pdf.setFontSize(15);
+      pdf.setTextColor('#FB7D01');
       pdf.text(category.name, startX, 20);
 
+      pdf.setFontSize(11);
+
       var poolIndex = 0;
+      var amountOfPeople = 0;
+
+      category.pools.forEach((pool) => {
+        pdf.setFont('helvetica', 'bold');
+        pdf.setTextColor('#FB7D01');
+        pdf.text(
+          `Pool ${pool.poolNumber + 1}`,
+          startX,
+          30 + amountOfPeople * 11
+        );
+
+        pdf.setFont('helvetica', 'normal');
+        pdf.setTextColor('#000000');
+
+        if (games) {
+          var playerIndex = 0;
+          pool.players.forEach((player) => {
+            pdf.text(
+              `${player.firstName} ${player.lastName}`,
+              startX,
+              30 + amountOfPeople * 11 + playerIndex * 10 + 10
+            );
+            playerIndex += 1;
+          });
+          poolIndex += 1;
+          amountOfPeople += pool.players.length;
+        } else {
+          var playerIndex = 0;
+          pool.games.forEach((game) => {
+            pdf.text(
+              `${game.player1.firstName} - ${game.player2.firstName}`,
+              startX,
+              30 + amountOfPeople * 11 + playerIndex * 10 + 10
+            );
+            playerIndex += 1;
+          });
+          poolIndex += 1;
+          amountOfPeople += pool.games.length;
+        }
+      });
 
       categoryIndex += 1;
     });
