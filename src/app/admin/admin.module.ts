@@ -29,6 +29,7 @@ import { CreateFieldComponent } from './views/field/create-field/create-field.co
 import { FieldListComponent } from './views/field/field-list/field-list.component';
 import { EditFieldComponent } from './views/field/edit-field/edit-field.component';
 import { LoaderToggleService } from '../services/loader-toggle.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { LoaderToggleService } from '../services/loader-toggle.service';
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
+    DragDropModule,
   ],
   exports: [
     DashboardComponent,
@@ -71,10 +73,8 @@ import { LoaderToggleService } from '../services/loader-toggle.service';
     EditTournamentComponent,
     TournamentDetailComponent,
     TournamentOverviewComponent,
-    CategoryBracketComponent
+    CategoryBracketComponent,
   ],
-  providers: [
-    TournamentService,
-  ]
+  providers: [TournamentService],
 })
-export class AdminModule { }
+export class AdminModule {}

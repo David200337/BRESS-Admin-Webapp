@@ -112,7 +112,7 @@ export class TournamentService extends ResourceService<Tournament> {
 				return item.result;
 			})
 		);
-	}
+  }
 
 	public getPool(
 		tournamentId: number,
