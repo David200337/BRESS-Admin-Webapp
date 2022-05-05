@@ -248,5 +248,15 @@ export class TournamentService extends ResourceService<Tournament> {
 					return item.result;
 				})
 			);
-	}
+  }
+
+  public editGameScore(tournamentId : number, gameId : number, score: number[][]) : Observable<any> {
+    return this.httpClient
+			.put<any>(`${this.APIUrl}/${tournamentId}/editGame/${gameId}`, { scorePlayer1: score[0], scorePlayer2: score[1] })
+			.pipe(
+				map((item) => {
+					return item.result;
+				}),
+			);
+  }
 }

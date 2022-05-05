@@ -1,17 +1,20 @@
 <table>
-    <thead>
-        <tr>
-            <th>Speler 1</th>
-            <th>Speler 2</th>
-            <th>Uitslag</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let game of games" [class.clickable]="game.score == null"
-            (click)="game.score == null && onClick(game.id)">
-            <td>{{game.player1.firstName}} {{game.player1.lastName}}</td>
-            <td>{{game.player2.firstName}} {{game.player2.lastName}}</td>
-            <td>{{game.score}}</td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Speler 1</th>
+      <th>Speler 2</th>
+      <th>Uitslag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let game of games"
+      [class.clickable]="game.score != null"
+      (click)="game.score != null && onClick(game.id)"
+    >
+      <td>{{ game.player1.firstName }} {{ game.player1.lastName }}</td>
+      <td>{{ game.player2.firstName }} {{ game.player2.lastName }}</td>
+      <td>{{ game.score }}</td>
+    </tr>
+  </tbody>
 </table>

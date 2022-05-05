@@ -79,6 +79,10 @@
     <div class="overviewBodyCollumn">
       <div class="overviewBodyData">
         <div class="overviewBodyElement">
+          <div class="dataLabel">Id</div>
+          <div class="dataContent">#{{ tournament?.id }}</div>
+        </div>
+        <div class="overviewBodyElement">
           <div class="dataLabel">Datum</div>
           <div class="dataContent">
             {{ tournament?.beginDateTime | date: "EEEE d MMMM" }}
