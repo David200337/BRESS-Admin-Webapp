@@ -146,7 +146,7 @@ export class TournamentOverviewComponent implements OnInit {
             String(`${game.player2.firstName} ${game.player2.lastName}`),
             String(game.player1.skillLevel.name),
             String(`Poule ${pool.poolNumber + 1}`),
-            String(game.score),
+            String(game.score === null ? '' : game.score),
           ];
         });
 

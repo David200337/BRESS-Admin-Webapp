@@ -5,14 +5,14 @@ import { PoolGame } from '../models/poolGame.model';
 import { TournamentService } from './tournament.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EditGameService {
   public tournamentId: number = 0;
   public gameId: number = 0;
   public showPopUp: boolean = false;
 
-  constructor(private tournamentService: TournamentService) { }
+  constructor(private tournamentService: TournamentService) {}
 
   showEdit(gameId: number) {
     this.showPopUp = true;
@@ -25,17 +25,22 @@ export class EditGameService {
     this.gameId = 0;
   }
 
-  enterScore(score: number[][]): Observable<any> {
+  enterScore(score: number[][], isEdit: boolean): Observable<any> {
     this.showPopUp = false;
-    return this.tournamentService.getFinalGame(this.tournamentId, 0, this.gameId)
-      .pipe(tap((res) => console.log(res)))
-      .pipe(() => { return this.enterGameScore(score) });
-  }
 
-  enterGameScore(score: number[][]): Observable<PoolGame> {
-    this.showPopUp = false;
-    console.log("enterPoolGameScore");
-
-    return this.tournamentService.updateGame(this.tournamentId, this.gameId, score);
+    if (!isEdit) {
+      return this.tournamentService.updateGame(
+        this.tournamentId,
+        this.gameId,
+        score
+      );
+    } else {
+      console.log('edit game');
+      return this.tournamentService.editGameScore(
+        this.tournamentId,
+        this.gameId,
+        score
+      );
+    }
   }
 }
