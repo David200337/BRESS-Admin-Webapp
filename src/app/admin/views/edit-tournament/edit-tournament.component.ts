@@ -23,11 +23,12 @@ export class EditTournamentComponent implements OnInit {
   toBeRemoved: number[] = [];
   toBeAdded: Player[] = [];
   sub!: Subscription;
-  showSearch : boolean = false;
+  showSearch: boolean = false;
   availablePlayers: Player[] | undefined = undefined;
   filteredList: Player[] | undefined = undefined;
+  toNewPlayer: boolean = false;
 
-  form!: FormGroup
+  form!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,159 +48,204 @@ export class EditTournamentComponent implements OnInit {
       beginDateTime: ['', [Validators.required, futureDateValidator()]],
       maxPlayers: ['', [Validators.required, Validators.min(0)]],
       entryFee: ['', [Validators.required, Validators.min(0)]],
-    })
+    });
 
     // Get tournament details and available players
-    this.route.paramMap.pipe(
-      switchMap((paramMap: ParamMap) => {
-        this.tournamentId = Number.parseInt(paramMap.get('id')!);
-        if(this.tournamentId != null) {
-          return this.tournamentService.get(this.tournamentId)
-        } else {
-          return of(null);
-        }
-      }),
-      switchMap((response: any) => {
-        this.tournament = response;
-        this.form.setValue({
-          title: this.tournament?.title,
-          beginDateTime: this.datePipe.transform(this.tournament?.beginDateTime, 'yyyy-MM-dd'),
-          maxPlayers: this.tournament?.maxPlayers,
-          entryFee: this.tournament?.entryFee,
+    this.route.paramMap
+      .pipe(
+        switchMap((paramMap: ParamMap) => {
+          this.tournamentId = Number.parseInt(paramMap.get('id')!);
+          if (this.tournamentId != null) {
+            return this.tournamentService.get(this.tournamentId);
+          } else {
+            return of(null);
+          }
+        }),
+        switchMap((response: any) => {
+          this.tournament = response;
+          this.form.setValue({
+            title: this.tournament?.title,
+            beginDateTime: this.datePipe.transform(
+              this.tournament?.beginDateTime,
+              'yyyy-MM-dd'
+            ),
+            maxPlayers: this.tournament?.maxPlayers,
+            entryFee: this.tournament?.entryFee,
+          });
+          return this.tournamentService.getAllAvailablePlayers(
+            this.tournamentId!
+          );
         })
-        return this.tournamentService.getAllAvailablePlayers(this.tournamentId!);
-      })
-    ).subscribe({
-      next: (response: any) => {
-        this.availablePlayers = response.result;
-        this.filteredList = response.result;
-        this.loaderToggle.loaderInvisible();
-      },
-      error: (err) => {
-        console.log(err);
-        this.loaderToggle.loaderInvisible();
-      },
-    });
+      )
+      .subscribe({
+        next: (response: any) => {
+          this.availablePlayers = response.result;
+          this.filteredList = response.result;
+          this.loaderToggle.loaderInvisible();
+        },
+        error: (err) => {
+          console.log(err);
+          this.loaderToggle.loaderInvisible();
+        },
+      });
   }
 
   ngOnDestroy(): void {
     if (this.sub) {
-      this.sub.unsubscribe()
+      this.sub.unsubscribe();
     }
   }
 
-  onSubmit(): void {
+  onSubmit(toNewPlayer: boolean): void {
     this.submitted = true;
     if (this.tournament && this.form.valid) {
       this.loaderToggle.loaderVisible();
-      this.tournament.title = this.form.value.title
-      this.tournament.entryFee = this.form.value.entryFee
-      this.tournament.maxPlayers = this.form.value.maxPlayers
-      
+      this.tournament.title = this.form.value.title;
+      this.tournament.entryFee = this.form.value.entryFee;
+      this.tournament.maxPlayers = this.form.value.maxPlayers;
+
       // Update tournament details
-      this.tournamentService.update(this.tournamentId! ,this.tournament).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          if (err.status === 401) {
-            this.errorMessage = "U bent niet ingelogd of bevoegd."
-          } else if (err.status === 500) {
-            this.errorMessage = "Server kan aanvraag niet verwerken."
-          }
-          this.loaderToggle.loaderInvisible();
-        },
-      });
+      this.tournamentService
+        .update(this.tournamentId!, this.tournament)
+        .subscribe({
+          next: (res) => {
+            console.log(toNewPlayer);
+            if (!toNewPlayer) {
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.loaderToggle.loaderInvisible();
+              this.router.navigate(['/players/create']);
+            }
+          },
+          error: (err) => {
+            if (err.status === 401) {
+              this.errorMessage = 'U bent niet ingelogd of bevoegd.';
+            } else if (err.status === 500) {
+              this.errorMessage = 'Server kan aanvraag niet verwerken.';
+            }
+            this.loaderToggle.loaderInvisible();
+          },
+        });
 
       // Remove players
-      if(this.tournamentId != null && this.toBeRemoved.length != 0) {
-          this.tournamentService.deletePlayer(this.tournamentId, this.toBeRemoved)
-            .subscribe()
-            .add(() => {
-              console.log("unsubscribe")
-            })
+      if (this.tournamentId != null && this.toBeRemoved.length != 0) {
+        this.tournamentService
+          .deletePlayer(this.tournamentId, this.toBeRemoved)
+          .subscribe()
+          .add(() => {
+            console.log('unsubscribe');
+          });
       }
 
       // Add players
-      if(this.tournamentId != null && this.toBeAdded.length != 0) {
-        const addedIds: number[] = []
+      if (this.tournamentId != null && this.toBeAdded.length != 0) {
+        const addedIds: number[] = [];
         this.toBeAdded.forEach((p) => {
-          addedIds.push(p.id)
-        })
-        this.tournamentService.addPlayer(this.tournamentId, addedIds)
+          addedIds.push(p.id);
+        });
+        this.tournamentService
+          .addPlayer(this.tournamentId, addedIds)
           .subscribe()
           .add(() => {
-            console.log("unsubscribe")
-          })
+            console.log('unsubscribe');
+          });
       }
       this.submitted = false;
     } else {
-      return
+      return;
     }
   }
 
   onRemovePlayer(playerId: number): void {
     let index = -1;
     this.tournament?.players.forEach((player, i) => {
-      if (player.id == playerId) {index = i; this.toBeRemoved.push(player.id)}
-    })
+      if (player.id == playerId) {
+        index = i;
+        this.toBeRemoved.push(player.id);
+      }
+    });
     this.tournament?.players.splice(index, 1);
   }
 
   onRemoveToBeAddedPlayer(removedAddedPlayer: Player): void {
-    let index = -1
+    let index = -1;
 
     this.toBeAdded.forEach((player, i) => {
-      if (player.id == removedAddedPlayer.id) {index = i}
-    })
+      if (player.id == removedAddedPlayer.id) {
+        index = i;
+      }
+    });
     if (index > -1) {
       this.toBeAdded.splice(index, 1);
-      this.availablePlayers?.push(removedAddedPlayer)
+      this.availablePlayers?.push(removedAddedPlayer);
       this.availablePlayers = this.availablePlayers!.sort((a, b) => {
         if (a.firstName > b.firstName) {
-          return 1
+          return 1;
         }
         if (a.firstName < b.firstName) {
-          return -1
+          return -1;
         }
         return 0;
-      })
+      });
     }
   }
 
   onAddPlayer(toBeAddedPlayer: Player): void {
-    if (this.toBeAdded.length + this.tournament!.players.length >= this.tournament!.maxPlayers) {
-      this.playersErrorMessage = "Speler kan niet toegevoegd worden, maximaal spelers in een wedstrijd bereikt."
-      return
+    if (
+      this.toBeAdded.length + this.tournament!.players.length >=
+      this.tournament!.maxPlayers
+    ) {
+      this.playersErrorMessage =
+        'Speler kan niet toegevoegd worden, maximaal spelers in een wedstrijd bereikt.';
+      return;
     }
 
     let index1 = -1;
     let index2 = -1;
     this.availablePlayers?.forEach((player, i) => {
-      if (player.id == toBeAddedPlayer.id) {index1 = i;}
-    })
-    console.log(index1, index2)
+      if (player.id == toBeAddedPlayer.id) {
+        index1 = i;
+      }
+    });
+    console.log(index1, index2);
     this.availablePlayers?.splice(index1, 1);
     this.filteredList = this.availablePlayers;
-    let searchbar: HTMLInputElement = document.getElementById("searchPlayers")! as HTMLInputElement;
+    let searchbar: HTMLInputElement = document.getElementById(
+      'searchPlayers'
+    )! as HTMLInputElement;
     searchbar.value = '';
 
-    this.toBeAdded.push(toBeAddedPlayer)
+    this.toBeAdded.push(toBeAddedPlayer);
   }
 
+  toggleSearch() {
+    if (this.showSearch) {
+      this.searchInvisible();
+    } else {
+      this.searchVisible();
+    }
+  }
 
-  searchInvisible(){
+  searchInvisible() {
+    this.filteredList = this.toBeAdded;
     this.showSearch = false;
   }
 
-  searchVisible(){
+  searchVisible() {
+    this.filteredList = this.availablePlayers;
     this.showSearch = true;
   }
 
   onSearch(event: any) {
     let key = event.target.value.toLowerCase();
-    this.filteredList = this.availablePlayers?.filter(p => (`${p.firstName} ${p.lastName}`).toLowerCase().includes(key))
+    if (this.showSearch) {
+      this.filteredList = this.availablePlayers?.filter((p) =>
+        `${p.firstName} ${p.lastName}`.toLowerCase().includes(key)
+      );
+    } else {
+      this.filteredList = this.toBeAdded?.filter((p) =>
+        `${p.firstName} ${p.lastName}`.toLowerCase().includes(key)
+      );
+    }
   }
-
 }

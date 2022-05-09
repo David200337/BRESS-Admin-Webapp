@@ -32,6 +32,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
   showPopup: boolean;
 
   interval: any;
+  toggleRefreshingOn: boolean = true;
 
   categoryList: Category[] = [];
   selectedCategoryIndex: number = 0;
@@ -90,7 +91,9 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
       this.createBracket(
         this.tournament.categories[this.selectedCategoryIndex].id
       );
-      this.startRefresh();
+      if (this.toggleRefreshingOn) {
+        this.startRefresh();
+      }
     });
   }
 
@@ -391,5 +394,13 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
 
   hideGameEdit() {
     this.editGame.hideEdit();
+  }
+
+  onToggleRefresh() {
+    if (this.toggleRefreshingOn) {
+      this.startRefresh();
+    } else {
+      clearInterval(this.interval);
+    }
   }
 }
