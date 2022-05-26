@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { of, Subscription, switchMap } from 'rxjs';
+import { filter, of, Subscription, switchMap } from 'rxjs';
 import { Player } from 'src/app/models/player.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
@@ -80,7 +80,7 @@ export class EditTournamentComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.availablePlayers = response.result;
-          this.filteredList = response.result;
+          this.filteredList = [...this.tournament!.players, ...this.toBeAdded]
           this.loaderToggle.loaderInvisible();
         },
         error: (err) => {
@@ -207,7 +207,6 @@ export class EditTournamentComponent implements OnInit {
         index1 = i;
       }
     });
-    console.log(index1, index2);
     this.availablePlayers?.splice(index1, 1);
     this.filteredList = this.availablePlayers;
     let searchbar: HTMLInputElement = document.getElementById(
@@ -227,7 +226,7 @@ export class EditTournamentComponent implements OnInit {
   }
 
   searchInvisible() {
-    this.filteredList = this.toBeAdded;
+    this.filteredList = [...this.toBeAdded, ...this.tournament!.players];
     this.showSearch = false;
   }
 
@@ -243,9 +242,14 @@ export class EditTournamentComponent implements OnInit {
         `${p.firstName} ${p.lastName}`.toLowerCase().includes(key)
       );
     } else {
-      this.filteredList = this.toBeAdded?.filter((p) =>
+      let toBeAddedFiltered = this.toBeAdded?.filter((p) =>
         `${p.firstName} ${p.lastName}`.toLowerCase().includes(key)
       );
+      let playersFiltered = this.tournament!.players.filter((p) =>
+        `${p.firstName} ${p.lastName}`.toLowerCase().includes(key)
+      );;
+
+      this.filteredList = [...toBeAddedFiltered, ...playersFiltered];
     }
   }
 }

@@ -71,8 +71,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
       .subscribe((res) => (this.tournament = res));
 
     concat(
-      this.tournamentService.getPoolQueue(this.tournamentId),
-      this.tournamentService.getFinaleQueue(this.tournamentId)
+      this.tournamentService.getPoolQueue(this.tournamentId)
     )
       .pipe(
         tap((g) => gamesList.push(...g)),
@@ -281,8 +280,7 @@ export class LiveScoreComponent implements OnInit, AfterViewInit {
     let gameList: Game[] = [];
 
     concat(
-      this.tournamentService.getPoolQueue(this.tournamentId),
-      this.tournamentService.getFinaleQueue(this.tournamentId)
+      this.tournamentService.getPoolQueue(this.tournamentId)
     )
       .pipe(tap((g) => gameList.push(...g)))
       .subscribe()
