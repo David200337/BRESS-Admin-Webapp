@@ -52,8 +52,12 @@ export class RpcService {
   }
 
   public addPlayersFromCSV(json: any[], tournamentId: number): Observable<any> {
-    console.log({ players: json })
-    return this.httpClient.post<string>(`${this.APIUrl}/WebsiteForm/submitPlayers/${tournamentId}`, { players: json })
+    return this.httpClient.post<string>(`${this.APIUrl}/WebsiteForm/submitPlayers/${tournamentId}`, { players: json }).pipe(
+      concatMap((response) => {
+        return of(response);
+      }),
+      catchError(this.handleError)
+    );
   }
 
   // TODO: Review for possible changes
