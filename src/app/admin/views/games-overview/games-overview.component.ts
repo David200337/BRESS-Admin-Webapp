@@ -49,8 +49,7 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
       .subscribe((res) => (this.tournament = res));
 
     concat(
-      this.tournamentService.getPoolQueue(this.tournamentId),
-      this.tournamentService.getFinaleQueue(this.tournamentId)
+      this.tournamentService.getPoolQueue(this.tournamentId)
     )
       .pipe(
         tap((res) => console.log(res)),
@@ -118,8 +117,7 @@ export class GamesOverviewComponent implements OnInit, OnDestroy {
     let gameList: Game[] = [];
 
     concat(
-      this.tournamentService.getPoolQueue(this.tournamentId),
-      this.tournamentService.getFinaleQueue(this.tournamentId)
+      this.tournamentService.getPoolQueue(this.tournamentId)
     )
       .pipe(tap((g) => gameList.push(...g)))
       .subscribe()
