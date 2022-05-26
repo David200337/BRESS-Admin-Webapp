@@ -17,6 +17,7 @@ import { TournamentDetailComponent } from './admin/views/tournament-detail/tourn
 import { TournamentOverviewComponent } from './admin/views/tournament-overview/tournament-overview.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './views/login/login.component';
+import { ReadCSVComponent } from './admin/views/read-csv/read-csv.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
@@ -33,11 +34,12 @@ const routes: Routes = [
   { path: "players/create", pathMatch: "full", component: CreatePlayerComponent, canActivate: [AuthGuard] },
   { path: "players/:id/edit", pathMatch: "full", component: EditPlayerComponent, canActivate: [AuthGuard] },
   { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] },
-  { path: "fields/create", pathMatch: "full", component: CreateFieldComponent, canActivate: [AuthGuard]},
-  { path: "fields/:id", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard]},
-  { path: "fields/:id/edit", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard]},
+  { path: "fields/create", pathMatch: "full", component: CreateFieldComponent, canActivate: [AuthGuard] },
+  { path: "fields/:id", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard] },
+  { path: "fields/:id/edit", pathMatch: "full", component: EditFieldComponent, canActivate: [AuthGuard] },
   { path: "players/:id", pathMatch: "full", component: PlayerDetailComponent, canActivate: [AuthGuard] },
-  { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] }
+  { path: "create-skilllevel", pathMatch: "full", component: CreateSkilllevelComponent, canActivate: [AuthGuard] },
+  { path: "csvReader", pathMatch: "full", component: ReadCSVComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

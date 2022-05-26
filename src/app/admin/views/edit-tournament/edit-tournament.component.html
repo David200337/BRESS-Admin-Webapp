@@ -91,6 +91,14 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label for="entryFee">CSV van spelers</label>
+
+            <div class="inputElement">
+              <app-read-csv [jsonData]=jsonData (dataChanged)="printJson($event)"></app-read-csv>
+            </div>
+          </div>
+
           <div class="form-group buttons">
             <div>
               <button type="submit" class="button-dark">Sla op</button>

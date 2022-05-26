@@ -30,6 +30,7 @@ import { FieldListComponent } from './views/field/field-list/field-list.componen
 import { EditFieldComponent } from './views/field/edit-field/edit-field.component';
 import { LoaderToggleService } from '../services/loader-toggle.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReadCSVComponent } from './views/read-csv/read-csv.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     EditFieldComponent,
     LiveScoreComponent,
     FilterPipe,
+    ReadCSVComponent,
   ],
   imports: [
     CommonModule,
@@ -77,4 +79,4 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   providers: [TournamentService],
 })
-export class AdminModule {}
+export class AdminModule { }

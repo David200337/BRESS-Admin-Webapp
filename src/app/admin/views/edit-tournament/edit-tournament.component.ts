@@ -6,6 +6,7 @@ import { filter, of, Subscription, switchMap } from 'rxjs';
 import { Player } from 'src/app/models/player.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { LoaderToggleService } from 'src/app/services/loader-toggle.service';
+import { RpcService } from 'src/app/services/rpc.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { futureDateValidator } from 'src/app/shared/validation/validators';
 
@@ -28,6 +29,7 @@ export class EditTournamentComponent implements OnInit {
   filteredList: Player[] | undefined = undefined;
   toNewPlayer: boolean = false;
 
+  jsonData: any[] = [];
   form!: FormGroup;
 
   constructor(
@@ -36,7 +38,8 @@ export class EditTournamentComponent implements OnInit {
     private tournamentService: TournamentService,
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
-    private loaderToggle: LoaderToggleService
+    private loaderToggle: LoaderToggleService,
+    private rpcService: RpcService
   ) {
     loaderToggle.loaderVisible();
   }
@@ -109,13 +112,15 @@ export class EditTournamentComponent implements OnInit {
         .update(this.tournamentId!, this.tournament)
         .subscribe({
           next: (res) => {
-            console.log(toNewPlayer);
-            if (!toNewPlayer) {
-              this.router.navigate(['/dashboard']);
-            } else {
-              this.loaderToggle.loaderInvisible();
-              this.router.navigate(['/players/create']);
-            }
+            this.rpcService.addPlayersFromCSV(this.jsonData, this.tournament!.id).subscribe((res) => {
+              console.log(toNewPlayer);
+              if (!toNewPlayer) {
+                this.router.navigate(['/dashboard']);
+              } else {
+                this.loaderToggle.loaderInvisible();
+                this.router.navigate(['/players/create']);
+              }
+            })
           },
           error: (err) => {
             if (err.status === 401) {
@@ -156,38 +161,38 @@ export class EditTournamentComponent implements OnInit {
     }
   }
 
-  onRemovePlayer(playerId: number): void {
-    let index = -1;
-    this.tournament?.players.forEach((player, i) => {
-      if (player.id == playerId) {
-        index = i;
-        this.toBeRemoved.push(player.id);
-      }
-    });
-    this.tournament?.players.splice(index, 1);
-  }
-
   onRemoveToBeAddedPlayer(removedAddedPlayer: Player): void {
-    let index = -1;
+    let index = this.tournament!.players.indexOf(removedAddedPlayer);
 
-    this.toBeAdded.forEach((player, i) => {
-      if (player.id == removedAddedPlayer.id) {
-        index = i;
-      }
-    });
-    if (index > -1) {
-      this.toBeAdded.splice(index, 1);
-      this.availablePlayers?.push(removedAddedPlayer);
-      this.availablePlayers = this.availablePlayers!.sort((a, b) => {
-        if (a.firstName > b.firstName) {
-          return 1;
+    if (index != -1) {
+      this.tournament?.players.forEach((player, i) => {
+        if (player.id == removedAddedPlayer.id) {
+          index = i;
+          this.toBeRemoved.push(player.id);
         }
-        if (a.firstName < b.firstName) {
-          return -1;
-        }
-        return 0;
       });
+
+      this.tournament?.players.splice(index, 1);
+    } else {
+      index = this.toBeAdded.indexOf(removedAddedPlayer);
+
+      if (index > -1) {
+        this.toBeAdded.splice(index, 1);
+        this.availablePlayers?.push(removedAddedPlayer);
+
+        this.availablePlayers = this.availablePlayers!.sort((a, b) => {
+          if (a.firstName > b.firstName) {
+            return 1;
+          }
+          if (a.firstName < b.firstName) {
+            return -1;
+          }
+          return 0;
+        });
+      }
     }
+
+    this.filteredList = [...this.toBeAdded, ...this.tournament!.players];
   }
 
   onAddPlayer(toBeAddedPlayer: Player): void {
@@ -251,5 +256,10 @@ export class EditTournamentComponent implements OnInit {
 
       this.filteredList = [...toBeAddedFiltered, ...playersFiltered];
     }
+  }
+
+  printJson(json: any[]) {
+    this.jsonData = json
+    console.log(json)
   }
 }
