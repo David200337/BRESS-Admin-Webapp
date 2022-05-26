@@ -10,7 +10,7 @@ export class RpcService {
   constructor(
     private httpClient: HttpClient,
     private loaderToggle: LoaderToggleService
-  ) {}
+  ) { }
   protected readonly APIUrl = 'https://bress-toernooi.nl/api';
 
   public startTournament(tournamentId: number): Observable<any> {
@@ -49,6 +49,11 @@ export class RpcService {
         }),
         catchError(this.handleError)
       );
+  }
+
+  public addPlayersFromCSV(json: any[], tournamentId: number): Observable<any> {
+    console.log({ players: json })
+    return this.httpClient.post<string>(`${this.APIUrl}/WebsiteForm/submitPlayers/${tournamentId}`, { players: json })
   }
 
   // TODO: Review for possible changes

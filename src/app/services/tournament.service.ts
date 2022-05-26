@@ -249,4 +249,6 @@ export class TournamentService extends ResourceService<Tournament> {
 				}),
 			);
 	}
+
+
 }
