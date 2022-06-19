@@ -11,7 +11,7 @@ export class RpcService {
     private httpClient: HttpClient,
     private loaderToggle: LoaderToggleService
   ) { }
-  protected readonly APIUrl = 'https://bress-toernooi.nl/api';
+  protected readonly APIUrl = 'https://localhost:7149/api';
 
   public startTournament(tournamentId: number): Observable<any> {
     return this.httpClient
