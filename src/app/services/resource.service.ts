@@ -8,7 +8,7 @@ import { LoaderToggleService } from "./loader-toggle.service";
 	providedIn: "root"
 })
 export abstract class ResourceService<T> {
-	protected readonly APIUrl = `https://localhost:7149/api${this.getResourceUrl()}`;
+	protected readonly APIUrl = `https://bress-toernooi.nl/api${this.getResourceUrl()}`;
 
 	constructor(protected httpClient: HttpClient, protected loaderToggle: LoaderToggleService) { }
 
