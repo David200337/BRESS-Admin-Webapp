@@ -5,6 +5,7 @@
         <th>Id</th>
         <th>Speler 1</th>
         <th>Speler 2</th>
+        <th>Categorie</th>
       </tr>
     </thead>
     <tbody cdkDropList (cdkDropListDropped)="drop($event)">
@@ -20,6 +21,9 @@
         </td>
         <td cdkDragHandle>
           {{ game.player2.firstName }} {{ game.player2.lastName }}
+        </td>
+        <td cdkDragHandle>
+          {{ game.player1.skillLevel.name }}
         </td>
       </tr>
     </tbody>
