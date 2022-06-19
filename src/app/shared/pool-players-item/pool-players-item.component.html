@@ -1,12 +1,14 @@
 <table *ngIf="pool != undefined">
     <thead>
         <tr>
+            <th>Id</th>
             <th>Speler</th>
             <th>Punten</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let player of pool.players">
+            <td>#{{player.id}}</td>
             <td>{{player.firstName}} {{player.lastName}}</td>
             <td>{{player.score}}</td>
         </tr>

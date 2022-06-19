@@ -161,7 +161,7 @@
             <tr *ngFor="let player of filteredList">
               <td>
                 <div>
-                  <p>{{ player.firstName }} {{ player.lastName }}</p>
+                  <p>#{{player.id}} - {{ player.firstName }} {{ player.lastName }} ({{player?.skillLevel?.name}})</p>
                   <button (click)="onRemoveToBeAddedPlayer(player)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -178,7 +178,7 @@
           <tr *ngFor="let player of filteredList">
             <td *ngIf="showSearch">
               <div>
-                <p>{{ player.firstName }} {{ player.lastName }}</p>
+                <p>#{{player.id}} - {{ player.firstName }} {{ player.lastName }} ({{player?.skillLevel?.name}})</p>
                 <button (click)="onAddPlayer(player)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
